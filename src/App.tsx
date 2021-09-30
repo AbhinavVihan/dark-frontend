@@ -1,70 +1,32 @@
-import React, { Suspense } from "react";
-// import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-// import NotFoundPage from "./pages/NotFound.page";
-// import { AUTH_TOKEN } from "./api/base";
-// import AppContainerPageLazy from "./pages/AppContainer/AppContainer.lazy";
-// import AuthPageLazy from "./pages/Auth/Auth.lazy";
-// import { useEffect } from "react";
-// // import { useAppSelector } from "./store";
-// // import { meSelector } from "./selectors/auth.selectors";
-// import { me } from "./api/auth";
-// // import { authActions } from "./actions/auth.actions";
+import React from "react";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import CategoriesPage from "./pages/AppContainer/Categories.page";
+import OverViewpage from "./pages/AppContainer/OverView.page";
+import Loginpage from "./pages/Auth/Login.page";
+import Signuppage from "./pages/Auth/Signup.page";
 
-// interface Props {}
+function App() {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" exact>
+          <Redirect to="/login"></Redirect>
+        </Route>
+        <Route path="/login">
+          <Loginpage></Loginpage>
+        </Route>
+        <Route path="/signup">
+          <Signuppage></Signuppage>
+        </Route>
+        <Route path="/overview">
+          <OverViewpage></OverViewpage>
+        </Route>
+        <Route path="/categories">
+          <CategoriesPage></CategoriesPage>
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  );
+}
 
-// const App: React.FC<Props> = (props) => {
-//   const customer = useAppSelector(meSelector);
-
-//   const token = localStorage.getItem(AUTH_TOKEN);
-
-//   useEffect(() => {
-//     if (!token) {
-//       return;
-//     }
-
-//     me().then((u) => authActions.fetch(u));
-//   }, []); // eslint-disable-line
-
-//   if (!customer && token) {
-//     return <div>Loading...</div>;
-//   }
-
-//   return (
-//     <div>
-//       <Suspense
-//         fallback={
-//           <div className="text-red-500">Loading App container Page</div>
-//         }
-//       >
-//         <BrowserRouter>
-//           <Switch>
-//             <Route path="/" exact>
-//               {customer ? (
-//                 <Redirect to="/dashboard" />
-//               ) : (
-//                 <Redirect to="/login" />
-//               )}
-//             </Route>
-//             <Route path={["/login", "/signup"]} exact>
-//               {customer ? <Redirect to="/dashboard" /> : <AuthPageLazy />}
-//             </Route>
-//             <Route
-//               path={[
-//                 "/dashboard",
-//                 "/recordings",
-//                 "/groups/:groupId",
-//                 "/batch/:batchNumber/lecture/:lectureNumber",
-//               ]}
-//               exact
-//             >
-//               {customer ? <AppContainerPageLazy /> : <Redirect to="/login" />}
-//             </Route>
-//             <Route component={NotFoundPage} />
-//           </Switch>
-//         </BrowserRouter>
-//       </Suspense>
-//     </div>
-//   );
-// };
-
-// export default App;
+export default App;
