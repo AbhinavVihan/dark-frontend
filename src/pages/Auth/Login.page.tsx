@@ -1,11 +1,10 @@
 import { FC, memo } from "react";
 import { Link } from "react-router-dom";
-
 interface Props {}
 
 const Login: FC<Props> = (props) => {
   return (
-    <div>
+    <div className="flex flex-row justify-between">
       This is Login Page. Don't have an account.{" "}
       <Link to="/signup">
         <span className="text-blue-500">Click here</span>

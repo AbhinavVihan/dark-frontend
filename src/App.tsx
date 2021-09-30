@@ -1,9 +1,8 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import CategoriesPage from "./pages/AppContainer/Categories.page";
-import OverViewpage from "./pages/AppContainer/OverView.page";
-import Loginpage from "./pages/Auth/Login.page";
-import Signuppage from "./pages/Auth/Signup.page";
+import AppContainerPage from "./pages/AppContainer/AppContainer.page";
+import AuthPage from "./pages/Auth/Auth.page";
+import NotFoundPage from "./pages/NotFound.page";
 
 function App() {
   return (
@@ -12,17 +11,17 @@ function App() {
         <Route path="/" exact>
           <Redirect to="/login"></Redirect>
         </Route>
-        <Route path="/login">
-          <Loginpage></Loginpage>
+        <Route path={["/login", "/signup"]} exact>
+          <AuthPage />
         </Route>
-        <Route path="/signup">
-          <Signuppage></Signuppage>
+        <Route
+          path={["/overview", "/categories", "/products/:productId"]}
+          exact
+        >
+          <AppContainerPage />
         </Route>
-        <Route path="/overview">
-          <OverViewpage></OverViewpage>
-        </Route>
-        <Route path="/categories">
-          <CategoriesPage></CategoriesPage>
+        <Route>
+          <NotFoundPage />
         </Route>
       </Switch>
     </BrowserRouter>
