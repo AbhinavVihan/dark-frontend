@@ -16,16 +16,14 @@ const Input: FC<Props> = ({
   return (
     <div className="w-full">
       <label htmlFor={id} className="sr-only">
-        {placeholder}
+        {id}
       </label>
-      <div className="flex items-center space-x-5">
-        <input
-          id={id}
-          {...rest}
-          className="pb-3 mb-5 border-b-2"
-          placeholder={placeholder}
-        />
-      </div>
+      <input
+        id={id}
+        {...rest}
+        className={"pb-3 mb-5 border-b-2 " + className}
+        placeholder={placeholder}
+      />
       {touched && <div className="text-red-600">{error}</div>}
     </div>
   );

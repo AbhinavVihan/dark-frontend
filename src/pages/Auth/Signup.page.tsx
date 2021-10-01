@@ -1,22 +1,3 @@
-// import { FC, memo } from "react";
-// import { Link } from "react-router-dom";
-// interface Props {}
-
-// const Signup: FC<Props> = (props) => {
-//   return (
-//     <div className="flex flex-row justify-between">
-//       This is Signup Page. Already have an account.
-//       <Link to="/login">
-//         <span className="text-blue-500">Click here</span>
-//       </Link>
-//     </div>
-//   );
-// };
-
-// Signup.defaultProps = {};
-
-// export default memo(Signup);
-
 import { memo } from "react";
 import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
@@ -31,21 +12,22 @@ const Signup = () => {
     setPassword(password ? false : true);
   };
 
-  const myForm = useFormik({
-    initialValues: {
-      email: "",
-      username: "",
-      password: "",
-    },
-    validationSchema: yup.object().shape({
-      email: yup.string().required().email(),
-      password: yup.string().required().min(8),
-    }),
-    onSubmit: (data) => {
-      // dispatch(signup(data));
-      history.push("/overview");
-    },
-  });
+  const { handleSubmit, getFieldProps, touched, isSubmitting, errors } =
+    useFormik({
+      initialValues: {
+        email: "",
+        username: "",
+        password: "",
+      },
+      validationSchema: yup.object().shape({
+        email: yup.string().required().email(),
+        password: yup.string().required().min(8),
+      }),
+      onSubmit: (data) => {
+        // dispatch(signup(data));
+        history.push("/overview");
+      },
+    });
 
   return (
     <div className="flex flex-col items-center w-screen pt-8 lg:w-1/2 space-y-28">
@@ -61,42 +43,34 @@ const Signup = () => {
           </div>
         </div>
 
-        <form className="space-y-8" onSubmit={myForm.handleSubmit}>
+        <form className="space-y-8" onSubmit={handleSubmit}>
           <div>
             <input
               className="border-2 border-black"
               id="email"
-              name="email"
               type="email"
               autoComplete="email"
-              value={myForm.values.email}
+              {...getFieldProps("email")}
               required
               placeholder="email"
-              onChange={myForm.handleChange}
-              onBlur={myForm.handleBlur}
             />
           </div>
 
-          {myForm.touched.email && (
-            <div className="text-red-500">{myForm.errors.email}</div>
-          )}
+          {touched.email && <div className="text-red-500"> {errors.email}</div>}
           <div>
             <input
               className="border-2 border-black"
               id="password"
-              name="password"
               type={password ? "text" : "password"}
               autoComplete="current-password"
-              value={myForm.values.password}
+              {...getFieldProps("password")}
               required
               placeholder="password"
-              onChange={myForm.handleChange}
-              onBlur={myForm.handleBlur}
             />
           </div>
 
-          {myForm.touched.email && (
-            <div className="text-red-500">{myForm.errors.password}</div>
+          {touched.email && (
+            <div className="text-red-500"> {errors.password}</div>
           )}
 
           <div className="flex items-center space-x-28">
@@ -117,7 +91,7 @@ const Signup = () => {
               I agree to terms and conditions
             </label>
           </div>
-          <div>{myForm.isSubmitting}</div>
+          <div> {isSubmitting}</div>
         </div>
       </div>
       <div className="max-w-md text-center">

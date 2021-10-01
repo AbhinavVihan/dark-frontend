@@ -1,6 +1,7 @@
 import { FC, memo } from "react";
 import { Route, Switch } from "react-router-dom";
 import FrontImage from "../../components/FrontImage";
+import ForgotpasswordPage from "./Forgotpassword.page";
 import LoginPage from "./Login.page";
 import SignupPage from "./Signup.page";
 
@@ -15,6 +16,9 @@ const AppContainer: FC<Props> = (props) => {
         </Route>
         <Route path="/signup">
           <SignupPage></SignupPage>
+        </Route>
+        <Route path="/forgot-password">
+          <ForgotpasswordPage></ForgotpasswordPage>
         </Route>
       </Switch>
       <FrontImage></FrontImage>

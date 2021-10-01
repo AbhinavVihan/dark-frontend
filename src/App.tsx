@@ -11,7 +11,7 @@ function App() {
         <Route path="/" exact>
           <Redirect to="/login"></Redirect>
         </Route>
-        <Route path={["/login", "/signup"]} exact>
+        <Route path={["/login", "/signup", "/forgot-password"]} exact>
           <AuthPage />
         </Route>
         <Route
