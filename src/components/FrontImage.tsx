@@ -3,9 +3,9 @@ import { FC, memo, useEffect } from "react";
 interface Props {}
 
 const FrontImage: FC<Props> = (props) => {
-  console.log("Front image rendering");
+  // console.log("Front image rendering");
   useEffect(() => {
-    console.log("front image rendering for the first time");
+    // console.log("front image rendering for the first time");
   }, []);
 
   return (
