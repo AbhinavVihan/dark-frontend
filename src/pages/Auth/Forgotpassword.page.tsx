@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FaSpinner } from "react-icons/fa";
 import * as yup from "yup";
 import Input from "../../components/input";
+import { forgotPassword } from "../../api/auth";
 
 interface Props {}
 
@@ -22,16 +23,8 @@ const ForgotPassword: FC<Props> = (props) => {
     validationSchema: yup.object().shape({
       email: yup.string().required().email(),
     }),
-    onSubmit: (data, helpers) => {
-      console.log("form submitting", data);
-
-      setTimeout(() => {
-        console.log(
-          "We have sent a link to reset your password in your inbox, please check spam folder also"
-        );
-        helpers.setSubmitting(false);
-        // history.push("/overview");
-      }, 5000);
+    onSubmit: (data) => {
+      forgotPassword(data);
     },
   });
 

@@ -13,17 +13,66 @@ interface LoginResponse {
   doc: Customer;
 }
 
+interface forgotPasswordRequest {
+  email: string;
+}
+
+interface SignupRequest {
+  name: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+  address: string;
+}
+
+interface LoginResponse {
+  status: string;
+  token: string;
+  doc: Customer;
+}
+
+interface SignupResponse {
+  status: string;
+  token: string;
+  doc: Customer;
+}
+
 export const login = (data: LoginRequest) => {
   const url = BASE_URL + "/customers/login";
 
   return axios.post<LoginResponse>(url, data).then((response) => {
-    localStorage.setItem(AUTH_TOKEN, response.data.token);
-    return response.data.doc;
+    localStorage.setItem(AUTH_TOKEN, "Bearer " + response.data.token);
+    console.log(response.data);
+    return response.data;
   });
 };
 
+export const forgotPassword = (data: forgotPasswordRequest) => {
+  const url = BASE_URL + "/customers/forgotPassword";
+
+  return axios.post(url, data).then((response) => {
+    console.log(response.data);
+    return response.data;
+  });
+};
+
+export const signup = (data: SignupRequest) => {
+  const url = BASE_URL + "/customers/signup";
+
+  return axios.post<SignupResponse>(url, data).then((response) => {
+    console.log(response.data);
+    return response.data;
+  });
+};
+
+// export const logout = () => {
+//   localStorage.removeItem(AUTH_TOKEN);
+// };
+
 export const logout = () => {
-  localStorage.removeItem(AUTH_TOKEN);
+  const url = BASE_URL + "/customers/logout";
+
+  return axios.get(url);
 };
 
 interface MeResponse {

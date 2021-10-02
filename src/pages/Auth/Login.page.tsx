@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { FaSpinner } from "react-icons/fa";
 import * as yup from "yup";
 import Input from "../../components/input";
+import { login } from "../../api/auth";
 
 interface Props {}
 
@@ -31,14 +32,10 @@ const Login: FC<Props> = (props) => {
       email: yup.string().required().email(),
       password: yup.string().required().min(8),
     }),
-    onSubmit: (data, helpers) => {
-      console.log("form submitting", data);
-
-      setTimeout(() => {
-        console.log("form submitted successfully");
-        helpers.setSubmitting(false);
-        history.push("/overview");
-      }, 5000);
+    onSubmit: (data) => {
+      login(data).then(() => {
+        history.push("overview");
+      });
     },
   });
 

@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { useState } from "react";
+import { signup } from "../../api/auth";
 
 const Signup = () => {
   const history = useHistory();
@@ -15,16 +16,21 @@ const Signup = () => {
   const { handleSubmit, getFieldProps, touched, isSubmitting, errors } =
     useFormik({
       initialValues: {
+        name: "",
         email: "",
-        username: "",
         password: "",
+        passwordConfirm: "",
+        address: "",
       },
       validationSchema: yup.object().shape({
+        name: yup.string().required(),
         email: yup.string().required().email(),
         password: yup.string().required().min(8),
+        passwordConfirm: yup.string().required().min(8),
+        address: yup.string().required(),
       }),
       onSubmit: (data) => {
-        // dispatch(signup(data));
+        signup(data);
         history.push("/overview");
       },
     });
@@ -45,6 +51,21 @@ const Signup = () => {
 
         <form className="space-y-8" onSubmit={handleSubmit}>
           <div>
+            name:{" "}
+            <input
+              className="border-2 border-black"
+              id="name"
+              type="name"
+              autoComplete="name"
+              {...getFieldProps("name")}
+              required
+              placeholder="name"
+            />
+          </div>
+          {touched.name && <div className="text-red-500"> {errors.name}</div>}
+
+          <div>
+            email:{" "}
             <input
               className="border-2 border-black"
               id="email"
@@ -58,6 +79,7 @@ const Signup = () => {
 
           {touched.email && <div className="text-red-500"> {errors.email}</div>}
           <div>
+            password:{" "}
             <input
               className="border-2 border-black"
               id="password"
@@ -71,6 +93,38 @@ const Signup = () => {
 
           {touched.email && (
             <div className="text-red-500"> {errors.password}</div>
+          )}
+
+          <div>
+            passwordConfirm:{" "}
+            <input
+              className="border-2 border-black"
+              id="passwordConfirm"
+              type="password"
+              autoComplete="off"
+              {...getFieldProps("passwordConfirm")}
+              required
+              placeholder="passwordConfirm"
+            />
+          </div>
+          {touched.passwordConfirm && (
+            <div className="text-red-500"> {errors.passwordConfirm}</div>
+          )}
+
+          <div>
+            address:{" "}
+            <input
+              className="border-2 border-black"
+              id="address"
+              type="address"
+              autoComplete="off"
+              {...getFieldProps("address")}
+              required
+              placeholder="address"
+            />
+          </div>
+          {touched.address && (
+            <div className="text-red-500"> {errors.address}</div>
           )}
 
           <div className="flex items-center space-x-28">
