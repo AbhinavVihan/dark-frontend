@@ -1,13 +1,11 @@
-import { FC, memo } from "react";
-import { useParams } from "react-router";
+import { FC, memo, useEffect } from "react";
+import { fetchProducts } from "../../api/products";
+// import { Product } from "../../models/Product";
 
 interface Props {}
 
 const Products: FC<Props> = (props) => {
-  const { productId } = useParams<any>();
-  console.log(productId);
-
-  return <div>This is the products having ID#{productId} </div>;
+  return <div>This is the products page</div>;
 };
 
 Products.defaultProps = {};

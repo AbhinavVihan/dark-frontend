@@ -1,12 +1,11 @@
 import { Category } from "./Category";
 
-export interface Product {
+export interface ProductSingle {
   status: string;
-  results: number;
-  doc: Doc[];
+  doc: Doc;
 }
 
-interface Doc {
+export interface Doc {
   quantity: number;
   productCategory: Category;
   name: string;
@@ -16,7 +15,16 @@ interface Doc {
   description: string;
   images: string[];
   slug: string;
-  id: string;
   imageCover: string;
   imageFront: string;
+  reviews: Review[];
+  id: string;
+}
+
+export interface Review {
+  rating: number;
+  createdAt: Date;
+  product: string;
+  customer: null;
+  id: string;
 }

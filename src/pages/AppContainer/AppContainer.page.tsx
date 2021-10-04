@@ -18,7 +18,7 @@ const AppContainer: FC<Props> = (props) => {
         <Route path="/categories">
           <CategoriesPage></CategoriesPage>
         </Route>
-        <Route path="/products/:productId">
+        <Route path="/products">
           <ProductsPage></ProductsPage>
         </Route>
       </Switch>

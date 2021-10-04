@@ -72,6 +72,7 @@ export const signup = (data: SignupRequest) => {
 export const logout = () => {
   const url = BASE_URL + "/customers/logout";
 
+  localStorage.removeItem(AUTH_TOKEN);
   return axios.get(url);
 };
 
