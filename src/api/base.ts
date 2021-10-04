@@ -19,9 +19,11 @@ axios.interceptors.response.use(undefined, (error) => {
   // console.error("error is", error);
   if (error.message === "Request failed with status code 401") {
     console.log("err:", error.message);
-    alert("Your email or password is invalid, Please try again");
+    alert(
+      "Your email or password is invalid, or your token is invalid or has expired. Please login again"
+    );
     localStorage.removeItem(AUTH_TOKEN);
-    // window.location.href = "/login";
+    window.location.href = "/login";
   }
   return Promise.reject(error);
 });

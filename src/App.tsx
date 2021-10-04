@@ -1,5 +1,6 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { me } from "./api/auth";
 import { AUTH_TOKEN } from "./api/base";
 import { Customer } from "./models/Customer";
 import AppConteinerPageLazy from "./pages/AppContainer/AppContainer.lazy";
@@ -13,19 +14,38 @@ function App() {
 
   const token = localStorage.getItem(AUTH_TOKEN);
 
+  useEffect(() => {
+    if (!token) {
+      return;
+    }
+
+    me().then((c) => {
+      console.log(c);
+      setCustomer(c);
+    });
+  }, []);
+
+  if (!customer && token) {
+    return <div>loading...</div>;
+  }
+
   return (
     <Suspense fallback={<div className="text-red-500">Loading...</div>}>
       <BrowserRouter>
         <Switch>
           <Route path="/" exact>
-            {token ? (
+            {customer ? (
               <Redirect to="/overview" />
             ) : (
               <Redirect to="/login"></Redirect>
             )}
           </Route>
           <Route path={["/login", "/signup", "/forgot-password"]} exact>
-            <AuthPageLazy onLogin={setCustomer} />
+            {customer ? (
+              <Redirect to="/overview" />
+            ) : (
+              <AuthPageLazy onLogin={setCustomer} />
+            )}
           </Route>
           <Route
             path={[
@@ -36,7 +56,11 @@ function App() {
             ]}
             exact
           >
-            <AppConteinerPageLazy customer={customer!} />
+            {customer ? (
+              <AppConteinerPageLazy customer={customer!} />
+            ) : (
+              <Redirect to="/login" />
+            )}
           </Route>
           <Route>
             <NotFoundPage />

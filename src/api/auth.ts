@@ -42,7 +42,7 @@ export const login = (data: LoginRequest) => {
 
   return axios.post<LoginResponse>(url, data).then((response) => {
     localStorage.setItem(AUTH_TOKEN, "Bearer " + response.data.token);
-    console.log(response.data);
+    console.log(response.data.doc);
     return response.data.doc;
   });
 };
@@ -77,13 +77,19 @@ export const logout = () => {
 };
 
 interface MeResponse {
+  status: string;
   doc: Customer;
 }
 
 export const me = () => {
   const url = BASE_URL + "/customers/me";
 
-  return axios.get<MeResponse>(url).then((response) => response.data.doc);
+  return axios
+    .get<MeResponse>(url, { headers: { Authorization: AUTH_TOKEN } })
+    .then((response) => {
+      console.log(response.data.doc);
+      return response.data.doc;
+    });
 };
 
 interface updateRequest {
