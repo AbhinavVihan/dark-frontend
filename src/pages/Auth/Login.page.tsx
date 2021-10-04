@@ -5,8 +5,11 @@ import { FaSpinner } from "react-icons/fa";
 import * as yup from "yup";
 import Input from "../../components/input";
 import { login } from "../../api/auth";
+import { Customer } from "../../models/Customer";
 
-interface Props {}
+interface Props {
+  onLogin: (customer: Customer) => void;
+}
 
 const Login: FC<Props> = (props) => {
   const [password, setPassword] = useState(false);
@@ -33,7 +36,8 @@ const Login: FC<Props> = (props) => {
       password: yup.string().required().min(8),
     }),
     onSubmit: (data) => {
-      login(data).then(() => {
+      login(data).then((u) => {
+        props.onLogin(u);
         history.push("overview");
       });
     },

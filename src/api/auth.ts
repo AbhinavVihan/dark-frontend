@@ -43,7 +43,7 @@ export const login = (data: LoginRequest) => {
   return axios.post<LoginResponse>(url, data).then((response) => {
     localStorage.setItem(AUTH_TOKEN, "Bearer " + response.data.token);
     console.log(response.data);
-    return response.data;
+    return response.data.doc;
   });
 };
 
