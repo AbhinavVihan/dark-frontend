@@ -1,14 +1,23 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { me } from "./api/auth";
 import { AUTH_TOKEN } from "./api/base";
-import { Customer } from "./models/Customer";
 import AppConteinerPageLazy from "./pages/AppContainer/AppContainer.lazy";
 import AuthPageLazy from "./pages/Auth/AuthPageLazy";
 import NotFoundPage from "./pages/NotFound.page";
+import { meFetchAction, useAppSelector } from "./store";
 
 function App() {
-  const [customer, setCustomer] = useState<Customer>();
+  // const customer = useSelector<AppState, Customer | undefined>(
+  //   (state) => state.me
+  // );
+
+  const customer = useAppSelector((state) => state.me);
+
+  const dispatch = useDispatch();
+
+  // const [customer, setCustomer] = useState<Customer>();
 
   const token = localStorage.getItem(AUTH_TOKEN);
 
@@ -19,9 +28,10 @@ function App() {
 
     me().then((c) => {
       console.log(c);
-      setCustomer(c);
+      // setCustomer(c);
+      dispatch(meFetchAction(c));
     });
-  }, [token]);
+  }, []);
 
   if (!customer && token) {
     return <div>loading...</div>;
@@ -39,11 +49,7 @@ function App() {
             )}
           </Route>
           <Route path={["/login", "/signup", "/forgot-password"]} exact>
-            {customer ? (
-              <Redirect to="/overview" />
-            ) : (
-              <AuthPageLazy onLogin={setCustomer} />
-            )}
+            {customer ? <Redirect to="/overview" /> : <AuthPageLazy />}
           </Route>
           <Route
             path={[
@@ -54,11 +60,7 @@ function App() {
             ]}
             exact
           >
-            {customer ? (
-              <AppConteinerPageLazy customer={customer!} />
-            ) : (
-              <Redirect to="/login" />
-            )}
+            {customer ? <AppConteinerPageLazy /> : <Redirect to="/login" />}
           </Route>
           <Route>
             <NotFoundPage />

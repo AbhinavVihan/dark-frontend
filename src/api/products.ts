@@ -1,15 +1,15 @@
 import axios from "axios";
-import { Product } from "../models/Product";
+import { Products } from "../models/Products";
 import { BASE_URL, get } from "./base";
 
 interface ProductResponse {
-  product: Product;
+  product: Products;
 }
 
 export const fetchProducts = () => {
   const url = BASE_URL + "/products";
 
-  return get<Product>(url, {}).then((response) => {
+  return get<Products>(url, {}).then((response) => {
     console.log(response.data.doc);
     return response.data.doc;
   });

@@ -1,6 +1,6 @@
 import { Customer } from "./Customer";
 
-export interface Category {
+export interface Categories {
   status: string;
   doc: Doc;
 }

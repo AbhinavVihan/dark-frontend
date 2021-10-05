@@ -1,9 +1,9 @@
 import axios from "axios";
-import { Category } from "../models/Category";
+import { Categories } from "../models/Categories";
 import { BASE_URL, get } from "./base";
 
 interface CategoryResponse {
-  doc: Category[];
+  doc: Categories[];
 }
 
 export const fetchCategories = () => {

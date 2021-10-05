@@ -1,20 +1,17 @@
 import { FC, memo } from "react";
 import { logout } from "../api/auth";
-import { Customer } from "../models/Customer";
+import { useAppSelector } from "../store";
 
-interface Props {
-  customer: Customer;
-}
+interface Props {}
 
 const Sidebar: FC<Props> = (props) => {
+  const customer = useAppSelector((state) => state.me);
+
   return (
     <div className="h-screen bg-gray-400">
       This is the sidebar
       <div className="text-red-700">
-        Hello{" "}
-        <span className="text-blue-700">
-          {props.customer.name.toUpperCase()}
-        </span>
+        Hello <span className="text-blue-700">{customer?.name}</span>
       </div>
       <div>
         {" "}

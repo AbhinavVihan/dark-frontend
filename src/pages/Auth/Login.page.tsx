@@ -5,13 +5,13 @@ import { FaSpinner } from "react-icons/fa";
 import * as yup from "yup";
 import Input from "../../components/input";
 import { login } from "../../api/auth";
-import { Customer } from "../../models/Customer";
+import { useDispatch } from "react-redux";
 
-interface Props {
-  onLogin: (customer: Customer) => void;
-}
+interface Props {}
 
 const Login: FC<Props> = (props) => {
+  const dispatch = useDispatch();
+
   const [password, setPassword] = useState(false);
   const togglePassword = () => {
     setPassword(password ? false : true);
@@ -37,7 +37,7 @@ const Login: FC<Props> = (props) => {
     }),
     onSubmit: (data) => {
       login(data).then((u) => {
-        props.onLogin(u);
+        dispatch({ type: "me/login", payload: u });
         history.push("overview");
       });
     },

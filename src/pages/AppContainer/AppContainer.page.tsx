@@ -1,19 +1,16 @@
 import { FC, memo } from "react";
 import { Route, Switch } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
-import { Customer } from "../../models/Customer";
 import CategoriesPage from "./Categories.page";
 import OverViewPage from "./OverView.page";
 import ProductsPage from "./Products.page";
 
-interface Props {
-  customer: Customer;
-}
+interface Props {}
 
-const AppContainer: FC<Props> = ({ customer }) => {
+const AppContainer: FC<Props> = () => {
   return (
     <div className="flex flex-row">
-      <Sidebar customer={customer}></Sidebar>
+      <Sidebar></Sidebar>
       <Switch>
         <Route path="/overview">
           <OverViewPage></OverViewPage>

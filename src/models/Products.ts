@@ -1,6 +1,6 @@
-import { Category } from "./Category";
+import { Categories } from "./Categories";
 
-export interface Product {
+export interface Products {
   status: string;
   results: number;
   doc: Doc[];
@@ -8,7 +8,7 @@ export interface Product {
 
 interface Doc {
   quantity: number;
-  productCategory: Category;
+  productCategory: Categories;
   name: string;
   ratingsAverage: number;
   ratingsQuantity: number;

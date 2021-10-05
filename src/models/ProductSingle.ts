@@ -1,4 +1,4 @@
-import { Category } from "./Category";
+import { Categories } from "./Categories";
 
 export interface ProductSingle {
   status: string;
@@ -7,7 +7,7 @@ export interface ProductSingle {
 
 export interface Doc {
   quantity: number;
-  productCategory: Category;
+  productCategory: Categories;
   name: string;
   ratingsAverage: number;
   ratingsQuantity: number;
