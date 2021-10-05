@@ -4,8 +4,6 @@ import { me } from "./api/auth";
 import { AUTH_TOKEN } from "./api/base";
 import { Customer } from "./models/Customer";
 import AppConteinerPageLazy from "./pages/AppContainer/AppContainer.lazy";
-import AppContainerPage from "./pages/AppContainer/AppContainer.page";
-import AuthPage from "./pages/Auth/Auth.page";
 import AuthPageLazy from "./pages/Auth/AuthPageLazy";
 import NotFoundPage from "./pages/NotFound.page";
 
@@ -23,7 +21,7 @@ function App() {
       console.log(c);
       setCustomer(c);
     });
-  }, []);
+  }, [token]);
 
   if (!customer && token) {
     return <div>loading...</div>;

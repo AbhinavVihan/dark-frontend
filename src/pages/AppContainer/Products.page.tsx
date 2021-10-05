@@ -1,6 +1,4 @@
-import { FC, memo, useEffect } from "react";
-import { fetchProducts } from "../../api/products";
-// import { Product } from "../../models/Product";
+import { FC, memo } from "react";
 
 interface Props {}
 
