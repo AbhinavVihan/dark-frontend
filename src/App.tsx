@@ -31,6 +31,7 @@ function App() {
       // setCustomer(c);
       dispatch(meFetchAction(c));
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!customer && token) {
