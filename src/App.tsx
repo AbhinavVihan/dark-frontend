@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import { meFetchAction } from "./actions/auth.actions";
+import { authActions } from "./actions/auth.actions";
 import { me } from "./api/auth";
 import { AUTH_TOKEN } from "./api/base";
 import AppContainerPageLazy from "./pages/AppContainer/AppContainer.lazy";
@@ -30,7 +30,7 @@ function App() {
     me().then((c) => {
       console.log(c);
       // setCustomer(c);
-      dispatch(meFetchAction(c));
+      authActions.fetch(c);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

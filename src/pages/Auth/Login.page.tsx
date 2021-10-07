@@ -6,7 +6,7 @@ import * as yup from "yup";
 import Input from "../../components/input";
 import { login } from "../../api/auth";
 import { useDispatch } from "react-redux";
-import { meLoginAction } from "../../actions/auth.actions";
+import { authActions } from "../../actions/auth.actions";
 
 interface Props {}
 
@@ -37,8 +37,8 @@ const Login: FC<Props> = (props) => {
       password: yup.string().required().min(8),
     }),
     onSubmit: (data) => {
-      login(data).then((u) => {
-        dispatch(meLoginAction(u));
+      login(data).then((c) => {
+        authActions.login(c);
         history.push("overview");
       });
     },

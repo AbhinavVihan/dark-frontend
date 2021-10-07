@@ -1,17 +1,22 @@
+import { bindActionCreators } from "redux";
 import { Product } from "../models/Products";
+import { store } from "../store";
+import { PRODUCTS_QUERY, PRODUCTS_QUERY_COMPLETED } from "./action.constants";
 
-export const PRODUCTS_QUERY = "products/query";
-export const PRODUCTS_QUERY_COMPLETED = "products/query_completed";
-
-export const productsQueryAction = (query: string) => ({
+export const QueryAction = (query: string) => ({
   type: PRODUCTS_QUERY,
   payload: query,
 });
 
-export const productsQueryCompletedAction = (
-  query: string,
-  products: Product[]
-) => ({
+export const QueryCompletedAction = (query: string, products: Product[]) => ({
   type: PRODUCTS_QUERY_COMPLETED,
   payload: { query, products },
 });
+
+export const productActions = bindActionCreators(
+  {
+    query: QueryAction,
+    queryCompleted: QueryCompletedAction,
+  },
+  store.dispatch
+);

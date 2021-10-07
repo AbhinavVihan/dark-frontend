@@ -1,6 +1,6 @@
 import axios from "axios";
-import { Product, Products } from "../models/Products";
-import { BASE_URL, get } from "./base";
+import { Product } from "../models/Products";
+import { BASE_URL } from "./base";
 
 interface ProductResponse {
   product: Product[];

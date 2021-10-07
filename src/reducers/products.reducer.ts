@@ -1,9 +1,10 @@
 import { Reducer } from "redux";
+
 import {
   PRODUCTS_QUERY,
   PRODUCTS_QUERY_COMPLETED,
-} from "../actions/products.actions";
-import { Product, Products } from "../models/Products";
+} from "../actions/action.constants";
+import { Product } from "../models/Products";
 
 export interface ProductsState {
   byId: {

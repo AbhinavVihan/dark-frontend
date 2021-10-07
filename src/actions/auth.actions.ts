@@ -1,14 +1,22 @@
+import { bindActionCreators } from "redux";
 import { Customer } from "../models/Customer";
+import { store } from "../store";
+import { ME_FETCH, ME_LOGIN } from "./action.constants";
 
-export const ME_FETCH = "me/fetch";
-export const ME_LOGIN = "me/login";
-
-export const meFetchAction = (c: Customer) => ({
+const meFetchAction = (c: Customer) => ({
   type: ME_FETCH,
   payload: c,
 });
 
-export const meLoginAction = (c: Customer) => ({
+const meLoginAction = (c: Customer) => ({
   type: ME_LOGIN,
   payload: c,
 });
+
+export const authActions = bindActionCreators(
+  {
+    fetch: meFetchAction,
+    login: meLoginAction,
+  },
+  store.dispatch
+);

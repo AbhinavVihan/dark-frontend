@@ -3,12 +3,7 @@ import { useDispatch } from "react-redux";
 import { fetchProducts } from "../../api/products";
 import { useAppSelector } from "../../store";
 import Input from "../../components/input";
-import {
-  productsQueryAction,
-  productsQueryCompletedAction,
-  PRODUCTS_QUERY,
-  PRODUCTS_QUERY_COMPLETED,
-} from "../../actions/products.actions";
+import { productActions } from "../../actions/products.actions";
 
 interface Props {}
 
@@ -25,7 +20,7 @@ const Products: FC<Props> = (props) => {
 
   useEffect(() => {
     fetchProducts({ query }).then((products) => {
-      dispatch(productsQueryCompletedAction(query, products));
+      productActions.queryCompleted(query, products);
     });
   }, [query]);
 
@@ -36,7 +31,7 @@ const Products: FC<Props> = (props) => {
         type="text"
         value={query}
         onChange={(e) => {
-          dispatch(productsQueryAction(e.target.value));
+          productActions.query(e.target.value);
         }}
       ></Input>
       <div>
