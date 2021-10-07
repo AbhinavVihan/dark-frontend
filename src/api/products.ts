@@ -1,17 +1,21 @@
 import axios from "axios";
-import { Products } from "../models/Products";
+import { Product, Products } from "../models/Products";
 import { BASE_URL, get } from "./base";
 
 interface ProductResponse {
-  product: Products;
+  product: Product[];
 }
 
-export const fetchProducts = () => {
+export interface ProductRequest {
+  query?: string;
+}
+
+export const fetchProducts = (data: ProductRequest) => {
   const url = BASE_URL + "/products";
 
-  return get<Products>(url, {}).then((response) => {
-    console.log(response.data.doc);
-    return response.data.doc;
+  return axios.get<Product[]>(url, { params: data }).then((response) => {
+    console.log(response.data);
+    return response.data;
   });
 };
 

@@ -1,5 +1,5 @@
 import { lazy } from "react";
 
-const AppConteinerPageLazy = lazy(() => import("./AppContainer.page"));
+const AppContainerPageLazy = lazy(() => import("./AppContainer.page"));
 
-export default AppConteinerPageLazy;
+export default AppContainerPageLazy;

@@ -3,10 +3,10 @@ import { Categories } from "./Categories";
 export interface Products {
   status: string;
   results: number;
-  doc: Doc[];
+  doc: Product[];
 }
 
-interface Doc {
+export interface Product {
   quantity: number;
   productCategory: Categories;
   name: string;
@@ -16,7 +16,7 @@ interface Doc {
   description: string;
   images: string[];
   slug: string;
-  id: string;
+  _id: string;
   imageCover: string;
   imageFront: string;
 }

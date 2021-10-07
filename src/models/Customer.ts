@@ -1,7 +1,7 @@
 import { Entity } from "./Entity";
 
-export interface Customer extends Entity {
-  id: string;
+export interface Customer {
+  _id: string;
   name: string;
   email: string;
   photo: string;

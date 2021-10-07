@@ -6,6 +6,7 @@ import * as yup from "yup";
 import Input from "../../components/input";
 import { login } from "../../api/auth";
 import { useDispatch } from "react-redux";
+import { meLoginAction } from "../../actions/auth.actions";
 
 interface Props {}
 
@@ -37,7 +38,7 @@ const Login: FC<Props> = (props) => {
     }),
     onSubmit: (data) => {
       login(data).then((u) => {
-        dispatch({ type: "me/login", payload: u });
+        dispatch(meLoginAction(u));
         history.push("overview");
       });
     },

@@ -16,14 +16,16 @@ const OverView: FC<Props> = (props) => {
   }, []);
 
   const getProductDetails = () => {
-    const products = fetchProducts();
-    products.then((el) => {
-      const imgArray = el.map((el) => {
-        return el.imageFront;
-      });
-      setDetails("https://dark-2.herokuapp.com/img/products/" + imgArray[2]);
-      console.log(details);
-    });
+    const products = fetchProducts({});
+    // products.then((el) => {
+    //   el.doc.map
+    //   const imgArray = el.map((el) => {
+    //     console.log(typeof el._id);
+    //     return el.imageFront;
+    //   });
+    //   setDetails("https://dark-2.herokuapp.com/img/products/" + imgArray[2]);
+    //   console.log(details);
+    // });
   };
 
   // console.log(details);
@@ -32,7 +34,7 @@ const OverView: FC<Props> = (props) => {
     <div>
       This is OverView Page
       <button>click Me</button>
-      {details && <img alt="me" src={details} />}
+      {/* {details && <img alt="me" src={details} />} */}
       <Link to="/categories">
         <span className="text-blue-500">Search by categories</span>
       </Link>

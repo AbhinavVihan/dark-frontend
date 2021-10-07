@@ -31,6 +31,11 @@ interface LoginResponse {
   doc: Customer;
 }
 
+interface ForgotPasswordResponse {
+  status: string;
+  message: string;
+}
+
 interface SignupResponse {
   status: string;
   token: string;
@@ -50,9 +55,9 @@ export const login = (data: LoginRequest) => {
 export const forgotPassword = (data: forgotPasswordRequest) => {
   const url = BASE_URL + "/customers/forgotPassword";
 
-  return axios.post(url, data).then((response) => {
-    console.log(response.data);
-    return response.data;
+  return axios.post<ForgotPasswordResponse>(url, data).then((response) => {
+    console.log(response.data.message);
+    return response.data.message;
   });
 };
 

@@ -1,23 +1,24 @@
 import React, { Suspense, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { meFetchAction } from "./actions/auth.actions";
 import { me } from "./api/auth";
 import { AUTH_TOKEN } from "./api/base";
-import AppConteinerPageLazy from "./pages/AppContainer/AppContainer.lazy";
+import AppContainerPageLazy from "./pages/AppContainer/AppContainer.lazy";
 import AuthPageLazy from "./pages/Auth/AuthPageLazy";
 import NotFoundPage from "./pages/NotFound.page";
-import { meFetchAction, useAppSelector } from "./store";
+import { useAppSelector } from "./store";
 
 function App() {
   // const customer = useSelector<AppState, Customer | undefined>(
   //   (state) => state.me
   // );
 
-  const customer = useAppSelector((state) => state.me);
+  const customer = useAppSelector(
+    (state) => state.auth._id && state.customers.byId[state.auth._id]
+  );
 
   const dispatch = useDispatch();
-
-  // const [customer, setCustomer] = useState<Customer>();
 
   const token = localStorage.getItem(AUTH_TOKEN);
 
@@ -44,13 +45,13 @@ function App() {
         <Switch>
           <Route path="/" exact>
             {customer ? (
-              <Redirect to="/overview" />
+              <Redirect to="/products" />
             ) : (
               <Redirect to="/login"></Redirect>
             )}
           </Route>
           <Route path={["/login", "/signup", "/forgot-password"]} exact>
-            {customer ? <Redirect to="/overview" /> : <AuthPageLazy />}
+            {customer ? <Redirect to="/products" /> : <AuthPageLazy />}
           </Route>
           <Route
             path={[
@@ -61,7 +62,7 @@ function App() {
             ]}
             exact
           >
-            {customer ? <AppConteinerPageLazy /> : <Redirect to="/login" />}
+            {customer ? <AppContainerPageLazy /> : <Redirect to="/login" />}
           </Route>
           <Route>
             <NotFoundPage />

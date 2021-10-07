@@ -24,7 +24,9 @@ const ForgotPassword: FC<Props> = (props) => {
       email: yup.string().required().email(),
     }),
     onSubmit: (data) => {
-      forgotPassword(data);
+      forgotPassword(data).then((m) => {
+        alert(m);
+      });
     },
   });
 
