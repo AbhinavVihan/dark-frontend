@@ -1,4 +1,5 @@
 import { Categories } from "./Categories";
+import { Entity } from "./Entity";
 
 export interface Products {
   status: string;
@@ -6,7 +7,7 @@ export interface Products {
   doc: Product[];
 }
 
-export interface Product {
+export interface Product extends Entity {
   quantity: number;
   productCategory: Categories;
   name: string;
@@ -16,7 +17,6 @@ export interface Product {
   description: string;
   images: string[];
   slug: string;
-  _id: string;
   imageCover: string;
   imageFront: string;
 }

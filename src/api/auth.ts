@@ -92,7 +92,7 @@ export const me = () => {
   return axios
     .get<MeResponse>(url, { headers: { Authorization: AUTH_TOKEN } })
     .then((response) => {
-      console.log(response.data.doc);
+      // console.log(response.data.doc);
       return response.data.doc;
     });
 };

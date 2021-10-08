@@ -25,7 +25,7 @@ function App() {
     }
 
     me().then((c) => {
-      console.log(c);
+      // console.log(c);
       // setCustomer(c);
       authActions.fetch(c);
     });

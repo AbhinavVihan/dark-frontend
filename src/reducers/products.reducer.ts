@@ -5,12 +5,9 @@ import {
   PRODUCTS_QUERY_COMPLETED,
 } from "../actions/action.constants";
 import { Product } from "../models/Products";
+import { addMany, EntityState, getIds } from "./entity.reducer";
 
-export interface ProductsState {
-  byId: {
-    [id: string]: Product;
-  };
-
+export interface ProductsState extends EntityState<Product> {
   query: string;
   queryMap: { [query: string]: string[] };
 }
@@ -30,20 +27,16 @@ export const productReducer: Reducer<ProductsState> = (
       return { ...state, query: action.payload };
     case PRODUCTS_QUERY_COMPLETED:
       const products = action.payload.products as Product[];
-      console.log(products);
-      const productIds = products.map((p) => p._id);
+      const productIds = getIds(products);
 
-      const productMap = products.reduce((prev, product) => {
-        return { ...prev, [product._id]: product };
-      }, {});
+      const newState = addMany(state, products) as ProductsState;
 
       return {
-        ...state,
+        ...newState,
         queryMap: {
           ...state.queryMap,
           [action.payload.query]: productIds,
         },
-        byId: { ...state.byId, ...productMap },
       };
     default:
       return state;
