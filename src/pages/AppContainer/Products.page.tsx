@@ -1,22 +1,19 @@
 import { FC, memo, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { fetchProducts } from "../../api/products";
 import { useAppSelector } from "../../store";
 import Input from "../../components/input";
 import { productActions } from "../../actions/products.actions";
+import {
+  currentQueryProductsSelector,
+  productQuerySelector,
+} from "../../selectors/products.selectors";
 
 interface Props {}
 
 const Products: FC<Props> = (props) => {
-  const query = useAppSelector((state) => state.products.query);
+  const query = useAppSelector(productQuerySelector);
 
-  const products = useAppSelector((state) => {
-    const productIds = state.products.queryMap[state.products.query] || [];
-    const products = productIds.map((id) => state.products.byId[id]);
-    return products;
-  });
-
-  const dispatch = useDispatch();
+  const products = useAppSelector(currentQueryProductsSelector);
 
   useEffect(() => {
     fetchProducts({ query }).then((products) => {

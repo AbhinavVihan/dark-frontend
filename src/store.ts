@@ -16,6 +16,6 @@ export const store = createStore(
   composeWithDevTools(applyMiddleware())
 );
 
-type AppState = ReturnType<typeof reducer>;
+export type AppState = ReturnType<typeof reducer>;
 
 export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;

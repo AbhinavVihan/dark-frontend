@@ -1,11 +1,11 @@
-import { FC, memo, useEffect, useState } from "react";
+import { FC, memo, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { fetchProducts } from "../../api/products";
+// import { fetchProducts } from "../../api/products";
 
 interface Props {}
 
 const OverView: FC<Props> = (props) => {
-  const [details, setDetails] = useState<string>();
+  // const [details, setDetails] = useState<string>();
   // const products = fetchProducts().then((el) => {
   //   el.map((el) => el.imageFront);
   // });
@@ -16,7 +16,7 @@ const OverView: FC<Props> = (props) => {
   }, []);
 
   const getProductDetails = () => {
-    const products = fetchProducts({});
+    // const products = fetchProducts({});
     // products.then((el) => {
     //   el.doc.map
     //   const imgArray = el.map((el) => {

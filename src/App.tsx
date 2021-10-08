@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { authActions } from "./actions/auth.actions";
 import { me } from "./api/auth";
@@ -7,6 +7,7 @@ import { AUTH_TOKEN } from "./api/base";
 import AppContainerPageLazy from "./pages/AppContainer/AppContainer.lazy";
 import AuthPageLazy from "./pages/Auth/AuthPageLazy";
 import NotFoundPage from "./pages/NotFound.page";
+import { meSelector } from "./selectors/auth.selectors";
 import { useAppSelector } from "./store";
 
 function App() {
@@ -14,11 +15,7 @@ function App() {
   //   (state) => state.me
   // );
 
-  const customer = useAppSelector(
-    (state) => state.auth._id && state.customers.byId[state.auth._id]
-  );
-
-  const dispatch = useDispatch();
+  const customer = useAppSelector(meSelector);
 
   const token = localStorage.getItem(AUTH_TOKEN);
 
