@@ -29,7 +29,6 @@ function App() {
       // setCustomer(c);
       authActions.fetch(c);
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!customer && token) {

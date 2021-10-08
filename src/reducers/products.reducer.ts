@@ -31,7 +31,6 @@ export const productReducer: Reducer<ProductsState> = (
     case PRODUCTS_QUERY_COMPLETED:
       const products = action.payload.products as Product[];
       console.log(products);
-      // eslint-disable-next-line array-callback-return
       const productIds = products.map((p) => p._id);
 
       const productMap = products.reduce((prev, product) => {

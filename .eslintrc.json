@@ -2,6 +2,7 @@
   "extends": ["airbnb", "prettier", "plugin:node/recommended"],
   "plugins": ["prettier"],
   "rules": {
+    "react-hooks/exhaustive-deps": "off",
     "quotes": ["error", "single"],
     "prettier/prettier": [
       "error",
