@@ -21,6 +21,9 @@ export interface EntityState<T extends Entity = Entity> {
   image3?: {
     [id: string]: string;
   };
+  photo?: {
+    [id: string]: string;
+  };
 }
 
 export const getIds = (entities: Entity[]) => {

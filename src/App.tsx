@@ -24,11 +24,7 @@ function App() {
       return;
     }
 
-    me().then((c) => {
-      // console.log(c);
-      // setCustomer(c);
-      authActions.fetch(c);
-    });
+    me();
   }, []);
 
   if (!customer && token) {

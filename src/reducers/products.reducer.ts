@@ -5,16 +5,7 @@ import {
   PRODUCTS_QUERY_COMPLETED,
 } from "../actions/action.constants";
 import { Product } from "../models/Products";
-import {
-  addImg1,
-  addImg2,
-  addImg3,
-  addImgCover,
-  addImgFront,
-  addMany,
-  EntityState,
-  getIds,
-} from "./entity.reducer";
+import { addMany, EntityState, getIds } from "./entity.reducer";
 
 export interface ProductsState extends EntityState<Product> {
   query: string;

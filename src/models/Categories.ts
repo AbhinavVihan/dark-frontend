@@ -1,15 +1,15 @@
 import { Customer } from "./Customer";
+import { Entity } from "./Entity";
 
 export interface Categories {
   status: string;
-  doc: Doc;
+  doc: Category;
 }
 
-interface Doc {
+export interface Category extends Entity {
   categoryName: string;
   maker: Customer;
   description: string;
   photo: string;
   slug: string;
-  id: string;
 }

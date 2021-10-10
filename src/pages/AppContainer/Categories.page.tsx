@@ -1,15 +1,41 @@
-import { FC, memo } from "react";
-import { Link } from "react-router-dom";
+import { FC, memo, useEffect } from "react";
+import { useAppSelector } from "../../store";
+import Input from "../../components/input";
+import {
+  categoryQuerySelector,
+  currentQueryCategoriesSelector,
+} from "../../selectors/categories.selectors";
+import { categoryActions } from "../../actions/categories.actions";
+import { fetchCategories } from "../../api/categories";
 
 interface Props {}
 
 const Categories: FC<Props> = (props) => {
+  const query = useAppSelector(categoryQuerySelector);
+
+  const categories = useAppSelector(currentQueryCategoriesSelector);
+
+  useEffect(() => {
+    fetchCategories({ query }).then((categories) => {
+      categoryActions.queryCompleted(query, categories);
+    });
+  }, [query]);
+
   return (
     <div>
-      This is Categories Page
-      <Link to="/overview">
-        <span className="text-blue-500">Go to overview</span>
-      </Link>
+      <div>This is the categories page</div>
+      <Input
+        type="text"
+        value={query}
+        onChange={(e) => {
+          categoryActions.query(e.target.value);
+        }}
+      ></Input>
+      <div>
+        {categories.map((category) => (
+          <div key={category._id}>{category.categoryName}</div>
+        ))}
+      </div>
     </div>
   );
 };

@@ -7,6 +7,7 @@ import {
   currentQueryProductsSelector,
   productQuerySelector,
 } from "../../selectors/products.selectors";
+import { Link } from "react-router-dom";
 
 interface Props {}
 
@@ -23,6 +24,9 @@ const Products: FC<Props> = (props) => {
 
   return (
     <div>
+      <Link to="/categories">
+        <span className="text-blue-500">Search by categories</span>
+      </Link>
       <div>This is the products page</div>
       <Input
         type="text"

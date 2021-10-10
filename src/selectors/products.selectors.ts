@@ -1,5 +1,4 @@
 import { createSelector } from "reselect";
-import { AppState } from "../store";
 import { productStateSelector } from "./app.selectors";
 
 // export const productQuerySelector = (state: AppState) => {

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { authActions } from "../actions/auth.actions";
 import { Customer } from "../models/Customer";
 import { AUTH_TOKEN, BASE_URL } from "./base";
 
@@ -92,8 +93,11 @@ export const me = () => {
   return axios
     .get<MeResponse>(url, { headers: { Authorization: AUTH_TOKEN } })
     .then((response) => {
-      // console.log(response.data.doc);
       return response.data.doc;
+    })
+    .then((c) => {
+      authActions.fetch(c);
+      return c;
     });
 };
 
