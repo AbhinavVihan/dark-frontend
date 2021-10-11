@@ -22,15 +22,15 @@ import axios from "axios";
 import { Category } from "../models/Categories";
 import { BASE_URL } from "./base";
 
-interface ProductResponse {
+interface CategoryResponse {
   category: Category[];
 }
 
-export interface ProductRequest {
+export interface CategoryRequest {
   query?: string;
 }
 
-export const fetchCategories = (data: ProductRequest) => {
+export const fetchCategories = (data: CategoryRequest) => {
   const url = BASE_URL + "/categories";
 
   return axios.get<Category[]>(url, { params: data }).then((response) => {
@@ -42,5 +42,5 @@ export const fetchCategories = (data: ProductRequest) => {
 export const fetchOneCategory = (id: string) => {
   const url = BASE_URL + "/products/" + id;
 
-  return axios.get<ProductResponse>(url);
+  return axios.get<CategoryResponse>(url);
 };

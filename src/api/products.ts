@@ -7,7 +7,7 @@ interface ProductResponse {
 }
 
 export interface ProductRequest {
-  query?: string;
+  query: string;
 }
 
 export const fetchProducts = (data: ProductRequest) => {

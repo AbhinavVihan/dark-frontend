@@ -1,23 +1,29 @@
 import { FC, memo, useEffect } from "react";
-import { fetchProducts } from "../../api/products";
 import { useAppSelector } from "../../store";
 import Input from "../../components/input";
-import { productActions } from "../../actions/products.actions";
 import {
   currentQueryProductsSelector,
+  productLoadingSelector,
   productQuerySelector,
 } from "../../selectors/products.selectors";
 import { Link } from "react-router-dom";
+import { fetchProducts } from "../../middlewares/products.middlewares";
+import { fetchProducts as fetchProductsStart } from "../../api/products";
+
+import { productActions } from "../../actions/products.actions";
+import { FaSpinner } from "react-icons/fa";
 
 interface Props {}
 
 const Products: FC<Props> = (props) => {
   const query = useAppSelector(productQuerySelector);
 
+  const loading = useAppSelector(productLoadingSelector);
+
   const products = useAppSelector(currentQueryProductsSelector);
 
   useEffect(() => {
-    fetchProducts({ query }).then((products) => {
+    fetchProductsStart({ query }).then((products) => {
       productActions.queryCompleted(query, products);
     });
   }, [query]);
@@ -32,9 +38,10 @@ const Products: FC<Props> = (props) => {
         type="text"
         value={query}
         onChange={(e) => {
-          productActions.query(e.target.value);
+          fetchProducts({ query: e.target.value });
         }}
       ></Input>
+      {loading && <FaSpinner className="mt-5 animate-spin"></FaSpinner>}
       <div>
         {products.map((product) => (
           <div key={product._id}>{product.name}</div>

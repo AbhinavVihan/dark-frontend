@@ -10,12 +10,14 @@ import { addMany, EntityState, getIds } from "./entity.reducer";
 export interface ProductsState extends EntityState<Product> {
   query: string;
   queryMap: { [query: string]: string[] };
+  loadingQuery: { [query: string]: boolean };
 }
 
 const initialState: ProductsState = {
   byId: {},
   query: "",
   queryMap: {},
+  loadingQuery: {},
   imageCover: {},
   imageFront: {},
   image1: {},
@@ -29,7 +31,13 @@ export const productReducer: Reducer<ProductsState> = (
 ) => {
   switch (action.type) {
     case PRODUCTS_QUERY:
-      return { ...state, query: action.payload };
+      const { query, loading } = action.payload;
+
+      return {
+        ...state,
+        query: query,
+        loadingQuery: { ...state.loadingQuery, [query]: loading },
+      };
     case PRODUCTS_QUERY_COMPLETED:
       const products = action.payload.products as Product[];
       const productIds = getIds(products);
@@ -77,8 +85,12 @@ export const productReducer: Reducer<ProductsState> = (
       return {
         ...newState,
         queryMap: {
-          ...state.queryMap,
+          ...newState.queryMap,
           [action.payload.query]: productIds,
+        },
+        loadingQuery: {
+          ...newState.loadingQuery,
+          [action.payload.query]: false,
         },
         imageCover: { ...state.imageCover, ...imgCover },
         imageFront: { ...state.imageFront, ...imgFront },

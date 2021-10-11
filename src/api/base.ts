@@ -17,7 +17,6 @@ axios.interceptors.request.use(function (config) {
 });
 
 axios.interceptors.response.use(undefined, (error) => {
-  // console.error("error is", error);
   if (error.message === "Request failed with status code 401") {
     console.log("err:", error.message);
     alert(
@@ -29,14 +28,14 @@ axios.interceptors.response.use(undefined, (error) => {
   return Promise.reject(error);
 });
 
-axios.interceptors.response.use(undefined, (error) => {
-  // console.error("error is", error);
-  if (error.message) {
-    localStorage.removeItem(AUTH_TOKEN);
-    // window.location.href = "/login";
-  }
-  return Promise.reject(error);
-});
+// axios.interceptors.response.use(undefined, (error) => {
+//   // console.error("error is", error);
+//   if (error.message) {
+//     localStorage.removeItem(AUTH_TOKEN);
+//     // window.location.href = "/login";
+//   }
+//   return Promise.reject(error);
+// });
 
 export const get = <T>(url: string, config: AxiosRequestConfig) => {
   const source = axios.CancelToken.source();

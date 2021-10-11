@@ -42,6 +42,16 @@ export const productByIdSelector = createSelector(
 //   return products;
 // };
 
+const productLoadingQuerySelector = createSelector(
+  [productStateSelector],
+  (productState) => productState.loadingQuery
+);
+
+export const productLoadingSelector = createSelector(
+  [productQuerySelector, productLoadingQuerySelector],
+  (query, loadingMap) => loadingMap[query]
+);
+
 export const currentQueryProductsSelector = createSelector(
   [productQuerySelector, productByIdSelector, productQueryMapSelector],
   (query, byId, queryMap) => {
