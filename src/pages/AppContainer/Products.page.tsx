@@ -7,15 +7,20 @@ import {
   productQuerySelector,
 } from "../../selectors/products.selectors";
 import { Link } from "react-router-dom";
-import { fetchProducts } from "../../middlewares/products.middlewares";
 import { fetchProducts as fetchProductsStart } from "../../api/products";
 
-import { productActions } from "../../actions/products.actions";
 import { FaSpinner } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import {
+  productQueryChangedAction,
+  productQueryCompletedAction,
+} from "../../actions/products.actions";
 
 interface Props {}
 
 const Products: FC<Props> = (props) => {
+  const dispatch = useDispatch();
+
   const query = useAppSelector(productQuerySelector);
 
   const loading = useAppSelector(productLoadingSelector);
@@ -24,7 +29,8 @@ const Products: FC<Props> = (props) => {
 
   useEffect(() => {
     fetchProductsStart({ query }).then((products) => {
-      productActions.queryCompleted(query, products);
+      // productActions.queryCompleted(query, products);
+      dispatch(productQueryCompletedAction(query, products));
     });
   }, [query]);
 
@@ -38,7 +44,8 @@ const Products: FC<Props> = (props) => {
         type="text"
         value={query}
         onChange={(e) => {
-          fetchProducts({ query: e.target.value });
+          // productActions.queryChanged(e.target.value, true);
+          dispatch(productQueryChangedAction(e.target.value, true));
         }}
       ></Input>
       {loading && <FaSpinner className="mt-5 animate-spin"></FaSpinner>}

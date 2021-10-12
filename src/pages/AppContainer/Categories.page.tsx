@@ -5,19 +5,26 @@ import {
   categoryQuerySelector,
   currentQueryCategoriesSelector,
 } from "../../selectors/categories.selectors";
-import { categoryActions } from "../../actions/categories.actions";
 import { fetchCategories } from "../../api/categories";
+import { useDispatch } from "react-redux";
+import {
+  categoryQueryChangedAction,
+  categoryQueryCompletedAction,
+} from "../../actions/categories.actions";
 
 interface Props {}
 
 const Categories: FC<Props> = (props) => {
+  const dispatch = useDispatch();
+
   const query = useAppSelector(categoryQuerySelector);
 
   const categories = useAppSelector(currentQueryCategoriesSelector);
 
   useEffect(() => {
     fetchCategories({ query }).then((categories) => {
-      categoryActions.queryCompleted(query, categories);
+      dispatch(categoryQueryCompletedAction(query, categories));
+      // categoryActions.queryCompleted(query, categories);
     });
   }, [query]);
 
@@ -28,7 +35,8 @@ const Categories: FC<Props> = (props) => {
         type="text"
         value={query}
         onChange={(e) => {
-          categoryActions.query(e.target.value);
+          dispatch(categoryQueryChangedAction(e.target.value));
+          // categoryActions.query(e.target.value);
         }}
       ></Input>
       <div>

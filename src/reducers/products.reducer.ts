@@ -1,7 +1,7 @@
 import { Reducer } from "redux";
 
 import {
-  PRODUCTS_QUERY,
+  PRODUCTS_QUERY_CHANGED,
   PRODUCTS_QUERY_COMPLETED,
 } from "../actions/action.constants";
 import { Product } from "../models/Products";
@@ -30,7 +30,7 @@ export const productReducer: Reducer<ProductsState> = (
   action
 ) => {
   switch (action.type) {
-    case PRODUCTS_QUERY:
+    case PRODUCTS_QUERY_CHANGED:
       const { query, loading } = action.payload;
 
       return {
