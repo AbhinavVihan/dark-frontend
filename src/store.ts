@@ -15,10 +15,12 @@ const reducer = combineReducers({
   categories: categoryReducer,
 });
 
-export const store = createStore(
-  reducer,
-  composeWithDevTools(applyMiddleware(SagaMiddleware))
-);
+const enhancer =
+  process.env.NODE_ENV === "production"
+    ? applyMiddleware(SagaMiddleware)
+    : composeWithDevTools(applyMiddleware(SagaMiddleware));
+
+export const store = createStore(reducer, enhancer);
 
 SagaMiddleware.run(watchProductQueryChanged);
 

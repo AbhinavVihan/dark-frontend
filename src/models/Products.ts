@@ -3,7 +3,6 @@ import { Entity } from "./Entity";
 
 export interface Products {
   status: string;
-  results: number;
   doc: Product[];
 }
 

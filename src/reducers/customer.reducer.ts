@@ -16,12 +16,12 @@ export const customerReducer: Reducer<CustomerState> = (
   switch (action.type) {
     case ME_FETCH:
     case ME_LOGIN:
-      // const customer: Customer = action.payload;
-      // return {
-      //   ...state,
-      //   byId: { ...state.byId, [customer._id]: customer },
-      // };
-      return addOne(state, action.payload) as CustomerState;
+      const customer: Customer = action.payload;
+      return {
+        ...state,
+        byId: { ...state.byId, [customer._id]: customer },
+      };
+    // return addOne(state, action.payload) as CustomerState;
 
     default:
       return state;

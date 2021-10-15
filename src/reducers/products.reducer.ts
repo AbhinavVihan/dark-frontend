@@ -1,11 +1,12 @@
 import { Reducer } from "redux";
 
 import {
+  PRODUCTS_FETCH_SINGLE_COMPLETE,
   PRODUCTS_QUERY_CHANGED,
   PRODUCTS_QUERY_COMPLETED,
 } from "../actions/action.constants";
 import { Product } from "../models/Products";
-import { addMany, EntityState, getIds } from "./entity.reducer";
+import { addMany, addOne, EntityState, getIds } from "./entity.reducer";
 
 export interface ProductsState extends EntityState<Product> {
   query: string;
@@ -98,6 +99,8 @@ export const productReducer: Reducer<ProductsState> = (
         image2: { ...state.image2, ...img2 },
         image3: { ...state.image3, ...img3 },
       };
+    case PRODUCTS_FETCH_SINGLE_COMPLETE:
+      return addOne(state, action.payload.doc) as ProductsState;
     default:
       return state;
   }

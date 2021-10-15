@@ -4,6 +4,7 @@ import Sidebar from "../../components/Sidebar";
 import CategoriesPage from "./Categories.page";
 import OverViewPage from "./OverView.page";
 import ProductsPage from "./Products.page";
+import ProductsDetailPage from "./ProductsDetail.page";
 
 interface Props {}
 
@@ -18,8 +19,11 @@ const AppContainer: FC<Props> = () => {
         <Route path="/categories">
           <CategoriesPage></CategoriesPage>
         </Route>
-        <Route path="/products">
+        <Route path="/products" exact>
           <ProductsPage></ProductsPage>
+        </Route>
+        <Route path="/products/:productId" exact>
+          <ProductsDetailPage></ProductsDetailPage>
         </Route>
       </Switch>
     </div>

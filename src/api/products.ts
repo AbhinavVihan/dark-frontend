@@ -14,7 +14,7 @@ export const fetchProducts = (data: ProductRequest) => {
   const url = BASE_URL + "/products";
 
   return axios.get<Product[]>(url, { params: data }).then((response) => {
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
   });
 };
