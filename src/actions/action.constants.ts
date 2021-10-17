@@ -7,6 +7,7 @@ export const PRODUCTS_FETCH_SINGLE = "products/fetch_single";
 export const PRODUCTS_FETCH_SINGLE_COMPLETE = "products/fetch_single_complete";
 export const PRODUCTS_QUERY_CHANGED = "products/query_changed";
 export const PRODUCTS_QUERY_COMPLETED = "products/query_completed";
+export const PRODUCT_IMAGES_LOADED = "products/images_loaded";
 
 //categories
 export const CATEGORIES_QUERY = "categories/query";

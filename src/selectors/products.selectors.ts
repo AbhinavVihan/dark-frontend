@@ -52,6 +52,16 @@ export const productLoadingSelector = createSelector(
   (query, loadingMap) => loadingMap[query]
 );
 
+export const selectedIdSelected = createSelector(
+  [productStateSelector],
+  (productState) => productState.selectedId
+);
+
+export const selectedProductSelector = createSelector(
+  [productByIdSelector, selectedIdSelected],
+  (byId, id) => id && byId[id]
+);
+
 export const currentQueryProductsSelector = createSelector(
   [productQuerySelector, productByIdSelector, productQueryMapSelector],
   (query, byId, queryMap) => {

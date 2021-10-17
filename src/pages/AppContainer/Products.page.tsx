@@ -28,12 +28,11 @@ const Products: FC<Props> = (props) => {
 
   const products = useAppSelector(currentQueryProductsSelector);
 
-  useEffect(() => {
-    fetchProductsStart({ query }).then((products) => {
-      // productActions.queryCompleted(query, products);
-      dispatch(productQueryCompletedAction(query, products));
-    });
-  }, [query]);
+  // useEffect(() => {
+  //   fetchProductsStart({ query }).then((products) => {
+  //     dispatch(productQueryCompletedAction(query, products));
+  //   });
+  // }, [query]);
 
   return (
     <div>

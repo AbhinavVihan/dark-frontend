@@ -6,6 +6,7 @@ export interface EntityState<T extends Entity = Entity> {
   byId: {
     [id: string]: T;
   };
+  selectedId?: string;
   imageCover?: {
     [id: string]: string;
   };
@@ -27,8 +28,15 @@ export interface EntityState<T extends Entity = Entity> {
 }
 
 export const getIds = (entities: Entity[]) => {
-  return entities.map((e) => e._id);
+  if (entities) {
+    return entities.map((e) => e._id);
+  }
 };
+
+export const select = (state: EntityState, id: string) => ({
+  ...state,
+  selectedId: id,
+});
 
 export const addOne = (state: EntityState, entity: Entity) => {
   return { ...state, byId: { [entity._id]: entity } };

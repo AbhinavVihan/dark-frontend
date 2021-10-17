@@ -1,8 +1,8 @@
 import { FC, memo, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Link, Route, Switch, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { fetchOneProduct } from "../../actions/products.actions";
-import { productByIdSelector } from "../../selectors/products.selectors";
+import { selectedProductSelector } from "../../selectors/products.selectors";
 import { useAppSelector } from "../../store";
 
 interface Props {}
@@ -10,13 +10,13 @@ interface Props {}
 const ProductsDetails: FC<Props> = (props) => {
   const { productId } = useParams<{ productId: string }>();
 
-  const productByIds = useAppSelector(productByIdSelector);
-  const product = productByIds[productId];
+  const product = useAppSelector(selectedProductSelector);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchOneProduct(productId));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productId]);
 
   if (!product) {

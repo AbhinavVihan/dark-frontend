@@ -21,12 +21,11 @@ import {
 } from "../api/products";
 
 function* fetchProducts(action: AnyAction): Generator<any> {
+  const { query } = action.payload;
   yield delay(300);
 
-  const output: any = yield call(fetchProductsApi, {
-    query: action.payload,
-  });
-  yield put(productQueryCompletedAction(action.payload, output));
+  const res: any = yield call(fetchProductsApi, { query });
+  yield put(productQueryCompletedAction(query, res));
 }
 
 function* fetchOne(action: AnyAction): Generator<any> {
@@ -35,8 +34,6 @@ function* fetchOne(action: AnyAction): Generator<any> {
 }
 
 export function* watchProductQueryChanged() {
-  yield all([
-    (takeLatest(PRODUCTS_QUERY_CHANGED, fetchProducts),
-    takeEvery(PRODUCTS_FETCH_SINGLE, fetchOne)),
-  ]);
+  yield takeLatest(PRODUCTS_QUERY_CHANGED, fetchProducts);
+  yield takeEvery(PRODUCTS_FETCH_SINGLE, fetchOne);
 }
