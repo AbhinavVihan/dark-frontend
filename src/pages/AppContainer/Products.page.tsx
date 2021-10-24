@@ -3,7 +3,7 @@ import { useAppSelector } from "../../store";
 import Input from "../../components/input";
 import {
   currentQueryProductsSelector,
-  productLoadingSelector,
+  productsLoadingSelector,
   productQuerySelector,
 } from "../../selectors/products.selectors";
 import { Link, useHistory } from "react-router-dom";
@@ -24,7 +24,7 @@ const Products: FC<Props> = (props) => {
 
   const query = useAppSelector(productQuerySelector);
 
-  const loading = useAppSelector(productLoadingSelector);
+  const loading = useAppSelector(productsLoadingSelector);
 
   const products = useAppSelector(currentQueryProductsSelector);
 

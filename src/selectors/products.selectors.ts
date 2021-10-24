@@ -21,6 +21,11 @@ export const productQueryMapSelector = createSelector(
   (productState) => productState.queryMap
 );
 
+export const queryIdsSelector = createSelector(
+  [productQuerySelector, productQueryMapSelector],
+  (query, queryMap) => queryMap[query] || []
+);
+
 // export const productByIdSelector = (state: AppState) => {
 //   const productState = productStateSelector(state);
 //   return productState.byId;
@@ -42,19 +47,24 @@ export const productByIdSelector = createSelector(
 //   return products;
 // };
 
-const productLoadingQuerySelector = createSelector(
+export const productsLoadingSelector = createSelector(
   [productStateSelector],
-  (productState) => productState.loadingQuery
-);
-
-export const productLoadingSelector = createSelector(
-  [productQuerySelector, productLoadingQuerySelector],
-  (query, loadingMap) => loadingMap[query]
+  (productState) => productState.loadingList
 );
 
 export const selectedIdSelected = createSelector(
   [productStateSelector],
   (productState) => productState.selectedId
+);
+
+export const selectedErrorSelector = createSelector(
+  [productStateSelector],
+  (productState) => productState.errorOne
+);
+
+export const selectedLoadingSelector = createSelector(
+  [productStateSelector],
+  (productState) => productState.loadingOne
 );
 
 export const selectedProductSelector = createSelector(
@@ -63,10 +73,9 @@ export const selectedProductSelector = createSelector(
 );
 
 export const currentQueryProductsSelector = createSelector(
-  [productQuerySelector, productByIdSelector, productQueryMapSelector],
-  (query, byId, queryMap) => {
-    const productIds = queryMap[query] || [];
-    const products = productIds.map((id) => byId[id]);
+  [queryIdsSelector, productByIdSelector],
+  (productsIds, byId) => {
+    const products = productsIds.map((id) => byId[id]);
     return products;
   }
 );

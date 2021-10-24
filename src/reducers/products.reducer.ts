@@ -3,23 +3,30 @@ import { Reducer } from "redux";
 import {
   PRODUCTS_FETCH_SINGLE,
   PRODUCTS_FETCH_SINGLE_COMPLETE,
+  PRODUCTS_FETCH_SINGLE_ERROR,
   PRODUCTS_QUERY_CHANGED,
   PRODUCTS_QUERY_COMPLETED,
 } from "../actions/action.constants";
 import { Product } from "../models/Products";
-import { addMany, addOne, EntityState, getIds, select } from "./entity.reducer";
+import {
+  addMany,
+  addOne,
+  EntityState,
+  getIds,
+  initialEntityState,
+  select,
+  setErrorForOne,
+} from "./entity.reducer";
 
 export interface ProductsState extends EntityState<Product> {
   query: string;
   queryMap: { [query: string]: string[] };
-  loadingQuery: { [query: string]: boolean };
 }
 
 const initialState: ProductsState = {
-  byId: {},
+  ...initialEntityState,
   query: "",
   queryMap: {},
-  loadingQuery: {},
   imageCover: {},
   imageFront: {},
   image1: {},
@@ -40,7 +47,7 @@ export const productReducer: Reducer<ProductsState> = (
       return {
         ...state,
         query: query,
-        loadingQuery: { ...state.loadingQuery, [query]: loading },
+        loadingList: true,
       };
     case PRODUCTS_QUERY_COMPLETED:
       const products = action.payload.products as Product[];
@@ -92,10 +99,7 @@ export const productReducer: Reducer<ProductsState> = (
           ...newState.queryMap,
           [action.payload.query]: productIds,
         },
-        loadingQuery: {
-          ...newState.loadingQuery,
-          [action.payload.query]: false,
-        },
+        loadingList: false,
         // imageCover: { ...state.imageCover, ...imgCover },
         // imageFront: { ...state.imageFront, ...imgFront },
         // image1: { ...state.image1, ...img1 },
@@ -103,7 +107,10 @@ export const productReducer: Reducer<ProductsState> = (
         // image3: { ...state.image3, ...img3 },
       };
     case PRODUCTS_FETCH_SINGLE_COMPLETE:
-      return addOne(state, action.payload.doc) as ProductsState;
+      return addOne(state, action.payload.doc, false) as ProductsState;
+    case PRODUCTS_FETCH_SINGLE_ERROR:
+      const { id, msg } = action.payload;
+      return setErrorForOne(state, id, msg) as ProductsState;
     default:
       return state;
   }

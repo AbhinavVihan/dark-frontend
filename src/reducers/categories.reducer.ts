@@ -5,7 +5,12 @@ import {
   CATEGORIES_QUERY_COMPLETED,
 } from "../actions/action.constants";
 import { Category } from "../models/Categories";
-import { addMany, EntityState, getIds } from "./entity.reducer";
+import {
+  addMany,
+  EntityState,
+  getIds,
+  initialEntityState,
+} from "./entity.reducer";
 
 export interface CategoriesState extends EntityState<Category> {
   query: string;
@@ -13,7 +18,7 @@ export interface CategoriesState extends EntityState<Category> {
 }
 
 const initialState: CategoriesState = {
-  byId: {},
+  ...initialEntityState,
   query: "",
   queryMap: {},
   photo: {},

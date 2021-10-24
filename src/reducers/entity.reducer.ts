@@ -25,7 +25,16 @@ export interface EntityState<T extends Entity = Entity> {
   photo?: {
     [id: string]: string;
   };
+  loadingOne: boolean;
+  loadingList: boolean;
+  errorOne?: string;
 }
+
+export const initialEntityState = {
+  byId: {},
+  loadingOne: false,
+  loadingList: false,
+};
 
 export const getIds = (entities: Entity[]) => {
   if (entities) {
@@ -36,10 +45,29 @@ export const getIds = (entities: Entity[]) => {
 export const select = (state: EntityState, id: string) => ({
   ...state,
   selectedId: id,
+  loadingOne: true,
+  errorOne: undefined,
 });
 
-export const addOne = (state: EntityState, entity: Entity) => {
-  return { ...state, byId: { [entity._id]: entity } };
+export const setErrorForOne = (state: EntityState, id: string, msg: string) => {
+  if (state.selectedId !== id) {
+    return state;
+  }
+
+  return { ...state, errorOne: msg, loadingOne: false };
+};
+
+export const addOne = (
+  state: EntityState,
+  entity: Entity,
+  loading?: boolean
+) => {
+  const newLoading = loading === undefined ? state.loadingOne : loading;
+  return {
+    ...state,
+    byId: { [entity._id]: entity },
+    loadingOne: newLoading,
+  };
 };
 
 export const addMany = (state: EntityState, entities: Entity[]) => {
@@ -48,7 +76,10 @@ export const addMany = (state: EntityState, entities: Entity[]) => {
   }
 
   const entityMap = entities.reduce((prev, entity) => {
-    return { ...prev, [entity._id]: entity };
+    return {
+      ...prev,
+      [entity._id]: entity,
+    };
   }, {});
 
   return {

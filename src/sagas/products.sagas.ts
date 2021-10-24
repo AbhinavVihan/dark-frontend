@@ -13,6 +13,7 @@ import {
 } from "../actions/action.constants";
 import {
   fetchOneProductComplete,
+  fetchSingleProductError,
   productQueryCompletedAction,
 } from "../actions/products.actions";
 import {
@@ -22,15 +23,21 @@ import {
 
 function* fetchProducts(action: AnyAction): Generator<any> {
   const { query } = action.payload;
-  yield delay(300);
+  yield delay(800);
 
   const res: any = yield call(fetchProductsApi, { query });
   yield put(productQueryCompletedAction(query, res));
 }
 
 function* fetchOne(action: AnyAction): Generator<any> {
-  const res: any = yield call(fetchOneProduct, action.payload);
-  yield put(fetchOneProductComplete(res.data));
+  try {
+    const res: any = yield call(fetchOneProduct, action.payload);
+    yield put(fetchOneProductComplete(res.data));
+  } catch (e: any) {
+    const error = e.response.statusText || "some error occured";
+    // console.log(e.response);
+    yield put(fetchSingleProductError(action.payload, error));
+  }
 }
 
 export function* watchProductQueryChanged() {
