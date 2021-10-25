@@ -42,12 +42,12 @@ export const productReducer: Reducer<ProductsState> = (
     case PRODUCTS_FETCH_SINGLE:
       return select(state, action.payload) as ProductsState;
     case PRODUCTS_QUERY_CHANGED:
-      const { query, loading } = action.payload;
+      const { query, loadingList } = action.payload;
 
       return {
         ...state,
         query: query,
-        loadingList: true,
+        loadingList: loadingList,
       };
     case PRODUCTS_QUERY_COMPLETED:
       const products = action.payload.products as Product[];

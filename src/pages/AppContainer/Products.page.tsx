@@ -34,6 +34,11 @@ const Products: FC<Props> = (props) => {
     });
   }, [query]);
 
+  // useEffect(() => {
+  //   // eslint-disable-next-line no-restricted-globals
+  //   location.href = location.href;
+  // }, [window.location.href === "/proucts"]);
+
   return (
     <div>
       <Link to="/categories">
@@ -50,14 +55,15 @@ const Products: FC<Props> = (props) => {
       ></Input>
       {loading && <FaSpinner className="mt-5 animate-spin"></FaSpinner>}
       <div>
-        {products.map((product) => (
-          <div className="cursor-pointer" key={product._id}>
-            <Link to={product && "/products/" + product._id}>
-              {" "}
-              {product && product.name}
-            </Link>
-          </div>
-        ))}
+        {products &&
+          products.map((product) => (
+            <div className="cursor-pointer">
+              <Link to={"/products/" + product._id}>
+                {" "}
+                {product && product.name}
+              </Link>
+            </div>
+          ))}
       </div>
     </div>
   );

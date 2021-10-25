@@ -36,6 +36,21 @@ const ProductsDetails: FC<Props> = (props) => {
     );
   }
 
+  const imageString =
+    product &&
+    product.images.map((imgArr) => {
+      const img = imgArr;
+      return imgArr;
+    });
+
+  const imgstr =
+    imageString &&
+    imageString.map((img) => {
+      return img;
+    });
+
+  const img = imgstr && imgstr.forEach((e) => e);
+
   return (
     <div>
       <div>
@@ -47,7 +62,13 @@ const ProductsDetails: FC<Props> = (props) => {
 
       {product && (
         <div>
-          this is the details of {product.name} (id: {productId})
+          this is the details of {product.name} (id: {productId}) whose image is
+          <img
+            alt="imhfdb"
+            src={
+              "http://127.0.0.1:8000/public/img/products/product-615185d0b3cd3f2386e2aa66-1634957812243-1.jpeg"
+            }
+          />
         </div>
       )}
       <Link to={"/products/" + (productId + 1)}>next product</Link>

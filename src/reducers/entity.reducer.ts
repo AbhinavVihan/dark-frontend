@@ -65,7 +65,7 @@ export const addOne = (
   const newLoading = loading === undefined ? state.loadingOne : loading;
   return {
     ...state,
-    // byId: { [entity._id]: entity },
+    byId: { [entity._id]: entity },
     loadingOne: newLoading,
   };
 };
@@ -75,12 +75,35 @@ export const addMany = (state: EntityState, entities: Entity[]) => {
     return state;
   }
 
+  const images = entities.map((en) => en.images);
+
+  // const images = images
+
+  const imgs = images.map((img) => {
+    const i =
+      img &&
+      img.map((img) => "http://127.0.0.1:8000/public/img/products/" + img);
+    return i;
+    //  e.map(i => {return  "http://127.0.0.1:8000/public/img/products/" + i})
+  });
+
   const entityMap = entities.reduce((prev, entity) => {
+    entity.images = imgs;
     return {
       ...prev,
       [entity._id]: entity,
     };
   }, {});
+
+  // if (entities === products) {
+  //   const imgFront = products.reduce((prev, product) => {
+  //     const img = product.imageFront;
+  //     return {
+  //       ...prev,
+  //       [product._id]: "https://dark-2.herokuapp.com/img/products/" + img,
+  //     };
+  //   }, {});
+  // }
 
   return {
     ...state,
