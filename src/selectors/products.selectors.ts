@@ -72,10 +72,19 @@ export const selectedProductSelector = createSelector(
   (byId, id) => id && byId[id]
 );
 
+// export const currentQueryProductsSelector = createSelector(
+//   [queryIdsSelector, productByIdSelector],
+//   (productsIds, byId) => {
+//     const products = productsIds.map((id) => byId[id]);
+//     return products;
+//   }
+// );
+
 export const currentQueryProductsSelector = createSelector(
-  [queryIdsSelector, productByIdSelector],
-  (productsIds, byId) => {
-    const products = productsIds.map((id) => byId[id]);
+  [productQuerySelector, productByIdSelector, productQueryMapSelector],
+  (query, byId, queryMap) => {
+    const productIds = queryMap[query] || [];
+    const products = productIds.map((id) => byId[id]);
     return products;
   }
 );

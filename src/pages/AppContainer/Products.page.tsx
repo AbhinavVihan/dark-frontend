@@ -28,11 +28,11 @@ const Products: FC<Props> = (props) => {
 
   const products = useAppSelector(currentQueryProductsSelector);
 
-  // useEffect(() => {
-  //   fetchProductsStart({ query }).then((products) => {
-  //     dispatch(productQueryCompletedAction(query, products));
-  //   });
-  // }, [query]);
+  useEffect(() => {
+    fetchProductsStart({ query }).then((products) => {
+      dispatch(productQueryCompletedAction(query, products));
+    });
+  }, [query]);
 
   return (
     <div>
@@ -52,7 +52,10 @@ const Products: FC<Props> = (props) => {
       <div>
         {products.map((product) => (
           <div className="cursor-pointer" key={product._id}>
-            <Link to={"/products/" + product._id}> {product.name}</Link>
+            <Link to={product && "/products/" + product._id}>
+              {" "}
+              {product && product.name}
+            </Link>
           </div>
         ))}
       </div>

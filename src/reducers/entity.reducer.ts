@@ -65,7 +65,7 @@ export const addOne = (
   const newLoading = loading === undefined ? state.loadingOne : loading;
   return {
     ...state,
-    byId: { [entity._id]: entity },
+    // byId: { [entity._id]: entity },
     loadingOne: newLoading,
   };
 };
