@@ -1,5 +1,4 @@
 import { createSelector } from "reselect";
-import { AppState } from "../store";
 import { authStateSelector, customerStateSelector } from "./app.selectors";
 
 export const authIdSelector = createSelector(

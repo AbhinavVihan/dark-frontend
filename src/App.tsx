@@ -1,7 +1,6 @@
 import React, { Suspense, useEffect } from "react";
 // import { useDispatch } from "react-redux";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import { authActions } from "./actions/auth.actions";
 import { me } from "./api/auth";
 import { AUTH_TOKEN } from "./api/base";
 import AppContainerPageLazy from "./pages/AppContainer/AppContainer.lazy";
@@ -25,6 +24,7 @@ function App() {
     }
 
     me();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!customer && token) {

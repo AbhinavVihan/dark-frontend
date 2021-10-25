@@ -26,6 +26,7 @@ const Categories: FC<Props> = (props) => {
       dispatch(categoryQueryCompletedAction(query, categories));
       // categoryActions.queryCompleted(query, categories);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   return (

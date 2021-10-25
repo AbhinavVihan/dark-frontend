@@ -3,7 +3,6 @@ import {
   takeEvery,
   call,
   put,
-  all,
   delay,
 } from "@redux-saga/core/effects";
 import { AnyAction } from "redux";
@@ -41,6 +40,6 @@ function* fetchOne(action: AnyAction): Generator<any> {
 }
 
 export function* watchProductQueryChanged() {
-  yield takeEvery(PRODUCTS_QUERY_CHANGED, fetchProducts);
+  yield takeLatest(PRODUCTS_QUERY_CHANGED, fetchProducts);
   yield takeEvery(PRODUCTS_FETCH_SINGLE, fetchOne);
 }

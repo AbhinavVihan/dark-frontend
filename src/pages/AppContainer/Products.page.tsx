@@ -6,7 +6,7 @@ import {
   productsLoadingSelector,
   productQuerySelector,
 } from "../../selectors/products.selectors";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { fetchProducts as fetchProductsStart } from "../../api/products";
 
 import { FaSpinner } from "react-icons/fa";
@@ -19,7 +19,6 @@ import {
 interface Props {}
 
 const Products: FC<Props> = (props) => {
-  const history = useHistory();
   const dispatch = useDispatch();
 
   const query = useAppSelector(productQuerySelector);
@@ -32,6 +31,7 @@ const Products: FC<Props> = (props) => {
     fetchProductsStart({ query }).then((products) => {
       dispatch(productQueryCompletedAction(query, products));
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   // useEffect(() => {
