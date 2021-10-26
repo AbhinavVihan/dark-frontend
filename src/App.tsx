@@ -43,13 +43,14 @@ function App() {
             )}
           </Route>
           <Route path={["/login", "/signup", "/forgot-password"]} exact>
-            {customer ? <Redirect to="/products" /> : <AuthPageLazy />}
+            {customer ? <Redirect to="/categories" /> : <AuthPageLazy />}
           </Route>
           <Route
             path={[
               "/overview",
               "/categories",
               "/products",
+              "/categories/:categoryId",
               "/products/:productId",
             ]}
             exact

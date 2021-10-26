@@ -1,15 +1,21 @@
 import { Reducer } from "redux";
 
 import {
-  CATEGORIES_QUERY,
+  CATEGORIES_FETCH_SINGLE,
+  CATEGORIES_FETCH_SINGLE_COMPLETE,
+  CATEGORIES_FETCH_SINGLE_ERROR,
+  CATEGORIES_QUERY_CHANGED,
   CATEGORIES_QUERY_COMPLETED,
 } from "../actions/action.constants";
 import { Category } from "../models/Categories";
 import {
   addMany,
+  addOne,
   EntityState,
   getIds,
   initialEntityState,
+  select,
+  setErrorForOne,
 } from "./entity.reducer";
 
 export interface CategoriesState extends EntityState<Category> {
@@ -21,7 +27,7 @@ const initialState: CategoriesState = {
   ...initialEntityState,
   query: "",
   queryMap: {},
-  photo: {},
+  // photo: {},
 };
 
 export const categoryReducer: Reducer<CategoriesState> = (
@@ -29,8 +35,16 @@ export const categoryReducer: Reducer<CategoriesState> = (
   action
 ) => {
   switch (action.type) {
-    case CATEGORIES_QUERY:
-      return { ...state, query: action.payload };
+    case CATEGORIES_FETCH_SINGLE:
+      return select(state, action.payload) as CategoriesState;
+    case CATEGORIES_QUERY_CHANGED:
+      const { query, loadingList } = action.payload;
+
+      return {
+        ...state,
+        query: query,
+        loadingList: loadingList,
+      };
     case CATEGORIES_QUERY_COMPLETED:
       const categories = action.payload.categories as Category[];
       const categoriesIds = getIds(categories);
@@ -84,19 +98,26 @@ export const categoryReducer: Reducer<CategoriesState> = (
       //       [product._id]: "https://dark-2.herokuapp.com/img/categories/" + img,
       //     };
       //   }, {});
+
       return {
         ...newState,
         queryMap: {
-          ...state.queryMap,
+          ...newState.queryMap,
           [action.payload.query]: categoriesIds,
         },
-        photo: { ...state.photo, ...photo },
+        loadingList: false,
+        // photo: { ...state.photo, ...photo },
         // imageCover: { ...state.imageCover, ...imgCover },
         // imageFront: { ...state.imageFront, ...imgFront },
         // image1: { ...state.image1, ...img1 },
         // image2: { ...state.image2, ...img2 },
         // image3: { ...state.image3, ...img3 },
       };
+    case CATEGORIES_FETCH_SINGLE_COMPLETE:
+      return addOne(state, action.payload.doc, false) as CategoriesState;
+    case CATEGORIES_FETCH_SINGLE_ERROR:
+      const { id, msg } = action.payload;
+      return setErrorForOne(state, id, msg) as CategoriesState;
     default:
       return state;
   }

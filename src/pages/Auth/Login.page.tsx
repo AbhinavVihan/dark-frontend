@@ -36,7 +36,7 @@ const Login: FC<Props> = (props) => {
     onSubmit: (data) => {
       login(data).then((c) => {
         authActions.login(c);
-        history.push("/products");
+        history.push("/categories");
       });
     },
   });

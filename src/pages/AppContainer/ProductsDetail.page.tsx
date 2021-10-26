@@ -3,9 +3,9 @@ import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { fetchOneProduct } from "../../actions/products.actions";
 import {
+  selectedProductSelector,
   selectedErrorSelector,
   selectedLoadingSelector,
-  selectedProductSelector,
 } from "../../selectors/products.selectors";
 import { useAppSelector } from "../../store";
 
@@ -17,7 +17,6 @@ const ProductsDetails: FC<Props> = (props) => {
   const product = useAppSelector(selectedProductSelector);
   const error = useAppSelector(selectedErrorSelector);
   const loading = useAppSelector(selectedLoadingSelector);
-  // const productIds = useAppSelector(queryIdsSelector);
 
   const dispatch = useDispatch();
 
@@ -34,21 +33,6 @@ const ProductsDetails: FC<Props> = (props) => {
       </div>
     );
   }
-
-  // const imageString =
-  //   product &&
-  //   product.images.map((imgArr) => {
-  //     const img = imgArr;
-  //     return imgArr;
-  //   });
-
-  // const imgstr =
-  //   imageString &&
-  //   imageString.map((img) => {
-  //     return img;
-  //   });
-
-  // const img = imgstr && imgstr.forEach((e) => e);
 
   return (
     <div>

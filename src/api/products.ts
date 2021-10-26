@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Product } from "../models/Products";
+import { ProductSingle } from "../models/ProductSingle";
 import { BASE_URL } from "./base";
 
 interface ProductResponse {
@@ -22,5 +23,5 @@ export const fetchProducts = (data: ProductRequest) => {
 export const fetchOneProduct = (id: string) => {
   const url = BASE_URL + "/products/" + id;
 
-  return axios.get<ProductResponse>(url);
+  return axios.get<ProductSingle>(url);
 };

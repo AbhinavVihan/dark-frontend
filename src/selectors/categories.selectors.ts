@@ -11,16 +11,63 @@ export const categoryQueryMapSelector = createSelector(
   (categoryState) => categoryState.queryMap
 );
 
+export const queryIdsSelector = createSelector(
+  [categoryQuerySelector, categoryQueryMapSelector],
+  (query, queryMap) => queryMap[query] || []
+);
+
 export const categoryByIdSelector = createSelector(
   [categoriesStateSelector],
   (categoryState) => categoryState.byId
 );
 
+export const categoriesLoadingSelector = createSelector(
+  [categoriesStateSelector],
+  (categoryState) => categoryState.loadingList
+);
+
+export const selectedIdSelected = createSelector(
+  [categoriesStateSelector],
+  (categoryState) => categoryState.selectedId
+);
+
+export const selectedErrorSelector = createSelector(
+  [categoriesStateSelector],
+  (categoryState) => categoryState.errorOne
+);
+
+export const selectedLoadingSelector = createSelector(
+  [categoriesStateSelector],
+  (categoryState) => categoryState.loadingOne
+);
+
+export const selectedCategorySelector = createSelector(
+  [categoryByIdSelector, selectedIdSelected],
+  (byId, id) => id && byId[id]
+);
+
+// export const currentQueryCategoriesSelector = createSelector(
+//   [queryIdsSelector, categoryByIdSelector],
+//   (categoriesIds, byId) => {
+//     const categories = categoriesIds.map((id) => byId[id]);
+//     return categories;
+//   }
+// );
+
+// export const currentQueryCategoriesSelector = createSelector(
+//   [categoryQuerySelector, categoryByIdSelector, categoryQueryMapSelector],
+//   (query, byId, queryMap) => {
+//     const categoryIds = queryMap[query] || [];
+//     const categories = categoryIds.map((id) => byId[id]);
+//     return categories;
+//   }
+// );
+
 export const currentQueryCategoriesSelector = createSelector(
   [categoryQuerySelector, categoryByIdSelector, categoryQueryMapSelector],
   (query, byId, queryMap) => {
-    const categoryIds = queryMap[query] || [];
-    const categories = categoryIds.map((id) => byId[id]);
-    return categories;
+    const productIds = queryMap[query] || [];
+    const products = productIds.map((id) => byId[id]);
+    return products;
   }
 );

@@ -12,5 +12,10 @@ export const PRODUCTS_QUERY_COMPLETED = "products/query_completed";
 export const PRODUCT_IMAGES_LOADED = "products/images_loaded";
 
 //categories
-export const CATEGORIES_QUERY = "categories/query";
+export const CATEGORIES_FETCH_SINGLE = "categories/fetch_single";
+export const CATEGORIES_FETCH_SINGLE_COMPLETE =
+  "categories/fetch_single_complete";
+export const CATEGORIES_FETCH_SINGLE_ERROR = "categories/fetch_single_error";
+
+export const CATEGORIES_QUERY_CHANGED = "categories/query_changed";
 export const CATEGORIES_QUERY_COMPLETED = "categories/query_completed";

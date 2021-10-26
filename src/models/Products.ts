@@ -2,7 +2,6 @@ import { Categories } from "./Categories";
 import { Entity } from "./Entity";
 
 export interface Products {
-  status: string;
   doc: Product[];
 }
 

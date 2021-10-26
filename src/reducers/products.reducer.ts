@@ -27,11 +27,11 @@ const initialState: ProductsState = {
   ...initialEntityState,
   query: "",
   queryMap: {},
-  imageCover: {},
-  imageFront: {},
-  image1: {},
-  image2: {},
-  image3: {},
+  // imageCover: {},
+  // imageFront: {},
+  // image1: {},
+  // image2: {},
+  // image3: {},
 };
 
 export const productReducer: Reducer<ProductsState> = (

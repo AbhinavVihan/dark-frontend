@@ -5,29 +5,11 @@ import { Link } from "react-router-dom";
 interface Props {}
 
 const OverView: FC<Props> = (props) => {
-  // const [details, setDetails] = useState<string>();
-  // const products = fetchProducts().then((el) => {
-  //   el.map((el) => el.imageFront);
-  // });
-
   useEffect(() => {
     getProductDetails();
   }, []);
 
-  const getProductDetails = () => {
-    // const products = fetchProducts({});
-    // products.then((el) => {
-    //   el.doc.map
-    //   const imgArray = el.map((el) => {
-    //     console.log(typeof el._id);
-    //     return el.imageFront;
-    //   });
-    //   setDetails("https://dark-2.herokuapp.com/img/products/" + imgArray[2]);
-    //   console.log(details);
-    // });
-  };
-
-  // console.log(details);
+  const getProductDetails = () => {};
 
   return (
     <div>

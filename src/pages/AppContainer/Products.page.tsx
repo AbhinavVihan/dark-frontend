@@ -34,11 +34,6 @@ const Products: FC<Props> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
-  // useEffect(() => {
-  //   // eslint-disable-next-line no-restricted-globals
-  //   location.href = location.href;
-  // }, [window.location.href === "/proucts"]);
-
   return (
     <div>
       <Link to="/categories">

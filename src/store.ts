@@ -6,7 +6,7 @@ import { categoryReducer } from "./reducers/categories.reducer";
 import { customerReducer } from "./reducers/customer.reducer";
 import { productReducer } from "./reducers/products.reducer";
 import { SagaMiddleware } from "./sagas";
-import { watchProductQueryChanged } from "./sagas/products.sagas";
+import { watchAll } from "./sagas/products.sagas";
 
 const reducer = combineReducers({
   customers: customerReducer,
@@ -22,7 +22,7 @@ const enhancer =
 
 export const store = createStore(reducer, enhancer);
 
-SagaMiddleware.run(watchProductQueryChanged);
+SagaMiddleware.run(watchAll);
 
 export type AppState = ReturnType<typeof reducer>;
 

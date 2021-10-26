@@ -3,7 +3,7 @@ import { Entity } from "./Entity";
 
 export interface Categories {
   status: string;
-  doc: Category;
+  doc: Category[];
 }
 
 export interface Category extends Entity {

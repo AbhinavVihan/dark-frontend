@@ -20,6 +20,7 @@
 
 import axios from "axios";
 import { Category } from "../models/Categories";
+import { CategoriesSingle } from "../models/CategorySingle";
 import { BASE_URL } from "./base";
 
 interface CategoryResponse {
@@ -34,13 +35,13 @@ export const fetchCategories = (data: CategoryRequest) => {
   const url = BASE_URL + "/categories";
 
   return axios.get<Category[]>(url, { params: data }).then((response) => {
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
   });
 };
 
 export const fetchOneCategory = (id: string) => {
-  const url = BASE_URL + "/products/" + id;
+  const url = BASE_URL + "/categories/" + id;
 
-  return axios.get<CategoryResponse>(url);
+  return axios.get<CategoriesSingle>(url);
 };
