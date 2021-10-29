@@ -1,6 +1,7 @@
 import { FC, memo } from "react";
 import { Route, Switch } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
+import MyAccount from "../Auth/MyAccount";
 import CategoriesPage from "./Categories.page";
 import CategoriesDetailPage from "./CategoriesDetail.page";
 import OverViewPage from "./OverView.page";
@@ -16,6 +17,9 @@ const AppContainer: FC<Props> = () => {
       <Switch>
         <Route path="/overview">
           <OverViewPage></OverViewPage>
+        </Route>
+        <Route path="/my-account" exact>
+          <MyAccount></MyAccount>
         </Route>
         <Route path="/categories" exact>
           <CategoriesPage></CategoriesPage>

@@ -42,9 +42,6 @@ function App() {
               <Redirect to="/login"></Redirect>
             )}
           </Route>
-          <Route path={["/login", "/signup", "/forgot-password"]} exact>
-            {customer ? <Redirect to="/categories" /> : <AuthPageLazy />}
-          </Route>
           <Route
             path={[
               "/overview",
@@ -52,11 +49,25 @@ function App() {
               "/products",
               "/categories/:categoryId",
               "/products/:productId",
+              "/my-account",
             ]}
             exact
           >
             {customer ? <AppContainerPageLazy /> : <Redirect to="/login" />}
           </Route>
+          <Route
+            path={[
+              "/login",
+              "/signup",
+              "/forgot-password",
+              "/token",
+              "/resetPassword",
+            ]}
+            exact
+          >
+            {customer ? <Redirect to="/categories" /> : <AuthPageLazy />}
+          </Route>
+
           <Route>
             <NotFoundPage />
           </Route>

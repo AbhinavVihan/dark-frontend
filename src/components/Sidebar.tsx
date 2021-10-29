@@ -1,4 +1,5 @@
 import { FC, memo } from "react";
+import { Link } from "react-router-dom";
 import { logout } from "../api/auth";
 import { meSelector } from "../selectors/auth.selectors";
 import { useAppSelector } from "../store";
@@ -12,7 +13,10 @@ const Sidebar: FC<Props> = (props) => {
     <div className="h-screen bg-gray-400">
       This is the sidebar
       <div className="text-red-700">
-        Hello <span className="text-blue-700">{customer?.name}</span>
+        Hello
+        <Link to="/my-account">
+          <span className="text-blue-700">{customer?.name}</span>
+        </Link>
       </div>
       <div>
         {" "}

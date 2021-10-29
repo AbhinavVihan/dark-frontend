@@ -1,6 +1,8 @@
 //auth
 export const ME_FETCH = "me/fetch";
 export const ME_LOGIN = "me/login";
+export const FORGOT_PASSWORD_BEGIN = "forgot_password/begin";
+export const RESET_PASSWORD_COMPLETED = "reset_password/completed";
 
 //products
 export const PRODUCTS_FETCH_SINGLE = "products/fetch_single";

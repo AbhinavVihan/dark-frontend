@@ -1,8 +1,11 @@
 import { FC, memo } from "react";
 import { Route, Switch } from "react-router-dom";
 import FrontImage from "../../components/FrontImage";
+import BeforeSettingPasswordPage from "./BeforeSettingPassword.page";
 import ForgotpasswordPage from "./Forgotpassword.page";
 import LoginPage from "./Login.page";
+import MyAccount from "./MyAccount";
+import ResetpasswordPage from "./Resetpassword.page";
 import SignupPage from "./Signup.page";
 
 interface Props {}
@@ -19,6 +22,12 @@ const AppContainer: FC<Props> = (props) => {
         </Route>
         <Route path="/forgot-password">
           <ForgotpasswordPage></ForgotpasswordPage>
+        </Route>
+        <Route path="/token">
+          <BeforeSettingPasswordPage></BeforeSettingPasswordPage>
+        </Route>
+        <Route path="/resetPassword">
+          <ResetpasswordPage></ResetpasswordPage>
         </Route>
       </Switch>
       <FrontImage></FrontImage>

@@ -1,14 +1,20 @@
 import { useFormik } from "formik";
-import React, { FC, memo } from "react";
+import React, { FC, memo, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { FaSpinner } from "react-icons/fa";
 import * as yup from "yup";
 import Input from "../../components/input";
-import { forgotPassword } from "../../api/auth";
+import { login } from "../../api/auth";
+import { authActions } from "../../actions/auth.actions";
 
 interface Props {}
 
-const ForgotPassword: FC<Props> = (props) => {
+const BeforeSettingPassword: FC<Props> = (props) => {
+  const [password, setPassword] = useState(false);
+  const togglePassword = () => {
+    setPassword(password ? false : true);
+  };
+
   const history = useHistory();
 
   const {
@@ -20,21 +26,14 @@ const ForgotPassword: FC<Props> = (props) => {
     errors,
   } = useFormik({
     initialValues: {
-      email: "",
+      token: "",
     },
     validationSchema: yup.object().shape({
-      email: yup.string().required().email(),
+      token: yup.string().required(),
     }),
     onSubmit: (data) => {
-      forgotPassword(data)
-        .then((m) => {
-          alert(m);
-          history.push("/token");
-        })
-        .catch((e) => {
-          alert("there is no such user");
-          window.location.href = "/forgot-password";
-        });
+      authActions.password(data);
+      history.push("/resetPassword");
     },
   });
 
@@ -42,34 +41,30 @@ const ForgotPassword: FC<Props> = (props) => {
     <div className="flex flex-col items-center w-screen pt-8 lg:w-1/2 space-y-28">
       <div className="flex flex-col space-y-14">
         <div className="space-y-4 ">
-          <h1 className="text-4xl">
-            FORGOT YOUR PASSWORD, No Worries, RESET IT HERE
-          </h1>
-
-          <div className="flex justify-start ">
-            <h2>New Here?</h2>
-            <Link to="/signup" className="text-blue-600 underline">
-              Create an account
-            </Link>
-          </div>
-          <div>
-            {" "}
-            <Link to="/login" className="text-blue-600 underline">
-              Login to your account
-            </Link>
-          </div>
+          <h1 className="text-4xl">Enter your token here</h1>
+        </div>
+        <div className="flex justify-start ">
+          <h2>New Here?</h2>
+          <Link to="/signup" className="text-blue-600 underline">
+            Create an account
+          </Link>
+        </div>
+        <div>
+          <Link to="/login" className="text-blue-600 underline">
+            Login to your account
+          </Link>
         </div>
 
         <form className="space-y-8" onSubmit={handleSubmit}>
           <div>
             <Input
               className="border-2 border-black"
-              id="email"
-              error={errors.email}
-              touched={touched.email}
+              id="token"
+              error={errors.token}
+              touched={touched.token}
               required
-              {...getFieldProps("email")}
-              placeholder="email address"
+              {...getFieldProps("token")}
+              placeholder="token"
             />
           </div>
 
@@ -96,6 +91,6 @@ const ForgotPassword: FC<Props> = (props) => {
   );
 };
 
-ForgotPassword.defaultProps = {};
+BeforeSettingPassword.defaultProps = {};
 
-export default memo(ForgotPassword);
+export default memo(BeforeSettingPassword);

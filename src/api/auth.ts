@@ -18,6 +18,11 @@ interface forgotPasswordRequest {
   email: string;
 }
 
+interface resetPasswordRequest {
+  password: string;
+  passwordConfirm: string;
+}
+
 interface SignupRequest {
   name: string;
   email: string;
@@ -48,7 +53,6 @@ export const login = (data: LoginRequest) => {
 
   return axios.post<LoginResponse>(url, data).then((response) => {
     localStorage.setItem(AUTH_TOKEN, "Bearer " + response.data.token);
-    console.log(response.data.doc);
     return response.data.doc;
   });
 };
@@ -59,6 +63,16 @@ export const forgotPassword = (data: forgotPasswordRequest) => {
   return axios.post<ForgotPasswordResponse>(url, data).then((response) => {
     console.log(response.data.message);
     return response.data.message;
+  });
+};
+
+export const resetPassword = (data: resetPasswordRequest, token: any) => {
+  const url = BASE_URL + "/customers/resetPassword/" + token;
+
+  return axios.patch<LoginResponse>(url, data).then((response) => {
+    localStorage.setItem(AUTH_TOKEN, "Bearer " + response.data.token);
+    console.log(response.data.doc);
+    return response.data.doc;
   });
 };
 

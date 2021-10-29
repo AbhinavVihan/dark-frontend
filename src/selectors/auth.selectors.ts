@@ -20,3 +20,8 @@ export const meSelector = createSelector(
   [authIdSelector, customerByIdSelector],
   (id, byId) => (id !== undefined ? byId[id] : undefined)
 );
+
+export const tokenSelector = createSelector(
+  [authStateSelector],
+  (customerState) => (customerState.token ? customerState.token : undefined)
+);
