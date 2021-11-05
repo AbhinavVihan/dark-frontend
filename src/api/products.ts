@@ -25,3 +25,13 @@ export const fetchOneProduct = (id: string) => {
 
   return axios.get<ProductSingle>(url);
 };
+
+export const fetchProductsForCategory = (id: string) => {
+  const url = BASE_URL + "/categories/" + id + "/products";
+  // console.log(id);
+
+  return axios.get<Product[]>(url).then((response) => {
+    // console.log(response.data);
+    return response.data;
+  });
+};

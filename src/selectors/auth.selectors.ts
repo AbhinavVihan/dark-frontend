@@ -25,3 +25,8 @@ export const tokenSelector = createSelector(
   [authStateSelector],
   (customerState) => (customerState.token ? customerState.token : undefined)
 );
+
+export const loadingSelector = createSelector(
+  [authStateSelector],
+  (customerState) => customerState.loading
+);

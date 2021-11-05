@@ -18,7 +18,7 @@ axios.interceptors.request.use(function (config) {
 
 axios.interceptors.response.use(undefined, (error) => {
   if (error.message === "Request failed with status code 401") {
-    console.log("err:", error.message);
+    // console.log("err:", error.message);
     alert(
       "Your email or password is invalid, or your token is invalid or has expired. Please login again"
     );

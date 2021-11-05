@@ -37,24 +37,33 @@ const Categories: FC<Props> = (props) => {
   return (
     <div>
       <Link to="/products">
-        <span className="text-blue-500">Search by products</span>
+        <span className="text-blue-500 hover:text-red-500">
+          Search by products
+        </span>
       </Link>
       <div>This is the categories page</div>
-      <Input
+      <input
+        className="h-10 border-2 border-black rounded w-96"
         type="text"
         value={query}
         onChange={(e) => {
           // productActions.queryChanged(e.target.value, true);
           dispatch(categoryQueryChangedAction(e.target.value, true));
         }}
-      ></Input>
+      ></input>
       {loading && <FaSpinner className="mt-5 animate-spin"></FaSpinner>}
-      <div>
+      <div className="flex space-x-5">
         {categories &&
           categories.map((category) => (
-            <div className="cursor-pointer">
-              <Link to={"/categories/" + category._id}>
-                {" "}
+            <div className="cursor-pointer ">
+              <Link
+                className=" hover:text-red-500"
+                to={"/categories/" + category._id + "/products"}
+              >
+                <img
+                  alt="djhsuk"
+                  src={"http://127.0.0.1:8000/img/categories/" + category.photo}
+                />
                 {category.categoryName}
               </Link>
             </div>

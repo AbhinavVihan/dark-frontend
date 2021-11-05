@@ -74,7 +74,11 @@ const ForgotPassword: FC<Props> = (props) => {
           </div>
 
           <div className="flex items-center space-x-28">
-            <button type="submit" disabled={!isValid}>
+            <button
+              className="hover:text-red-500"
+              type="submit"
+              disabled={!isValid}
+            >
               {" "}
               Submit
             </button>

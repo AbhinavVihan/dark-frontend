@@ -12,21 +12,24 @@ const Sidebar: FC<Props> = (props) => {
   return (
     <div className="h-screen bg-gray-400">
       This is the sidebar
-      <div className="text-red-700">
+      <div className="text-2xl font-bold text-red-700">
         Hello
         <Link to="/my-account">
-          <span className="text-blue-700">{customer?.name}</span>
+          <span className="text-green-700 hover:text-blue-500">
+            {customer?.name}
+          </span>
         </Link>
       </div>
       <div>
         {" "}
         <button
+          className="hover:text-red-500"
           onClick={() => {
             logout();
             window.location.href = "/login";
           }}
         >
-          logout
+          Logout
         </button>
       </div>
     </div>

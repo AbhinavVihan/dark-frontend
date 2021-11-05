@@ -1,5 +1,6 @@
 import { createSelector } from "reselect";
-import { productStateSelector } from "./app.selectors";
+import { categoriesStateSelector, productStateSelector } from "./app.selectors";
+import { selectedCategorySelector } from "./categories.selectors";
 
 // export const productQuerySelector = (state: AppState) => {
 //   const productState = productStateSelector(state);
@@ -34,6 +35,11 @@ export const queryIdsSelector = createSelector(
 export const productByIdSelector = createSelector(
   [productStateSelector],
   (productState) => productState.byId
+);
+
+export const productCategoryIdSelector = createSelector(
+  [productStateSelector],
+  (productState) => productState.productsByCategoryId
 );
 
 // export const currentQueryProductsSelector = (state: AppState) => {
@@ -88,3 +94,9 @@ export const currentQueryProductsSelector = createSelector(
     return products;
   }
 );
+
+// export const selectedQuerySelector = createSelector([categoriesStateSelector], (categoriesState) => {categoriesState.selectedId})
+
+// export const currentCategoryProductsSelector = createSelector([productCategoryIdSelector, selectedCategorySelector], (categoryId, selectedCategory) => {
+//   const products =
+// })

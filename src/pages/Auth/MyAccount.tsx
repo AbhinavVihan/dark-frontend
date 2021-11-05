@@ -1,37 +1,43 @@
 import axios from "axios";
 import React, { memo, useEffect, useState } from "react";
-import { me } from "../../api/auth";
+import { Link } from "react-router-dom";
+import { authActions } from "../../actions/auth.actions";
+import { changeCustomerPhoto, me } from "../../api/auth";
 import { AUTH_TOKEN } from "../../api/base";
 import { meSelector } from "../../selectors/auth.selectors";
 import { useAppSelector } from "../../store";
 
-function MyAccount() {
+const MyAccount = () => {
   const customer = useAppSelector(meSelector);
 
-  const [src, setSrc] = useState("");
+  const [photo, setPhoto] = useState(undefined);
+  const [disabled, setDisabled] = useState(true);
 
   const token = localStorage.getItem(AUTH_TOKEN);
-
-  //   useEffect(() => {
-  //     if (!token) {
-  //       return;
-  //     }
-
-  //     me();
-  //     // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   }, []);
 
   if (!customer && token) {
     return <div>loading...</div>;
   }
   const imageName = customer?.photo;
 
-  const url = `http://localhost:8000/public/img/customers/${imageName}`;
+  const handleInputChange = (e: any) => {
+    setPhoto(e.target.files[0]);
+  };
 
-  axios.get(url).then((res) => {
-    const imageUrl = URL.createObjectURL(res.data);
-    setSrc(imageUrl);
-  });
+  // const handleInputChange = (e:  React.ChangeEvent<HTMLInputElement>) => {
+  //   setPhoto(e.target.files[0])
+  // }
+
+  const submit = (e: any) => {
+    e.preventDefault();
+    // window.location.href = "/my-account";
+    changeCustomerPhoto(photo).then((c) => {
+      authActions.updatemeCompleted(c);
+      authActions.login(c);
+      // window.location.href = "/my-account";
+    });
+  };
+
   return (
     <div className="h-screen bg-gray-400">
       My Account
@@ -45,16 +51,64 @@ function MyAccount() {
         ADDRESS: <span className="text-blue-700">{customer?.address}</span>
       </div>
       <div>
-        {/* {customer && setPhoto(customer.photo)} */}
-        {/* PHOTO: <span className="text-blue-700">{customer?.photo}</span> */}
-        {<img alt="customer" src={src} />}
+        {
+          <img
+            alt="customer"
+            src={`http://localhost:8000/img/customers/${imageName}`}
+          />
+        }
       </div>
+      <form onSubmit={submit}>
+        <div>
+          <label
+            className="cursor-pointer hover:text-red-500"
+            onClick={() => setDisabled(!disabled)}
+            htmlFor="photo"
+          >
+            Choose new photo
+          </label>
+          <input
+            className="hidden"
+            onChange={(e) => {
+              handleInputChange(e);
+              authActions.updatemeBegin();
+            }}
+            type="file"
+            id="photo"
+            name="photo"
+            accept="image/*"
+            // name="file"
+            defaultValue={photo}
+            // value={photo}
+          />
+          <div>
+            {!disabled && (
+              <button
+                className="border-4 border-black hover:text-red-500"
+                type="submit"
+                onClick={() => submit}
+              >
+                Submit
+              </button>
+            )}
+          </div>
+        </div>
+      </form>
       <div>
         ROLE: <span className="text-blue-700">{customer?.role}</span>
       </div>
+      <div>
+        <Link
+          onClick={authActions.loggedinPasswordChangeBegin}
+          className="hover:text-blue-500"
+          to="/my-password"
+        >
+          Change Your Password
+        </Link>
+      </div>
     </div>
   );
-}
+};
 
 MyAccount.defaultProps = {};
 

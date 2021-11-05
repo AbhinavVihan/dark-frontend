@@ -48,8 +48,11 @@ function App() {
               "/categories",
               "/products",
               "/categories/:categoryId",
+              "/categories/:categoryId/products",
+
               "/products/:productId",
               "/my-account",
+              "/my-password",
             ]}
             exact
           >
@@ -65,7 +68,7 @@ function App() {
             ]}
             exact
           >
-            {customer ? <Redirect to="/categories" /> : <AuthPageLazy />}
+            {customer ? <Redirect to="/products" /> : <AuthPageLazy />}
           </Route>
 
           <Route>

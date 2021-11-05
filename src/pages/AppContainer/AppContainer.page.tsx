@@ -7,6 +7,8 @@ import CategoriesDetailPage from "./CategoriesDetail.page";
 import OverViewPage from "./OverView.page";
 import ProductsPage from "./Products.page";
 import ProductsDetailPage from "./ProductsDetail.page";
+import LoggedinResetPasswordPage from "../Auth/LoggedinResetPassword";
+import CategoryProductsPage from "./Category-Products.page";
 
 interface Props {}
 
@@ -21,6 +23,11 @@ const AppContainer: FC<Props> = () => {
         <Route path="/my-account" exact>
           <MyAccount></MyAccount>
         </Route>
+
+        <Route path="/my-password" exact>
+          <LoggedinResetPasswordPage></LoggedinResetPasswordPage>
+        </Route>
+
         <Route path="/categories" exact>
           <CategoriesPage></CategoriesPage>
         </Route>
@@ -29,6 +36,9 @@ const AppContainer: FC<Props> = () => {
         </Route>
         <Route path="/categories/:categoryId" exact>
           <CategoriesDetailPage></CategoriesDetailPage>
+        </Route>
+        <Route path="/categories/:categoryId/products" exact>
+          <CategoryProductsPage></CategoryProductsPage>
         </Route>
         <Route path="/products/:productId" exact>
           <ProductsDetailPage></ProductsDetailPage>

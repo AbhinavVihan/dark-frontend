@@ -66,8 +66,8 @@ export const selectedCategorySelector = createSelector(
 export const currentQueryCategoriesSelector = createSelector(
   [categoryQuerySelector, categoryByIdSelector, categoryQueryMapSelector],
   (query, byId, queryMap) => {
-    const productIds = queryMap[query] || [];
-    const products = productIds.map((id) => byId[id]);
-    return products;
+    const categoryIds = queryMap[query] || [];
+    const categories = categoryIds.map((id) => byId[id]);
+    return categories;
   }
 );

@@ -49,7 +49,10 @@ const Login: FC<Props> = (props) => {
 
           <div className="flex justify-start ">
             <h2>New Here?</h2>
-            <Link to="/signup" className="text-blue-600 underline">
+            <Link
+              to="/signup"
+              className="text-blue-600 underline hover:text-red-500"
+            >
               Create an account
             </Link>
           </div>
@@ -93,7 +96,11 @@ const Login: FC<Props> = (props) => {
               <label>Show Password</label>
               <input onClick={togglePassword} type="checkbox" />
             </div>
-            <button type="submit" disabled={!isValid}>
+            <button
+              className="hover:text-red-500"
+              type="submit"
+              disabled={!isValid}
+            >
               {" "}
               Log in
             </button>
@@ -112,7 +119,10 @@ const Login: FC<Props> = (props) => {
             </label>
           </div>
 
-          <Link to="/forgot-password" className="text-blue-600">
+          <Link
+            to="/forgot-password"
+            className="text-blue-600 hover:text-red-500"
+          >
             Forgot Password?
           </Link>
         </div>

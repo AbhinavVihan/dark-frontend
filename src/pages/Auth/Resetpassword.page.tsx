@@ -26,29 +26,6 @@ const ResetPassword: FC<Props> = (props) => {
 
   const history = useHistory();
 
-  // const {
-  //   handleSubmit,
-  //   getFieldProps,
-  //   isValid,
-  //   touched,
-  //   isSubmitting,
-  //   errors,
-  // } = useFormik({
-  //   initialValues: {
-  //     password: "",
-  //     passwordConfirm: "",
-  //   },
-  //   validationSchema: yup.object().shape({
-  //     password: yup.string().required().min(8),
-  //     passwordConfirm: yup.string().required().min(8),
-  //   }),
-  //   onSubmit: (data) => {
-  //     // dispatch(resetPasswordCompleted());
-  //     alert("it is gonna happen");
-  //     console.log("it happened");
-  //   },
-  // });
-
   const handleSubmit = (e: any) => {
     e.preventDefault();
     resetPassword({ password: value1, passwordConfirm: value2 }, token)

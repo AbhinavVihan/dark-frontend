@@ -79,16 +79,16 @@ export const addMany = (state: EntityState, entities: Entity[]) => {
 
   // const images = images
 
-  const imgs = images.map((img) => {
-    const i =
-      img &&
-      img.map((img) => "http://127.0.0.1:8000/public/img/products/" + img);
-    return i;
-    //  e.map(i => {return  "http://127.0.0.1:8000/public/img/products/" + i})
-  });
+  // const imgs = images.map((img) => {
+  //   const i =
+  //     img &&
+  //     img.map((img) => "http://127.0.0.1:8000/public/img/products/" + img);
+  //   return i;
+  //   //  e.map(i => {return  "http://127.0.0.1:8000/public/img/products/" + i})
+  // });
 
   const entityMap = entities.reduce((prev, entity) => {
-    entity.images = imgs;
+    // entity.images = imgs;
     return {
       ...prev,
       [entity._id]: entity,

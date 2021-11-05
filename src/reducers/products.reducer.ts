@@ -1,6 +1,7 @@
 import { Reducer } from "redux";
 
 import {
+  FETCH_PRODUCTS_FOR_CATEGORY,
   PRODUCTS_FETCH_SINGLE,
   PRODUCTS_FETCH_SINGLE_COMPLETE,
   PRODUCTS_FETCH_SINGLE_ERROR,
@@ -21,12 +22,14 @@ import {
 export interface ProductsState extends EntityState<Product> {
   query: string;
   queryMap: { [query: string]: string[] };
+  productsByCategoryId: { [id: string]: Product[] };
 }
 
 const initialState: ProductsState = {
   ...initialEntityState,
   query: "",
   queryMap: {},
+  productsByCategoryId: {},
   // imageCover: {},
   // imageFront: {},
   // image1: {},
@@ -111,6 +114,14 @@ export const productReducer: Reducer<ProductsState> = (
     case PRODUCTS_FETCH_SINGLE_ERROR:
       const { id, msg } = action.payload;
       return setErrorForOne(state, id, msg) as ProductsState;
+    case FETCH_PRODUCTS_FOR_CATEGORY:
+      return {
+        ...state,
+        productsByCategoryId: {
+          ...state.productsByCategoryId,
+          [action.payload.id]: action.payload.products,
+        },
+      };
     default:
       return state;
   }

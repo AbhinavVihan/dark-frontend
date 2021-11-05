@@ -45,17 +45,17 @@ const CategoriesDetails: FC<Props> = (props) => {
 
       {category && (
         <div>
-          this is the details of {category.categoryName} (id: {categoryId})
-          whose image is
-          {/* <img
-            alt="imhfdb"
-            src={
-              "http://127.0.0.1:8000/public/img/products/category-615185d0b3cd3f2386e2aa66-1634957812243-1.jpeg"
-            }
-          /> */}
+          this is the details of {category.categoryName} category (id:{" "}
+          {categoryId}) whose image is
+          <Link to={"/categories/" + categoryId + "/products"}>
+            <img
+              alt="imhfdb"
+              src={"http://localhost:8000/img/categories/" + category.photo}
+            />
+          </Link>
         </div>
       )}
-      <Link to={"/categories/" + (+categoryId + 1)}>next category</Link>
+      <Link to={"/categories/" + (categoryId + 1)}>next category</Link>
     </div>
   );
 };
