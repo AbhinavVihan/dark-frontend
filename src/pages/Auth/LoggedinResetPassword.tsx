@@ -86,7 +86,10 @@ const LoggedinResetPassword: FC<Props> = (props) => {
           </div>
 
           <div className="flex items-center space-x-28">
-            <button className="hover:text-red-500" type="submit">
+            <button
+              className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+              type="submit"
+            >
               {" "}
               Submit
             </button>

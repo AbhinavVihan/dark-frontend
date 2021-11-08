@@ -35,12 +35,16 @@ function App() {
     <Suspense fallback={<div className="text-red-500">Loading...</div>}>
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact>
+          {/* <Route path="/" exact>
             {customer ? (
               <Redirect to="/products" />
             ) : (
               <Redirect to="/login"></Redirect>
             )}
+          </Route> */}
+
+          <Route path="/" exact>
+            <Redirect to="/products" />
           </Route>
           <Route
             path={[
@@ -49,14 +53,15 @@ function App() {
               "/products",
               "/categories/:categoryId",
               "/categories/:categoryId/products",
-
               "/products/:productId",
               "/my-account",
               "/my-password",
+              "/cart",
             ]}
             exact
           >
-            {customer ? <AppContainerPageLazy /> : <Redirect to="/login" />}
+            {/* {customer ? <AppContainerPageLazy /> : <Redirect to="/login" />} */}
+            <AppContainerPageLazy />
           </Route>
           <Route
             path={[
@@ -68,7 +73,8 @@ function App() {
             ]}
             exact
           >
-            {customer ? <Redirect to="/products" /> : <AuthPageLazy />}
+            {/* {customer ? <Redirect to="/products" /> : <AuthPageLazy />} */}
+            <AuthPageLazy />
           </Route>
 
           <Route>

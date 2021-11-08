@@ -1,21 +1,11 @@
 import { createSelector } from "reselect";
-import { categoriesStateSelector, productStateSelector } from "./app.selectors";
-import { selectedCategorySelector } from "./categories.selectors";
-
-// export const productQuerySelector = (state: AppState) => {
-//   const productState = productStateSelector(state);
-//   return productState.query;
-// };
+import { productStateSelector } from "./app.selectors";
+import { selectedIdSelected as selectedIdSelector } from "./categories.selectors";
 
 export const productQuerySelector = createSelector(
   [productStateSelector],
   (productState) => productState.query
 );
-
-// export const productQueryMapSelector = (state: AppState) => {
-//   const productState = productStateSelector(state);
-//   return productState.queryMap;
-// };
 
 export const productQueryMapSelector = createSelector(
   [productStateSelector],
@@ -27,11 +17,6 @@ export const queryIdsSelector = createSelector(
   (query, queryMap) => queryMap[query] || []
 );
 
-// export const productByIdSelector = (state: AppState) => {
-//   const productState = productStateSelector(state);
-//   return productState.byId;
-// };
-
 export const productByIdSelector = createSelector(
   [productStateSelector],
   (productState) => productState.byId
@@ -42,16 +27,10 @@ export const productCategoryIdSelector = createSelector(
   (productState) => productState.productsByCategoryId
 );
 
-// export const currentQueryProductsSelector = (state: AppState) => {
-//   const query = productQuerySelector(state);
-
-//   const queryMap = productQueryMapSelector(state);
-//   const byId = productByIdSelector(state);
-
-//   const productIds = queryMap[query] || [];
-//   const products = productIds.map((id) => byId[id]);
-//   return products;
-// };
+export const categoryProducts = createSelector(
+  [productStateSelector],
+  (productState) => productState.productsByCategoryId
+);
 
 export const productsLoadingSelector = createSelector(
   [productStateSelector],
@@ -78,14 +57,6 @@ export const selectedProductSelector = createSelector(
   (byId, id) => id && byId[id]
 );
 
-// export const currentQueryProductsSelector = createSelector(
-//   [queryIdsSelector, productByIdSelector],
-//   (productsIds, byId) => {
-//     const products = productsIds.map((id) => byId[id]);
-//     return products;
-//   }
-// );
-
 export const currentQueryProductsSelector = createSelector(
   [productQuerySelector, productByIdSelector, productQueryMapSelector],
   (query, byId, queryMap) => {
@@ -95,8 +66,10 @@ export const currentQueryProductsSelector = createSelector(
   }
 );
 
-// export const selectedQuerySelector = createSelector([categoriesStateSelector], (categoriesState) => {categoriesState.selectedId})
-
-// export const currentCategoryProductsSelector = createSelector([productCategoryIdSelector, selectedCategorySelector], (categoryId, selectedCategory) => {
-//   const products =
-// })
+export const currentCategoryProductsSelector = createSelector(
+  [categoryProducts, selectedIdSelector],
+  (productss, selectedId) => {
+    const products = selectedId && productss[selectedId];
+    return products;
+  }
+);

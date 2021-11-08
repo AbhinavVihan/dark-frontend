@@ -30,11 +30,6 @@ const initialState: ProductsState = {
   query: "",
   queryMap: {},
   productsByCategoryId: {},
-  // imageCover: {},
-  // imageFront: {},
-  // image1: {},
-  // image2: {},
-  // image3: {},
 };
 
 export const productReducer: Reducer<ProductsState> = (

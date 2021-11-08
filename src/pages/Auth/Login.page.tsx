@@ -36,6 +36,7 @@ const Login: FC<Props> = (props) => {
     onSubmit: (data) => {
       login(data).then((c) => {
         authActions.login(c);
+        // history.goBack();
         history.push("/products");
       });
     },
@@ -70,7 +71,7 @@ const Login: FC<Props> = (props) => {
               placeholder="email"
             /> */}
             <Input
-              className="border-2 border-black"
+              className="h-10 border-2 border-black rounded w-96"
               id="email"
               error={errors.email}
               touched={touched.email}
@@ -80,6 +81,7 @@ const Login: FC<Props> = (props) => {
             />
 
             <Input
+              className="h-10 border-2 border-black rounded w-96"
               id="password"
               type={password ? "text" : "password"}
               error={errors.password}
@@ -97,12 +99,11 @@ const Login: FC<Props> = (props) => {
               <input onClick={togglePassword} type="checkbox" />
             </div>
             <button
-              className="hover:text-red-500"
+              className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
               type="submit"
               disabled={!isValid}
             >
-              {" "}
-              Log in
+              Login
             </button>
             <div>
               {isSubmitting && (

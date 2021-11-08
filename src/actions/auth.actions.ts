@@ -13,6 +13,21 @@ import {
   RESET_PASSWORD_COMPLETED,
 } from "./action.constants";
 
+// const loginActionBegin = (email: string, password: string) => ({
+//   type: LOGIN_BEGIN,
+//   payload: { email, password },
+// });
+
+// export const loginActionComplete = (c: Customer) => ({
+//   type: LOGIN_COMPLETE,
+//   payload: c,
+// });
+
+// const LoginActionError = (msg: string) => ({
+//   type: LOGIN_ERROR,
+//   payload: msg,
+// });
+
 const meFetchAction = (c: Customer) => ({
   type: ME_FETCH,
   payload: c,
@@ -55,6 +70,9 @@ export const customerUpdatemeError = (c: Customer) => ({
 
 export const authActions = bindActionCreators(
   {
+    // loginBegin: loginActionBegin,
+    // loginComplete: loginActionComplete,
+    // loginError: LoginActionError,
     fetch: meFetchAction,
     login: meLoginAction,
     password: resetPasswordBegin,

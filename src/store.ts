@@ -2,6 +2,7 @@ import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { authReducer } from "./reducers/auth.reducer";
+import { cartReducer } from "./reducers/cartReducer";
 import { categoryReducer } from "./reducers/categories.reducer";
 import { customerReducer } from "./reducers/customer.reducer";
 import { productReducer } from "./reducers/products.reducer";
@@ -13,6 +14,7 @@ const reducer = combineReducers({
   products: productReducer,
   auth: authReducer,
   categories: categoryReducer,
+  cart: cartReducer,
 });
 
 const enhancer =

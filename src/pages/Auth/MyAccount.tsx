@@ -39,7 +39,7 @@ const MyAccount = () => {
   };
 
   return (
-    <div className="h-screen bg-gray-400">
+    <div className="h-screen font-bold bg-gray-100">
       My Account
       <div className="text-red-700">
         NAME : <span className="text-blue-700">{customer?.name}</span>
@@ -84,7 +84,7 @@ const MyAccount = () => {
           <div>
             {!disabled && (
               <button
-                className="border-4 border-black hover:text-red-500"
+                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
                 type="submit"
                 onClick={() => submit}
               >

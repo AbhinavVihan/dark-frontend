@@ -13,12 +13,14 @@ export interface AuthState {
   _id: string;
   token?: any;
   loading?: boolean;
+  errorOne: string;
 }
 
 const initialState = {
   _id: "",
   token: 1,
   loading: false,
+  errorOne: "",
 };
 
 export const authReducer: Reducer<AuthState> = (
@@ -30,6 +32,7 @@ export const authReducer: Reducer<AuthState> = (
     case ME_FETCH:
       const customerId = action.payload._id as string;
       return { ...state, _id: customerId };
+
     case FORGOT_PASSWORD_BEGIN:
       return { ...state, token: action.payload.token };
     case RESET_PASSWORD_COMPLETED:

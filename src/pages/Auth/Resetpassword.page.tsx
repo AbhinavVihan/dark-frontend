@@ -111,7 +111,7 @@ const ResetPassword: FC<Props> = (props) => {
             <button
               type="submit"
               // disabled={!isValid}
-              className=" hover:text-red-500"
+              className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
             >
               Reset
             </button>

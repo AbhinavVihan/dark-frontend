@@ -1,17 +1,13 @@
-import { FC, memo, useEffect, useState } from "react";
+import { FC, memo, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { fetchOneProduct } from "../../actions/products.actions";
-import { Product, Products } from "../../models/Products";
 import { fetchProductsForCategory } from "../../api/products";
 import { fetchProductsForCategory as fetchProductsForCategories } from "../../actions/products.actions";
 
-import { selectedCategorySelector } from "../../selectors/categories.selectors";
 import {
-  selectedProductSelector,
   selectedErrorSelector,
   selectedLoadingSelector,
-  productCategoryIdSelector,
+  currentCategoryProductsSelector,
 } from "../../selectors/products.selectors";
 import { useAppSelector } from "../../store";
 import { fetchOneCategory } from "../../actions/categories.actions";
@@ -19,35 +15,21 @@ import { fetchOneCategory } from "../../actions/categories.actions";
 interface Props {}
 
 const ProductsForCategories: FC<Props> = (props) => {
-  const [products, setProducts] = useState<Product[]>([]);
-
+  const productss = useAppSelector(currentCategoryProductsSelector);
   const { categoryId } = useParams<{ categoryId: string }>();
-  // console.log(categoryId);
 
-  //   const category = useAppSelector(productCategoryIdSelector);
-  //   const products = useAppSelector(state => state.products.categoryId)
   const error = useAppSelector(selectedErrorSelector);
   const loading = useAppSelector(selectedLoadingSelector);
 
   const dispatch = useDispatch();
 
-  //   useEffect(() => {
-  //     dispatch(fetchProductsForCategory(categoryId, category));
-  //     // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   }, [categoryId]);
-
   useEffect(() => {
     fetchProductsForCategory(categoryId).then((p) => {
       dispatch(fetchOneCategory(categoryId));
-      setProducts(p);
       dispatch(fetchProductsForCategories(categoryId, p));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId]);
-
-  const product = products.map((p) => p.name);
-  const photoArray = products.map((p) => p.imageFront);
-  const imgFront = photoArray.toString();
 
   if (error) {
     return (
@@ -65,33 +47,38 @@ const ProductsForCategories: FC<Props> = (props) => {
           Back to categories
         </Link>
       </div>
-      {/* {loading && <div className="text-green-500">Loading Product...</div>} */}
+      {loading && <div className="text-green-500">Loading Product...</div>}
 
-      <div>{product.map((p) => p)}</div>
-      <img
-        alt="ajvhbv"
-        src={"http://localhost:8000/img/products/" + imgFront}
-      />
-
-      <div>
-        {products.map((p) => {
-          <div className="text-black">Hello there</div>;
-          <img
-            alt="sjfbsjv"
-            src={"http://localhost:8000/img/products/" + imgFront}
-          />;
-        })}
+      {/* <div>{product.map((p) => p)}</div> */}
+      <div className="grid grid-cols-5 gap-4 m-4 space-x-10 h-96">
+        {productss &&
+          productss.map((product) => (
+            <div className="items-center justify-center rounded cursor-pointer bg-gray-50 hover:bg-gray-100">
+              <div className="items-center justify-center border-black">
+                <Link to={"/products/" + product._id}>
+                  <img
+                    className="items-center justify-center w-full"
+                    alt="jvbjdsbj"
+                    src={
+                      "http://127.0.0.1:8000/img/products/" + product.imageFront
+                    }
+                  />
+                  <div className="flex justify-around">
+                    <div className="font-semibold">
+                      {product && product.name}
+                    </div>
+                    <div className="font-bold text-green-600">
+                      ${product.price}
+                    </div>
+                  </div>
+                  <div className="text-xl font-bold text-center text-green-600">
+                    Free Delivery
+                  </div>
+                </Link>
+              </div>
+            </div>
+          ))}
       </div>
-      {/* {product && (
-        <div>
-          this is the details of {product.name} (id: {productId}) whose image is
-          <img
-            alt="imhfdb"
-            src={"http://localhost:8000/img/products/" + product.imageCover}
-          />
-        </div>
-      )} */}
-      {/* <Link to={"/products/" + (productId + 1)}>next product</Link> */}
     </div>
   );
 };

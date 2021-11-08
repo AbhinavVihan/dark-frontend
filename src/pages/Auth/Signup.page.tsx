@@ -43,7 +43,10 @@ const Signup = () => {
 
           <div className="flex justify-start ">
             <h2>Already have an account?</h2>
-            <Link to="/login" className="text-blue-600 underline">
+            <Link
+              to="/login"
+              className="text-blue-600 underline hover:text-red-500"
+            >
               Log In
             </Link>
           </div>
@@ -133,7 +136,10 @@ const Signup = () => {
               <input onClick={togglePassword} type="checkbox" />
             </div>
 
-            <button className="bg-blue-600" type="submit">
+            <button
+              className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+              type="submit"
+            >
               Get started
             </button>
           </div>

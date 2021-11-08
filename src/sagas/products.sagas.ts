@@ -7,8 +7,10 @@ import {
 } from "@redux-saga/core/effects";
 import { AnyAction } from "redux";
 import {
+  ADD_TO_CART_BEGIN,
   CATEGORIES_FETCH_SINGLE,
   FETCH_PRODUCTS_FOR_CATEGORY,
+  GET_CART_BEGIN,
   PRODUCTS_FETCH_SINGLE,
   PRODUCTS_QUERY_CHANGED,
 } from "../actions/action.constants";
@@ -21,8 +23,20 @@ import {
   fetchSingleProductError,
   productQueryCompletedAction,
 } from "../actions/products.actions";
-import { fetchOneProduct as fetchOneProd } from "../api/products";
+import {
+  fetchOneProduct as fetchOneProd,
+  getCart,
+  addToCart as addProdToCart,
+} from "../api/products";
 import { fetchOneCategory as fetchOneCate } from "../api/categories";
+import {
+  addToCartComplete,
+  addToCartError,
+  getCartComplete as getYourCart,
+  getCartError,
+} from "../actions/cart.actions";
+import { login as loginBegin } from "../api/auth";
+// import { authActions, loginActionComplete } from "../actions/auth.actions";
 
 // function* fetchProducts(action: AnyAction): Generator<any> {
 //   const { query } = action.payload;
@@ -43,6 +57,17 @@ function* fetchOneProduct(action: AnyAction): Generator<any> {
   }
 }
 
+function* fetchOneCart(action: AnyAction): Generator<any> {
+  try {
+    const res: any = yield call(getCart);
+    console.log(res.data.doc);
+    yield put(getYourCart(res.data.doc));
+  } catch (e: any) {
+    const error = e.response.statusText || "some error occured";
+    yield put(getCartError(error));
+  }
+}
+
 function* fetchOneCategory(action: AnyAction): Generator<any> {
   try {
     const res: any = yield call(fetchOneCate, action.payload);
@@ -52,6 +77,24 @@ function* fetchOneCategory(action: AnyAction): Generator<any> {
     const error = e.response.statusText || "some error occured";
     // console.log(e.response);
     yield put(fetchSingleCategoryError(action.payload, error));
+  }
+}
+
+function* addToCart(action: AnyAction): Generator<any> {
+  try {
+    const res: any = yield call(
+      addProdToCart,
+      action.payload.pId,
+      action.payload.cId
+    );
+    console.log(action.payload.pId);
+    yield put(addToCartComplete(res.data));
+    alert("added successfully");
+    // console.log(res.data);
+  } catch (e: any) {
+    const error = e.response.statusText || "some error occured";
+    yield put(addToCartError(error));
+    alert(e.response.statusText);
   }
 }
 
@@ -69,8 +112,13 @@ function* fetchOneCategory(action: AnyAction): Generator<any> {
 
 export function* watchAll() {
   yield all([
+    // takeEvery(LOGIN_BEGIN, login),
+
     takeEvery(PRODUCTS_FETCH_SINGLE, fetchOneProduct),
     takeEvery(CATEGORIES_FETCH_SINGLE, fetchOneCategory),
+    takeEvery(GET_CART_BEGIN, fetchOneCart),
+    takeEvery(ADD_TO_CART_BEGIN, addToCart),
+
     // takeEvery(FETCH_PRODUCTS_FOR_CATEGORY, fetchProductsForCategory),
   ]);
 }

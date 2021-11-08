@@ -16,17 +16,18 @@ axios.interceptors.request.use(function (config) {
   return { ...config, headers: { ...config.headers, Authorization: token } };
 });
 
-axios.interceptors.response.use(undefined, (error) => {
-  if (error.message === "Request failed with status code 401") {
-    // console.log("err:", error.message);
-    alert(
-      "Your email or password is invalid, or your token is invalid or has expired. Please login again"
-    );
-    localStorage.removeItem(AUTH_TOKEN);
-    window.location.href = "/login";
-  }
-  return Promise.reject(error);
-});
+// axios.interceptors.response.use(undefined, (error) => {
+//   if (error.message === "Request failed with status code 401") {
+//     // console.log("err:", error.message);
+//     alert(
+//       "Your email or password is invalid, or your token is invalid or has expired. Please login again"
+//     );
+//     localStorage.removeItem(AUTH_TOKEN);
+//     // eslint-disable-next-line no-restricted-globals
+//     location.href = location.href;
+//   }
+//   return Promise.reject(error);
+// });
 
 // axios.interceptors.response.use(undefined, (error) => {
 //   // console.error("error is", error);

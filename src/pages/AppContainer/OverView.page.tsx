@@ -14,7 +14,9 @@ const OverView: FC<Props> = (props) => {
   return (
     <div>
       This is OverView Page
-      <button>click Me</button>
+      <button className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28">
+        click Me
+      </button>
       {/* {details && <img alt="me" src={details} />} */}
       <Link to="/categories">
         <span className="text-blue-500">Search by categories</span>
