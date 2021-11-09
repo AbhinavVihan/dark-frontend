@@ -19,6 +19,7 @@ import {
 import { meSelector } from "../../selectors/auth.selectors";
 import { cartIdSelector, cartSelector } from "../../selectors/cart.selectors";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { BASE_URL } from "../../api/base";
 
 <script src="https://js.stripe.com/v3/"></script>;
 
@@ -38,9 +39,9 @@ const ProductsDetails: FC<Props> = (props) => {
 
   const [index, setIndex] = useState(0);
   const img = product && [
-    "http://localhost:8000/img/products/" + product.images[0],
-    "http://localhost:8000/img/products/" + product.images[1],
-    "http://localhost:8000/img/products/" + product.images[2],
+    BASE_URL + "/img/products/" + product.images[0],
+    BASE_URL + "/img/products/" + product.images[1],
+    BASE_URL + "/img/products/" + product.images[2],
   ];
 
   useEffect(() => {
