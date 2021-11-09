@@ -1,8 +1,7 @@
-import axios from "axios";
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useState } from "react";
 import { Link } from "react-router-dom";
 import { authActions } from "../../actions/auth.actions";
-import { changeCustomerPhoto, me } from "../../api/auth";
+import { changeCustomerPhoto } from "../../api/auth";
 import { AUTH_TOKEN } from "../../api/base";
 import { meSelector } from "../../selectors/auth.selectors";
 import { useAppSelector } from "../../store";

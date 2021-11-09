@@ -4,7 +4,6 @@ import FrontImage from "../../components/FrontImage";
 import BeforeSettingPasswordPage from "./BeforeSettingPassword.page";
 import ForgotpasswordPage from "./Forgotpassword.page";
 import LoginPage from "./Login.page";
-import MyAccount from "./MyAccount";
 import ResetpasswordPage from "./Resetpassword.page";
 import SignupPage from "./Signup.page";
 

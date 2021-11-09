@@ -51,7 +51,7 @@ export const categoryReducer: Reducer<CategoriesState> = (
 
       const newState = addMany(state, categories) as CategoriesState;
 
-      const photo = categories.reduce((prev, category) => {
+      categories.reduce((prev, category) => {
         const img = category.photo;
 
         return {

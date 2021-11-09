@@ -3,8 +3,6 @@ import { authActions } from "../actions/auth.actions";
 import { Customer } from "../models/Customer";
 import { AUTH_TOKEN, BASE_URL } from "./base";
 import {
-  ChangePhotoResponse,
-  customerPhotoChangeRequest,
   forgotPasswordRequest,
   ForgotPasswordResponse,
   loggedinResetPasswordRequest,

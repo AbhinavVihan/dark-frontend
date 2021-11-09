@@ -1,19 +1,11 @@
-import {
-  takeLatest,
-  takeEvery,
-  call,
-  put,
-  all,
-} from "@redux-saga/core/effects";
+import { takeEvery, call, put, all } from "@redux-saga/core/effects";
 import { AnyAction } from "redux";
 import {
   ADD_TO_CART_BEGIN,
   BUYING_PROCESS_BEGIN,
   CATEGORIES_FETCH_SINGLE,
-  FETCH_PRODUCTS_FOR_CATEGORY,
   GET_CART_BEGIN,
   PRODUCTS_FETCH_SINGLE,
-  PRODUCTS_QUERY_CHANGED,
 } from "../actions/action.constants";
 import {
   fetchOneCategoryComplete,
@@ -22,7 +14,6 @@ import {
 import {
   fetchOneProductComplete,
   fetchSingleProductError,
-  productQueryCompletedAction,
 } from "../actions/products.actions";
 import {
   fetchOneProduct as fetchOneProd,
@@ -39,7 +30,6 @@ import {
   getCartComplete as getYourCart,
   getCartError,
 } from "../actions/cart.actions";
-import { login as loginBegin } from "../api/auth";
 // import { authActions, loginActionComplete } from "../actions/auth.actions";
 
 // function* fetchProducts(action: AnyAction): Generator<any> {

@@ -1,9 +1,5 @@
-import { useFormik } from "formik";
 import React, { FC, memo, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
 import { FaSpinner } from "react-icons/fa";
-import * as yup from "yup";
-import input from "../../components/input";
 import { loggedinResetResetPassword } from "../../api/auth";
 import { authActions } from "../../actions/auth.actions";
 import { useAppSelector } from "../../store";

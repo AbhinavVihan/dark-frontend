@@ -1,4 +1,3 @@
-import { type } from "os";
 import { Cart, Carts } from "../models/Cart";
 import {
   CREATE_CART_REQUEST_BEGIN,

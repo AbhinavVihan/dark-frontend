@@ -1,6 +1,5 @@
 import { FC, memo, useEffect } from "react";
 import { useAppSelector } from "../../store";
-import Input from "../../components/input";
 import {
   currentQueryCategoriesSelector,
   categoriesLoadingSelector,

@@ -1,6 +1,4 @@
 import { Entity } from "../models/Entity";
-import { Product } from "../models/Products";
-import { ProductsState } from "./products.reducer";
 
 export interface EntityState<T extends Entity = Entity> {
   byId: {
@@ -74,8 +72,6 @@ export const addMany = (state: EntityState, entities: Entity[]) => {
   if (entities.length === 0) {
     return state;
   }
-
-  const images = entities.map((en) => en.images);
 
   // const images = images
 

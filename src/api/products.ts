@@ -5,10 +5,6 @@ import { ProductSingle } from "../models/ProductSingle";
 import { BASE_URL } from "./base";
 import { AUTH_TOKEN } from "./base";
 
-interface ProductResponse {
-  product: Product[];
-}
-
 export interface ProductRequest {
   query: string;
 }

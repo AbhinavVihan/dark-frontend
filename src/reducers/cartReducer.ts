@@ -1,6 +1,5 @@
 import { AnyAction, Reducer } from "redux";
 import {
-  ADD_TO_CART_COMPLETE,
   ADD_TO_CART_ERROR,
   BUYING_PROCESS_COMPLETE,
   CREATE_CART_REQUEST_BEGIN,

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 
 import { fetchOneProduct } from "../../actions/products.actions";
-import { addToCart, createCart } from "../../api/products";
+import { createCart } from "../../api/products";
 import {
   selectedProductSelector,
   selectedErrorSelector,

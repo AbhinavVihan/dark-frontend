@@ -1,17 +1,10 @@
-import { useFormik } from "formik";
 import React, { FC, memo, useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { FaSpinner } from "react-icons/fa";
-import * as yup from "yup";
-import Input from "../../components/input";
-import { login, resetPassword } from "../../api/auth";
-import {
-  authActions,
-  resetPasswordCompleted,
-} from "../../actions/auth.actions";
+import { useHistory } from "react-router-dom";
+
+import { resetPassword } from "../../api/auth";
+import { authActions } from "../../actions/auth.actions";
 import { useAppSelector } from "../../store";
 import { tokenSelector } from "../../selectors/auth.selectors";
-import { useDispatch } from "react-redux";
 
 interface Props {}
 

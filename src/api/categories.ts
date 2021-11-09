@@ -23,10 +23,6 @@ import { Category } from "../models/Categories";
 import { CategoriesSingle } from "../models/CategorySingle";
 import { BASE_URL } from "./base";
 
-interface CategoryResponse {
-  category: Category[];
-}
-
 export interface CategoryRequest {
   query?: string;
 }

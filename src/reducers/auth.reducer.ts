@@ -9,7 +9,6 @@ import {
   ME_LOGIN,
   RESET_PASSWORD_COMPLETED,
 } from "../actions/action.constants";
-import { loggedinResetPasswordBegin } from "../actions/auth.actions";
 
 export interface AuthState {
   _id: string;

@@ -20,14 +20,7 @@ const Login: FC<Props> = (props) => {
   const history = useHistory();
   const loading = useAppSelector(loadingSelector);
 
-  const {
-    handleSubmit,
-    getFieldProps,
-    isValid,
-    touched,
-    isSubmitting,
-    errors,
-  } = useFormik({
+  const { handleSubmit, getFieldProps, isValid, touched, errors } = useFormik({
     initialValues: {
       email: "",
       password: "",

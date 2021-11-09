@@ -1,20 +1,14 @@
 import { useFormik } from "formik";
-import React, { FC, memo, useState } from "react";
+import React, { FC, memo } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { FaSpinner } from "react-icons/fa";
 import * as yup from "yup";
 import Input from "../../components/input";
-import { login } from "../../api/auth";
 import { authActions } from "../../actions/auth.actions";
 
 interface Props {}
 
 const BeforeSettingPassword: FC<Props> = (props) => {
-  const [password, setPassword] = useState(false);
-  const togglePassword = () => {
-    setPassword(password ? false : true);
-  };
-
   const history = useHistory();
 
   const {
