@@ -8,6 +8,7 @@ import {
 import { AnyAction } from "redux";
 import {
   ADD_TO_CART_BEGIN,
+  BUYING_PROCESS_BEGIN,
   CATEGORIES_FETCH_SINGLE,
   FETCH_PRODUCTS_FOR_CATEGORY,
   GET_CART_BEGIN,
@@ -27,11 +28,14 @@ import {
   fetchOneProduct as fetchOneProd,
   getCart,
   addToCart as addProdToCart,
+  deleteFromCart,
 } from "../api/products";
 import { fetchOneCategory as fetchOneCate } from "../api/categories";
 import {
   addToCartComplete,
   addToCartError,
+  buyingComplete,
+  buyingError,
   getCartComplete as getYourCart,
   getCartError,
 } from "../actions/cart.actions";
@@ -60,11 +64,26 @@ function* fetchOneProduct(action: AnyAction): Generator<any> {
 function* fetchOneCart(action: AnyAction): Generator<any> {
   try {
     const res: any = yield call(getCart);
-    console.log(res.data.doc);
+    // console.log(res.data.doc);
     yield put(getYourCart(res.data.doc));
   } catch (e: any) {
     const error = e.response.statusText || "some error occured";
     yield put(getCartError(error));
+  }
+}
+
+function* deleteProductFromCart(action: AnyAction): Generator<any> {
+  try {
+    const res: any = yield call(
+      deleteFromCart,
+      action.payload.pId,
+      action.payload.cId
+    );
+    // console.log(res.data.doc);
+    yield put(buyingComplete(res.data.doc));
+  } catch (e: any) {
+    const error = e.response.statusText || "some error occured";
+    yield put(buyingError(error));
   }
 }
 
@@ -94,7 +113,7 @@ function* addToCart(action: AnyAction): Generator<any> {
   } catch (e: any) {
     const error = e.response.statusText || "some error occured";
     yield put(addToCartError(error));
-    alert(e.response.statusText);
+    alert("this product is already in your cart");
   }
 }
 
@@ -118,6 +137,7 @@ export function* watchAll() {
     takeEvery(CATEGORIES_FETCH_SINGLE, fetchOneCategory),
     takeEvery(GET_CART_BEGIN, fetchOneCart),
     takeEvery(ADD_TO_CART_BEGIN, addToCart),
+    takeEvery(BUYING_PROCESS_BEGIN, deleteProductFromCart),
 
     // takeEvery(FETCH_PRODUCTS_FOR_CATEGORY, fetchProductsForCategory),
   ]);

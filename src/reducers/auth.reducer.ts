@@ -3,6 +3,8 @@ import {
   FORGOT_PASSWORD_BEGIN,
   LOGGEDIN_PASSWORD_CHANGE_BEGIN,
   LOGGEDIN_PASSWORD_CHANGE_COMPLETED,
+  LOGIN_BEGIN,
+  LOGIN_ERROR,
   ME_FETCH,
   ME_LOGIN,
   RESET_PASSWORD_COMPLETED,
@@ -32,13 +34,16 @@ export const authReducer: Reducer<AuthState> = (
     case ME_FETCH:
       const customerId = action.payload._id as string;
       return { ...state, _id: customerId };
-
+    case LOGIN_BEGIN:
+      return { ...state, loading: true };
     case FORGOT_PASSWORD_BEGIN:
       return { ...state, token: action.payload.token };
     case RESET_PASSWORD_COMPLETED:
       return { ...state, token: 1 };
     case LOGGEDIN_PASSWORD_CHANGE_BEGIN:
       return { ...state, loading: true };
+    case LOGIN_ERROR:
+      return { ...state, errorOne: action.payload, loading: false };
     case LOGGEDIN_PASSWORD_CHANGE_COMPLETED:
       return { ...state, loading: false };
     default:

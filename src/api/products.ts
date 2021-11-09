@@ -74,3 +74,8 @@ export const addToCart = (pId: string, cId: string) => {
       return response.data.doc;
     });
 };
+
+export const deleteFromCart = (pId: string, cId: string) => {
+  const url = BASE_URL + "/products/" + pId + "/cart/" + cId;
+  return axios.delete<Carts>(url, { headers: { Authorization: AUTH_TOKEN } });
+};

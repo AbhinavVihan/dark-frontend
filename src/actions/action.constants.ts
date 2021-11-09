@@ -1,9 +1,9 @@
 //auth
 export const ME_FETCH = "me/fetch";
 export const ME_LOGIN = "me/login";
-// export const LOGIN_BEGIN = "login/begin";
+export const LOGIN_BEGIN = "login/begin";
 // export const LOGIN_COMPLETE = "login/complete";
-// export const LOGIN_ERROR = "login/error";
+export const LOGIN_ERROR = "login/error";
 export const FORGOT_PASSWORD_BEGIN = "forgot_password/begin";
 export const RESET_PASSWORD_COMPLETED = "reset_password/completed";
 export const LOGGEDIN_PASSWORD_CHANGE_BEGIN = "loggedin/password_change_begin";
@@ -41,3 +41,6 @@ export const GET_CART_ERROR = "get/cart_error";
 export const ADD_TO_CART_BEGIN = "add/to_cart_begin";
 export const ADD_TO_CART_COMPLETE = "add/to_cart_complete";
 export const ADD_TO_CART_ERROR = "add/to_cart_error";
+export const BUYING_PROCESS_BEGIN = "buying/process_begin";
+export const BUYING_PROCESS_ERROR = "buying/process_error";
+export const BUYING_PROCESS_COMPLETE = "buying/process_complete";

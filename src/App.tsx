@@ -35,12 +35,8 @@ function App() {
     <Suspense fallback={<div className="text-red-500">Loading...</div>}>
       <BrowserRouter>
         <Switch>
-          {/* <Route path="/" exact>
-            {customer ? (
-              <Redirect to="/products" />
-            ) : (
-              <Redirect to="/login"></Redirect>
-            )}
+          {/* <Route path="/cart" exact>
+            {!customer && <Redirect to="/products" />}
           </Route> */}
 
           <Route path="/" exact>

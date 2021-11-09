@@ -1,3 +1,4 @@
+import { type } from "os";
 import { Cart, Carts } from "../models/Cart";
 import {
   CREATE_CART_REQUEST_BEGIN,
@@ -8,6 +9,9 @@ import {
   ADD_TO_CART_COMPLETE,
   ADD_TO_CART_ERROR,
   ADD_TO_CART_BEGIN,
+  BUYING_PROCESS_BEGIN,
+  BUYING_PROCESS_COMPLETE,
+  BUYING_PROCESS_ERROR,
 } from "./action.constants";
 
 export const createCartBegin = () => ({
@@ -46,4 +50,19 @@ export const addToCartComplete = (cart: Carts) => ({
 export const addToCartError = (msg: string) => ({
   type: ADD_TO_CART_ERROR,
   payload: msg,
+});
+
+export const buyingStart = (pId: string, cId: string) => ({
+  type: BUYING_PROCESS_BEGIN,
+  payload: { pId, cId },
+});
+
+export const buyingError = (msg: string) => ({
+  type: BUYING_PROCESS_ERROR,
+  payload: msg,
+});
+
+export const buyingComplete = (cart: Carts) => ({
+  type: BUYING_PROCESS_COMPLETE,
+  payload: cart,
 });

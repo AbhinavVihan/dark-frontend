@@ -6,6 +6,8 @@ import * as yup from "yup";
 import Input from "../../components/input";
 import { login } from "../../api/auth";
 import { authActions } from "../../actions/auth.actions";
+import { useAppSelector } from "../../store";
+import { loadingSelector } from "../../selectors/auth.selectors";
 
 interface Props {}
 
@@ -16,6 +18,7 @@ const Login: FC<Props> = (props) => {
   };
 
   const history = useHistory();
+  const loading = useAppSelector(loadingSelector);
 
   const {
     handleSubmit,
@@ -34,11 +37,18 @@ const Login: FC<Props> = (props) => {
       password: yup.string().required().min(8),
     }),
     onSubmit: (data) => {
-      login(data).then((c) => {
-        authActions.login(c);
-        // history.goBack();
-        history.push("/products");
-      });
+      authActions.loginBegin();
+      login(data)
+        .then((c) => {
+          authActions.login(c);
+          history.goBack();
+          // history.push("/products");
+        })
+        .catch((e) => {
+          alert(e.response.statusText);
+          authActions.loginError(e.response.statusText);
+          console.log(e.response.statusText);
+        });
     },
   });
 
@@ -106,9 +116,7 @@ const Login: FC<Props> = (props) => {
               Login
             </button>
             <div>
-              {isSubmitting && (
-                <FaSpinner className="mt-5 animate-spin"></FaSpinner>
-              )}
+              {loading && <FaSpinner className="mt-5 animate-spin"></FaSpinner>}
             </div>
           </div>
         </form>

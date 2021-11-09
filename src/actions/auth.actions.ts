@@ -8,25 +8,26 @@ import {
   FORGOT_PASSWORD_BEGIN,
   LOGGEDIN_PASSWORD_CHANGE_BEGIN,
   LOGGEDIN_PASSWORD_CHANGE_COMPLETED,
+  LOGIN_BEGIN,
+  LOGIN_ERROR,
   ME_FETCH,
   ME_LOGIN,
   RESET_PASSWORD_COMPLETED,
 } from "./action.constants";
 
-// const loginActionBegin = (email: string, password: string) => ({
-//   type: LOGIN_BEGIN,
-//   payload: { email, password },
-// });
+const loginActionBegin = () => ({
+  type: LOGIN_BEGIN,
+});
 
 // export const loginActionComplete = (c: Customer) => ({
 //   type: LOGIN_COMPLETE,
 //   payload: c,
 // });
 
-// const LoginActionError = (msg: string) => ({
-//   type: LOGIN_ERROR,
-//   payload: msg,
-// });
+const LoginActionError = (msg: string) => ({
+  type: LOGIN_ERROR,
+  payload: msg,
+});
 
 const meFetchAction = (c: Customer) => ({
   type: ME_FETCH,
@@ -70,9 +71,9 @@ export const customerUpdatemeError = (c: Customer) => ({
 
 export const authActions = bindActionCreators(
   {
-    // loginBegin: loginActionBegin,
+    loginBegin: loginActionBegin,
     // loginComplete: loginActionComplete,
-    // loginError: LoginActionError,
+    loginError: LoginActionError,
     fetch: meFetchAction,
     login: meLoginAction,
     password: resetPasswordBegin,

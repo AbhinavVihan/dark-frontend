@@ -23,13 +23,14 @@ const Sidebar: FC<Props> = (props) => {
         </div>
       )}
       <div>
-        {customer && !(window.location.href = "/cart") && (
+        {customer && (
           <button
             className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
             onClick={() => {
               logout();
               // eslint-disable-next-line no-restricted-globals
-              location.href = location.href;
+              // location.href = location.href;
+              window.location.href = "/products";
             }}
           >
             Logout

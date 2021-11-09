@@ -54,7 +54,7 @@ const MyAccount = () => {
         {
           <img
             alt="customer"
-            src={`http://localhost:8000/img/customers/${imageName}`}
+            src={`http://127.0.0.1:8000/img/customers/${imageName}`}
           />
         }
       </div>

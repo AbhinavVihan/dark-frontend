@@ -20,6 +20,8 @@ import { meSelector } from "../../selectors/auth.selectors";
 import { cartIdSelector, cartSelector } from "../../selectors/cart.selectors";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
+<script src="https://js.stripe.com/v3/"></script>;
+
 interface Props {}
 
 const ProductsDetails: FC<Props> = (props) => {
@@ -99,8 +101,24 @@ const ProductsDetails: FC<Props> = (props) => {
 
   return (
     <div>
-      {customer && (
+      {/* {customer && (
         <Link to="/cart">
+          <button className="flex px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28">
+            My Cart
+            <AiOutlineShoppingCart className="items-center justify-end text-right "></AiOutlineShoppingCart>
+          </button>
+        </Link>
+      )} */}
+
+      {customer && cart ? (
+        <Link to="/cart">
+          <button className="flex px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28">
+            My Cart
+            <AiOutlineShoppingCart className="items-center justify-end text-right "></AiOutlineShoppingCart>
+          </button>
+        </Link>
+      ) : (
+        <Link to="/login">
           <button className="flex px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28">
             My Cart
             <AiOutlineShoppingCart className="items-center justify-end text-right "></AiOutlineShoppingCart>
@@ -144,10 +162,10 @@ const ProductsDetails: FC<Props> = (props) => {
             <div>
               {!customer ? (
                 <Link
-                  className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                  className="inline-block px-0 py-1 mx-3 my-2 text-center text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
                   to="/login"
                 >
-                  Login to create cart
+                  Login for Cart
                 </Link>
               ) : !cart ? (
                 <button
