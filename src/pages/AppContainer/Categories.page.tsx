@@ -14,6 +14,7 @@ import {
   categoryQueryChangedAction,
   categoryQueryCompletedAction,
 } from "../../actions/categories.actions";
+import { BASE_URL } from "../../api/base";
 
 interface Props {}
 
@@ -60,9 +61,7 @@ const Categories: FC<Props> = (props) => {
                   <img
                     className="items-center justify-center w-full h-full"
                     alt="djhsuk"
-                    src={
-                      "http://127.0.0.1:8000/img/categories/" + category.photo
-                    }
+                    src={BASE_URL + "/img/categories/" + category.photo}
                   />
                   <div className="pt-3 text-center">
                     {category.categoryName}

@@ -2,7 +2,7 @@ import React, { memo, useState } from "react";
 import { Link } from "react-router-dom";
 import { authActions } from "../../actions/auth.actions";
 import { changeCustomerPhoto } from "../../api/auth";
-import { AUTH_TOKEN } from "../../api/base";
+import { AUTH_TOKEN, BASE_URL } from "../../api/base";
 import { meSelector } from "../../selectors/auth.selectors";
 import { useAppSelector } from "../../store";
 
@@ -13,6 +13,7 @@ const MyAccount = () => {
   const [disabled, setDisabled] = useState(true);
 
   const token = localStorage.getItem(AUTH_TOKEN);
+  const baseUrl = BASE_URL;
 
   if (!customer && token) {
     return <div>loading...</div>;
@@ -50,12 +51,7 @@ const MyAccount = () => {
         ADDRESS: <span className="text-blue-700">{customer?.address}</span>
       </div>
       <div>
-        {
-          <img
-            alt="customer"
-            src={`http://127.0.0.1:8000/img/customers/${imageName}`}
-          />
-        }
+        {<img alt="customer" src={`${baseUrl}/img/customers/${imageName}`} />}
       </div>
       <form onSubmit={submit}>
         <div>

@@ -11,6 +11,7 @@ import {
 } from "../../selectors/products.selectors";
 import { useAppSelector } from "../../store";
 import { fetchOneCategory } from "../../actions/categories.actions";
+import { BASE_URL } from "../../api/base";
 
 interface Props {}
 
@@ -59,9 +60,7 @@ const ProductsForCategories: FC<Props> = (props) => {
                   <img
                     className="items-center justify-center w-full"
                     alt="jvbjdsbj"
-                    src={
-                      "http://127.0.0.1:8000/img/products/" + product.imageFront
-                    }
+                    src={BASE_URL + "/img/products/" + product.imageFront}
                   />
                   <div className="flex justify-around">
                     <div className="font-semibold">
