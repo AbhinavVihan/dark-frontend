@@ -1,6 +1,9 @@
 import { Reducer } from "redux";
 
 import {
+  CREATE_PRODUCT_BEGIN,
+  CREATE_PRODUCT_COMPLETE,
+  CREATE_PRODUCT_ERROR,
   FETCH_PRODUCTS_FOR_CATEGORY,
   PRODUCTS_FETCH_SINGLE,
   PRODUCTS_FETCH_SINGLE_COMPLETE,
@@ -23,6 +26,7 @@ export interface ProductsState extends EntityState<Product> {
   query: string;
   queryMap: { [query: string]: string[] };
   productsByCategoryId: { [id: string]: Product[] };
+  createdProduct: { [id: string]: Product };
 }
 
 const initialState: ProductsState = {
@@ -30,6 +34,7 @@ const initialState: ProductsState = {
   query: "",
   queryMap: {},
   productsByCategoryId: {},
+  createdProduct: {},
 };
 
 export const productReducer: Reducer<ProductsState> = (
@@ -47,6 +52,17 @@ export const productReducer: Reducer<ProductsState> = (
         query: query,
         loadingList: loadingList,
       };
+    case CREATE_PRODUCT_COMPLETE:
+      return {
+        ...state,
+        createdProduct: {
+          ...state.createdProduct,
+          [action.payload.id]: action.payload,
+        },
+        selectedId: action.payload.id,
+      };
+    case CREATE_PRODUCT_ERROR:
+      return { ...state, errorOne: action.payload };
     case PRODUCTS_QUERY_COMPLETED:
       const products = action.payload.products as Product[];
       const productIds = getIds(products);

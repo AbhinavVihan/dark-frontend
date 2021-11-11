@@ -1,7 +1,9 @@
 import { bindActionCreators } from "redux";
 import { Customer } from "../models/Customer";
+import { Product, Products } from "../models/Products";
 import { store } from "../store";
 import {
+  CREATE_PRODUCT_BEGIN,
   CUSTOMER_UPDATEME_BEGIN,
   CUSTOMER_UPDATEME_COMPLETED,
   CUSTOMER_UPDATEME_ERROR,

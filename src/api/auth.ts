@@ -23,6 +23,15 @@ export const login = (data: LoginRequest) => {
   });
 };
 
+export const loginAsRetailor = (data: LoginRequest) => {
+  const url = BASE_URL + "/customers/retailor-login";
+
+  return axios.post<LoginResponse>(url, data).then((response) => {
+    localStorage.setItem(AUTH_TOKEN, "Bearer " + response.data.token);
+    return response.data.doc;
+  });
+};
+
 export const forgotPassword = (data: forgotPasswordRequest) => {
   const url = BASE_URL + "/customers/forgotPassword";
 
@@ -77,6 +86,15 @@ export const changeCustomerPhoto = (data: any) => {
 
 export const signup = (data: SignupRequest) => {
   const url = BASE_URL + "/customers/signup";
+
+  return axios.post<SignupResponse>(url, data).then((response) => {
+    // console.log(response.data);
+    return response.data.doc;
+  });
+};
+
+export const signupAsRetailor = (data: SignupRequest) => {
+  const url = BASE_URL + "/customers/retailor-signup";
 
   return axios.post<SignupResponse>(url, data).then((response) => {
     // console.log(response.data);

@@ -46,6 +46,11 @@ export const selectedCategorySelector = createSelector(
   (byId, id) => id && byId[id]
 );
 
+export const cIdToCreateProduct = createSelector(
+  [categoriesStateSelector],
+  (categoriesState) => categoriesState.idForRetailor
+);
+
 // export const currentQueryCategoriesSelector = createSelector(
 //   [queryIdsSelector, categoryByIdSelector],
 //   (categoriesIds, byId) => {

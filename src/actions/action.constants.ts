@@ -12,6 +12,9 @@ export const LOGGEDIN_PASSWORD_CHANGE_COMPLETED =
 export const CUSTOMER_UPDATEME_BEGIN = "customer/updateme_begin";
 export const CUSTOMER_UPDATEME_COMPLETED = "customer/updateme_completed";
 export const CUSTOMER_UPDATEME_ERROR = "customer/updateme_error";
+export const CREATE_PRODUCT_BEGIN = "create/product_begin";
+export const CREATE_PRODUCT_COMPLETE = "create/product_complete";
+export const CREATE_PRODUCT_ERROR = "create/product_error";
 
 //products
 export const PRODUCTS_FETCH_SINGLE = "products/fetch_single";
@@ -28,7 +31,7 @@ export const CATEGORIES_FETCH_SINGLE = "categories/fetch_single";
 export const CATEGORIES_FETCH_SINGLE_COMPLETE =
   "categories/fetch_single_complete";
 export const CATEGORIES_FETCH_SINGLE_ERROR = "categories/fetch_single_error";
-
+export const CATEGORY_CHOOSE = "category/choose";
 export const CATEGORIES_QUERY_CHANGED = "categories/query_changed";
 export const CATEGORIES_QUERY_COMPLETED = "categories/query_completed";
 

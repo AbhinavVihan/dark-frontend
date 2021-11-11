@@ -27,9 +27,9 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (!customer && token) {
-    return <div>loading...</div>;
-  }
+  // if (!customer && token) {
+  //   return <div>loading...</div>;
+  // }
 
   return (
     <Suspense fallback={<div className="text-red-500">Loading...</div>}>
@@ -66,6 +66,11 @@ function App() {
               "/forgot-password",
               "/token",
               "/resetPassword",
+              "/choose-category",
+              "/retailor-login",
+              "/retailor-signup",
+              "/create-product",
+              "/upload-photo",
             ]}
             exact
           >

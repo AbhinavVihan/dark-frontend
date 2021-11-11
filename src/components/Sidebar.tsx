@@ -37,6 +37,9 @@ const Sidebar: FC<Props> = (props) => {
           </button>
         )}
       </div>
+      <Link className="hover:text-red-500" to="/retailor-login">
+        Be a retailor
+      </Link>
     </div>
   );
 };

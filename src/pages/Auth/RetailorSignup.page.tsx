@@ -3,10 +3,9 @@ import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { useState } from "react";
-import { signup } from "../../api/auth";
-import { authActions } from "../../actions/auth.actions";
+import { signup, signupAsRetailor } from "../../api/auth";
 
-const Signup = () => {
+const RetailorSignup = () => {
   const history = useHistory();
   const [password, setPassword] = useState(false);
 
@@ -22,7 +21,6 @@ const Signup = () => {
         password: "",
         passwordConfirm: "",
         address: "",
-        role: "customer",
       },
       validationSchema: yup.object().shape({
         name: yup.string().required(),
@@ -30,12 +28,10 @@ const Signup = () => {
         password: yup.string().required().min(8),
         passwordConfirm: yup.string().required().min(8),
         address: yup.string().required(),
-        role: yup.string().required(),
       }),
       onSubmit: (data) => {
-        signup(data).then((c) => {
-          authActions.login(c);
-          history.push("/products");
+        signupAsRetailor(data).then((c) => {
+          history.push("/choose-category");
         });
       },
     });
@@ -44,15 +40,17 @@ const Signup = () => {
     <div className="flex flex-col items-center w-screen pt-8 lg:w-1/2 space-y-28">
       <div className="flex flex-col space-y-14">
         <div className="space-y-4 ">
-          <h1 className="text-4xl">Get started with a free account</h1>
+          <h1 className="text-4xl">
+            Get started with a free Retailor's account
+          </h1>
 
           <div className="flex justify-start ">
-            <h2>Already have an account?</h2>
+            <h2>Already have a retailor's account?</h2>
             <Link
-              to="/login"
+              to="/retailor-login"
               className="text-blue-600 underline hover:text-red-500"
             >
-              Log In
+              Log In as retailor
             </Link>
           </div>
         </div>
@@ -131,19 +129,6 @@ const Signup = () => {
               placeholder="address"
             />
           </div>
-          <div>
-            role:{" "}
-            <input
-              className="border-2 border-black"
-              id="role"
-              type="role"
-              autoComplete="off"
-              {...getFieldProps("role")}
-              required
-              placeholder="role"
-              value="customer"
-            />
-          </div>
           {touched.address && (
             <div className="text-red-500"> {errors.address}</div>
           )}
@@ -182,6 +167,6 @@ const Signup = () => {
   );
 };
 
-Signup.defaultProps = {};
+RetailorSignup.defaultProps = {};
 
-export default memo(Signup);
+export default memo(RetailorSignup);

@@ -55,7 +55,7 @@ export interface ForgotPasswordResponse {
 
 export interface SignupResponse {
   status: string;
-  token?: string;
+  token: string;
   doc: Customer;
 }
 

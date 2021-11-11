@@ -5,6 +5,7 @@ import {
   CATEGORIES_FETCH_SINGLE_ERROR,
   CATEGORIES_QUERY_CHANGED,
   CATEGORIES_QUERY_COMPLETED,
+  CATEGORY_CHOOSE,
 } from "./action.constants";
 
 export const categoryQueryChangedAction = (
@@ -36,4 +37,9 @@ export const fetchOneCategoryComplete = (category: Categories) => ({
 export const fetchSingleCategoryError = (id: string, msg: string) => ({
   type: CATEGORIES_FETCH_SINGLE_ERROR,
   payload: { id, msg },
+});
+
+export const categoryChoose = (id: string) => ({
+  type: CATEGORY_CHOOSE,
+  payload: id,
 });

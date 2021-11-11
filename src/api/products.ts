@@ -4,6 +4,7 @@ import { Product } from "../models/Products";
 import { ProductSingle } from "../models/ProductSingle";
 import { BASE_URL } from "./base";
 import { AUTH_TOKEN } from "./base";
+import { createProductRequest } from "./interfaces/productInterfaces";
 
 export interface ProductRequest {
   query: string;
@@ -33,6 +34,40 @@ export const fetchProductsForCategory = (id: string) => {
     return response.data;
   });
 };
+
+export const createProduct = (id: string, data: createProductRequest) => {
+  const url = BASE_URL + "/categories/" + id + "/products";
+  // console.log(id);
+
+  return axios.post<Product>(url, data);
+};
+
+export const uploadProductImages = (id: string, data: any) => {
+  const form = new FormData();
+  // console.log(form);
+  form.append("imageFront", data.imageFront);
+  form.append("imageCover", data.imageCover);
+  form.append("image1", data.image1);
+  form.append("image2", data.image2);
+  form.append("image3", data.image3);
+
+  // form.append("image", data);
+  const url = BASE_URL + "/products/" + id;
+
+  return axios({
+    method: "PATCH",
+    url: url,
+    data: form,
+    headers: {
+      Authorization: AUTH_TOKEN,
+      "Content-type": "application/json",
+      "Content-Type": "multipart/form-data",
+    },
+  }).then((response) => {
+    return response.data.doc;
+  });
+};
+// {{URL}}products/61860ba6158d3c926ba58aba
 
 // export const addToCart = (pId: string, cId: string) => {
 //   const url = BASE_URL + "/products/" + pId + "/cart/" + cId;

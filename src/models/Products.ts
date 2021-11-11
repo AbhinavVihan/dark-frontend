@@ -13,7 +13,9 @@ export interface Product extends Entity {
   ratingsQuantity: number;
   price: number;
   description: string;
-  images: string[][];
+  image1: string;
+  image2: string;
+  image3: string;
   slug: string;
   imageCover: string;
   imageFront: string;

@@ -39,9 +39,9 @@ const ProductsDetails: FC<Props> = (props) => {
 
   const [index, setIndex] = useState(0);
   const img = product && [
-    BASE_URL + "/img/products/" + product.images[0],
-    BASE_URL + "/img/products/" + product.images[1],
-    BASE_URL + "/img/products/" + product.images[2],
+    BASE_URL + "/img/products/" + product.image1,
+    BASE_URL + "/img/products/" + product.image2,
+    BASE_URL + "/img/products/" + product.image3,
   ];
 
   useEffect(() => {

@@ -6,6 +6,7 @@ import {
   CATEGORIES_FETCH_SINGLE_ERROR,
   CATEGORIES_QUERY_CHANGED,
   CATEGORIES_QUERY_COMPLETED,
+  CATEGORY_CHOOSE,
 } from "../actions/action.constants";
 import { Category } from "../models/Categories";
 import {
@@ -21,12 +22,15 @@ import {
 export interface CategoriesState extends EntityState<Category> {
   query: string;
   queryMap: { [query: string]: string[] };
+  idForRetailor: string;
 }
 
 const initialState: CategoriesState = {
   ...initialEntityState,
   query: "",
   queryMap: {},
+  idForRetailor: "",
+
   // photo: {},
 };
 
@@ -118,6 +122,8 @@ export const categoryReducer: Reducer<CategoriesState> = (
     case CATEGORIES_FETCH_SINGLE_ERROR:
       const { id, msg } = action.payload;
       return setErrorForOne(state, id, msg) as CategoriesState;
+    case CATEGORY_CHOOSE:
+      return { ...state, idForRetailor: action.payload };
     default:
       return state;
   }

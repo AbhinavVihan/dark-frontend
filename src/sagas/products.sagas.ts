@@ -4,6 +4,7 @@ import {
   ADD_TO_CART_BEGIN,
   BUYING_PROCESS_BEGIN,
   CATEGORIES_FETCH_SINGLE,
+  CREATE_PRODUCT_BEGIN,
   GET_CART_BEGIN,
   PRODUCTS_FETCH_SINGLE,
 } from "../actions/action.constants";
@@ -12,6 +13,8 @@ import {
   fetchSingleCategoryError,
 } from "../actions/categories.actions";
 import {
+  createProductComplete,
+  createProductError,
   fetchOneProductComplete,
   fetchSingleProductError,
 } from "../actions/products.actions";
@@ -20,6 +23,7 @@ import {
   getCart,
   addToCart as addProdToCart,
   deleteFromCart,
+  createProduct,
 } from "../api/products";
 import { fetchOneCategory as fetchOneCate } from "../api/categories";
 import {
@@ -107,27 +111,32 @@ function* addToCart(action: AnyAction): Generator<any> {
   }
 }
 
-// function* fetchProductsForCategory(action: AnyAction): Generator<any> {
-//   try {
-//     const res: any = yield call(fetchOneCate, action.payload);
-//     yield put(fetchOneCategoryComplete(res.data));
-//     console.log(res.data);
-//   } catch (e: any) {
-//     const error = e.response.statusText || "some error occured";
-//     // console.log(e.response);
-//     yield put(fetchSingleCategoryError(action.payload, error));
-//   }
-// }
+function* createproduct(action: AnyAction): Generator<any> {
+  try {
+    const res: any = yield call(createProduct, action.payload.id, {
+      name: action.payload.data.name,
+      price: action.payload.data.price,
+      description: action.payload.data.description,
+    });
+    console.log(action.payload);
+    yield put(createProductComplete(res.data));
+    alert("created successfully");
+    // console.log(res.data);
+  } catch (e: any) {
+    const error = e.response.statusText || "some error occured";
+    yield put(createProductError(error));
+    alert("Some error occured");
+  }
+}
 
 export function* watchAll() {
   yield all([
-    // takeEvery(LOGIN_BEGIN, login),
-
     takeEvery(PRODUCTS_FETCH_SINGLE, fetchOneProduct),
     takeEvery(CATEGORIES_FETCH_SINGLE, fetchOneCategory),
     takeEvery(GET_CART_BEGIN, fetchOneCart),
     takeEvery(ADD_TO_CART_BEGIN, addToCart),
     takeEvery(BUYING_PROCESS_BEGIN, deleteProductFromCart),
+    takeEvery(CREATE_PRODUCT_BEGIN, createproduct),
 
     // takeEvery(FETCH_PRODUCTS_FOR_CATEGORY, fetchProductsForCategory),
   ]);

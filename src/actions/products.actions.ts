@@ -1,5 +1,8 @@
+import { createProductRequest } from "../api/interfaces/productInterfaces";
 import { Product, Products } from "../models/Products";
 import {
+  CREATE_PRODUCT_BEGIN,
+  CREATE_PRODUCT_COMPLETE,
   FETCH_PRODUCTS_FOR_CATEGORY,
   PRODUCTS_FETCH_SINGLE,
   PRODUCTS_FETCH_SINGLE_COMPLETE,
@@ -42,4 +45,19 @@ export const fetchOneProductComplete = (product: Products) => ({
 export const fetchSingleProductError = (id: string, msg: string) => ({
   type: PRODUCTS_FETCH_SINGLE_ERROR,
   payload: { id, msg },
+});
+
+export const createProductBegin = (id: string, data: createProductRequest) => ({
+  type: CREATE_PRODUCT_BEGIN,
+  payload: { id, data },
+});
+
+export const createProductComplete = (product: Product) => ({
+  type: CREATE_PRODUCT_COMPLETE,
+  payload: product,
+});
+
+export const createProductError = (msg: string) => ({
+  type: CREATE_PRODUCT_COMPLETE,
+  payload: msg,
 });
