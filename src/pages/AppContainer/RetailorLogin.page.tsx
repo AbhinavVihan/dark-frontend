@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { FaSpinner } from "react-icons/fa";
 import * as yup from "yup";
 import Input from "../../components/input";
-import { login, loginAsRetailor } from "../../api/auth";
+import { loginAsRetailor } from "../../api/auth";
 import { authActions } from "../../actions/auth.actions";
 import { useAppSelector } from "../../store";
 import { loadingSelector } from "../../selectors/auth.selectors";

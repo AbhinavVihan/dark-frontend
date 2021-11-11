@@ -3,8 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { authActions } from "../../actions/auth.actions";
 import { productQueryCompletedAction } from "../../actions/products.actions";
-import { changeCustomerPhoto } from "../../api/auth";
-import { AUTH_TOKEN, BASE_URL } from "../../api/base";
+import { AUTH_TOKEN } from "../../api/base";
 import { fetchProducts, uploadProductImages } from "../../api/products";
 import { meSelector } from "../../selectors/auth.selectors";
 import { selectedIdSelected } from "../../selectors/products.selectors";
@@ -25,7 +24,6 @@ const UploadProductImages = () => {
   const [disabled, setDisabled] = useState(true);
   const dispatch = useDispatch();
   const token = localStorage.getItem(AUTH_TOKEN);
-  const baseUrl = BASE_URL;
 
   if (!customer && token) {
     alert("you are logged out somehow, please login again");

@@ -1,30 +1,14 @@
-import { FC, memo, useEffect } from "react";
+import { FC, memo } from "react";
 import { useAppSelector } from "../../store";
-import {
-  currentQueryProductsSelector,
-  productsLoadingSelector,
-  productQuerySelector,
-} from "../../selectors/products.selectors";
-import { Link, useHistory } from "react-router-dom";
-import {
-  createProduct,
-  fetchProducts as fetchProductsStart,
-} from "../../api/products";
 
-import { FaSpinner } from "react-icons/fa";
+import { useHistory } from "react-router-dom";
+
 import { useDispatch } from "react-redux";
-import {
-  createProductBegin,
-  productQueryChangedAction,
-  productQueryCompletedAction,
-} from "../../actions/products.actions";
+import { createProductBegin } from "../../actions/products.actions";
 import * as yup from "yup";
 
-import { meSelector } from "../../selectors/auth.selectors";
-import { BASE_URL } from "../../api/base";
 import { cIdToCreateProduct } from "../../selectors/categories.selectors";
 import { useFormik } from "formik";
-import { authActions } from "../../actions/auth.actions";
 
 interface Props {}
 
@@ -33,7 +17,7 @@ const CrateProduct: FC<Props> = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { handleSubmit, getFieldProps, isValid, touched, errors } = useFormik({
+  const { handleSubmit, getFieldProps, isValid } = useFormik({
     initialValues: {
       name: "",
       price: "",

@@ -1,7 +1,6 @@
 import { Reducer } from "redux";
 
 import {
-  CREATE_PRODUCT_BEGIN,
   CREATE_PRODUCT_COMPLETE,
   CREATE_PRODUCT_ERROR,
   FETCH_PRODUCTS_FOR_CATEGORY,

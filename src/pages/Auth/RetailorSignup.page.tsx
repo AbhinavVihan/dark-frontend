@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { useState } from "react";
-import { signup, signupAsRetailor } from "../../api/auth";
+import { signupAsRetailor } from "../../api/auth";
 
 const RetailorSignup = () => {
   const history = useHistory();

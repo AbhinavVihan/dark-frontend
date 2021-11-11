@@ -1,13 +1,9 @@
 import { useFormik } from "formik";
 import React, { FC, memo, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { FaSpinner } from "react-icons/fa";
 import * as yup from "yup";
-import Input from "../../components/input";
-import { login } from "../../api/auth";
-import { authActions } from "../../actions/auth.actions";
+
 import { useAppSelector } from "../../store";
-import { loadingSelector } from "../../selectors/auth.selectors";
 import { fetchCategories as fetchCategoriesStart } from "../../api/categories";
 import { useDispatch } from "react-redux";
 import {
@@ -33,7 +29,7 @@ const ChooseCategory: FC<Props> = (props) => {
 
   const history = useHistory();
 
-  const { handleSubmit, getFieldProps, isValid, touched, errors } = useFormik({
+  const { handleSubmit } = useFormik({
     initialValues: {
       category: "",
     },
