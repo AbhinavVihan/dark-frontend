@@ -12,7 +12,7 @@ const Sidebar: FC<Props> = (props) => {
   return (
     <div className="w-2/5 bg-gray-100">
       This is the sidebar
-      {customer && (
+      {customer && customer.role === "customer" && (
         <div className="text-2xl font-bold text-red-700">
           Hello
           <Link to="/my-account">
@@ -23,7 +23,7 @@ const Sidebar: FC<Props> = (props) => {
         </div>
       )}
       <div>
-        {customer && (
+        {customer?.role === "customer" && (
           <button
             className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
             onClick={() => {
@@ -36,10 +36,35 @@ const Sidebar: FC<Props> = (props) => {
             Logout
           </button>
         )}
+        {/* {customer?.role === "retailor" && (
+          <button
+            className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+            onClick={() => {
+              logout();
+              // eslint-disable-next-line no-restricted-globals
+              // location.href = location.href;
+              window.location.href = "/retailor-overview";
+            }}
+          >
+            Logout
+          </button>
+        )} */}
       </div>
-      <Link className="hover:text-red-500" to="/retailor-login">
-        Be a retailor
-      </Link>
+      {customer?.role === "customer" && (
+        <Link className="hover:text-red-500" to="/retailor-overview">
+          Go to retailor's section
+        </Link>
+      )}
+      {customer?.role === "retailor" && (
+        <Link className="hover:text-red-500" to="/retailor-overview">
+          Go to retailor's section
+        </Link>
+      )}
+      {!customer && (
+        <Link className="hover:text-red-500" to="/retailor-overview">
+          Go to retailor's section
+        </Link>
+      )}
     </div>
   );
 };

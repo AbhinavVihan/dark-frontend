@@ -7,6 +7,10 @@ import {
   CATEGORIES_QUERY_CHANGED,
   CATEGORIES_QUERY_COMPLETED,
   CATEGORY_CHOOSE,
+  CREATE_CATEGORY_BEGIN,
+  CREATE_CATEGORY_COMPLETE,
+  UPLOAD_PHOTO_FOR_CATEGORY_BEGIN,
+  UPLOAD_PHOTO_FOR_CATEGORY_COMPLETED,
 } from "../actions/action.constants";
 import { Category } from "../models/Categories";
 import {
@@ -23,6 +27,7 @@ export interface CategoriesState extends EntityState<Category> {
   query: string;
   queryMap: { [query: string]: string[] };
   idForRetailor: string;
+  createdCategory: string;
 }
 
 const initialState: CategoriesState = {
@@ -30,6 +35,7 @@ const initialState: CategoriesState = {
   query: "",
   queryMap: {},
   idForRetailor: "",
+  createdCategory: "",
 
   // photo: {},
 };
@@ -124,6 +130,12 @@ export const categoryReducer: Reducer<CategoriesState> = (
       return setErrorForOne(state, id, msg) as CategoriesState;
     case CATEGORY_CHOOSE:
       return { ...state, idForRetailor: action.payload };
+    case CREATE_CATEGORY_COMPLETE:
+      return { ...state, createdCategory: action.payload._id };
+    case UPLOAD_PHOTO_FOR_CATEGORY_BEGIN:
+      return { ...state, loadingOne: true };
+    case UPLOAD_PHOTO_FOR_CATEGORY_COMPLETED:
+      return { ...state, loadingOne: false };
     default:
       return state;
   }

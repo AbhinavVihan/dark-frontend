@@ -5,7 +5,7 @@ import {
   productsLoadingSelector,
   productQuerySelector,
 } from "../../selectors/products.selectors";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { fetchProducts as fetchProductsStart } from "../../api/products";
 
 import { FaSpinner } from "react-icons/fa";
@@ -16,12 +16,12 @@ import {
 } from "../../actions/products.actions";
 import { meSelector } from "../../selectors/auth.selectors";
 import { BASE_URL } from "../../api/base";
+import { AiFillHome } from "react-icons/ai";
 
 interface Props {}
 
-const Products: FC<Props> = (props) => {
+const ProductForRetailor: FC<Props> = (props) => {
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const query = useAppSelector(productQuerySelector);
 
@@ -43,62 +43,47 @@ const Products: FC<Props> = (props) => {
   // const imgString = img.toString();
   // console.log(imgString);
 
-  // if (customer?.role === "retailor") {
-  //   alert("you are a retailor");
-  //   // window.location.href = "/login";
-  //   history.push("/retailor-overview");
-  // }
-
   return (
     <div>
-      {/* <Link to="/categories">
-        <div className="text-right">
-          <span className="text-blue-500 hover:text-red-500">
-            Search by categories
-          </span>
-        </div>
-      </Link>
-      <Link className="text-blue-500 hover:text-red-500" to="/login">
-        Login
-      </Link> */}
-      <div className="space-x-3 space-x-5 text-right">
-        <Link className="text-blue-500 hover:text-red-500" to="/categories">
-          Search by categories
+      <div className="flex items-center justify-end space-x-4 align-middle">
+        <Link className="hover:text-red-500" to="retailor-overview">
+          <AiFillHome></AiFillHome>
         </Link>
-        {!customer && (
-          <Link className="text-blue-500 hover:text-red-500" to="/login">
-            Login
-          </Link>
-        )}
-        {customer && customer.role === "customer" && (
-          <Link className="text-blue-500 hover:text-red-500" to="/my-account">
-            {customer.name}
-          </Link>
-        )}
-        {customer && customer.role === "retailor" && (
-          <Link className="text-blue-500 hover:text-red-500" to="/login">
-            Login
-          </Link>
-        )}
-        {/* {!customer ? ( customer && customer.role === "customer" ?
-          <Link className="text-blue-500 hover:text-red-500" to="/login">
-            Login
-          </Link>
-        ) : (
-          <Link className="hover:text-red-500" to="/my-account">
-            {customer && customer.name}
-          </Link>
-        )} */}
-        {/* {!customer && customer ? (
-          <Link className="text-blue-500 hover:text-red-500" to="/login">
-            Login
-          </Link>
-        ) : (
-          <Link className="hover:text-red-500" to="/my-account">
-            {customer.name}
-          </Link>
-        )} */}
+        <div>
+          {customer?.role === "retailor" ? (
+            <Link className="text-blue-500 hover:text-red-500" to="/my-account">
+              <span className="text-black">Hi</span> {customer.name}{" "}
+              <span className="text-black">(retailor)</span>
+            </Link>
+          ) : (
+            <Link
+              className="text-blue-500 hover:text-red-500"
+              to="/retailor-login"
+            >
+              Login as retailor
+            </Link>
+          )}
+        </div>
       </div>
+
+      {/* {customer && customer.role === "retailor" && (
+        <Link className="text-blue-500 hover:text-red-500" to="/my-account">
+          <span className="text-black">Hi</span> {customer.name}{" "}
+          <span className="text-black">(retailor)</span>
+        </Link>
+      )} */}
+
+      {/* {customer && customer?.role === "retailor" ? (
+        <Link className="text-blue-500 hover:text-red-500" to="/my-account">
+          <span className="text-black">Hi</span> {customer.name}{" "}
+          <span className="text-black">(retailor)</span>
+        </Link>
+      ) : (
+        <Link className="text-blue-500 hover:text-red-500" to="/retailor-login">
+          Login as retailor
+        </Link>
+      )} */}
+
       <div className="text-center ">Search for Products Here</div>
       <div className="mb-10 text-center ">
         <input
@@ -117,7 +102,7 @@ const Products: FC<Props> = (props) => {
         {products.map((product) => (
           <div className="items-center justify-center rounded cursor-pointer bg-gray-50 hover:bg-gray-100">
             <div className="items-center justify-center border-black">
-              <Link to={"/products/" + product._id}>
+              <Link to={"/products/" + product._id + "/retailor"}>
                 <img
                   className="items-center justify-center w-full"
                   alt="jvbjdsbj"
@@ -141,6 +126,6 @@ const Products: FC<Props> = (props) => {
   );
 };
 
-Products.defaultProps = {};
+ProductForRetailor.defaultProps = {};
 
-export default memo(Products);
+export default memo(ProductForRetailor);

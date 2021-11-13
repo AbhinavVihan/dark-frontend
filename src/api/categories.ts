@@ -21,7 +21,8 @@
 import axios from "axios";
 import { Category } from "../models/Categories";
 import { CategoriesSingle } from "../models/CategorySingle";
-import { BASE_URL } from "./base";
+import { AUTH_TOKEN, BASE_URL } from "./base";
+import { createCategoryRequest } from "./interfaces/categoryInterfaces";
 
 export interface CategoryRequest {
   query?: string;
@@ -39,5 +40,42 @@ export const fetchCategories = (data: CategoryRequest) => {
 export const fetchOneCategory = (id: string) => {
   const url = BASE_URL + "/categories/" + id;
 
-  return axios.get<CategoriesSingle>(url);
+  return axios.get<CategoriesSingle>(url, {
+    headers: { Authorization: AUTH_TOKEN },
+  });
+};
+
+export const createCategory = (data: createCategoryRequest) => {
+  const url = BASE_URL + "/categories";
+  // console.log(id);
+
+  return axios
+    .post<Category>(url, data, {
+      headers: { Authorization: AUTH_TOKEN },
+    })
+    .then((res) => {
+      return res.data;
+    });
+};
+
+export const changeCategoryPhoto = (id: string, data: any) => {
+  const form = new FormData();
+  // console.log(form);
+  form.append("photo", data);
+
+  // form.append("image", data);
+  const url = BASE_URL + "/categories/" + id;
+
+  return axios({
+    method: "PATCH",
+    url: url,
+    data: form,
+    headers: {
+      Authorization: AUTH_TOKEN,
+      "Content-type": "application/json",
+      "Content-Type": "multipart/form-data",
+    },
+  }).then((response) => {
+    return response.data.doc;
+  });
 };

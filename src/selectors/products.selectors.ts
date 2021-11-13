@@ -73,3 +73,11 @@ export const currentCategoryProductsSelector = createSelector(
     return products;
   }
 );
+
+export const uploadProductLoader = createSelector(
+  [productStateSelector],
+  (productState) => {
+    const loader = productState.loadingForProduct;
+    return loader;
+  }
+);

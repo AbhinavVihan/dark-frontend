@@ -4,11 +4,14 @@ import {
   ADD_TO_CART_BEGIN,
   BUYING_PROCESS_BEGIN,
   CATEGORIES_FETCH_SINGLE,
+  CREATE_CATEGORY_BEGIN,
   CREATE_PRODUCT_BEGIN,
   GET_CART_BEGIN,
   PRODUCTS_FETCH_SINGLE,
 } from "../actions/action.constants";
 import {
+  createCategoryComplete,
+  createCategoryError,
   fetchOneCategoryComplete,
   fetchSingleCategoryError,
 } from "../actions/categories.actions";
@@ -25,7 +28,10 @@ import {
   deleteFromCart,
   createProduct,
 } from "../api/products";
-import { fetchOneCategory as fetchOneCate } from "../api/categories";
+import {
+  createCategory,
+  fetchOneCategory as fetchOneCate,
+} from "../api/categories";
 import {
   addToCartComplete,
   addToCartError,
@@ -129,6 +135,23 @@ function* createproduct(action: AnyAction): Generator<any> {
   }
 }
 
+// function* createcategory(action: AnyAction): Generator<any> {
+//   try {
+//     const res: any = yield call(createCategory, {
+//       categoryName: action.payload.data.categoryName,
+//       description: action.payload.data.description,
+//     });
+//     console.log(action.payload.data.categoryName);
+//     yield put(createCategoryComplete(res.data));
+//     alert("category created successfully");
+//     // console.log(res.data);
+//   } catch (e: any) {
+//     const error = e || "some error occured";
+//     yield put(createCategoryError(error));
+//     alert("Some error occured");
+//   }
+// }
+
 export function* watchAll() {
   yield all([
     takeEvery(PRODUCTS_FETCH_SINGLE, fetchOneProduct),
@@ -137,6 +160,7 @@ export function* watchAll() {
     takeEvery(ADD_TO_CART_BEGIN, addToCart),
     takeEvery(BUYING_PROCESS_BEGIN, deleteProductFromCart),
     takeEvery(CREATE_PRODUCT_BEGIN, createproduct),
+    // takeEvery(CREATE_CATEGORY_BEGIN, createcategory),
 
     // takeEvery(FETCH_PRODUCTS_FOR_CATEGORY, fetchProductsForCategory),
   ]);

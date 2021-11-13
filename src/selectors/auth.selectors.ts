@@ -11,10 +11,28 @@ export const customerByIdSelector = createSelector(
   (customerState) => customerState.byId
 );
 
+export const retailorByIdSelector = createSelector(
+  [customerStateSelector],
+  (customerState) => customerState.retailorById
+);
+
 // export const meSelector = (state: AppState) =>
 //   state.auth._id !== undefined
 //     ? state.customers.byId[state.auth._id]
 //     : undefined;
+
+export const retailorSelectedIdSelector = createSelector(
+  [customerStateSelector],
+  (customerState) => customerState.retailorSelectedId
+);
+
+export const retailorSelector = createSelector(
+  [retailorByIdSelector, retailorSelectedIdSelector],
+  (byId, selectedId) => {
+    const retailor = selectedId && byId[selectedId];
+    return retailor;
+  }
+);
 
 export const meSelector = createSelector(
   [authIdSelector, customerByIdSelector],

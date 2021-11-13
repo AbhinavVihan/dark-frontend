@@ -9,7 +9,12 @@ import {
   PRODUCTS_FETCH_SINGLE_ERROR,
   PRODUCTS_QUERY_CHANGED,
   PRODUCTS_QUERY_COMPLETED,
+  UPLOAD_PRODUCT_BEGIN,
 } from "../actions/action.constants";
+import {
+  uploadProductCompleted,
+  uploadProductError,
+} from "../actions/products.actions";
 import { Product } from "../models/Products";
 import {
   addMany,
@@ -26,6 +31,7 @@ export interface ProductsState extends EntityState<Product> {
   queryMap: { [query: string]: string[] };
   productsByCategoryId: { [id: string]: Product[] };
   createdProduct: { [id: string]: Product };
+  loadingForProduct: boolean;
 }
 
 const initialState: ProductsState = {
@@ -34,6 +40,7 @@ const initialState: ProductsState = {
   queryMap: {},
   productsByCategoryId: {},
   createdProduct: {},
+  loadingForProduct: false,
 };
 
 export const productReducer: Reducer<ProductsState> = (
@@ -68,44 +75,6 @@ export const productReducer: Reducer<ProductsState> = (
 
       const newState = addMany(state, products) as ProductsState;
 
-      // const imgCover = products.reduce((prev, product) => {
-      //   const img = product.imageCover;
-
-      //   return {
-      //     ...prev,
-      //     [product._id]: "https://dark-2.herokuapp.com/img/products/" + img,
-      //   };
-      // }, {});
-      // const imgFront = products.reduce((prev, product) => {
-      //   const img = product.imageFront;
-      //   return {
-      //     ...prev,
-      //     [product._id]: "https://dark-2.herokuapp.com/img/products/" + img,
-      //   };
-      // }, {});
-      // const img1 = products.reduce((prev, product) => {
-      //   const img = product.images[0];
-
-      //   return {
-      //     ...prev,
-      //     [product._id]: "https://dark-2.herokuapp.com/img/products/" + img,
-      //   };
-      // }, {});
-      // const img2 = products.reduce((prev, product) => {
-      //   const img = product.images[1];
-
-      //   return {
-      //     ...prev,
-      //     [product._id]: "https://dark-2.herokuapp.com/img/products/" + img,
-      //   };
-      // }, {});
-      // const img3 = products.reduce((prev, product) => {
-      //   const img = product.images[2];
-      //   return {
-      //     ...prev,
-      //     [product._id]: "https://dark-2.herokuapp.com/img/products/" + img,
-      //   };
-      // }, {});
       return {
         ...newState,
         queryMap: {
@@ -113,11 +82,6 @@ export const productReducer: Reducer<ProductsState> = (
           [action.payload.query]: productIds,
         },
         loadingList: false,
-        // imageCover: { ...state.imageCover, ...imgCover },
-        // imageFront: { ...state.imageFront, ...imgFront },
-        // image1: { ...state.image1, ...img1 },
-        // image2: { ...state.image2, ...img2 },
-        // image3: { ...state.image3, ...img3 },
       };
     case PRODUCTS_FETCH_SINGLE_COMPLETE:
       return addOne(state, action.payload.doc, false) as ProductsState;
@@ -132,6 +96,12 @@ export const productReducer: Reducer<ProductsState> = (
           [action.payload.id]: action.payload.products,
         },
       };
+    case UPLOAD_PRODUCT_BEGIN:
+      return { ...state, loadingForProduct: true };
+    case uploadProductCompleted:
+      return { ...state, loadingForProduct: false };
+    case uploadProductError:
+      return { ...state, errorOne: action.payload };
     default:
       return state;
   }

@@ -8,7 +8,10 @@ import {
   ME_FETCH,
   ME_LOGIN,
   RESET_PASSWORD_COMPLETED,
+  RETAILOR_LOGIN,
+  RETAILOR_LOGIN_ERROR,
 } from "../actions/action.constants";
+import { Customer } from "../models/Customer";
 
 export interface AuthState {
   _id: string;
@@ -45,6 +48,7 @@ export const authReducer: Reducer<AuthState> = (
       return { ...state, errorOne: action.payload, loading: false };
     case LOGGEDIN_PASSWORD_CHANGE_COMPLETED:
       return { ...state, loading: false };
+
     default:
       return state;
   }

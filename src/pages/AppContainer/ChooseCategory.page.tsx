@@ -11,6 +11,7 @@ import {
   categoryQueryCompletedAction,
 } from "../../actions/categories.actions";
 import { currentQueryCategoriesSelector } from "../../selectors/categories.selectors";
+import { meSelector } from "../../selectors/auth.selectors";
 
 interface Props {}
 
@@ -19,6 +20,7 @@ const ChooseCategory: FC<Props> = (props) => {
   const dispatch = useDispatch();
   const query = "";
   const categories = useAppSelector(currentQueryCategoriesSelector);
+  const customer = useAppSelector(meSelector);
 
   useEffect(() => {
     fetchCategoriesStart({ query }).then((categories) => {
@@ -41,6 +43,14 @@ const ChooseCategory: FC<Props> = (props) => {
       history.push("/create-product");
     },
   });
+
+  // if (!customer) {
+  //   window.location.href = "/retailor-login";
+  // }
+
+  // if (customer?.role === "customer") {
+  //   window.location.href = "/retailor-login";
+  // }
 
   return (
     <div className="flex flex-col items-center w-screen pt-8 lg:w-1/2 space-y-28">

@@ -161,7 +161,32 @@ const ProductsDetails: FC<Props> = (props) => {
             <div>{product.ratingsAverage}</div>
             <div>{product.description}</div>
             <div>
-              {!customer ? (
+              {customer?.role === "retailor" && (
+                <Link
+                  className="inline-block px-0 py-1 mx-3 my-2 text-center text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                  to="/login"
+                >
+                  Login for Cart
+                </Link>
+              )}
+              {customer?.role === "customer" && cart && (
+                <button
+                  className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                  onClick={addToCarts}
+                >
+                  Add to Cart
+                </button>
+              )}
+              {customer?.role === "customer" && !cart && (
+                <button
+                  className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                  onClick={createYourCart}
+                >
+                  Create your Cart
+                </button>
+              )}
+
+              {/* {!customer ? (
                 <Link
                   className="inline-block px-0 py-1 mx-3 my-2 text-center text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
                   to="/login"
@@ -182,7 +207,7 @@ const ProductsDetails: FC<Props> = (props) => {
                 >
                   Add to Cart
                 </button>
-              )}
+              )} */}
             </div>
           </div>
         </div>

@@ -76,3 +76,8 @@ export const currentQueryCategoriesSelector = createSelector(
     return categories;
   }
 );
+
+export const createdCategorySelector = createSelector(
+  [categoriesStateSelector],
+  (categoriesState) => categoriesState.createdCategory
+);

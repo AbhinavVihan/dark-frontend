@@ -53,6 +53,7 @@ function App() {
               "/my-account",
               "/my-password",
               "/cart",
+              "/products/:productId/retailor",
             ]}
             exact
           >
@@ -70,7 +71,11 @@ function App() {
               "/retailor-login",
               "/retailor-signup",
               "/create-product",
+              "/create-category",
               "/upload-photo",
+              "/retailor-overview",
+              "/productsRetailor",
+              "/upload-category-photo",
             ]}
             exact
           >

@@ -14,7 +14,9 @@ import {
 import { orderProduct } from "../../stripe/public/checkout";
 import { BASE_URL } from "../../api/base";
 
-<script src="https://js.stripe.com/v3/"></script>;
+{
+  /* <script src="https://js.stripe.com/v3/"></script>; */
+}
 
 interface Props {}
 
@@ -42,10 +44,9 @@ const Cart: FC<Props> = (props) => {
     }
   };
 
-  // const img = products.map((p) => p.imageFront);
-
-  // const imgString = img.toString();
-  // console.log(imgString);
+  if (cartProducts?.length === 0) {
+    <div>There is nothing in your cart</div>;
+  }
 
   return (
     <div>

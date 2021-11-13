@@ -2,8 +2,13 @@ import { FC, memo } from "react";
 import { Route, Switch } from "react-router-dom";
 import FrontImage from "../../components/FrontImage";
 import ChooseCategoryPage from "../AppContainer/ChooseCategory.page";
+import CreateCategoryPage from "../AppContainer/CreateCategory.page";
 import CreateProductPage from "../AppContainer/CreateProduct.page";
+import ProductDetailForRetailorsPage from "../AppContainer/ProductDetailForRetailors.page";
+import ProductsForRetailorPage from "../AppContainer/ProductsForRetailor.page";
 import RetailorLoginPage from "../AppContainer/RetailorLogin.page";
+import RetailorOverviewPage from "../AppContainer/RetailorOverview.page";
+import UploadCategoryPhotoPage from "../AppContainer/UploadCategoryPhoto.page";
 import UploadPhotoForProductsPage from "../AppContainer/UploadPhotoForProducts.page";
 import BeforeSettingPasswordPage from "./BeforeSettingPassword.page";
 import ForgotpasswordPage from "./Forgotpassword.page";
@@ -47,6 +52,21 @@ const AppContainer: FC<Props> = (props) => {
         </Route>
         <Route path="/upload-photo">
           <UploadPhotoForProductsPage></UploadPhotoForProductsPage>
+        </Route>
+        <Route path="/retailor-overview">
+          <RetailorOverviewPage></RetailorOverviewPage>
+        </Route>
+        <Route path="/productsRetailor">
+          <ProductsForRetailorPage></ProductsForRetailorPage>
+        </Route>
+        <Route path="/products/:productId/retailor" exact>
+          <ProductDetailForRetailorsPage></ProductDetailForRetailorsPage>
+        </Route>
+        <Route path="/upload-category-photo" exact>
+          <UploadCategoryPhotoPage></UploadCategoryPhotoPage>
+        </Route>
+        <Route path="/create-category" exact>
+          <CreateCategoryPage></CreateCategoryPage>
         </Route>
       </Switch>
       <FrontImage></FrontImage>

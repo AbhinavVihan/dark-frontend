@@ -10,6 +10,8 @@ import ProductsDetailPage from "./ProductsDetail.page";
 import LoggedinResetPasswordPage from "../Auth/LoggedinResetPassword";
 import CategoryProductsPage from "./Category-Products.page";
 import CartPage from "./Cart.page";
+import ProductDetailForRetailorsPage from "./ProductDetailForRetailors.page";
+import UploadCategoryPhotoPage from "./UploadCategoryPhoto.page";
 
 interface Props {}
 
@@ -46,6 +48,9 @@ const AppContainer: FC<Props> = () => {
         </Route>
         <Route path="/products/:productId" exact>
           <ProductsDetailPage></ProductsDetailPage>
+        </Route>
+        <Route path="/products/:productId/retailor" exact>
+          <ProductDetailForRetailorsPage></ProductDetailForRetailorsPage>
         </Route>
       </Switch>
     </div>

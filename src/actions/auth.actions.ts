@@ -13,6 +13,8 @@ import {
   ME_FETCH,
   ME_LOGIN,
   RESET_PASSWORD_COMPLETED,
+  RETAILOR_LOGIN,
+  RETAILOR_LOGIN_ERROR,
 } from "./action.constants";
 
 const loginActionBegin = () => ({
@@ -38,6 +40,16 @@ const meLoginAction = (c: Customer) => ({
   type: ME_LOGIN,
   payload: c,
 });
+
+// const retailorLoginAction = (c: Customer) => ({
+//   type: RETAILOR_LOGIN,
+//   payload: c,
+// });
+
+// const retailorLoginErrorAction = (msg: string) => ({
+//   type: RETAILOR_LOGIN_ERROR,
+//   payload: msg,
+// });
 
 export const resetPasswordBegin = ({ token }: any) => ({
   type: FORGOT_PASSWORD_BEGIN,
@@ -76,6 +88,8 @@ export const authActions = bindActionCreators(
     loginError: LoginActionError,
     fetch: meFetchAction,
     login: meLoginAction,
+    // retailorLogin: retailorLoginAction,
+    // retailorLoginError: retailorLoginErrorAction,
     password: resetPasswordBegin,
     passwordChanged: resetPasswordCompleted,
     loggedinPasswordChangeBegin: loggedinResetPasswordBegin,

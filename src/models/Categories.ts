@@ -11,5 +11,6 @@ export interface Category extends Entity {
   maker: Customer;
   description: string;
   photo: string;
+  createdAt: string;
   slug: string;
 }

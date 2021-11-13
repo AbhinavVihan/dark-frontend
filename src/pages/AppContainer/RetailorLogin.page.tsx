@@ -35,7 +35,7 @@ const RetailorLogin: FC<Props> = (props) => {
         .then((c) => {
           authActions.login(c);
           alert("you are successfully logged in as a retailor");
-          history.push("/choose-category");
+          history.goBack();
         })
         .catch((e) => {
           alert(e.response.statusText);
@@ -48,7 +48,7 @@ const RetailorLogin: FC<Props> = (props) => {
     <div className="flex flex-col items-center w-screen pt-8 lg:w-1/2 space-y-28">
       <div className="flex flex-col space-y-14">
         <div className="space-y-4 ">
-          <h1 className="text-4xl">Welcome to Retailor's RetailorLogin</h1>
+          <h1 className="text-4xl">Welcome to Retailor's Login</h1>
 
           <div className="flex justify-start ">
             <h2>New Here?</h2>

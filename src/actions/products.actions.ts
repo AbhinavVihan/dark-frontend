@@ -9,6 +9,19 @@ import {
   PRODUCTS_FETCH_SINGLE_ERROR,
   PRODUCTS_QUERY_CHANGED,
   PRODUCTS_QUERY_COMPLETED,
+  UPLOAD_IMAGE_1_BEGIN,
+  UPLOAD_IMAGE_1_COMPLETED,
+  UPLOAD_IMAGE_2_BEGIN,
+  UPLOAD_IMAGE_2_COMPLETED,
+  UPLOAD_IMAGE_3_BEGIN,
+  UPLOAD_IMAGE_3_COMPLETED,
+  UPLOAD_IMAGE_COVER_BEGIN,
+  UPLOAD_IMAGE_COVER_COMPLETED,
+  UPLOAD_IMAGE_FRONT_BEGIN,
+  UPLOAD_IMAGE_FRONT_COMPLETED,
+  UPLOAD_PRODUCT_BEGIN,
+  UPLOAD_PRODUCT_COMPLETED,
+  UPLOAD_PRODUCT_ERROR,
 } from "./action.constants";
 
 export const productQueryChangedAction = (
@@ -60,4 +73,56 @@ export const createProductComplete = (product: Product) => ({
 export const createProductError = (msg: string) => ({
   type: CREATE_PRODUCT_COMPLETE,
   payload: msg,
+});
+
+export const uploadProductBegin = () => ({
+  type: UPLOAD_PRODUCT_BEGIN,
+});
+
+export const uploadProductCompleted = () => ({
+  type: UPLOAD_PRODUCT_COMPLETED,
+});
+
+export const uploadProductError = () => ({
+  type: UPLOAD_PRODUCT_ERROR,
+});
+
+export const uploadFrontImageBegin = () => ({
+  type: UPLOAD_IMAGE_FRONT_BEGIN,
+});
+
+export const uploadFrontImageCompleted = () => ({
+  type: UPLOAD_IMAGE_FRONT_COMPLETED,
+});
+
+export const uploadCoverImageBegin = () => ({
+  type: UPLOAD_IMAGE_COVER_BEGIN,
+});
+
+export const uploadCoverImageCompleted = () => ({
+  type: UPLOAD_IMAGE_COVER_COMPLETED,
+});
+
+export const uploadImage1Begin = () => ({
+  type: UPLOAD_IMAGE_1_BEGIN,
+});
+
+export const uploadImage1Completed = () => ({
+  type: UPLOAD_IMAGE_1_COMPLETED,
+});
+
+export const uploadImage2Begin = () => ({
+  type: UPLOAD_IMAGE_2_BEGIN,
+});
+
+export const uploadImage2Completed = () => ({
+  type: UPLOAD_IMAGE_2_COMPLETED,
+});
+
+export const uploadImage3Begin = () => ({
+  type: UPLOAD_IMAGE_3_BEGIN,
+});
+
+export const uploadImage3Completed = () => ({
+  type: UPLOAD_IMAGE_3_COMPLETED,
 });
