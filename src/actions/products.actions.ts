@@ -1,14 +1,18 @@
 import { createProductRequest } from "../api/interfaces/productInterfaces";
+import { Customer } from "../models/Customer";
 import { Product, Products } from "../models/Products";
 import {
   CREATE_PRODUCT_BEGIN,
   CREATE_PRODUCT_COMPLETE,
   FETCH_PRODUCTS_FOR_CATEGORY,
+  GET_CUSTOMER_BEGIN,
+  GET_CUSTOMER_COMPLETE,
   PRODUCTS_FETCH_SINGLE,
   PRODUCTS_FETCH_SINGLE_COMPLETE,
   PRODUCTS_FETCH_SINGLE_ERROR,
   PRODUCTS_QUERY_CHANGED,
   PRODUCTS_QUERY_COMPLETED,
+  PRODUCT_CHOOSE,
   UPLOAD_IMAGE_1_BEGIN,
   UPLOAD_IMAGE_1_COMPLETED,
   UPLOAD_IMAGE_2_BEGIN,
@@ -125,4 +129,9 @@ export const uploadImage3Begin = () => ({
 
 export const uploadImage3Completed = () => ({
   type: UPLOAD_IMAGE_3_COMPLETED,
+});
+
+export const productChoose = (id: string) => ({
+  type: PRODUCT_CHOOSE,
+  payload: id,
 });

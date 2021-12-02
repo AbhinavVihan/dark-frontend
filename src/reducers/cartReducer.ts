@@ -4,6 +4,7 @@ import {
   BUYING_PROCESS_COMPLETE,
   CREATE_CART_REQUEST_BEGIN,
   CREATE_CART_REQUEST_COMPLETE,
+  GET_CART_BEGIN,
   GET_CART_COMPLETE,
   GET_CART_ERROR,
 } from "../actions/action.constants";
@@ -23,6 +24,8 @@ export const cartReducer: Reducer<cartState> = (
 ) => {
   switch (action.type) {
     case CREATE_CART_REQUEST_BEGIN:
+      return { ...state, loadingOne: true };
+    case GET_CART_BEGIN:
       return { ...state, loadingOne: true };
     case CREATE_CART_REQUEST_COMPLETE:
     case GET_CART_COMPLETE:

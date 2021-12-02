@@ -38,43 +38,58 @@ const CrateCategory: FC<Props> = (props) => {
   };
 
   return (
-    <div className="flex flex-col items-center w-screen pt-8 lg:w-1/2 space-y-28">
-      <div className="flex flex-col space-y-14">
-        <div className="space-y-4 ">
-          <h1 className="text-4xl">Create Category</h1>
+    <div className="flex flex-col items-center pt-8 space-y-28">
+      <div className="flex flex-col space-y-8">
+        <div className="text-center ">
+          <h1 className="text-xl md:text-4xl sm:text-2xl">
+            Create a new Category
+          </h1>
         </div>
 
         <form className="space-y-8" onSubmit={(e) => handleSubmit(e)}>
-          <div>
-            <input
-              className="h-10 border-2 border-black rounded w-96"
-              autoComplete="off"
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-              id="Category Name"
-              required
-              placeholder="Category Name"
-            />
+          <div className="space-y-5 text-center lg:flex-col md:flex md:flex-col lg:flex">
+            <div>
+              <input
+                className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96"
+                autoComplete="off"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                id="Category Name"
+                required
+                placeholder="Category Name"
+              />
+            </div>
 
-            <input
-              className="h-10 border-2 border-black rounded w-96"
-              id="description"
-              onChange={(e) => setDescription(e.target.value)}
-              value={description}
-              autoComplete="off"
-              required
-              placeholder="description"
-            />
+            <div>
+              <textarea
+                className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96 "
+                id="description"
+                onChange={(e) => setDescription(e.target.value)}
+                value={description}
+                autoComplete="off"
+                required
+                placeholder="description"
+              ></textarea>
+              {/* <input
+                className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96 "
+                id="description"
+                onChange={(e) => setDescription(e.target.value)}
+                value={description}
+                autoComplete="off"
+                required
+                placeholder="description"
+              /> */}
+            </div>
           </div>
 
-          <div className="flex items-center space-x-28">
+          <div className="flex justify-center space-x-28">
             <button
               onClick={() => {
                 dispatch(createCategoryBegin());
               }}
-              className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+              className="inline-block px-0 py-1 mx-3 my-2 text-white bg-green-800 border-2 border-black rounded bg-transparen hover:bg-green-900 w-28"
             >
-              CrateCategory
+              Crate Category
             </button>
           </div>
         </form>

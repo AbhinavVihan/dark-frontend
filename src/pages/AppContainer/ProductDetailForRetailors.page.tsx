@@ -20,8 +20,7 @@ import { meSelector } from "../../selectors/auth.selectors";
 import { cartIdSelector, cartSelector } from "../../selectors/cart.selectors";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BASE_URL } from "../../api/base";
-
-<script src="https://js.stripe.com/v3/"></script>;
+import LoadingOverlay from "react-loading-overlay-ts";
 
 interface Props {}
 
@@ -74,53 +73,61 @@ const ProductsDetailForRetailor: FC<Props> = (props) => {
   }
 
   return (
-    <div>
+    <LoadingOverlay className="w-screen h-screen" active={loading} spinner>
       <div>
-        <Link
-          className="text-blue-600 hover:text-red-500"
-          to="/productsRetailor"
-        >
-          Back to Products
-        </Link>
-      </div>
-
-      {customer && (
         <div>
-          {loading && <div className="text-green-500">Loading Product...</div>}
+          <Link
+            className="text-blue-600 hover:text-red-500"
+            to="/productsRetailor"
+          >
+            Back to Products
+          </Link>
+        </div>
 
-          {product && (
-            <div className="flex">
-              <div className="ml-6 mr-6">
-                <img className="w-full h-full" alt="imhfdb" src={img![index]} />
-                <div className="space-x-5">
-                  <button
-                    className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
-                    onClick={onClickBack}
-                  >
-                    prev.
-                  </button>
-                  <button
-                    className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
-                    onClick={onClickForward}
-                  >
-                    next
-                  </button>
+        {product && (
+          <div>
+            {loading && (
+              <div className="text-green-500">Loading Product...</div>
+            )}
+
+            {product && (
+              <div className="flex">
+                <div className="ml-6 mr-6">
+                  <img
+                    className="w-full h-full"
+                    alt="imhfdb"
+                    src={img![index]}
+                  />
+                  <div className="space-x-5">
+                    <button
+                      className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                      onClick={onClickBack}
+                    >
+                      prev.
+                    </button>
+                    <button
+                      className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                      onClick={onClickForward}
+                    >
+                      next
+                    </button>
+                  </div>
+                </div>
+
+                <div className="space-y-8 font-bold tracking-wider pl-9">
+                  <div>{product.name}</div>
+                  <div>{product.price}</div>
+                  <div>{product.quantity}</div>
+                  <div>{product.ratingsAverage}</div>
+                  <div>{product.description}</div>
+                  <div></div>
                 </div>
               </div>
-
-              <div className="space-y-8 font-bold tracking-wider pl-9">
-                <div>{product.name}</div>
-                <div>{product.price}</div>
-                <div>{product.quantity}</div>
-                <div>{product.ratingsAverage}</div>
-                <div>{product.description}</div>
-                <div></div>
-              </div>
-            </div>
-          )}
-        </div>
-      )}
-    </div>
+            )}
+          </div>
+        )}
+      </div>
+    </LoadingOverlay>
   );
 };
 

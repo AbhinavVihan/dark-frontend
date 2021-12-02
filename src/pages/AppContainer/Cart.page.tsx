@@ -9,14 +9,12 @@ import { meSelector } from "../../selectors/auth.selectors";
 import { buyingStart, getCartBegin } from "../../actions/cart.actions";
 import {
   cartIdSelector,
+  cartLoadingSelector,
   cartProductsSelector,
 } from "../../selectors/cart.selectors";
 import { orderProduct } from "../../stripe/public/checkout";
 import { BASE_URL } from "../../api/base";
-
-{
-  /* <script src="https://js.stripe.com/v3/"></script>; */
-}
+import LoadingOverlay from "react-loading-overlay-ts";
 
 interface Props {}
 
@@ -24,7 +22,7 @@ const Cart: FC<Props> = (props) => {
   const dispatch = useDispatch();
 
   const cartProducts = useAppSelector(cartProductsSelector);
-
+  const loading = useAppSelector(cartLoadingSelector);
   const customer = useAppSelector(meSelector);
   const cartId = useAppSelector(cartIdSelector);
 
@@ -49,54 +47,54 @@ const Cart: FC<Props> = (props) => {
   }
 
   return (
-    <div>
-      <div className="grid grid-flow-row gap-4 m-4 space-x-10 h-96">
-        {cartProducts && customer ? (
-          cartProducts.map((product) => (
-            <div className="items-center justify-center rounded cursor-pointer bg-gray-50 hover:bg-gray-100">
-              <div className="items-center justify-center border-black">
-                <Link to={"/products/" + product._id}>
-                  <img
-                    className="items-center justify-center w-64"
-                    alt="jvbjdsbj"
-                    src={BASE_URL + "/img/products/" + product.imageFront}
-                  />
-                  <div className="flex justify-around">
-                    <div className="font-semibold">
-                      {product && product.name}
+    <LoadingOverlay className="w-screen h-screen" active={loading} spinner>
+      <div>
+        <div className="grid grid-flow-row gap-4 m-4 space-x-10 h-96">
+          {cartProducts &&
+            cartProducts.map((product) => (
+              <div className="items-center justify-center rounded cursor-pointer bg-gray-50 hover:bg-gray-100">
+                <div className="items-center justify-center border-black">
+                  <Link to={"/products/" + product._id}>
+                    <img
+                      className="items-center justify-center w-64"
+                      alt="jvbjdsbj"
+                      src={BASE_URL + "/img/products/" + product.imageFront}
+                    />
+                    <div className="flex justify-around">
+                      <div className="font-semibold">
+                        {product && product.name}
+                      </div>
+                      <div className="font-bold text-green-600">
+                        ${product.price}
+                      </div>
                     </div>
-                    <div className="font-bold text-green-600">
-                      ${product.price}
-                    </div>
+                  </Link>
+                  <div className="text-center">
+                    <button
+                      onClick={() => {
+                        orderProduct(product._id);
+                      }}
+                      className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                    >
+                      Buy Now
+                    </button>
+                    <button
+                      onClick={() => {
+                        dispatch(buyingStart(product._id, cartId!));
+                        // dispatch(getCartBegin());
+                      }}
+                      className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                    >
+                      Delete From Cart
+                    </button>
                   </div>
-                </Link>
-                <div className="text-center">
-                  <button
-                    onClick={() => {
-                      orderProduct(product._id);
-                    }}
-                    className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
-                  >
-                    Buy Now
-                  </button>
-                  <button
-                    onClick={() => {
-                      dispatch(buyingStart(product._id, cartId!));
-                    }}
-                    className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
-                  >
-                    Delete From Cart
-                  </button>
                 </div>
               </div>
-            </div>
-          ))
-        ) : (
-          <div>Your cart is empty</div>
-        )}
-        <div>Total: ${price()}</div>
+            ))}
+          <div>Total: ${price()}</div>
+        </div>
       </div>
-    </div>
+    </LoadingOverlay>
   );
 };
 

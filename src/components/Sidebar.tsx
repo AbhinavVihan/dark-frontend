@@ -10,11 +10,10 @@ const Sidebar: FC<Props> = (props) => {
   const customer = useAppSelector(meSelector);
 
   return (
-    <div className="w-2/5 bg-gray-100">
-      This is the sidebar
+    <div className="pt-5 bg-gray-200 sm:text-center xsm:text-right">
       {customer && customer.role === "customer" && (
-        <div className="text-2xl font-bold text-red-700">
-          Hello
+        <div className="font-bold text-red-700 md:text-xl sm:text-sm ">
+          Hi{" "}
           <Link to="/my-account">
             <span className="text-green-700 hover:text-blue-500">
               {customer?.name}

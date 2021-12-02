@@ -1,6 +1,6 @@
 import axios from "axios";
-import { authActions } from "../actions/auth.actions";
-import { Customer } from "../models/Customer";
+// import { authActions } from "../actions/auth.actions";
+import { Customer, CustomerForReview } from "../models/Customer";
 import { AUTH_TOKEN, BASE_URL } from "./base";
 import {
   forgotPasswordRequest,
@@ -124,15 +124,26 @@ export const me = () => {
   return axios
     .get<MeResponse>(url, { headers: { Authorization: AUTH_TOKEN } })
     .then((response) => {
+      console.log(response.data.doc);
+      console.log(AUTH_TOKEN);
       return response.data.doc;
-    })
-    .then((c) => {
-      authActions.fetch(c);
-      return c;
     });
 };
 
 export const updateMe = (id: string, data: updateRequest) => {
   const url = BASE_URL + "/customers/" + id;
-  return axios.patch(url).then((response) => response.data.doc);
+  return axios
+    .patch(url, data, { headers: { Authorization: AUTH_TOKEN } })
+    .then(() => {
+      window.location.href = "/my-account";
+    });
+};
+
+export const getCustomer = (id: string) => {
+  const url = BASE_URL + "/customers/" + id;
+  return axios
+    .get<CustomerForReview>(url, { headers: { Authorization: AUTH_TOKEN } })
+    .then((c) => {
+      return c.data.doc;
+    });
 };

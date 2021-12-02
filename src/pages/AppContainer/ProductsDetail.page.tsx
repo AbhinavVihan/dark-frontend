@@ -20,6 +20,8 @@ import { meSelector } from "../../selectors/auth.selectors";
 import { cartIdSelector, cartSelector } from "../../selectors/cart.selectors";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BASE_URL } from "../../api/base";
+import LoadingOverlay from "react-loading-overlay-ts";
+// import ReviewsPage from "./Reviews.page";
 
 <script src="https://js.stripe.com/v3/"></script>;
 
@@ -101,118 +103,106 @@ const ProductsDetails: FC<Props> = (props) => {
   }
 
   return (
-    <div>
-      {/* {customer && (
-        <Link to="/cart">
-          <button className="flex px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28">
-            My Cart
-            <AiOutlineShoppingCart className="items-center justify-end text-right "></AiOutlineShoppingCart>
-          </button>
-        </Link>
-      )} */}
-
-      {customer && cart ? (
-        <Link to="/cart">
-          <button className="flex px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28">
-            My Cart
-            <AiOutlineShoppingCart className="items-center justify-end text-right "></AiOutlineShoppingCart>
-          </button>
-        </Link>
-      ) : (
-        <Link to="/login">
-          <button className="flex px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28">
-            My Cart
-            <AiOutlineShoppingCart className="items-center justify-end text-right "></AiOutlineShoppingCart>
-          </button>
-        </Link>
-      )}
-
+    <LoadingOverlay className="w-screen h-screen" active={loading} spinner>
       <div>
-        <Link className="text-blue-600 hover:text-red-500" to="/products">
-          Back to Products
-        </Link>
-      </div>
-      {loading && <div className="text-green-500">Loading Product...</div>}
-
-      {product && (
-        <div className="flex">
-          <div className="ml-6 mr-6">
-            <img className="w-full h-full" alt="imhfdb" src={img![index]} />
-            <div className="space-x-5">
-              <button
-                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
-                onClick={onClickBack}
-              >
-                prev.
-              </button>
-              <button
-                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
-                onClick={onClickForward}
-              >
-                next
-              </button>
-            </div>
-          </div>
-
-          <div className="space-y-8 font-bold tracking-wider pl-9">
-            <div>{product.name}</div>
-            <div>{product.price}</div>
-            <div>{product.quantity}</div>
-            <div>{product.ratingsAverage}</div>
-            <div>{product.description}</div>
-            <div>
-              {customer?.role === "retailor" && (
-                <Link
-                  className="inline-block px-0 py-1 mx-3 my-2 text-center text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
-                  to="/login"
-                >
-                  Login for Cart
-                </Link>
-              )}
-              {customer?.role === "customer" && cart && (
-                <button
-                  className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
-                  onClick={addToCarts}
-                >
-                  Add to Cart
-                </button>
-              )}
-              {customer?.role === "customer" && !cart && (
-                <button
-                  className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
-                  onClick={createYourCart}
-                >
-                  Create your Cart
-                </button>
-              )}
-
-              {/* {!customer ? (
-                <Link
-                  className="inline-block px-0 py-1 mx-3 my-2 text-center text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
-                  to="/login"
-                >
-                  Login for Cart
-                </Link>
-              ) : !cart ? (
-                <button
-                  className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
-                  onClick={createYourCart}
-                >
-                  Create your Cart
-                </button>
-              ) : (
-                <button
-                  className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
-                  onClick={addToCarts}
-                >
-                  Add to Cart
-                </button>
-              )} */}
-            </div>
-          </div>
+        {customer && cart ? (
+          <Link to="/cart">
+            <button className="flex px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28">
+              My Cart
+              <AiOutlineShoppingCart className="items-center justify-end text-right "></AiOutlineShoppingCart>
+            </button>
+          </Link>
+        ) : (
+          <Link to="/login">
+            <button className="flex px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28">
+              My Cart
+              <AiOutlineShoppingCart className="items-center justify-end text-right "></AiOutlineShoppingCart>
+            </button>
+          </Link>
+        )}
+        <div>
+          <Link className="text-blue-600 hover:text-red-500" to="/products">
+            Back to Products
+          </Link>
         </div>
-      )}
-    </div>
+        {product && (
+          <div className="flex">
+            <div className="ml-6 mr-6">
+              <img className="w-full h-full" alt="imhfdb" src={img![index]} />
+              <div className="space-x-5">
+                <button
+                  className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                  onClick={onClickBack}
+                >
+                  prev.
+                </button>
+                <button
+                  className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                  onClick={onClickForward}
+                >
+                  next
+                </button>
+              </div>
+            </div>
+
+            <div className="space-y-8 font-bold tracking-wider pl-9">
+              <div>{product.name}</div>
+              <div>{product.price}</div>
+              <div>{product.quantity}</div>
+              <div>{product.ratingsAverage}</div>
+              <div>{product.description}</div>
+              <div>
+                {customer?.role === "retailor" && (
+                  <Link
+                    className="inline-block px-0 py-1 mx-3 my-2 text-center text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                    to="/login"
+                  >
+                    Add to Cart
+                  </Link>
+                )}
+                {customer?.role === "customer" && cart && (
+                  <button
+                    className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                    onClick={addToCarts}
+                  >
+                    Add to Cart
+                  </button>
+                )}
+                {customer?.role === "customer" && !cart && (
+                  <button
+                    className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                    onClick={createYourCart}
+                  >
+                    Create your Cart
+                  </button>
+                )}
+                {!customer && (
+                  <Link
+                    className="inline-block px-0 py-1 mx-3 my-2 text-center text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                    to="/login"
+                  >
+                    Add to Cart
+                  </Link>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+        {}
+
+        {product && product.reviews && (
+          <div>
+            <div className="mt-40 border-t-4 "></div>
+            <div className="mt-20 mb-5 text-3xl font-semibold text-center sm:text-3xl xsm:text-base xxxsm:text-xs">
+              Reviews on this product
+            </div>
+            <div className="flex justify-center ">
+              {/* <ReviewsPage></ReviewsPage> */}
+            </div>
+          </div>
+        )}
+      </div>
+    </LoadingOverlay>
   );
 };
 

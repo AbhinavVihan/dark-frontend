@@ -1,12 +1,20 @@
 import React, { memo, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { authActions } from "../../actions/auth.actions";
+import {
+  customerUpdatemeBegin,
+  customerUpdatemeCompleted,
+  loggedinResetPasswordBegin,
+  loginActionBegin,
+} from "../../actions/auth.actions";
 import { changeCustomerPhoto } from "../../api/auth";
 import { AUTH_TOKEN, BASE_URL } from "../../api/base";
 import { meSelector } from "../../selectors/auth.selectors";
 import { useAppSelector } from "../../store";
 
 const MyAccount = () => {
+  const dispatch = useDispatch();
+
   const customer = useAppSelector(meSelector);
 
   const [photo, setPhoto] = useState(undefined);
@@ -32,8 +40,10 @@ const MyAccount = () => {
     e.preventDefault();
     // window.location.href = "/my-account";
     changeCustomerPhoto(photo).then((c) => {
-      authActions.updatemeCompleted(c);
-      authActions.login(c);
+      // authActions.updatemeCompleted(c);
+      dispatch(customerUpdatemeCompleted(c));
+      dispatch(loginActionBegin(c));
+      // authActions.login(c);
       // window.location.href = "/my-account";
     });
   };
@@ -55,18 +65,29 @@ const MyAccount = () => {
       </div>
       <form onSubmit={submit}>
         <div>
-          <label
-            className="cursor-pointer hover:text-red-500"
-            onClick={() => setDisabled(!disabled)}
-            htmlFor="photo"
-          >
-            Choose new photo
-          </label>
+          {customer?.photo ? (
+            <label
+              className="cursor-pointer hover:text-red-500"
+              onClick={() => setDisabled(!disabled)}
+              htmlFor="photo"
+            >
+              Choose new photo
+            </label>
+          ) : (
+            <label
+              className="cursor-pointer hover:text-red-500"
+              onClick={() => setDisabled(!disabled)}
+              htmlFor="photo"
+            >
+              Upload my photo
+            </label>
+          )}
+
           <input
             className="hidden"
             onChange={(e) => {
               handleInputChange(e);
-              authActions.updatemeBegin();
+              dispatch(customerUpdatemeBegin());
             }}
             type="file"
             id="photo"
@@ -94,11 +115,19 @@ const MyAccount = () => {
       </div>
       <div>
         <Link
-          onClick={authActions.loggedinPasswordChangeBegin}
+          onClick={() => dispatch(loggedinResetPasswordBegin())}
           className="hover:text-blue-500"
           to="/my-password"
         >
           Change Your Password
+        </Link>
+      </div>
+      <div>
+        <Link
+          className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+          to="update-myaccount"
+        >
+          Update my credentials
         </Link>
       </div>
     </div>

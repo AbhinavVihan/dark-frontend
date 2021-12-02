@@ -9,3 +9,8 @@ export interface Customer extends Entity {
   passwordResetToken: string;
   role: "customer" | "admin" | "retailor";
 }
+
+export interface CustomerForReview {
+  status: string;
+  doc: Customer;
+}

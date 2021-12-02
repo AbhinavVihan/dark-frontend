@@ -1,9 +1,14 @@
 import React, { FC, memo, useState } from "react";
-import { FaSpinner } from "react-icons/fa";
 import { loggedinResetResetPassword } from "../../api/auth";
-import { authActions } from "../../actions/auth.actions";
+import {
+  loggedinResetPasswordCompleted,
+  loginActionBegin,
+  meLoginAction,
+} from "../../actions/auth.actions";
 import { useAppSelector } from "../../store";
 import { loadingSelector } from "../../selectors/auth.selectors";
+import LoadingOverlay from "react-loading-overlay-ts";
+import { useDispatch } from "react-redux";
 
 interface Props {}
 
@@ -14,6 +19,7 @@ const LoggedinResetPassword: FC<Props> = (props) => {
   const [value2, setValue2] = useState("");
   const [value3, setValue3] = useState("");
 
+  const dispatch = useDispatch();
   const handleSubmit = (e: any) => {
     e.preventDefault();
     loggedinResetResetPassword({
@@ -22,8 +28,10 @@ const LoggedinResetPassword: FC<Props> = (props) => {
       passwordConfirm: value3,
     })
       .then((c) => {
-        authActions.loggedinPasswordChangeCompleted();
-        authActions.login(c);
+        // authActions.loggedinPasswordChangeCompleted();
+        dispatch(loggedinResetPasswordCompleted());
+        // authActions.login(c);
+        dispatch(meLoginAction(c));
         alert("your password has been successfully changed");
       })
       .catch((e) => {
@@ -35,73 +43,72 @@ const LoggedinResetPassword: FC<Props> = (props) => {
   };
 
   return (
-    <div className="flex flex-col items-center w-screen pt-8 lg:w-1/2 space-y-28">
-      <div className="flex flex-col space-y-14">
-        <div className="space-y-4 ">
-          <h1 className="text-4xl">Change your Password</h1>
-        </div>
-
-        <form className="space-y-8" onSubmit={handleSubmit}>
-          <div>
-            <input
-              className="border-2 border-black"
-              id="text"
-              value={value1}
-              type="password"
-              onChange={(e) => {
-                setValue1(e.target.value);
-              }}
-              required
-              placeholder="Current Password"
-            />
-          </div>
-          <div>
-            <input
-              className="border-2 border-black"
-              id="text"
-              value={value2}
-              onChange={(e) => {
-                setValue2(e.target.value);
-              }}
-              required
-              placeholder="Password"
-            />
-          </div>
-          <div>
-            <input
-              className="border-2 border-black"
-              id="password"
-              type="password"
-              value={value3}
-              onChange={(e) => {
-                setValue3(e.target.value);
-              }}
-              required
-              placeholder="Confirm your password"
-            />
+    <LoadingOverlay className="w-screen h-screen" active={loading} spinner>
+      <div className="flex flex-col items-center w-screen pt-8 lg:w-1/2 space-y-28">
+        <div className="flex flex-col space-y-14">
+          <div className="space-y-4 ">
+            <h1 className="text-4xl">Change your Password</h1>
           </div>
 
-          <div className="flex items-center space-x-28">
-            <button
-              className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
-              type="submit"
-            >
-              {" "}
-              Submit
-            </button>
+          <form className="space-y-8" onSubmit={handleSubmit}>
             <div>
-              {loading && <FaSpinner className="mt-5 animate-spin"></FaSpinner>}
+              <input
+                className="border-2 border-black"
+                id="text"
+                value={value1}
+                type="password"
+                onChange={(e) => {
+                  setValue1(e.target.value);
+                }}
+                required
+                placeholder="Current Password"
+              />
             </div>
-          </div>
-        </form>
+            <div>
+              <input
+                className="border-2 border-black"
+                id="text"
+                value={value2}
+                onChange={(e) => {
+                  setValue2(e.target.value);
+                }}
+                required
+                placeholder="Password"
+              />
+            </div>
+            <div>
+              <input
+                className="border-2 border-black"
+                id="password"
+                type="password"
+                value={value3}
+                onChange={(e) => {
+                  setValue3(e.target.value);
+                }}
+                required
+                placeholder="Confirm your password"
+              />
+            </div>
+
+            <div className="flex items-center space-x-28">
+              <button
+                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                type="submit"
+              >
+                {" "}
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+        <div className="max-w-md text-center">
+          <p>
+            © 2021 All Rights Reserved. DARK is a product of Designreset. Cookie
+            Preferences, Privacy, and Terms.
+          </p>
+        </div>
       </div>
-      <div className="max-w-md text-center">
-        <p>
-          © 2021 All Rights Reserved. DARK is a product of Designreset. Cookie
-          Preferences, Privacy, and Terms.
-        </p>
-      </div>
-    </div>
+    </LoadingOverlay>
   );
 };
 

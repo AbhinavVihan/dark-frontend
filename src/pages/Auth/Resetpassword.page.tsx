@@ -2,13 +2,19 @@ import React, { FC, memo, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { resetPassword } from "../../api/auth";
-import { authActions } from "../../actions/auth.actions";
+import {
+  meLoginAction,
+  resetPasswordCompleted,
+} from "../../actions/auth.actions";
 import { useAppSelector } from "../../store";
 import { tokenSelector } from "../../selectors/auth.selectors";
+import { useDispatch } from "react-redux";
 
 interface Props {}
 
 const ResetPassword: FC<Props> = (props) => {
+  const dispatch = useDispatch();
+
   const token = useAppSelector(tokenSelector);
   const [password, setPassword] = useState(false);
   const togglePassword = () => {
@@ -23,8 +29,10 @@ const ResetPassword: FC<Props> = (props) => {
     e.preventDefault();
     resetPassword({ password: value1, passwordConfirm: value2 }, token)
       .then((c) => {
-        authActions.passwordChanged(c);
-        authActions.login(c);
+        // authActions.passwordChanged(c);
+        dispatch(resetPasswordCompleted(c));
+        // authActions.login(c);
+        dispatch(meLoginAction(c));
         alert("your password has been successfully changed");
         history.push("/products");
       })
@@ -108,11 +116,6 @@ const ResetPassword: FC<Props> = (props) => {
             >
               Reset
             </button>
-            {/* <div>
-              {isSubmitting && (
-                <FaSpinner className="mt-5 animate-spin"></FaSpinner>
-              )}
-            </div> */}
           </div>
         </form>
         <div className="flex flex-col items-center space-y-5">

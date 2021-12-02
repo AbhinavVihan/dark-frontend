@@ -2,6 +2,7 @@ import { FC, memo } from "react";
 import { Route, Switch } from "react-router-dom";
 import FrontImage from "../../components/FrontImage";
 import ChooseCategoryPage from "../AppContainer/ChooseCategory.page";
+import ChooseProductPage from "../AppContainer/ChooseProduct.page";
 import CreateCategoryPage from "../AppContainer/CreateCategory.page";
 import CreateProductPage from "../AppContainer/CreateProduct.page";
 import ProductDetailForRetailorsPage from "../AppContainer/ProductDetailForRetailors.page";
@@ -21,7 +22,8 @@ interface Props {}
 
 const AppContainer: FC<Props> = (props) => {
   return (
-    <div className="flex flex-row justify-between">
+    <div className="grid-cols-2 lg:grid sm:flex-col">
+      <FrontImage></FrontImage>
       <Switch>
         <Route path="/login">
           <LoginPage></LoginPage>
@@ -56,9 +58,7 @@ const AppContainer: FC<Props> = (props) => {
         <Route path="/retailor-overview">
           <RetailorOverviewPage></RetailorOverviewPage>
         </Route>
-        <Route path="/productsRetailor">
-          <ProductsForRetailorPage></ProductsForRetailorPage>
-        </Route>
+
         <Route path="/products/:productId/retailor" exact>
           <ProductDetailForRetailorsPage></ProductDetailForRetailorsPage>
         </Route>
@@ -69,7 +69,6 @@ const AppContainer: FC<Props> = (props) => {
           <CreateCategoryPage></CreateCategoryPage>
         </Route>
       </Switch>
-      <FrontImage></FrontImage>
     </div>
   );
 };

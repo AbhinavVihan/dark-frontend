@@ -23,3 +23,8 @@ export const cartProductsSelector = createSelector([cartSelector], (cart) => {
   const products = cart && cart.product.map((el) => el);
   return products;
 });
+
+export const cartLoadingSelector = createSelector(
+  [cartStateSelector],
+  (cartState) => cartState.loadingOne
+);

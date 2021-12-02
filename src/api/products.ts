@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Cart, Carts } from "../models/Cart";
+import { Order } from "../models/Order";
 import { Product } from "../models/Products";
 import { ProductSingle } from "../models/ProductSingle";
 import { BASE_URL } from "./base";
@@ -89,7 +90,7 @@ export const createCart = () => {
 
 export const getCart = () => {
   const url = BASE_URL + "/cart/myCart";
-  return axios.get<Carts>(url);
+  return axios.get<Carts>(url, { headers: { Authorization: AUTH_TOKEN } });
 };
 
 export interface addToCartRequest {
@@ -109,4 +110,24 @@ export const addToCart = (pId: string, cId: string) => {
 export const deleteFromCart = (pId: string, cId: string) => {
   const url = BASE_URL + "/products/" + pId + "/cart/" + cId;
   return axios.delete<Carts>(url, { headers: { Authorization: AUTH_TOKEN } });
+};
+
+export const fetchMyOrders = () => {
+  const url = BASE_URL + "/orders/my-orders";
+  return axios.get<Product[]>(url, { headers: { Authorization: AUTH_TOKEN } });
+};
+
+export const fetchAllOrders = () => {
+  const url = BASE_URL + "/orders";
+  return axios.get<Order[]>(url, { headers: { Authorization: AUTH_TOKEN } });
+};
+
+export const deleteAnOrder = (id: string) => {
+  const url = BASE_URL + "/orders/" + id;
+  return axios.delete(url, { headers: { Authorization: AUTH_TOKEN } });
+};
+
+export const deleteProduct = (id: string) => {
+  const url = BASE_URL + "/products/" + id;
+  return axios.delete(url, { headers: { Authorization: AUTH_TOKEN } });
 };

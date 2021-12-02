@@ -30,51 +30,62 @@ const CrateProduct: FC<Props> = (props) => {
     }),
     onSubmit: (data) => {
       dispatch(createProductBegin(categoryId, data));
-      history.push("/upload-photo");
+      setTimeout(() => {
+        history.push("/upload-photo");
+      }, 3000);
     },
   });
 
   return (
-    <div className="flex flex-col items-center w-screen pt-8 lg:w-1/2 space-y-28">
-      <div className="flex flex-col space-y-14">
-        <div className="space-y-4 ">
-          <h1 className="text-4xl">Create Product</h1>
+    <div className="flex flex-col items-center pt-8 space-y-28">
+      <div className="flex flex-col space-y-7">
+        <div className="text-center">
+          <h1 className="text-xl md:text-4xl sm:text-2xl">
+            Create your Product's credentials
+          </h1>
         </div>
 
         <form className="space-y-8" onSubmit={handleSubmit}>
-          <div>
-            <input
-              className="h-10 border-2 border-black rounded w-96"
-              id="name"
-              required
-              {...getFieldProps("name")}
-              placeholder="Product Name"
-            />
-            <input
-              className="h-10 border-2 border-black rounded w-96"
-              id="price"
-              required
-              {...getFieldProps("price")}
-              placeholder="Price"
-            />
+          <div className="space-y-5 text-center">
+            <div>
+              <input
+                className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96"
+                id="name"
+                required
+                {...getFieldProps("name")}
+                placeholder="Product Name"
+              />
+            </div>
 
-            <input
-              className="h-10 border-2 border-black rounded w-96"
-              id="description"
-              autoComplete="off"
-              required
-              {...getFieldProps("description")}
-              placeholder="Product description"
-            />
+            <div>
+              <input
+                className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96"
+                id="price"
+                required
+                {...getFieldProps("price")}
+                placeholder="Price"
+              />
+            </div>
+
+            <div>
+              <input
+                className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96"
+                id="description"
+                autoComplete="off"
+                required
+                {...getFieldProps("description")}
+                placeholder="Product description"
+              />
+            </div>
           </div>
 
-          <div className="flex items-center space-x-28">
+          <div className="text-center ">
             <button
-              className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+              className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28"
               type="submit"
               disabled={!isValid}
             >
-              CrateProduct
+              Crate Product
             </button>
           </div>
         </form>

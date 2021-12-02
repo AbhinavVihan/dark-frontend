@@ -1,7 +1,7 @@
 import React, { memo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { authActions } from "../../actions/auth.actions";
+// import { authActions } from "../../actions/auth.actions";
 import {
   uploadCategoryPhotoBegin,
   uploadCategoryPhotoComplete,
@@ -57,7 +57,7 @@ const UploadCategoryPhoto = () => {
       <form onSubmit={submit}>
         <div>
           <label
-            className="cursor-pointer hover:text-red-500"
+            className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
             onClick={() => setDisabled(!disabled)}
             htmlFor="photo"
           >
@@ -80,7 +80,7 @@ const UploadCategoryPhoto = () => {
           <div>
             {!disabled && (
               <button
-                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded cursor-pointer hover:bg-black w-28"
                 type="submit"
                 onClick={() => submit}
               >
@@ -90,16 +90,6 @@ const UploadCategoryPhoto = () => {
           </div>
         </div>
       </form>
-
-      <div>
-        <Link
-          onClick={authActions.loggedinPasswordChangeBegin}
-          className="hover:text-blue-500"
-          to="/my-password"
-        >
-          Change Your Password
-        </Link>
-      </div>
     </div>
   );
 };

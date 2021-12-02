@@ -12,13 +12,17 @@ import CategoryProductsPage from "./Category-Products.page";
 import CartPage from "./Cart.page";
 import ProductDetailForRetailorsPage from "./ProductDetailForRetailors.page";
 import UploadCategoryPhotoPage from "./UploadCategoryPhoto.page";
+import MyOrdersPage from "./MyOrders.page";
+import RetailorAllOrdersPage from "./RetailorAllOrders.page";
+import UpdateMyCredentialsPage from "../Auth/UpdateMyCredentials.page";
+import ProductsForRetailorPage from "./ProductsForRetailor.page";
+import ChooseProductPage from "./ChooseProduct.page";
 
 interface Props {}
 
 const AppContainer: FC<Props> = () => {
   return (
     <div className="flex flex-row">
-      <Sidebar></Sidebar>
       <Switch>
         <Route path="/overview">
           <OverViewPage></OverViewPage>
@@ -51,6 +55,21 @@ const AppContainer: FC<Props> = () => {
         </Route>
         <Route path="/products/:productId/retailor" exact>
           <ProductDetailForRetailorsPage></ProductDetailForRetailorsPage>
+        </Route>
+        <Route path="/my-orders" exact>
+          <MyOrdersPage></MyOrdersPage>
+        </Route>
+        <Route path="/all-orders" exact>
+          <RetailorAllOrdersPage></RetailorAllOrdersPage>
+        </Route>
+        <Route path="/update-myaccount" exact>
+          <UpdateMyCredentialsPage></UpdateMyCredentialsPage>
+        </Route>
+        <Route path="/productsRetailor">
+          <ProductsForRetailorPage></ProductsForRetailorPage>
+        </Route>
+        <Route path="/choose-product" exact>
+          <ChooseProductPage></ChooseProductPage>
         </Route>
       </Switch>
     </div>

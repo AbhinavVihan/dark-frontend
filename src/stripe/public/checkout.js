@@ -4,7 +4,7 @@ import { BASE_URL } from "../../../src/api/base";
 
 // eslint-disable-next-line no-undef
 const stripe = Stripe(
-  "pk_test_51Jaw5qSEDdC22uUYZS4srwrEnr36Er7QQjFXztiegKA3oTtkYQUmQsQFUuL1Mx0wERWXqfptSSjfs4ucdVhCsQcW00ia17E5RR"
+  "pk_test_51Ju6xDSHY9y2p2gcLNd345Cq1vJki4thgc6cBBQoNx3gqFBgMoRcUyE4rV6sRZxbLm5Q0qQHjsWkdWoIU19eKHxh00D17E8UvW"
 );
 
 export const orderProduct = async (productId) => {

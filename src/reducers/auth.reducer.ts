@@ -4,11 +4,12 @@ import {
   LOGGEDIN_PASSWORD_CHANGE_BEGIN,
   LOGGEDIN_PASSWORD_CHANGE_COMPLETED,
   LOGIN_BEGIN,
+  LOGIN_COMPLETE,
   LOGIN_ERROR,
   ME_FETCH,
+  ME_FETCH_COMPLETE,
   ME_LOGIN,
   RESET_PASSWORD_COMPLETED,
-  RETAILOR_LOGIN,
   RETAILOR_LOGIN_ERROR,
 } from "../actions/action.constants";
 import { Customer } from "../models/Customer";
@@ -32,12 +33,18 @@ export const authReducer: Reducer<AuthState> = (
   action
 ) => {
   switch (action.type) {
+    // case LOGIN_BEGIN:
     case ME_LOGIN:
     case ME_FETCH:
       const customerId = action.payload._id as string;
-      return { ...state, _id: customerId };
-    case LOGIN_BEGIN:
-      return { ...state, loading: true };
+      return { ...state, _id: customerId, loading: true };
+    case ME_FETCH_COMPLETE:
+      return { ...state, loading: false };
+    case LOGIN_COMPLETE:
+      return { ...state, loading: false };
+    // case LOGIN_ERROR:
+    //   return { ...state, loading: false };
+
     case FORGOT_PASSWORD_BEGIN:
       return { ...state, token: action.payload.token };
     case RESET_PASSWORD_COMPLETED:

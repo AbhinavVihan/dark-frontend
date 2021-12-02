@@ -8,31 +8,55 @@ import AuthPageLazy from "./pages/Auth/AuthPageLazy";
 import NotFoundPage from "./pages/NotFound.page";
 import { meSelector } from "./selectors/auth.selectors";
 import { useAppSelector } from "./store";
+import LoadingOverlay from "react-loading-overlay-ts";
+import { useDispatch } from "react-redux";
+import {
+  meFetchActionBegin,
+  meFetchActionComplete,
+  meLoginAction,
+} from "./actions/auth.actions";
 
 function App() {
   // const customer = useSelector<AppState, Customer | undefined>(
   //   (state) => state.me
   // );
 
+  const dispatch = useDispatch();
   const customer = useAppSelector(meSelector);
 
   const token = localStorage.getItem(AUTH_TOKEN);
+  console.log(token);
 
   useEffect(() => {
     if (!token) {
       return;
     }
 
-    me();
+    me().then((c) => {
+      console.log(c);
+      dispatch(meFetchActionBegin(c));
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!customer && token) {
-    return <div>loading...</div>;
+    <LoadingOverlay
+      className="w-screen h-screen"
+      active
+      spinner
+    ></LoadingOverlay>;
   }
 
   return (
-    <Suspense fallback={<div className="text-red-500">Loading...</div>}>
+    <Suspense
+      fallback={
+        <LoadingOverlay
+          className="w-screen h-screen"
+          active
+          spinner
+        ></LoadingOverlay>
+      }
+    >
       <BrowserRouter>
         <Switch>
           {/* <Route path="/cart" exact>
@@ -54,6 +78,11 @@ function App() {
               "/my-password",
               "/cart",
               "/products/:productId/retailor",
+              "/my-orders",
+              "/all-orders",
+              "/update-myaccount",
+              "/productsRetailor",
+              "/choose-product",
             ]}
             exact
           >
@@ -74,7 +103,6 @@ function App() {
               "/create-category",
               "/upload-photo",
               "/retailor-overview",
-              "/productsRetailor",
               "/upload-category-photo",
             ]}
             exact

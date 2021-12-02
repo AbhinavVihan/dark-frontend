@@ -1,10 +1,12 @@
 //auth
 export const ME_FETCH = "me/fetch";
+export const ME_FETCH_COMPLETE = "me/fetch_complete";
 export const ME_LOGIN = "me/login";
-export const RETAILOR_LOGIN = "retailor/login";
+export const RETAILOR_LOGIN_BEGIN = "retailor/login";
+export const RETAILOR_LOGIN_COMPLETE = "retailor/login";
 export const RETAILOR_LOGIN_ERROR = "retailor/login_error";
 export const LOGIN_BEGIN = "login/begin";
-// export const LOGIN_COMPLETE = "login/complete";
+export const LOGIN_COMPLETE = "login/complete";
 export const LOGIN_ERROR = "login/error";
 export const FORGOT_PASSWORD_BEGIN = "forgot_password/begin";
 export const RESET_PASSWORD_COMPLETED = "reset_password/completed";
@@ -14,6 +16,12 @@ export const LOGGEDIN_PASSWORD_CHANGE_COMPLETED =
 export const CUSTOMER_UPDATEME_BEGIN = "customer/updateme_begin";
 export const CUSTOMER_UPDATEME_COMPLETED = "customer/updateme_completed";
 export const CUSTOMER_UPDATEME_ERROR = "customer/updateme_error";
+export const UPDATE_MY_CREDENTIALS_BEGIN = "update/my_credentials_begin";
+export const UPDATE_MY_CREDENTIALS_COMPLETED =
+  "update/my_credentials_completed";
+export const UPDATE_MY_CREDENTIALS_ERROR = "update/my_credentials_error";
+export const GET_CUSTOMER_BEGIN = "get/customer_begin";
+export const GET_CUSTOMER_COMPLETE = "get/customer_complete";
 
 //products
 export const PRODUCTS_FETCH_SINGLE = "products/fetch_single";
@@ -50,6 +58,7 @@ export const UPLOAD_IMAGE_2_ERROR = "upload/image_2_error";
 export const UPLOAD_IMAGE_3_BEGIN = "upload/image_3_begin";
 export const UPLOAD_IMAGE_3_COMPLETED = "upload/image_3_completed";
 export const UPLOAD_IMAGE_3_ERROR = "upload/image_3_error";
+export const PRODUCT_CHOOSE = "product/choose";
 
 //categories
 export const CATEGORIES_FETCH_SINGLE = "categories/fetch_single";
@@ -79,3 +88,11 @@ export const ADD_TO_CART_ERROR = "add/to_cart_error";
 export const BUYING_PROCESS_BEGIN = "buying/process_begin";
 export const BUYING_PROCESS_ERROR = "buying/process_error";
 export const BUYING_PROCESS_COMPLETE = "buying/process_complete";
+
+//orders
+export const MY_ORDERS_BEGIN = "my/orders_begin";
+export const MY_ORDERS_COMPLETED = "my/orders_completed";
+export const MY_ORDERS_ERROR = "my/orders_error";
+export const RETAIOR_ALL_ORDERS_BEGIN = "retailor/all_orders_begin";
+export const RETAIOR_ALL_ORDERS_COMPLETED = "retailor/all_orders_completed";
+export const RETAIOR_ALL_ORDERS_ERROR = "retailor/all_orders_error";

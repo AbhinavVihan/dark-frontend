@@ -31,20 +31,20 @@ const RetailorSignup = () => {
       }),
       onSubmit: (data) => {
         signupAsRetailor(data).then((c) => {
-          history.push("/choose-category");
+          history.push("/retailor-overview");
         });
       },
     });
 
   return (
-    <div className="flex flex-col items-center w-screen pt-8 lg:w-1/2 space-y-28">
+    <div className="flex flex-col items-center pt-8 space-y-28">
       <div className="flex flex-col space-y-14">
         <div className="space-y-4 ">
-          <h1 className="text-4xl">
+          <h1 className="text-2xl text-center sm:text-4xl">
             Get started with a free Retailor's account
           </h1>
 
-          <div className="flex justify-start ">
+          <div className="text-center ">
             <h2>Already have a retailor's account?</h2>
             <Link
               to="/retailor-login"
@@ -55,11 +55,11 @@ const RetailorSignup = () => {
           </div>
         </div>
 
-        <form className="space-y-8" onSubmit={handleSubmit}>
+        <form className="space-y-8 text-center" onSubmit={handleSubmit}>
           <div>
-            name:{" "}
+            Name:{" "}
             <input
-              className="border-2 border-black"
+              className="h-10 border-2 border-black rounded w-44 sm:w-96 md:w-96 lg:w-96"
               id="name"
               type="name"
               autoComplete="name"
@@ -71,9 +71,9 @@ const RetailorSignup = () => {
           {touched.name && <div className="text-red-500"> {errors.name}</div>}
 
           <div>
-            email:{" "}
+            Email:{" "}
             <input
-              className="border-2 border-black"
+              className="h-10 border-2 border-black rounded w-44 sm:w-96 md:w-96 lg:w-96"
               id="email"
               type="email"
               autoComplete="email"
@@ -85,9 +85,9 @@ const RetailorSignup = () => {
 
           {touched.email && <div className="text-red-500"> {errors.email}</div>}
           <div>
-            password:{" "}
+            Password:{" "}
             <input
-              className="border-2 border-black"
+              className="h-10 border-2 border-black rounded w-44 sm:w-96 md:w-96 lg:w-96"
               id="password"
               type={password ? "text" : "password"}
               autoComplete="current-password"
@@ -102,9 +102,9 @@ const RetailorSignup = () => {
           )}
 
           <div>
-            passwordConfirm:{" "}
+            PasswordConfirm:{" "}
             <input
-              className="border-2 border-black"
+              className="h-10 border-2 border-black rounded w-44 sm:w-96 md:w-96 lg:w-72 xl:w-96"
               id="passwordConfirm"
               type="password"
               autoComplete="off"
@@ -118,9 +118,9 @@ const RetailorSignup = () => {
           )}
 
           <div>
-            address:{" "}
+            Address:{" "}
             <input
-              className="border-2 border-black"
+              className="h-10 border-2 border-black rounded w-44 sm:w-96 md:w-96 lg:w-96"
               id="address"
               type="address"
               autoComplete="off"
@@ -133,10 +133,17 @@ const RetailorSignup = () => {
             <div className="text-red-500"> {errors.address}</div>
           )}
 
-          <div className="flex items-center space-x-28">
+          <div className="flex justify-center text-center sm:items-center sm:space-x-28">
             <div className="flex items-center">
-              <label>Show Password</label>
-              <input onClick={togglePassword} type="checkbox" />
+              <label htmlFor="tick" className="cursor-pointer">
+                Show Password
+              </label>
+              <input
+                className="cursor-pointer"
+                id="tick"
+                onClick={togglePassword}
+                type="checkbox"
+              />
             </div>
 
             <button
@@ -148,20 +155,8 @@ const RetailorSignup = () => {
           </div>
         </form>
         <div className="flex flex-col items-center space-y-5">
-          <div className="flex items-center justify-start">
-            <input id="loggedin" name="Toggle button" type="checkbox" />
-            <label className="switch" htmlFor="loggedin">
-              I agree to terms and conditions
-            </label>
-          </div>
           <div> {isSubmitting}</div>
         </div>
-      </div>
-      <div className="max-w-md text-center">
-        <p>
-          © 2020 All Rights Reserved. DARK is a product of Designreset. Cookie
-          Preferences, Privacy, and Terms.
-        </p>
       </div>
     </div>
   );

@@ -7,7 +7,13 @@ import {
   CREATE_CATEGORY_BEGIN,
   CREATE_PRODUCT_BEGIN,
   GET_CART_BEGIN,
+  GET_CUSTOMER_BEGIN,
+  LOGIN_BEGIN,
+  MY_ORDERS_BEGIN,
   PRODUCTS_FETCH_SINGLE,
+  RETAILOR_LOGIN_BEGIN,
+  RETAIOR_ALL_ORDERS_BEGIN,
+  UPDATE_MY_CREDENTIALS_BEGIN,
 } from "../actions/action.constants";
 import {
   createCategoryComplete,
@@ -27,6 +33,8 @@ import {
   addToCart as addProdToCart,
   deleteFromCart,
   createProduct,
+  fetchMyOrders,
+  fetchAllOrders,
 } from "../api/products";
 import {
   createCategory,
@@ -40,15 +48,24 @@ import {
   getCartComplete as getYourCart,
   getCartError,
 } from "../actions/cart.actions";
-// import { authActions, loginActionComplete } from "../actions/auth.actions";
-
-// function* fetchProducts(action: AnyAction): Generator<any> {
-//   const { query } = action.payload;
-//   yield delay(800);
-
-//   const res: any = yield call(fetchProductsApi, { query });
-//   yield put(productQueryCompletedAction(query, res));
-// }
+import {
+  myOrdersCompleted,
+  myOrdersError,
+  retailorAllOrdersCompleted,
+  retailorAllOrdersError,
+} from "../actions/order.actions";
+import { getCustomer, loginAsRetailor, updateMe } from "../api/auth";
+import {
+  getCustomerComplete,
+  loginActionComplete,
+  LoginActionError,
+  RetailorLoginActionComplete,
+  retailorLoginActionError,
+  updateMyCredentialsCompleted,
+  updateMyCredentialsError,
+} from "../actions/auth.actions";
+import { login } from "../api/auth";
+import { LoginResponse } from "../api/interfaces/authInterfaces";
 
 function* fetchOneProduct(action: AnyAction): Generator<any> {
   try {
@@ -135,21 +152,100 @@ function* createproduct(action: AnyAction): Generator<any> {
   }
 }
 
-// function* createcategory(action: AnyAction): Generator<any> {
+function* FetchMyOrders(action: AnyAction): Generator<any> {
+  try {
+    const res: any = yield call(fetchMyOrders);
+    yield put(myOrdersCompleted(res.data));
+    // alert("created successfully");
+    // console.log(res.data);
+  } catch (e: any) {
+    const error = e.response.statusText || "some error occured";
+    yield put(myOrdersError(error));
+    // alert("Some error occured");
+  }
+}
+
+function* FetchAllOrders(action: AnyAction): Generator<any> {
+  try {
+    const res: any = yield call(fetchAllOrders);
+
+    console.log(res.data);
+    yield put(retailorAllOrdersCompleted(res.data));
+    // alert("created successfully");
+    // console.log(res.data);
+  } catch (e: any) {
+    const error = e.response.statusText || "some error occured";
+    yield put(retailorAllOrdersError(error));
+    // alert("Some error occured");
+  }
+}
+
+// function* Login(action: AnyAction): Generator<any> {
 //   try {
-//     const res: any = yield call(createCategory, {
-//       categoryName: action.payload.data.categoryName,
-//       description: action.payload.data.description,
+//     const res: any = yield call(login, {
+//       email: action.payload.email,
+//       password: action.payload.password,
 //     });
-//     console.log(action.payload.data.categoryName);
-//     yield put(createCategoryComplete(res.data));
-//     alert("category created successfully");
+
+//     console.log(action.payload.email);
+//     console.log(res);
+//     yield put(loginActionComplete(res));
+//     window.location.href = "/products";
+//     // alert("created successfully");
 //     // console.log(res.data);
 //   } catch (e: any) {
 //     const error = e || "some error occured";
-//     yield put(createCategoryError(error));
-//     alert("Some error occured");
+//     yield put(LoginActionError(error));
+//     alert(e);
 //   }
+// }
+
+// function* RetailorLogin(action: AnyAction): Generator<any> {
+//   try {
+//     const res: any = yield call(loginAsRetailor, {
+//       email: action.payload.email,
+//       password: action.payload.password,
+//     });
+
+//     console.log(action.payload.email);
+//     console.log(res);
+//     yield put(RetailorLoginActionComplete(res));
+//     window.location.href = "/retailor-overview";
+//     // alert("created successfully");
+//     // console.log(res.data);
+//   } catch (e: any) {
+//     const error = e || "some error occured";
+//     yield put(retailorLoginActionError(error));
+//     // alert(e);
+//   }
+// }
+
+function* updateMyCredentials(action: AnyAction): Generator<any> {
+  try {
+    const res: any = yield call(updateMe, action.payload.id, {
+      name: action.payload.data.name,
+      email: action.payload.data.email,
+      address: action.payload.data.address,
+    });
+
+    console.log(res.data.doc);
+    yield put(updateMyCredentialsCompleted(res.data.doc));
+    // alert("created successfully");
+    // console.log(res.data);
+  } catch (e: any) {
+    const error = e || "some error occured";
+    yield put(updateMyCredentialsError(error));
+    // alert("Some error occured");
+  }
+}
+
+// function* getC(action: AnyAction): Generator<any> {
+//   const res: any = yield call(getCustomer, action.payload);
+
+//   console.log(res.data);
+//   yield put(getCustomerComplete(res.data));
+//   alert("got customer successfully");
+//   console.log(res.data);
 // }
 
 export function* watchAll() {
@@ -160,6 +256,13 @@ export function* watchAll() {
     takeEvery(ADD_TO_CART_BEGIN, addToCart),
     takeEvery(BUYING_PROCESS_BEGIN, deleteProductFromCart),
     takeEvery(CREATE_PRODUCT_BEGIN, createproduct),
+    takeEvery(MY_ORDERS_BEGIN, FetchMyOrders),
+    takeEvery(RETAIOR_ALL_ORDERS_BEGIN, FetchAllOrders),
+    takeEvery(UPDATE_MY_CREDENTIALS_BEGIN, updateMyCredentials),
+    // takeEvery(LOGIN_BEGIN, Login),
+    // takeEvery(RETAILOR_LOGIN_BEGIN, RetailorLogin),
+    // takeEvery(GET_CUSTOMER_BEGIN, getC),
+
     // takeEvery(CREATE_CATEGORY_BEGIN, createcategory),
 
     // takeEvery(FETCH_PRODUCTS_FOR_CATEGORY, fetchProductsForCategory),
