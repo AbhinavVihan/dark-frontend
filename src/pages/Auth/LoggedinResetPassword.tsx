@@ -1,6 +1,7 @@
 import React, { FC, memo, useState } from "react";
 import { loggedinResetResetPassword } from "../../api/auth";
 import {
+  loggedinResetPasswordBegin,
   loggedinResetPasswordCompleted,
   meLoginAction,
 } from "../../actions/auth.actions";
@@ -32,6 +33,7 @@ const LoggedinResetPassword: FC<Props> = (props) => {
         // authActions.login(c);
         dispatch(meLoginAction(c));
         alert("your password has been successfully changed");
+        window.location.href = "/my-account";
       })
       .catch((e) => {
         alert(
@@ -52,7 +54,7 @@ const LoggedinResetPassword: FC<Props> = (props) => {
           <form className="space-y-8" onSubmit={handleSubmit}>
             <div>
               <input
-                className="border-2 border-black"
+                className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96"
                 id="text"
                 value={value1}
                 type="password"
@@ -65,19 +67,19 @@ const LoggedinResetPassword: FC<Props> = (props) => {
             </div>
             <div>
               <input
-                className="border-2 border-black"
+                className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96"
                 id="text"
                 value={value2}
                 onChange={(e) => {
                   setValue2(e.target.value);
                 }}
                 required
-                placeholder="Password"
+                placeholder="new password"
               />
             </div>
             <div>
               <input
-                className="border-2 border-black"
+                className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96"
                 id="password"
                 type="password"
                 value={value3}
@@ -85,12 +87,13 @@ const LoggedinResetPassword: FC<Props> = (props) => {
                   setValue3(e.target.value);
                 }}
                 required
-                placeholder="Confirm your password"
+                placeholder="Confirm new password"
               />
             </div>
 
             <div className="flex items-center space-x-28">
               <button
+                onClick={() => dispatch(loggedinResetPasswordBegin())}
                 className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
                 type="submit"
               >

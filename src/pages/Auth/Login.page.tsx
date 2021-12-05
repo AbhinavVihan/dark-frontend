@@ -27,7 +27,7 @@ const Login: FC<Props> = (props) => {
   const dispatch = useDispatch();
   const loading = useAppSelector(retailorLoginLoadingSelector);
 
-  const { handleSubmit, getFieldProps, isValid, touched, errors } = useFormik({
+  const { handleSubmit, getFieldProps, isValid } = useFormik({
     initialValues: {
       email: "",
       password: "",
@@ -46,7 +46,9 @@ const Login: FC<Props> = (props) => {
           // history.push("/products");
         })
         .catch((e) => {
-          alert(e.response.statusText);
+          alert(
+            "either you are not a customer, or you might've entered your credentials wrong please try again!"
+          );
           // authActions.loginError(e.response.statusText);
           dispatch(LoginActionError(e.response.statusText));
           console.log(e.response.statusText);
@@ -86,8 +88,6 @@ const Login: FC<Props> = (props) => {
               <Input
                 className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96"
                 id="email"
-                error={errors.email}
-                touched={touched.email}
                 autoComplete="off"
                 required
                 {...getFieldProps("email")}
@@ -98,8 +98,6 @@ const Login: FC<Props> = (props) => {
                 className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96"
                 id="password"
                 type={password ? "text" : "password"}
-                error={errors.password}
-                touched={touched.password}
                 autoComplete="off"
                 required
                 {...getFieldProps("password")}

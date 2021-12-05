@@ -40,10 +40,8 @@ const Categories: FC<Props> = (props) => {
   return (
     <LoadingOverlay className="w-screen h-screen" active={loading} spinner>
       <div className="h-20 pt-5 pr-3 space-x-2 text-xs font-semibold text-right text-white bg-black sm:space-x-3 md:text-base justify-items-end sm:text-sm">
-        <Link to="/products">
-          <span className="text-blue-500 hover:text-red-500">
-            Search by products
-          </span>
+        <Link className=" hover:text-red-500" to="/products">
+          Search by products
         </Link>
         {!customer && (
           <Link className=" hover:text-red-500" to="/login">
@@ -71,22 +69,24 @@ const Categories: FC<Props> = (props) => {
           </Link>
         )}
       </div>
+
       <div className="py-6 text-center bg-gray-800 border-black ">
         <input
           className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96"
           type="text"
-          placeholder="search for categories here"
           value={query}
+          placeholder="search for categories here"
           onChange={(e) => {
             // productActions.queryChanged(e.target.value, true);
             dispatch(categoryQueryChangedAction(e.target.value, true));
           }}
         ></input>
       </div>
+
       <div className="flex flex-col sm:flex sm:flex-row ">
         <Sidebar></Sidebar>
 
-        <div className="pb-5 mt-5 space-x-10 xxsm:space-y-10 xxsm:mx-auto xxsm:grid-cols-1 xxsm:grid xsm:space-y-5 xsm:mx-3 xsm:w-auto 2xl:grid 2xl:grid-cols-5 xsm:grid xsm:grid-cols-2 sm:mx-3 xl:mx-10 md:grid md:grid-cols-3 sm:w-auto md:w-auto w-60 sm:grid sm:grid-cols-2 lg:grid lg:grid-cols-4">
+        <div className="pb-5 mt-5 space-x-10 text-justify xxsm:space-y-10 xxsm:mx-auto xxsm:grid-cols-1 xxsm:grid xsm:space-y-5 xsm:mx-3 xsm:w-auto 2xl:grid 2xl:grid-cols-5 xsm:grid xsm:grid-cols-2 sm:mx-3 xl:mx-10 md:grid md:grid-cols-3 sm:w-auto md:w-auto w-60 sm:grid sm:grid-cols-2 lg:grid lg:grid-cols-4">
           {categories.map((category) => (
             <div className="rounded cursor-pointer bg-gray-50 hover:bg-gray-200">
               <div className="border-black ">

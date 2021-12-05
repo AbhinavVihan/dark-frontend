@@ -7,6 +7,9 @@ export const ME_LOGIN_COMPLETE = "me/login_complete";
 export const RETAILOR_LOGIN_BEGIN = "retailor/login_begin";
 export const RETAILOR_LOGIN_COMPLETE = "retailor/login_complete";
 export const RETAILOR_LOGIN_ERROR = "retailor/login_error";
+export const RETAILOR_SIGNUP_BEGIN = "retailor/signup_begin";
+export const RETAILOR_SIGNUP_COMPLETE = "retailor/signup_complete";
+export const RETAILOR_SIGNUP_ERROR = "retailor/signup_error";
 export const LOGIN_BEGIN = "login/begin";
 export const LOGIN_COMPLETE = "login/complete";
 export const LOGIN_ERROR = "login/error";
@@ -24,6 +27,9 @@ export const UPDATE_MY_CREDENTIALS_COMPLETED =
 export const UPDATE_MY_CREDENTIALS_ERROR = "update/my_credentials_error";
 export const GET_CUSTOMER_BEGIN = "get/customer_begin";
 export const GET_CUSTOMER_COMPLETE = "get/customer_complete";
+export const RESET_PASSWORD_BEGIN = "reset/password_begin";
+export const RESET_PASSWORD_COMPLETE = "reset/password_complete";
+export const RESET_PASSWORD_ERROR = "reset/password_error";
 
 //products
 export const PRODUCTS_FETCH_SINGLE = "products/fetch_single";

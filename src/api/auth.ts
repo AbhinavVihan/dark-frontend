@@ -26,10 +26,18 @@ export const login = (data: LoginRequest) => {
 export const loginAsRetailor = (data: LoginRequest) => {
   const url = BASE_URL + "/customers/retailor-login";
 
-  return axios.post<LoginResponse>(url, data).then((response) => {
-    localStorage.setItem(AUTH_TOKEN, "Bearer " + response.data.token);
-    return response.data.doc;
-  });
+  return axios
+    .post<LoginResponse>(url, data)
+    .then((response) => {
+      localStorage.setItem(AUTH_TOKEN, "Bearer " + response.data.token);
+      // alert("you are successfully loggedin as a retailor");
+      return response.data.doc;
+    })
+    .catch((e) => {
+      alert(
+        "either you are not a retailor, or you might've entered your credentials wrong please try again!"
+      );
+    });
 };
 
 export const forgotPassword = (data: forgotPasswordRequest) => {
@@ -44,11 +52,20 @@ export const forgotPassword = (data: forgotPasswordRequest) => {
 export const resetPassword = (data: resetPasswordRequest, token: any) => {
   const url = BASE_URL + "/customers/resetPassword/" + token;
 
-  return axios.patch<LoginResponse>(url, data).then((response) => {
-    localStorage.setItem(AUTH_TOKEN, "Bearer " + response.data.token);
-    // console.log(response.data.doc);
-    return response.data.doc;
-  });
+  return axios
+    .patch<LoginResponse>(url, data)
+    .then((response) => {
+      localStorage.setItem(AUTH_TOKEN, "Bearer " + response.data.token);
+      // console.log(response.data.doc);
+      alert("your password has been successfully changed");
+
+      return response.data.doc;
+    })
+    .catch((e) => {
+      alert(
+        "either your passwords does not matched or you have entered an invalid token on the previous page, kindly try again."
+      );
+    });
 };
 
 export const loggedinResetResetPassword = (
@@ -96,10 +113,17 @@ export const signup = (data: SignupRequest) => {
 export const signupAsRetailor = (data: SignupRequest) => {
   const url = BASE_URL + "/customers/retailor-signup";
 
-  return axios.post<SignupResponse>(url, data).then((response) => {
-    // console.log(response.data);
-    return response.data;
-  });
+  return axios
+    .post<SignupResponse>(url, data)
+    .then((response) => {
+      // console.log(response.data);
+      alert("retailor signup successfull");
+      window.location.href = "/retailor-login";
+      return response.data;
+    })
+    .catch((e) => {
+      alert(e.message);
+    });
 };
 
 // export const logout = () => {

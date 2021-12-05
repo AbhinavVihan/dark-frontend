@@ -1,5 +1,6 @@
 import { Reducer } from "redux";
 import {
+  LOGIN_ERROR,
   ME_FETCH,
   ME_LOGIN,
   ME_LOGIN_COMPLETE,
@@ -8,6 +9,9 @@ import {
   RETAILOR_LOGIN_BEGIN,
   RETAILOR_LOGIN_COMPLETE,
   RETAILOR_LOGIN_ERROR,
+  RETAILOR_SIGNUP_BEGIN,
+  RETAILOR_SIGNUP_COMPLETE,
+  RETAILOR_SIGNUP_ERROR,
   RETAIOR_ALL_ORDERS_BEGIN,
   RETAIOR_ALL_ORDERS_COMPLETED,
 } from "../actions/action.constants";
@@ -53,9 +57,12 @@ export const customerReducer: Reducer<CustomerState> = (
         loadingOne: false,
       };
     case ME_LOGIN_COMPLETE:
+    case RETAILOR_SIGNUP_BEGIN:
       return { ...state, loadingOne: true };
-    // case RETAILOR_LOGIN_BEGIN:
-    //   return { ...state, loadingOne: true };
+    case LOGIN_ERROR:
+    case RETAILOR_SIGNUP_COMPLETE:
+    case RETAILOR_SIGNUP_ERROR:
+      return { ...state, loadingOne: false };
 
     case RETAILOR_LOGIN_BEGIN:
       return {

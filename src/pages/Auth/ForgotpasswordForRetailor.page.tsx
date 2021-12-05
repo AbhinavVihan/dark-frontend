@@ -2,15 +2,23 @@ import { useFormik } from "formik";
 import React, { FC, memo } from "react";
 import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
+import Input from "../../components/input";
 import { forgotPassword } from "../../api/auth";
 import LoadingOverlay from "react-loading-overlay-ts";
 
 interface Props {}
 
-const ForgotPassword: FC<Props> = (props) => {
+const ForgotPasswordForRetilor: FC<Props> = (props) => {
   const history = useHistory();
 
-  const { handleSubmit, getFieldProps, isValid, isSubmitting } = useFormik({
+  const {
+    handleSubmit,
+    getFieldProps,
+    isValid,
+    touched,
+    isSubmitting,
+    errors,
+  } = useFormik({
     initialValues: {
       email: "",
     },
@@ -42,28 +50,30 @@ const ForgotPassword: FC<Props> = (props) => {
             <div className="text-center">
               <h2>New Here?</h2>
               <Link
-                to="/signup"
+                to="/retailor-signup"
                 className="text-blue-600 underline hover:text-red-400"
               >
-                Create an account
+                Create a retailor's account
               </Link>
             </div>
             <div className="text-center">
               {" "}
               <Link
-                to="/login"
+                to="/retailor-login"
                 className="text-blue-600 underline hover:text-red-400"
               >
-                Login to your account
+                Login to your retailor account
               </Link>
             </div>
           </div>
 
           <form className="space-y-8" onSubmit={handleSubmit}>
             <div className="text-center">
-              <input
+              <Input
                 className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96"
                 id="email"
+                error={errors.email}
+                touched={touched.email}
                 required
                 {...getFieldProps("email")}
                 placeholder="email address"
@@ -93,6 +103,6 @@ const ForgotPassword: FC<Props> = (props) => {
   );
 };
 
-ForgotPassword.defaultProps = {};
+ForgotPasswordForRetilor.defaultProps = {};
 
-export default memo(ForgotPassword);
+export default memo(ForgotPasswordForRetilor);

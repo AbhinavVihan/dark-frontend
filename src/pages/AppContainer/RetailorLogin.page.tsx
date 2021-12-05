@@ -4,10 +4,10 @@ import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
 import { loginAsRetailor } from "../../api/auth";
 import {
-  LoginActionError,
   meLoginAction,
   RetailorLoginActionBegin,
   RetailorLoginActionComplete,
+  retailorLoginActionError,
 } from "../../actions/auth.actions";
 import { useAppSelector } from "../../store";
 import LoadingOverlay from "react-loading-overlay-ts";
@@ -40,16 +40,12 @@ const RetailorLogin: FC<Props> = (props) => {
       dispatch(RetailorLoginActionBegin(data));
       loginAsRetailor(data)
         .then((c) => {
-          dispatch(meLoginAction(c));
-          // authActions.login(c);
-          alert("you are successfully logged in as a retailor");
+          dispatch(meLoginAction(c!));
           history.push("/retailor-overview");
           dispatch(RetailorLoginActionComplete());
         })
         .catch((e) => {
-          // alert(e.message);
-          // authActions.loginError(e.response.statusText);
-          dispatch(LoginActionError(e.message));
+          dispatch(retailorLoginActionError(e.message));
         });
       // dispatch(RetailorLoginActionBegin(data));
     },
@@ -132,7 +128,7 @@ const RetailorLogin: FC<Props> = (props) => {
           </form>
           <div className="flex flex-col items-center space-y-5">
             <Link
-              to="/forgot-password"
+              to="/forgot-p-retailor"
               className="text-blue-600 hover:text-red-500"
             >
               Forgot Password?

@@ -90,6 +90,7 @@ function App() {
               "/login",
               "/signup",
               "/forgot-password",
+              "/forgot-p-retailor",
               "/token",
               "/resetPassword",
               "/choose-category",

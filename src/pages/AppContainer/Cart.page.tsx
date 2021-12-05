@@ -18,6 +18,8 @@ import {
 import { orderProduct } from "../../stripe/public/checkout";
 import { BASE_URL } from "../../api/base";
 import LoadingOverlay from "react-loading-overlay-ts";
+import { deleteFromCart } from "../../api/products";
+import sadImoji from "../../../src/sad-emoji.png";
 
 interface Props {}
 
@@ -44,38 +46,45 @@ const Cart: FC<Props> = (props) => {
     }
   };
 
-  if (cartProducts?.length === 0) {
-    <div>There is nothing in your cart</div>;
-  }
-
   return (
     <LoadingOverlay className="w-screen h-screen" active={loading} spinner>
       <div>
+        {cartProducts?.length === 0 && (
+          <div className="text-center">There is nothing in your cart</div>
+        )}
         <div className="grid grid-flow-row gap-4 m-4 space-x-10 h-96">
           {cartProducts &&
             cartProducts.map((product) => (
-              <div className="items-center justify-center rounded cursor-pointer bg-gray-50 hover:bg-gray-100">
-                <div className="items-center justify-center border-black">
-                  <Link to={"/products/" + product._id}>
-                    <img
-                      className="items-center justify-center w-64"
-                      alt="jvbjdsbj"
-                      src={BASE_URL + "/img/products/" + product.imageFront}
-                    />
-                    <div className="flex justify-around">
-                      <div className="font-semibold">
-                        {product && product.name}
+              <div className="rounded bg-gray-50">
+                <div className="border-black ">
+                  <div className="hover:bg-gray-100">
+                    <Link
+                      to={"/products/" + product._id}
+                      className="items-center hover:bg-gray-200"
+                    >
+                      <div className="flex justify-center">
+                        <img
+                          className="w-64 "
+                          alt="jvbjdsbj"
+                          src={BASE_URL + "/img/products/" + product.imageFront}
+                        />
                       </div>
-                      <div className="font-bold text-green-600">
-                        ${product.price}
+                      <div className="flex flex-col text-center">
+                        <div className="font-semibold">
+                          {product && product.name}
+                        </div>
+                        <div className="font-bold text-green-600">
+                          ${product.price}
+                        </div>
                       </div>
-                    </div>
-                  </Link>
+                    </Link>
+                  </div>
                   <div className="text-center">
                     <button
                       onClick={() => {
                         orderProduct(product._id);
                         dispatch(buyingBegin());
+                        deleteFromCart(product._id, cartId!);
                       }}
                       className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28"
                     >
@@ -88,13 +97,18 @@ const Cart: FC<Props> = (props) => {
                       }}
                       className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-red-800 border-2 border-black rounded hover:bg-red-900 w-28"
                     >
-                      Delete From Cart
+                      Delete
                     </button>
                   </div>
                 </div>
               </div>
             ))}
-          <div>Total: ${price()}</div>
+          {cartProducts && cartProducts?.length > 0 && (
+            <div className="font-extrabold text-center">
+              Total: ${price()}
+              <img alt="sjwhsvbjws" src={sadImoji} />
+            </div>
+          )}
         </div>
       </div>
     </LoadingOverlay>

@@ -4,13 +4,14 @@ import { Link } from "react-router-dom";
 import {
   customerUpdatemeBegin,
   customerUpdatemeCompleted,
-  loggedinResetPasswordBegin,
   loginActionBegin,
 } from "../../actions/auth.actions";
 import { changeCustomerPhoto } from "../../api/auth";
 import { AUTH_TOKEN, BASE_URL } from "../../api/base";
 import { meSelector } from "../../selectors/auth.selectors";
 import { useAppSelector } from "../../store";
+import LoadingOverlay from "react-loading-overlay-ts";
+import { AiFillHome } from "react-icons/ai";
 
 const MyAccount = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,13 @@ const MyAccount = () => {
   const baseUrl = BASE_URL;
 
   if (!customer && token) {
-    return <div>loading...</div>;
+    return (
+      <LoadingOverlay
+        className="w-screen h-screen"
+        active
+        spinner
+      ></LoadingOverlay>
+    );
   }
   const imageName = customer?.photo;
 
@@ -52,6 +59,16 @@ const MyAccount = () => {
 
   return (
     <div className="flex flex-col justify-around h-screen font-bold bg-gray-100">
+      {customer?.role === "retailor" && (
+        <Link className="cursor-default" to="/retailor-overview">
+          <AiFillHome className="cursor-pointer hover:text-red-500"></AiFillHome>
+        </Link>
+      )}
+      {customer?.role === "customer" && (
+        <Link className="cursor-default" to="/products">
+          <AiFillHome className="cursor-pointer hover:text-red-500"></AiFillHome>
+        </Link>
+      )}
       <div className="py-10 text-2xl">My Account</div>
       <div className="">
         NAME : <span className="text-blue-700">{customer?.name}</span>
@@ -75,7 +92,7 @@ const MyAccount = () => {
         <div>
           {customer?.photo.startsWith("default") ? (
             <label
-              className="cursor-pointer hover:text-red-500"
+              className="text-green-500 cursor-pointer hover:text-red-500"
               onClick={() => setDisabled(!disabled)}
               htmlFor="photo"
             >
@@ -123,11 +140,7 @@ const MyAccount = () => {
         ROLE: <span className="text-blue-700">{customer?.role}</span>
       </div>
       <div>
-        <Link
-          onClick={() => dispatch(loggedinResetPasswordBegin())}
-          className="text-green-500 hover:text-red-500"
-          to="/my-password"
-        >
+        <Link className="text-green-500 hover:text-red-500" to="/my-password">
           Change Your Password
         </Link>
       </div>

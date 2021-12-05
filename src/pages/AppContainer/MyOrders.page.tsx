@@ -31,7 +31,7 @@ const MyOrders: FC<Props> = (props) => {
   return (
     <LoadingOverlay className="w-screen h-screen" active={loading} spinner>
       <div className="flex justify-center">
-        <div className="mt-5 gap-7 sm:grid xxsm:grid-cols-1 xxsm:grid sm:grid-cols-2">
+        <div className="mt-5 gap-7 sm:grid xxsm:grid-cols-1 xxsm:grid ">
           <div className="flex flex-col space-y-10">
             {orders.length < 1 && (
               <div>You do not have any orders placed yet.</div>
@@ -46,14 +46,14 @@ const MyOrders: FC<Props> = (props) => {
             )}
           </div>
           {orders.map((order) => (
-            <div className="flex flex-row items-center justify-center text-center bg-gray-100 rounded-lg cursor-pointer w-72 sm:flex sm:flex-col hover:bg-gray-200">
+            <div className="items-center justify-center text-center bg-gray-100 rounded-lg cursor-pointer w-72 sm:w-96 hover:bg-gray-200">
               <div className="items-center border-black ">
                 <Link
                   className="flex justify-center space-x-4"
                   to={"/products/" + order._id}
                 >
                   <img
-                    className="w-40 xxsm:w-20 xxxsm:w-20s sm:w-36 xsm:w-28 rounded-xl"
+                    className="w-40 xxsm:w-36 xxxsm:w-28 sm:w-36 xsm:w-36 rounded-xl"
                     alt="jvbjdsbj"
                     src={BASE_URL + "/img/products/" + order.imageCover}
                   />

@@ -47,7 +47,6 @@ const ProductForRetailor: FC<Props> = (props) => {
     <LoadingOverlay className="w-screen h-screen" active={loading} spinner>
       <div>
         <div className="flex items-center justify-end h-20 space-x-4 text-xs font-semibold text-right text-white align-middle bg-black sm:space-x-3 md:text-base justify-items-end sm:text-sm">
-          {/* <div className="h-20 pt-5 pr-3 space-x-2 text-xs font-semibold text-right text-white bg-black sm:space-x-3 md:text-base justify-items-end sm:text-sm"> */}
           <Link className="hover:text-red-500" to="retailor-overview">
             <AiFillHome></AiFillHome>
           </Link>

@@ -88,6 +88,22 @@ const RetailorOverview: FC<Props> = (props) => {
           Go Back to customer's Section
         </Link>
       </div>
+      {customer?.role === "customer" && (
+        <Link
+          to="/retailor-login"
+          className="inline-block px-0 py-1 mx-3 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28"
+        >
+          Login
+        </Link>
+      )}
+      {!customer && (
+        <Link
+          to="/retailor-login"
+          className="inline-block px-0 py-1 mx-3 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28"
+        >
+          Login
+        </Link>
+      )}
       {customer?.role === "retailor" && (
         <button
           className="inline-block px-0 py-1 mx-3 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"

@@ -8,7 +8,10 @@ import {
   ME_FETCH,
   ME_FETCH_COMPLETE,
   ME_LOGIN,
+  RESET_PASSWORD_BEGIN,
+  RESET_PASSWORD_COMPLETE,
   RESET_PASSWORD_COMPLETED,
+  RESET_PASSWORD_ERROR,
 } from "../actions/action.constants";
 
 export interface AuthState {
@@ -34,10 +37,11 @@ export const authReducer: Reducer<AuthState> = (
     case ME_LOGIN:
     case ME_FETCH:
       const customerId = action.payload._id as string;
-      return { ...state, _id: customerId, loading: true };
+      return { ...state, _id: customerId };
     case ME_FETCH_COMPLETE:
-      return { ...state, loading: false };
     case LOGIN_COMPLETE:
+    case RESET_PASSWORD_COMPLETE:
+    case RESET_PASSWORD_ERROR:
       return { ...state, loading: false };
     // case LOGIN_ERROR:
     //   return { ...state, loading: false };
@@ -47,6 +51,7 @@ export const authReducer: Reducer<AuthState> = (
     case RESET_PASSWORD_COMPLETED:
       return { ...state, token: 1 };
     case LOGGEDIN_PASSWORD_CHANGE_BEGIN:
+    case RESET_PASSWORD_BEGIN:
       return { ...state, loading: true };
     case LOGIN_ERROR:
       return { ...state, errorOne: action.payload, loading: false };

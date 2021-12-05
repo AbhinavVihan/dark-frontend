@@ -5,15 +5,20 @@ import { resetPassword } from "../../api/auth";
 import {
   meLoginAction,
   resetPasswordCompleted,
+  resetPasswordForTokenBegin,
+  resetPasswordForTokenCompleted,
+  resetPasswordForTokenError,
 } from "../../actions/auth.actions";
 import { useAppSelector } from "../../store";
-import { tokenSelector } from "../../selectors/auth.selectors";
+import { loadingSelector, tokenSelector } from "../../selectors/auth.selectors";
 import { useDispatch } from "react-redux";
+import LoadingOverlay from "react-loading-overlay-ts";
 
 interface Props {}
 
 const ResetPassword: FC<Props> = (props) => {
   const dispatch = useDispatch();
+  const loading = useAppSelector(loadingSelector);
 
   const token = useAppSelector(tokenSelector);
   const [password, setPassword] = useState(false);
@@ -26,21 +31,20 @@ const ResetPassword: FC<Props> = (props) => {
   const history = useHistory();
 
   const handleSubmit = (e: any) => {
+    dispatch(resetPasswordForTokenBegin());
     e.preventDefault();
     resetPassword({ password: value1, passwordConfirm: value2 }, token)
       .then((c) => {
         // authActions.passwordChanged(c);
-        dispatch(resetPasswordCompleted(c));
+        dispatch(resetPasswordCompleted(c!));
         // authActions.login(c);
-        dispatch(meLoginAction(c));
-        alert("your password has been successfully changed");
+        dispatch(meLoginAction(c!));
+        dispatch(resetPasswordForTokenCompleted());
         history.push("/products");
       })
       .catch((e) => {
-        alert(
-          "either your passwords does not matched or you have entered an invalid token on the previous page, kindly try again."
-        );
         history.push("/forgot-password");
+        dispatch(resetPasswordForTokenError());
       });
   };
   useEffect(() => {
@@ -53,27 +57,28 @@ const ResetPassword: FC<Props> = (props) => {
     };
   }, []);
 
-  useEffect(() => {
-    if (token === 1) {
-      alert(
-        "you must've refreshed the page or came to this page directly , kindly restart the process again"
-      );
-      history.push("/forgot-password");
-    }
-  });
+  // useEffect(() => {
+  //   if (token === 1) {
+  //     alert(
+  //       "you must've refreshed the page or came to this page directly , kindly restart the process again"
+  //     );
+  //     history.push("/forgot-password");
+  //   }
+  // });
 
   return (
-    <div className="flex flex-col items-center w-screen pt-8 lg:w-1/2 space-y-28">
-      <div className="flex flex-col space-y-14">
-        <div className="space-y-4 ">
-          <h1 className="text-4xl">Reset your Password here</h1>
-        </div>
+    <LoadingOverlay className="w-screen h-screen" active={loading} spinner>
+      ;
+      <div className="flex flex-col items-center pt-8 space-y-28">
+        <div className="flex flex-col space-y-14">
+          <div className="space-y-4 ">
+            <h1 className="text-4xl text-center">Reset your Password here</h1>
+          </div>
 
-        <form className="space-y-8" onSubmit={handleSubmit}>
-          <div>
-            <div>
+          <form onSubmit={handleSubmit}>
+            <div className="flex flex-col items-center justify-center mb-10 space-y-8 text-center">
               <input
-                className="border-2 border-black"
+                className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96"
                 // id="newPassword"
                 // error={errors.password}
                 // touched={touched.password}
@@ -85,10 +90,9 @@ const ResetPassword: FC<Props> = (props) => {
                 // {...getFieldProps("password")}
                 placeholder="new password"
               />
-            </div>
-            <div>
+
               <input
-                // id="confirmNewPassword"
+                className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96"
                 type={password ? "text" : "password"}
                 // error={errors.passwordConfirm}
                 // touched={touched.passwordConfirm}
@@ -99,41 +103,42 @@ const ResetPassword: FC<Props> = (props) => {
                 autoComplete="off"
                 required
                 // {...getFieldProps("confirmPassword")}
-                placeholder="confirm your password"
+                placeholder="confirm new password"
               />
             </div>
-          </div>
 
-          <div className="flex items-center space-x-28">
-            <div className="flex items-center">
-              <label>Show Password</label>
-              <input onClick={togglePassword} type="checkbox" />
+            <div className="flex justify-center text-center sm:items-center sm:space-x-28">
+              <div className="flex items-center justify-center space-x-1 text-center">
+                <label htmlFor="tick" className="cursor-pointer">
+                  Show Password
+                </label>
+                <input
+                  className="cursor-pointer"
+                  id="tick"
+                  onClick={togglePassword}
+                  type="checkbox"
+                />
+              </div>
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  // disabled={!isValid}
+                  className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                >
+                  Reset
+                </button>
+              </div>
             </div>
-            <button
-              type="submit"
-              // disabled={!isValid}
-              className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
-            >
-              Reset
-            </button>
-          </div>
-        </form>
-        <div className="flex flex-col items-center space-y-5">
-          <div className="flex items-center ">
-            <input id="loggedin" name="Toggle button" type="checkbox" />
-            <label className="switch" htmlFor="loggedin">
-              Keep me logged in
-            </label>
-          </div>
+          </form>
+        </div>
+        <div className="max-w-md text-center">
+          <p>
+            © 2021 All Rights Reserved. DARK is a product of Designreset. Cookie
+            Preferences, Privacy, and Terms.
+          </p>
         </div>
       </div>
-      <div className="max-w-md text-center">
-        <p>
-          © 2021 All Rights Reserved. DARK is a product of Designreset. Cookie
-          Preferences, Privacy, and Terms.
-        </p>
-      </div>
-    </div>
+    </LoadingOverlay>
   );
 };
 

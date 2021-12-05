@@ -17,10 +17,16 @@ import {
   ME_FETCH_COMPLETE,
   ME_LOGIN,
   ME_LOGIN_COMPLETE,
+  RESET_PASSWORD_BEGIN,
+  RESET_PASSWORD_COMPLETE,
   RESET_PASSWORD_COMPLETED,
+  RESET_PASSWORD_ERROR,
   RETAILOR_LOGIN_BEGIN,
   RETAILOR_LOGIN_COMPLETE,
   RETAILOR_LOGIN_ERROR,
+  RETAILOR_SIGNUP_BEGIN,
+  RETAILOR_SIGNUP_COMPLETE,
+  RETAILOR_SIGNUP_ERROR,
   UPDATE_MY_CREDENTIALS_BEGIN,
 } from "./action.constants";
 
@@ -32,6 +38,10 @@ export const loginActionBegin = (data: LoginRequest) => ({
 export const RetailorLoginActionBegin = (data: LoginRequest) => ({
   type: RETAILOR_LOGIN_BEGIN,
   payload: data,
+});
+
+export const RetailorSignupActionBegin = () => ({
+  type: RETAILOR_SIGNUP_BEGIN,
 });
 
 export const loginActionComplete = (c: Customer) => ({
@@ -47,6 +57,9 @@ export const loginActionComplete = (c: Customer) => ({
 export const RetailorLoginActionComplete = () => ({
   type: RETAILOR_LOGIN_COMPLETE,
 });
+export const RetailorSignupActionComplete = () => ({
+  type: RETAILOR_SIGNUP_COMPLETE,
+});
 
 export const LoginActionError = (msg: string) => ({
   type: LOGIN_ERROR,
@@ -55,6 +68,10 @@ export const LoginActionError = (msg: string) => ({
 
 export const retailorLoginActionError = (msg: string) => ({
   type: RETAILOR_LOGIN_ERROR,
+  payload: msg,
+});
+export const retailorSignupActionError = (msg: string) => ({
+  type: RETAILOR_SIGNUP_ERROR,
   payload: msg,
 });
 
@@ -73,6 +90,15 @@ export const meLoginAction = (c: Customer) => ({
 });
 export const meLoginCompletedAction = () => ({
   type: ME_LOGIN_COMPLETE,
+});
+export const resetPasswordForTokenBegin = () => ({
+  type: RESET_PASSWORD_BEGIN,
+});
+export const resetPasswordForTokenCompleted = () => ({
+  type: RESET_PASSWORD_COMPLETE,
+});
+export const resetPasswordForTokenError = () => ({
+  type: RESET_PASSWORD_ERROR,
 });
 
 // const retailorLoginAction = (c: Customer) => ({

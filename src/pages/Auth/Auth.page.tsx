@@ -11,6 +11,7 @@ import UploadCategoryPhotoPage from "../AppContainer/UploadCategoryPhoto.page";
 import UploadPhotoForProductsPage from "../AppContainer/UploadPhotoForProducts.page";
 import BeforeSettingPasswordPage from "./BeforeSettingPassword.page";
 import ForgotpasswordPage from "./Forgotpassword.page";
+import ForgotpasswordForRetailorPage from "./ForgotpasswordForRetailor.page";
 import LoginPage from "./Login.page";
 import ResetpasswordPage from "./Resetpassword.page";
 import RetailorSignupPage from "./RetailorSignup.page";
@@ -65,6 +66,9 @@ const AppContainer: FC<Props> = (props) => {
         </Route>
         <Route path="/create-category" exact>
           <CreateCategoryPage></CreateCategoryPage>
+        </Route>
+        <Route path="/forgot-p-retailor" exact>
+          <ForgotpasswordForRetailorPage></ForgotpasswordForRetailorPage>
         </Route>
       </Switch>
     </div>
