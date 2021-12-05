@@ -1,4 +1,3 @@
-import { createCategoryRequest } from "../api/interfaces/categoryInterfaces";
 import { Categories, Category } from "../models/Categories";
 import {
   CATEGORIES_FETCH_SINGLE,

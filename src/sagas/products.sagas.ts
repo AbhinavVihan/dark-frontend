@@ -4,20 +4,14 @@ import {
   ADD_TO_CART_BEGIN,
   BUYING_PROCESS_BEGIN,
   CATEGORIES_FETCH_SINGLE,
-  CREATE_CATEGORY_BEGIN,
   CREATE_PRODUCT_BEGIN,
   GET_CART_BEGIN,
-  GET_CUSTOMER_BEGIN,
-  LOGIN_BEGIN,
   MY_ORDERS_BEGIN,
   PRODUCTS_FETCH_SINGLE,
-  RETAILOR_LOGIN_BEGIN,
   RETAIOR_ALL_ORDERS_BEGIN,
   UPDATE_MY_CREDENTIALS_BEGIN,
 } from "../actions/action.constants";
 import {
-  createCategoryComplete,
-  createCategoryError,
   fetchOneCategoryComplete,
   fetchSingleCategoryError,
 } from "../actions/categories.actions";
@@ -36,10 +30,7 @@ import {
   fetchMyOrders,
   fetchAllOrders,
 } from "../api/products";
-import {
-  createCategory,
-  fetchOneCategory as fetchOneCate,
-} from "../api/categories";
+import { fetchOneCategory as fetchOneCate } from "../api/categories";
 import {
   addToCartComplete,
   addToCartError,
@@ -54,18 +45,11 @@ import {
   retailorAllOrdersCompleted,
   retailorAllOrdersError,
 } from "../actions/order.actions";
-import { getCustomer, loginAsRetailor, updateMe } from "../api/auth";
+import { updateMe } from "../api/auth";
 import {
-  getCustomerComplete,
-  loginActionComplete,
-  LoginActionError,
-  RetailorLoginActionComplete,
-  retailorLoginActionError,
   updateMyCredentialsCompleted,
   updateMyCredentialsError,
 } from "../actions/auth.actions";
-import { login } from "../api/auth";
-import { LoginResponse } from "../api/interfaces/authInterfaces";
 
 function* fetchOneProduct(action: AnyAction): Generator<any> {
   try {

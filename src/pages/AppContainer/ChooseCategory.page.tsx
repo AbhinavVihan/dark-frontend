@@ -51,7 +51,7 @@ const ChooseCategory: FC<Props> = (props) => {
             Choose a category for your product
           </h1>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3">
           {categories.map((c) => (
             // <div onClick={setCstate(c._id)}>{c.categoryName}</div>
             <div className="pl-16">

@@ -1,19 +1,10 @@
 import { FC, memo, useEffect } from "react";
 import { useAppSelector } from "../../store";
-import {
-  currentQueryProductsSelector,
-  productsLoadingSelector,
-  productQuerySelector,
-} from "../../selectors/products.selectors";
-import { Link, useHistory } from "react-router-dom";
-import { fetchProducts as fetchProductsStart } from "../../api/products";
+
+import { Link } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
-import {
-  productQueryChangedAction,
-  productQueryCompletedAction,
-} from "../../actions/products.actions";
-import { meSelector } from "../../selectors/auth.selectors";
+
 import { BASE_URL } from "../../api/base";
 import {
   myOrdersSelectors,
@@ -26,14 +17,9 @@ interface Props {}
 
 const MyOrders: FC<Props> = (props) => {
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const loading = useAppSelector(ordersLoadingSelector);
   const orders = useAppSelector(myOrdersSelectors);
-
-  const products = useAppSelector(currentQueryProductsSelector);
-
-  const customer = useAppSelector(meSelector);
 
   var todayDate = new Date().toISOString().slice(0, 10);
 

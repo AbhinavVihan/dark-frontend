@@ -5,15 +5,15 @@ import * as yup from "yup";
 import Input from "../../components/input";
 import { login } from "../../api/auth";
 import {
-  loginActionBegin,
   loginActionComplete,
   LoginActionError,
   meLoginAction,
+  meLoginCompletedAction,
 } from "../../actions/auth.actions";
 import { useAppSelector } from "../../store";
-import { loadingSelector } from "../../selectors/auth.selectors";
 import LoadingOverlay from "react-loading-overlay-ts";
 import { useDispatch } from "react-redux";
+import { retailorLoginLoadingSelector } from "../../selectors/customer.selectors";
 
 interface Props {}
 
@@ -25,7 +25,7 @@ const Login: FC<Props> = (props) => {
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const loading = useAppSelector(loadingSelector);
+  const loading = useAppSelector(retailorLoginLoadingSelector);
 
   const { handleSubmit, getFieldProps, isValid, touched, errors } = useFormik({
     initialValues: {
@@ -37,10 +37,9 @@ const Login: FC<Props> = (props) => {
       password: yup.string().required().min(8),
     }),
     onSubmit: (data) => {
-      // authActions.loginBegin();
+      dispatch(meLoginCompletedAction());
       login(data)
         .then((c) => {
-          // authActions.login(c);
           dispatch(meLoginAction(c));
           history.goBack();
           dispatch(loginActionComplete(c));
@@ -72,7 +71,7 @@ const Login: FC<Props> = (props) => {
                 Create an account
               </Link>
             </div>
-            <div className="">
+            <div>
               <Link
                 to="/retailor-login"
                 className="text-blue-600 underline hover:text-red-500"
@@ -108,7 +107,7 @@ const Login: FC<Props> = (props) => {
               />
             </div>
 
-            <div className="flex justify-center space-y-5 flex-co t sm:flex sm:flex-row">
+            <div className="flex justify-center text-center sm:items-center sm:space-x-28">
               <div className="flex items-center justify-center space-x-1 text-center">
                 <label htmlFor="tick" className="cursor-pointer">
                   Show Password

@@ -10,11 +10,7 @@ import { meSelector } from "./selectors/auth.selectors";
 import { useAppSelector } from "./store";
 import LoadingOverlay from "react-loading-overlay-ts";
 import { useDispatch } from "react-redux";
-import {
-  meFetchActionBegin,
-  meFetchActionComplete,
-  meLoginAction,
-} from "./actions/auth.actions";
+import { meFetchActionBegin } from "./actions/auth.actions";
 
 function App() {
   // const customer = useSelector<AppState, Customer | undefined>(

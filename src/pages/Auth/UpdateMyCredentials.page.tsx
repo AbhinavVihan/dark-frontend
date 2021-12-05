@@ -1,9 +1,8 @@
 import React, { memo, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { updateMyCredentialsBegin } from "../../actions/auth.actions";
-import { changeCustomerPhoto } from "../../api/auth";
-import { AUTH_TOKEN, BASE_URL } from "../../api/base";
+
 import { meSelector } from "../../selectors/auth.selectors";
 import { useAppSelector } from "../../store";
 

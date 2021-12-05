@@ -1,7 +1,5 @@
-import { bindActionCreators } from "redux";
 import { updateRequest } from "../api/interfaces/authInterfaces";
 import { Customer } from "../models/Customer";
-import { store } from "../store";
 import { LoginRequest } from "../api/interfaces/authInterfaces";
 import {
   CUSTOMER_UPDATEME_BEGIN,
@@ -18,6 +16,7 @@ import {
   ME_FETCH,
   ME_FETCH_COMPLETE,
   ME_LOGIN,
+  ME_LOGIN_COMPLETE,
   RESET_PASSWORD_COMPLETED,
   RETAILOR_LOGIN_BEGIN,
   RETAILOR_LOGIN_COMPLETE,
@@ -40,9 +39,13 @@ export const loginActionComplete = (c: Customer) => ({
   payload: c,
 });
 
-export const RetailorLoginActionComplete = (c: Customer) => ({
+// export const RetailorLoginActionComplete = (c: Customer) => ({
+//   type: RETAILOR_LOGIN_COMPLETE,
+//   payload: c,
+// });
+
+export const RetailorLoginActionComplete = () => ({
   type: RETAILOR_LOGIN_COMPLETE,
-  payload: c,
 });
 
 export const LoginActionError = (msg: string) => ({
@@ -67,6 +70,9 @@ export const meFetchActionComplete = () => ({
 export const meLoginAction = (c: Customer) => ({
   type: ME_LOGIN,
   payload: c,
+});
+export const meLoginCompletedAction = () => ({
+  type: ME_LOGIN_COMPLETE,
 });
 
 // const retailorLoginAction = (c: Customer) => ({

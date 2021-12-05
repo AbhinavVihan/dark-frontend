@@ -1,14 +1,14 @@
-import { FC, memo, useEffect, useState } from "react";
+import { FC, memo, useEffect } from "react";
 import { useAppSelector } from "../../store";
 import {
   currentQueryProductsSelector,
   productsLoadingSelector,
   productQuerySelector,
 } from "../../selectors/products.selectors";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { fetchProducts as fetchProductsStart } from "../../api/products";
 
-import { useDispatch, useStore } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   productQueryChangedAction,
   productQueryCompletedAction,
@@ -22,7 +22,6 @@ interface Props {}
 
 const Products: FC<Props> = (props) => {
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const query = useAppSelector(productQuerySelector);
 

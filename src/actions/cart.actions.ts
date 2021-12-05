@@ -11,6 +11,8 @@ import {
   BUYING_PROCESS_BEGIN,
   BUYING_PROCESS_COMPLETE,
   BUYING_PROCESS_ERROR,
+  BUYING_BEGIN,
+  BUYING_COMPLETE,
 } from "./action.constants";
 
 export const createCartBegin = () => ({
@@ -54,6 +56,14 @@ export const addToCartError = (msg: string) => ({
 export const buyingStart = (pId: string, cId: string) => ({
   type: BUYING_PROCESS_BEGIN,
   payload: { pId, cId },
+});
+
+export const buyingBegin = () => ({
+  type: BUYING_BEGIN,
+});
+
+export const buyingCompleted = () => ({
+  type: BUYING_COMPLETE,
 });
 
 export const buyingError = (msg: string) => ({

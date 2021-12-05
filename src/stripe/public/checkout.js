@@ -1,6 +1,9 @@
 // A reference to Stripe.js initialized with a fake API key.
 import axios from "axios";
+import { bindActionCreators } from "redux";
 import { BASE_URL } from "../../../src/api/base";
+import { buyingCompleted } from "../../actions/cart.actions";
+import { store } from "../../store";
 
 // eslint-disable-next-line no-undef
 const stripe = Stripe(
@@ -19,6 +22,7 @@ export const orderProduct = async (productId) => {
     await stripe.redirectToCheckout({
       sessionId: session.data.session.id,
     });
+    action.buyingComplete();
   } catch (e) {
     console.log(e);
     alert(e);
@@ -136,3 +140,10 @@ export const orderProduct = async (productId) => {
 //     document.querySelector("#button-text").classList.remove("hidden");
 //   }
 // }
+
+export const action = bindActionCreators(
+  {
+    buyingComplete: buyingCompleted,
+  },
+  store.dispatch
+);

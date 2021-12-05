@@ -17,32 +17,36 @@ const Signup = () => {
     setPassword(password ? false : true);
   };
 
-  const { handleSubmit, getFieldProps, touched, isSubmitting, errors } =
-    useFormik({
-      initialValues: {
-        name: "",
-        email: "",
-        password: "",
-        passwordConfirm: "",
-        address: "",
-        role: "customer",
-      },
-      validationSchema: yup.object().shape({
-        name: yup.string().required(),
-        email: yup.string().required().email(),
-        password: yup.string().required().min(8),
-        passwordConfirm: yup.string().required().min(8),
-        address: yup.string().required(),
-        role: yup.string().required(),
-      }),
-      onSubmit: (data) => {
-        signup(data).then((c) => {
+  const { handleSubmit, getFieldProps, isSubmitting } = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+      passwordConfirm: "",
+      address: "",
+      role: "customer",
+    },
+    validationSchema: yup.object().shape({
+      name: yup.string().required(),
+      email: yup.string().required().email(),
+      password: yup.string().required().min(8),
+      passwordConfirm: yup.string().required().min(8),
+      address: yup.string().required(),
+      role: yup.string().required(),
+    }),
+    onSubmit: (data) => {
+      signup(data)
+        .then((c) => {
           // authActions.login(c);
           dispatch(meLoginAction(c));
+          alert("signed up successfully");
           history.push("/products");
+        })
+        .catch((e) => {
+          alert(e.message);
         });
-      },
-    });
+    },
+  });
 
   return (
     <div className="flex flex-col items-center pt-8">
@@ -137,7 +141,6 @@ const Signup = () => {
               autoComplete="off"
               {...getFieldProps("role")}
               required
-              placeholder="role"
               value="customer"
             />
           </div>

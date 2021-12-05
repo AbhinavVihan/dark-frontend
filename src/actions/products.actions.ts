@@ -1,12 +1,9 @@
 import { createProductRequest } from "../api/interfaces/productInterfaces";
-import { Customer } from "../models/Customer";
 import { Product, Products } from "../models/Products";
 import {
   CREATE_PRODUCT_BEGIN,
   CREATE_PRODUCT_COMPLETE,
   FETCH_PRODUCTS_FOR_CATEGORY,
-  GET_CUSTOMER_BEGIN,
-  GET_CUSTOMER_COMPLETE,
   PRODUCTS_FETCH_SINGLE,
   PRODUCTS_FETCH_SINGLE_COMPLETE,
   PRODUCTS_FETCH_SINGLE_ERROR,

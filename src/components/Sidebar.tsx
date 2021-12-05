@@ -51,17 +51,17 @@ const Sidebar: FC<Props> = (props) => {
       </div>
       {customer?.role === "customer" && (
         <Link className="hover:text-red-500" to="/retailor-overview">
-          Go to retailor's section
+          Switch to retailor's section
         </Link>
       )}
       {customer?.role === "retailor" && (
         <Link className="hover:text-red-500" to="/retailor-overview">
-          Go to retailor's section
+          Switch to retailor's section
         </Link>
       )}
       {!customer && (
         <Link className="hover:text-red-500" to="/retailor-overview">
-          Go to retailor's section
+          Switch to retailor's section
         </Link>
       )}
     </div>

@@ -1,22 +1,11 @@
 import { FC, memo, useEffect } from "react";
 import { useAppSelector } from "../../store";
-import {
-  currentQueryProductsSelector,
-  productsLoadingSelector,
-  productQuerySelector,
-} from "../../selectors/products.selectors";
-import { Link, useHistory } from "react-router-dom";
-import {
-  deleteAnOrder,
-  fetchProducts as fetchProductsStart,
-} from "../../api/products";
+
+import { Link } from "react-router-dom";
+import { deleteAnOrder } from "../../api/products";
 
 import { useDispatch } from "react-redux";
-import {
-  productQueryChangedAction,
-  productQueryCompletedAction,
-} from "../../actions/products.actions";
-import { meSelector } from "../../selectors/auth.selectors";
+
 import { BASE_URL } from "../../api/base";
 import { retailorAllOrdersBegin } from "../../actions/order.actions";
 import {
@@ -30,13 +19,10 @@ interface Props {}
 
 const AllOrders: FC<Props> = (props) => {
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const loading = useAppSelector(retailorAllOrdersLoadingSelector);
 
   const orders = useAppSelector(retailorAllOrderRealSelector);
-
-  const customer = useAppSelector(meSelector);
 
   useEffect(() => {
     dispatch(retailorAllOrdersBegin());

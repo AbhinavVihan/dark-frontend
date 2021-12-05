@@ -17,7 +17,11 @@ import {
   getCartBegin,
 } from "../../actions/cart.actions";
 import { meSelector } from "../../selectors/auth.selectors";
-import { cartIdSelector, cartSelector } from "../../selectors/cart.selectors";
+import {
+  cartIdSelector,
+  cartLoadingSelector,
+  cartSelector,
+} from "../../selectors/cart.selectors";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BASE_URL } from "../../api/base";
 import LoadingOverlay from "react-loading-overlay-ts";
@@ -36,6 +40,7 @@ const ProductsDetails: FC<Props> = (props) => {
   const product = useAppSelector(selectedProductSelector);
   const error = useAppSelector(selectedErrorSelector);
   const loading = useAppSelector(selectedLoadingSelector);
+  const loadingForCart = useAppSelector(cartLoadingSelector);
 
   const dispatch = useDispatch();
 
@@ -82,14 +87,6 @@ const ProductsDetails: FC<Props> = (props) => {
   };
 
   const addToCarts = () => {
-    // cartId &&
-    //   addToCart({ pId: productId, cId: cartId })
-    //     .then(() => {
-    //       alert("successfully added");
-    //     })
-    //     .catch((e) => {
-    //       alert(e);
-    //     });
     cartId && dispatch(addToCartBegin(productId, cartId));
   };
 
@@ -103,7 +100,11 @@ const ProductsDetails: FC<Props> = (props) => {
   }
 
   return (
-    <LoadingOverlay className="w-screen h-screen" active={loading} spinner>
+    <LoadingOverlay
+      className="w-screen h-screen"
+      active={loading || loadingForCart}
+      spinner
+    >
       <div>
         {customer && cart ? (
           <Link to="/cart">

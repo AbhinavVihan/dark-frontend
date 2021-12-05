@@ -1,8 +1,8 @@
 import { Reducer } from "redux";
 import {
-  GET_CUSTOMER_COMPLETE,
   ME_FETCH,
   ME_LOGIN,
+  ME_LOGIN_COMPLETE,
   MY_ORDERS_BEGIN,
   MY_ORDERS_COMPLETED,
   RETAILOR_LOGIN_BEGIN,
@@ -50,9 +50,20 @@ export const customerReducer: Reducer<CustomerState> = (
       return {
         ...state,
         byId: { ...state.byId, [customer._id]: customer },
+        loadingOne: false,
       };
+    case ME_LOGIN_COMPLETE:
+      return { ...state, loadingOne: true };
     // case RETAILOR_LOGIN_BEGIN:
     //   return { ...state, loadingOne: true };
+
+    case RETAILOR_LOGIN_BEGIN:
+      return {
+        ...state,
+        retailorById: { [action.payload._id]: action.payload },
+        retailorSelectedId: action.payload._id,
+        loadingOne: true,
+      };
     case RETAILOR_LOGIN_COMPLETE:
       const Customer: Customer = action.payload;
 
@@ -61,14 +72,8 @@ export const customerReducer: Reducer<CustomerState> = (
         byId: { ...state.byId, [Customer._id]: Customer },
         loadingOne: false,
       };
-    case RETAILOR_LOGIN_BEGIN:
-      return {
-        ...state,
-        retailorById: { [action.payload._id]: action.payload },
-        retailorSelectedId: action.payload._id,
-      };
     case RETAILOR_LOGIN_ERROR:
-      return { ...state, errorOne: action.payload };
+      return { ...state, errorOne: action.payload, loadingOne: false };
     // return addOne(state, action.payload) as CustomerState;
     case MY_ORDERS_BEGIN: {
       return { ...state, loadingOne: true };

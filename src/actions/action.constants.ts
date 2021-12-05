@@ -2,8 +2,10 @@
 export const ME_FETCH = "me/fetch";
 export const ME_FETCH_COMPLETE = "me/fetch_complete";
 export const ME_LOGIN = "me/login";
-export const RETAILOR_LOGIN_BEGIN = "retailor/login";
-export const RETAILOR_LOGIN_COMPLETE = "retailor/login";
+export const ME_LOGIN_COMPLETE = "me/login_complete";
+
+export const RETAILOR_LOGIN_BEGIN = "retailor/login_begin";
+export const RETAILOR_LOGIN_COMPLETE = "retailor/login_complete";
 export const RETAILOR_LOGIN_ERROR = "retailor/login_error";
 export const LOGIN_BEGIN = "login/begin";
 export const LOGIN_COMPLETE = "login/complete";
@@ -88,6 +90,9 @@ export const ADD_TO_CART_ERROR = "add/to_cart_error";
 export const BUYING_PROCESS_BEGIN = "buying/process_begin";
 export const BUYING_PROCESS_ERROR = "buying/process_error";
 export const BUYING_PROCESS_COMPLETE = "buying/process_complete";
+export const BUYING_BEGIN = "byuing/begin";
+export const BUYING_COMPLETE = "byuing/complete";
+export const BUYING_ERROR = "byuing/error";
 
 //orders
 export const MY_ORDERS_BEGIN = "my/orders_begin";

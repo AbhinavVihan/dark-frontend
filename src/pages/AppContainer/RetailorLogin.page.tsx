@@ -2,15 +2,14 @@ import { useFormik } from "formik";
 import React, { FC, memo, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
-import Input from "../../components/input";
 import { loginAsRetailor } from "../../api/auth";
 import {
   LoginActionError,
   meLoginAction,
   RetailorLoginActionBegin,
+  RetailorLoginActionComplete,
 } from "../../actions/auth.actions";
 import { useAppSelector } from "../../store";
-import { loadingSelector } from "../../selectors/auth.selectors";
 import LoadingOverlay from "react-loading-overlay-ts";
 import { useDispatch } from "react-redux";
 import { retailorLoginLoadingSelector } from "../../selectors/customer.selectors";
@@ -28,7 +27,7 @@ const RetailorLogin: FC<Props> = (props) => {
   const history = useHistory();
   // const loading = useAppSelector(loadingSelector);
 
-  const { handleSubmit, getFieldProps, isValid, touched, errors } = useFormik({
+  const { handleSubmit, getFieldProps, isValid } = useFormik({
     initialValues: {
       email: "",
       password: "",
@@ -38,18 +37,19 @@ const RetailorLogin: FC<Props> = (props) => {
       password: yup.string().required().min(8),
     }),
     onSubmit: (data) => {
-      // authActions.loginBegin(data);
+      dispatch(RetailorLoginActionBegin(data));
       loginAsRetailor(data)
         .then((c) => {
           dispatch(meLoginAction(c));
           // authActions.login(c);
           alert("you are successfully logged in as a retailor");
-          history.goBack();
+          history.push("/retailor-overview");
+          dispatch(RetailorLoginActionComplete());
         })
         .catch((e) => {
-          alert(e.response.statusText);
+          // alert(e.message);
           // authActions.loginError(e.response.statusText);
-          dispatch(LoginActionError(e.response.statusText));
+          dispatch(LoginActionError(e.message));
         });
       // dispatch(RetailorLoginActionBegin(data));
     },
@@ -60,7 +60,10 @@ const RetailorLogin: FC<Props> = (props) => {
       <div className="flex flex-col items-center pt-8 space-y-28">
         <div className="flex flex-col space-y-14">
           <div className="space-y-4 text-center">
-            <h1 className="text-4xl">Welcome to Retailor's Login</h1>
+            {/* <h1 className="text-4xl">Welcome to Retailor's Login</h1> */}
+            <h1 className="text-xl md:text-4xl sm:text-2xl">
+              Welcome to Retailor's Login
+            </h1>
 
             <div className="text-center ">
               <h2>New Here?</h2>
@@ -71,6 +74,14 @@ const RetailorLogin: FC<Props> = (props) => {
                 Signup as a retailor
               </Link>
             </div>
+            <div>
+              <Link
+                to="/login"
+                className="text-blue-600 underline hover:text-red-500"
+              >
+                Login as customer
+              </Link>
+            </div>
           </div>
 
           <form
@@ -78,23 +89,19 @@ const RetailorLogin: FC<Props> = (props) => {
             onSubmit={handleSubmit}
           >
             <div>
-              <Input
+              <input
                 className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96"
                 id="email"
-                error={errors.email}
-                touched={touched.email}
                 required
                 {...getFieldProps("email")}
                 placeholder="email address"
               />
             </div>
             <div>
-              <Input
+              <input
                 className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96"
                 id="password"
                 type={password ? "text" : "password"}
-                error={errors.password}
-                touched={touched.password}
                 autoComplete="off"
                 required
                 {...getFieldProps("password")}
@@ -115,7 +122,7 @@ const RetailorLogin: FC<Props> = (props) => {
                 />
               </div>
               <button
-                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28"
                 type="submit"
                 disabled={!isValid}
               >
@@ -124,13 +131,6 @@ const RetailorLogin: FC<Props> = (props) => {
             </div>
           </form>
           <div className="flex flex-col items-center space-y-5">
-            <div className="flex items-center ">
-              <input id="loggedin" name="Toggle button" type="checkbox" />
-              <label className="switch" htmlFor="loggedin">
-                Keep me logged in
-              </label>
-            </div>
-
             <Link
               to="/forgot-password"
               className="text-blue-600 hover:text-red-500"

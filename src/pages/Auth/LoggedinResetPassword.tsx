@@ -2,7 +2,6 @@ import React, { FC, memo, useState } from "react";
 import { loggedinResetResetPassword } from "../../api/auth";
 import {
   loggedinResetPasswordCompleted,
-  loginActionBegin,
   meLoginAction,
 } from "../../actions/auth.actions";
 import { useAppSelector } from "../../store";

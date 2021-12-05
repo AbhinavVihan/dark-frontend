@@ -3,22 +3,13 @@ import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 
 import { fetchOneProduct } from "../../actions/products.actions";
-import { createCart } from "../../api/products";
 import {
   selectedProductSelector,
   selectedErrorSelector,
   selectedLoadingSelector,
 } from "../../selectors/products.selectors";
 import { useAppSelector } from "../../store";
-import {
-  addToCartBegin,
-  createCartBegin as createCartAction,
-  createCartCompleted,
-  getCartBegin,
-} from "../../actions/cart.actions";
-import { meSelector } from "../../selectors/auth.selectors";
-import { cartIdSelector, cartSelector } from "../../selectors/cart.selectors";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+
 import { BASE_URL } from "../../api/base";
 import LoadingOverlay from "react-loading-overlay-ts";
 
@@ -26,7 +17,6 @@ interface Props {}
 
 const ProductsDetailForRetailor: FC<Props> = (props) => {
   const { productId } = useParams<{ productId: string }>();
-  const customer = useAppSelector(meSelector);
 
   const product = useAppSelector(selectedProductSelector);
   const error = useAppSelector(selectedErrorSelector);

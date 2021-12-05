@@ -15,6 +15,8 @@ import {
 } from "../../actions/categories.actions";
 import { BASE_URL } from "../../api/base";
 import LoadingOverlay from "react-loading-overlay-ts";
+import { meSelector } from "../../selectors/auth.selectors";
+import Sidebar from "../../components/Sidebar";
 
 interface Props {}
 
@@ -26,6 +28,7 @@ const Categories: FC<Props> = (props) => {
   const loading = useAppSelector(categoriesLoadingSelector);
 
   const categories = useAppSelector(currentQueryCategoriesSelector);
+  const customer = useAppSelector(meSelector);
 
   useEffect(() => {
     fetchCategoriesStart({ query }).then((categories) => {
@@ -36,42 +39,79 @@ const Categories: FC<Props> = (props) => {
 
   return (
     <LoadingOverlay className="w-screen h-screen" active={loading} spinner>
-      <div>
+      <div className="h-20 pt-5 pr-3 space-x-2 text-xs font-semibold text-right text-white bg-black sm:space-x-3 md:text-base justify-items-end sm:text-sm">
         <Link to="/products">
           <span className="text-blue-500 hover:text-red-500">
             Search by products
           </span>
         </Link>
-        <div>This is the categories page</div>
+        {!customer && (
+          <Link className=" hover:text-red-500" to="/login">
+            Login
+          </Link>
+        )}
+        {customer && customer.role === "customer" && (
+          <Link className=" hover:text-red-500" to="/my-account">
+            MyAccount
+          </Link>
+        )}
+        {customer && customer.role === "retailor" && (
+          <Link className=" hover:text-red-500" to="/login">
+            Login
+          </Link>
+        )}
+        {customer && customer.role === "customer" && (
+          <Link className=" hover:text-red-500" to="/my-orders">
+            Orders
+          </Link>
+        )}
+        {customer && customer.role === "customer" && (
+          <Link className=" hover:text-red-500" to="/cart">
+            Cart
+          </Link>
+        )}
+      </div>
+      <div className="py-6 text-center bg-gray-800 border-black ">
         <input
-          className="h-10 border-2 border-black rounded w-96"
+          className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96"
           type="text"
+          placeholder="search for categories here"
           value={query}
           onChange={(e) => {
             // productActions.queryChanged(e.target.value, true);
             dispatch(categoryQueryChangedAction(e.target.value, true));
           }}
         ></input>
-        <div className="grid grid-cols-5 gap-4 m-4 space-x-10">
-          {categories &&
-            categories.map((category) => (
-              <div className="items-center justify-center rounded cursor-pointer bg-gray-50 hover:bg-gray-100">
-                <div className="items-center justify-center border-black">
-                  <Link to={"/categories/" + category._id + "/products"}>
-                    <img
-                      className="items-center justify-center w-full h-full"
-                      alt="djhsuk"
-                      src={BASE_URL + "/img/categories/" + category.photo}
-                    />
-                    <div className="pt-3 text-center">
-                      {category.categoryName}
+      </div>
+      <div className="flex flex-col sm:flex sm:flex-row ">
+        <Sidebar></Sidebar>
+
+        <div className="pb-5 mt-5 space-x-10 xxsm:space-y-10 xxsm:mx-auto xxsm:grid-cols-1 xxsm:grid xsm:space-y-5 xsm:mx-3 xsm:w-auto 2xl:grid 2xl:grid-cols-5 xsm:grid xsm:grid-cols-2 sm:mx-3 xl:mx-10 md:grid md:grid-cols-3 sm:w-auto md:w-auto w-60 sm:grid sm:grid-cols-2 lg:grid lg:grid-cols-4">
+          {categories.map((category) => (
+            <div className="rounded cursor-pointer bg-gray-50 hover:bg-gray-200">
+              <div className="border-black ">
+                <Link to={"/categories/" + category._id + "/products"}>
+                  <img
+                    className="w-full rounded-lg "
+                    alt="djhsuk"
+                    src={BASE_URL + "/img/categories/" + category.photo}
+                  />
+                  <div className="flex justify-around pb-5">
+                    <div className="text-sm font-semibold sm:text-sm md:text-base">
+                      {category && category.categoryName}
                     </div>
-                  </Link>
-                </div>
+                  </div>
+                </Link>
               </div>
-            ))}
+            </div>
+          ))}
         </div>
       </div>
+      {categories.length < 1 && !loading && (
+        <div className="flex items-center justify-center text-center">
+          No categories found for that query.
+        </div>
+      )}
     </LoadingOverlay>
   );
 };

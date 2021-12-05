@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import { UPLOAD_IMAGE_FRONT_BEGIN } from "../../actions/action.constants";
+import { useHistory } from "react-router-dom";
+
 // import { authActions } from "../../actions/auth.actions";
 import {
   productQueryCompletedAction,

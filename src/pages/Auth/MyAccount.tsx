@@ -42,16 +42,18 @@ const MyAccount = () => {
     changeCustomerPhoto(photo).then((c) => {
       // authActions.updatemeCompleted(c);
       dispatch(customerUpdatemeCompleted(c));
+
       dispatch(loginActionBegin(c));
+      window.location.href = "/my-account";
       // authActions.login(c);
       // window.location.href = "/my-account";
     });
   };
 
   return (
-    <div className="h-screen font-bold bg-gray-100">
-      My Account
-      <div className="text-red-700">
+    <div className="flex flex-col justify-around h-screen font-bold bg-gray-100">
+      <div className="py-10 text-2xl">My Account</div>
+      <div className="">
         NAME : <span className="text-blue-700">{customer?.name}</span>
       </div>
       <div>
@@ -61,19 +63,17 @@ const MyAccount = () => {
         ADDRESS: <span className="text-blue-700">{customer?.address}</span>
       </div>
       <div>
-        {<img alt="customer" src={`${baseUrl}/img/customers/${imageName}`} />}
+        {
+          <img
+            className="rounded"
+            alt="customer"
+            src={`${baseUrl}/img/customers/${imageName}`}
+          />
+        }
       </div>
       <form onSubmit={submit}>
         <div>
-          {customer?.photo ? (
-            <label
-              className="cursor-pointer hover:text-red-500"
-              onClick={() => setDisabled(!disabled)}
-              htmlFor="photo"
-            >
-              Choose new photo
-            </label>
-          ) : (
+          {customer?.photo.startsWith("default") ? (
             <label
               className="cursor-pointer hover:text-red-500"
               onClick={() => setDisabled(!disabled)}
@@ -81,12 +81,21 @@ const MyAccount = () => {
             >
               Upload my photo
             </label>
+          ) : (
+            <label
+              className="text-green-500 cursor-pointer hover:text-red-500"
+              onClick={() => setDisabled(!disabled)}
+              htmlFor="photo"
+            >
+              Choose new photo
+            </label>
           )}
 
           <input
             className="hidden"
             onChange={(e) => {
               handleInputChange(e);
+              alert("click on submit button");
               dispatch(customerUpdatemeBegin());
             }}
             type="file"
@@ -116,15 +125,17 @@ const MyAccount = () => {
       <div>
         <Link
           onClick={() => dispatch(loggedinResetPasswordBegin())}
-          className="hover:text-blue-500"
+          className="text-green-500 hover:text-red-500"
           to="/my-password"
         >
           Change Your Password
         </Link>
       </div>
+
+      <span className="text-red-500">or</span>
       <div>
         <Link
-          className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+          className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-red-800 border-2 border-black rounded hover:bg-red-900 w-28"
           to="update-myaccount"
         >
           Update my credentials

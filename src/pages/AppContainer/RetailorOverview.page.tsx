@@ -1,5 +1,5 @@
 import { FC, memo } from "react";
-import { Link, Route, Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { logout } from "../../api/auth";
 import { meSelector } from "../../selectors/auth.selectors";
 import { useAppSelector } from "../../store";
@@ -90,7 +90,7 @@ const RetailorOverview: FC<Props> = (props) => {
       </div>
       {customer?.role === "retailor" && (
         <button
-          className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+          className="inline-block px-0 py-1 mx-3 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
           onClick={() => {
             logout();
             // eslint-disable-next-line no-restricted-globals

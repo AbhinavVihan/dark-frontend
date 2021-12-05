@@ -3,9 +3,7 @@ import { FC, memo, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
-import * as yup from "yup";
 
-import { useFormik } from "formik";
 import {
   createCategoryBegin,
   createCategoryComplete,

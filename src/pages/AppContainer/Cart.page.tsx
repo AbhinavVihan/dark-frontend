@@ -5,8 +5,11 @@ import { Link } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 
-import { meSelector } from "../../selectors/auth.selectors";
-import { buyingStart, getCartBegin } from "../../actions/cart.actions";
+import {
+  buyingStart,
+  getCartBegin,
+  buyingBegin,
+} from "../../actions/cart.actions";
 import {
   cartIdSelector,
   cartLoadingSelector,
@@ -23,7 +26,6 @@ const Cart: FC<Props> = (props) => {
 
   const cartProducts = useAppSelector(cartProductsSelector);
   const loading = useAppSelector(cartLoadingSelector);
-  const customer = useAppSelector(meSelector);
   const cartId = useAppSelector(cartIdSelector);
 
   useEffect(() => {
@@ -73,8 +75,9 @@ const Cart: FC<Props> = (props) => {
                     <button
                       onClick={() => {
                         orderProduct(product._id);
+                        dispatch(buyingBegin());
                       }}
-                      className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                      className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28"
                     >
                       Buy Now
                     </button>
@@ -83,7 +86,7 @@ const Cart: FC<Props> = (props) => {
                         dispatch(buyingStart(product._id, cartId!));
                         // dispatch(getCartBegin());
                       }}
-                      className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                      className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-red-800 border-2 border-black rounded hover:bg-red-900 w-28"
                     >
                       Delete From Cart
                     </button>

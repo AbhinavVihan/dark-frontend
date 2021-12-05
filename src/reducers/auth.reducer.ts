@@ -3,16 +3,13 @@ import {
   FORGOT_PASSWORD_BEGIN,
   LOGGEDIN_PASSWORD_CHANGE_BEGIN,
   LOGGEDIN_PASSWORD_CHANGE_COMPLETED,
-  LOGIN_BEGIN,
   LOGIN_COMPLETE,
   LOGIN_ERROR,
   ME_FETCH,
   ME_FETCH_COMPLETE,
   ME_LOGIN,
   RESET_PASSWORD_COMPLETED,
-  RETAILOR_LOGIN_ERROR,
 } from "../actions/action.constants";
-import { Customer } from "../models/Customer";
 
 export interface AuthState {
   _id: string;

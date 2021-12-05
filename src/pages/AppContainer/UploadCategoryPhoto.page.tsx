@@ -1,12 +1,12 @@
 import React, { memo, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 // import { authActions } from "../../actions/auth.actions";
 import {
   uploadCategoryPhotoBegin,
   uploadCategoryPhotoComplete,
 } from "../../actions/categories.actions";
-import { AUTH_TOKEN, BASE_URL } from "../../api/base";
+import { AUTH_TOKEN } from "../../api/base";
 import { changeCategoryPhoto } from "../../api/categories";
 import { meSelector } from "../../selectors/auth.selectors";
 import { createdCategorySelector } from "../../selectors/categories.selectors";

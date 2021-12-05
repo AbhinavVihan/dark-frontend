@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import React, { FC, memo, useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as yup from "yup";
 
 import { useAppSelector } from "../../store";
@@ -8,10 +8,7 @@ import { useDispatch } from "react-redux";
 
 import { deleteProduct, fetchProducts } from "../../api/products";
 import { currentQueryProductsSelector } from "../../selectors/products.selectors";
-import {
-  productChoose,
-  productQueryCompletedAction,
-} from "../../actions/products.actions";
+import { productQueryCompletedAction } from "../../actions/products.actions";
 
 interface Props {}
 
@@ -30,7 +27,8 @@ const ChooseProduct: FC<Props> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { handleSubmit } = useFormik({
+  // eslint-disable-next-line no-empty-pattern
+  const {} = useFormik({
     initialValues: {
       category: "",
     },

@@ -1,7 +1,14 @@
 import { AnyAction, Reducer } from "redux";
 import {
+  ADD_TO_CART_BEGIN,
+  ADD_TO_CART_COMPLETE,
   ADD_TO_CART_ERROR,
+  BUYING_BEGIN,
+  BUYING_COMPLETE,
+  BUYING_ERROR,
+  BUYING_PROCESS_BEGIN,
   BUYING_PROCESS_COMPLETE,
+  BUYING_PROCESS_ERROR,
   CREATE_CART_REQUEST_BEGIN,
   CREATE_CART_REQUEST_COMPLETE,
   GET_CART_BEGIN,
@@ -41,6 +48,15 @@ export const cartReducer: Reducer<cartState> = (
     case buyingError:
     case ADD_TO_CART_ERROR:
       return { ...state, errorOne: action.payload, loadingOne: false };
+    case ADD_TO_CART_BEGIN:
+    case BUYING_PROCESS_BEGIN:
+    case BUYING_BEGIN:
+      return { ...state, loadingOne: true };
+    case ADD_TO_CART_COMPLETE:
+    case BUYING_PROCESS_ERROR:
+    case BUYING_COMPLETE:
+    case BUYING_ERROR:
+      return { ...state, loadingOne: false };
 
     default:
       return state;
