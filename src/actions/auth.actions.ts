@@ -13,6 +13,8 @@ import {
   LOGIN_BEGIN,
   LOGIN_COMPLETE,
   LOGIN_ERROR,
+  LOGOUT_BEGIN,
+  LOGOUT_COMPLETE,
   ME_FETCH,
   ME_FETCH_COMPLETE,
   ME_LOGIN,
@@ -99,6 +101,14 @@ export const resetPasswordForTokenCompleted = () => ({
 });
 export const resetPasswordForTokenError = () => ({
   type: RESET_PASSWORD_ERROR,
+});
+
+export const logoutBegin = () => ({
+  type: LOGOUT_BEGIN,
+});
+
+export const logoutCompleted = () => ({
+  type: LOGOUT_COMPLETE,
 });
 
 // const retailorLoginAction = (c: Customer) => ({

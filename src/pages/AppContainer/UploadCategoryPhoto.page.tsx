@@ -11,6 +11,7 @@ import { changeCategoryPhoto } from "../../api/categories";
 import { meSelector } from "../../selectors/auth.selectors";
 import { createdCategorySelector } from "../../selectors/categories.selectors";
 import { useAppSelector } from "../../store";
+import LoadingOverlay from "react-loading-overlay-ts";
 
 const UploadCategoryPhoto = () => {
   const customer = useAppSelector(meSelector);
@@ -22,7 +23,11 @@ const UploadCategoryPhoto = () => {
   const history = useHistory();
 
   if (!customer && token) {
-    return <div>loading...</div>;
+    <LoadingOverlay
+      className="w-screen h-screen"
+      active
+      spinner
+    ></LoadingOverlay>;
   }
 
   const handleInputChange = (e: any) => {

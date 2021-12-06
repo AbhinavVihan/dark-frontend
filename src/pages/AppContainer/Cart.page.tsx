@@ -104,9 +104,11 @@ const Cart: FC<Props> = (props) => {
               </div>
             ))}
           {cartProducts && cartProducts?.length > 0 && (
-            <div className="font-extrabold text-center">
-              Total: ${price()}
-              <img alt="sjwhsvbjws" src={sadImoji} />
+            <div className="font-extrabold text-center">Total: ${price()}</div>
+          )}
+          {cartProducts && cartProducts?.length === 0 && (
+            <div className="flex justify-center">
+              <img className="w-52 h-52" alt="sjwhsvbjws" src={sadImoji} />
             </div>
           )}
         </div>

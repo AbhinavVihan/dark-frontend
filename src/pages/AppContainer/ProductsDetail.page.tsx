@@ -106,7 +106,7 @@ const ProductsDetails: FC<Props> = (props) => {
       spinner
     >
       <div>
-        {customer && cart ? (
+        {customer?.role === "customer" && cart ? (
           <Link to="/cart">
             <button className="flex px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28">
               My Cart
@@ -121,15 +121,19 @@ const ProductsDetails: FC<Props> = (props) => {
             </button>
           </Link>
         )}
-        <div>
+        {/* <div>
           <Link className="text-blue-600 hover:text-red-500" to="/products">
             Back to Products
           </Link>
-        </div>
+        </div> */}
         {product && (
           <div className="flex">
             <div className="ml-6 mr-6">
-              <img className="w-full h-full" alt="imhfdb" src={img![index]} />
+              <img
+                className="w-full h-full rounded-2xl"
+                alt="imhfdb"
+                src={img![index]}
+              />
               <div className="space-x-5">
                 <button
                   className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"

@@ -15,7 +15,7 @@ import {
 } from "../../actions/categories.actions";
 import { BASE_URL } from "../../api/base";
 import LoadingOverlay from "react-loading-overlay-ts";
-import { meSelector } from "../../selectors/auth.selectors";
+import { loadingSelector, meSelector } from "../../selectors/auth.selectors";
 import Sidebar from "../../components/Sidebar";
 
 interface Props {}
@@ -26,6 +26,7 @@ const Categories: FC<Props> = (props) => {
   const query = useAppSelector(categoryQuerySelector);
 
   const loading = useAppSelector(categoriesLoadingSelector);
+  const loadingForLogout = useAppSelector(loadingSelector);
 
   const categories = useAppSelector(currentQueryCategoriesSelector);
   const customer = useAppSelector(meSelector);
@@ -38,7 +39,11 @@ const Categories: FC<Props> = (props) => {
   }, [query]);
 
   return (
-    <LoadingOverlay className="w-screen h-screen" active={loading} spinner>
+    <LoadingOverlay
+      className="w-screen h-screen"
+      active={loading || loadingForLogout}
+      spinner
+    >
       <div className="h-20 pt-5 pr-3 space-x-2 text-xs font-semibold text-right text-white bg-black sm:space-x-3 md:text-base justify-items-end sm:text-sm">
         <Link className=" hover:text-red-500" to="/products">
           Search by products
@@ -86,13 +91,13 @@ const Categories: FC<Props> = (props) => {
       <div className="flex flex-col sm:flex sm:flex-row ">
         <Sidebar></Sidebar>
 
-        <div className="pb-5 mt-5 space-x-10 text-justify xxsm:space-y-10 xxsm:mx-auto xxsm:grid-cols-1 xxsm:grid xsm:space-y-5 xsm:mx-3 xsm:w-auto 2xl:grid 2xl:grid-cols-5 xsm:grid xsm:grid-cols-2 sm:mx-3 xl:mx-10 md:grid md:grid-cols-3 sm:w-auto md:w-auto w-60 sm:grid sm:grid-cols-2 lg:grid lg:grid-cols-4">
+        <div className="m-auto mt-10 xxsm:grid-cols-1 xxsm:grid 2xl:grid 2xl:grid-cols-5 xsm:grid xsm:grid-cols-2 xxsm:gap-8 lg:gap-14 md:grid md:grid-cols-3 md:gap-14 xl:mx-auto 2xl:gap-10 lg:mx-auto sm:grid sm:grid-cols-2 lg:grid lg:grid-cols-4">
           {categories.map((category) => (
             <div className="rounded cursor-pointer bg-gray-50 hover:bg-gray-200">
               <div className="border-black ">
                 <Link to={"/categories/" + category._id + "/products"}>
                   <img
-                    className="w-full rounded-lg "
+                    className="rounded-lg xxxsm:w-48 xxsm:w-40 xsm:w-52 sm:w-44 md:w-52"
                     alt="djhsuk"
                     src={BASE_URL + "/img/categories/" + category.photo}
                   />
@@ -108,9 +113,7 @@ const Categories: FC<Props> = (props) => {
         </div>
       </div>
       {categories.length < 1 && !loading && (
-        <div className="flex items-center justify-center text-center">
-          No categories found for that query.
-        </div>
+        <div className="text-center ">No categories found for that query.</div>
       )}
     </LoadingOverlay>
   );

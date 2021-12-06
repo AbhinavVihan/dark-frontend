@@ -30,6 +30,8 @@ export const GET_CUSTOMER_COMPLETE = "get/customer_complete";
 export const RESET_PASSWORD_BEGIN = "reset/password_begin";
 export const RESET_PASSWORD_COMPLETE = "reset/password_complete";
 export const RESET_PASSWORD_ERROR = "reset/password_error";
+export const LOGOUT_BEGIN = "logout/begin";
+export const LOGOUT_COMPLETE = "logout/complete";
 
 //products
 export const PRODUCTS_FETCH_SINGLE = "products/fetch_single";

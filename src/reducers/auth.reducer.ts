@@ -5,6 +5,8 @@ import {
   LOGGEDIN_PASSWORD_CHANGE_COMPLETED,
   LOGIN_COMPLETE,
   LOGIN_ERROR,
+  LOGOUT_BEGIN,
+  LOGOUT_COMPLETE,
   ME_FETCH,
   ME_FETCH_COMPLETE,
   ME_LOGIN,
@@ -42,6 +44,7 @@ export const authReducer: Reducer<AuthState> = (
     case LOGIN_COMPLETE:
     case RESET_PASSWORD_COMPLETE:
     case RESET_PASSWORD_ERROR:
+    case LOGOUT_COMPLETE:
       return { ...state, loading: false };
     // case LOGIN_ERROR:
     //   return { ...state, loading: false };
@@ -52,6 +55,7 @@ export const authReducer: Reducer<AuthState> = (
       return { ...state, token: 1 };
     case LOGGEDIN_PASSWORD_CHANGE_BEGIN:
     case RESET_PASSWORD_BEGIN:
+    case LOGOUT_BEGIN:
       return { ...state, loading: true };
     case LOGIN_ERROR:
       return { ...state, errorOne: action.payload, loading: false };

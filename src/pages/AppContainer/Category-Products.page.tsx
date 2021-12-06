@@ -14,6 +14,7 @@ import { fetchOneCategory } from "../../actions/categories.actions";
 import { BASE_URL } from "../../api/base";
 import LoadingOverlay from "react-loading-overlay-ts";
 import { meSelector } from "../../selectors/auth.selectors";
+import Sidebar from "../../components/Sidebar";
 
 interface Props {}
 
@@ -46,56 +47,54 @@ const ProductsForCategories: FC<Props> = (props) => {
 
   return (
     <LoadingOverlay className="w-screen h-screen" active={loading} spinner>
-      <div>
-        <div>
-          <Link className="text-blue-600 hover:text-red-500" to="/categories">
-            Back to categories
+      <div className="h-20 pt-5 pr-3 space-x-2 text-xs font-semibold text-right text-white bg-black sm:space-x-3 md:text-base justify-items-end sm:text-sm">
+        <Link className=" hover:text-red-500" to="/categories">
+          Back to categories
+        </Link>
+        {!customer && (
+          <Link className=" hover:text-red-500" to="/login">
+            Login
           </Link>
-        </div>
-        <div className="h-20 pt-5 pr-3 space-x-2 text-xs font-semibold text-right text-white bg-black sm:space-x-3 md:text-base justify-items-end sm:text-sm">
-          <Link className=" hover:text-red-500" to="/categories">
-            Back to categories
+        )}
+        {customer && customer.role === "customer" && (
+          <Link className=" hover:text-red-500" to="/my-account">
+            MyAccount
           </Link>
-          {!customer && (
-            <Link className=" hover:text-red-500" to="/login">
-              Login
-            </Link>
-          )}
-          {customer && customer.role === "customer" && (
-            <Link className=" hover:text-red-500" to="/my-account">
-              MyAccount
-            </Link>
-          )}
-          {customer && customer.role === "retailor" && (
-            <Link className=" hover:text-red-500" to="/login">
-              Login
-            </Link>
-          )}
-          {customer && customer.role === "customer" && (
-            <Link className=" hover:text-red-500" to="/my-orders">
-              Orders
-            </Link>
-          )}
-          {customer && customer.role === "customer" && (
-            <Link className=" hover:text-red-500" to="/cart">
-              Cart
-            </Link>
-          )}
+        )}
+        {customer && customer.role === "retailor" && (
+          <Link className=" hover:text-red-500" to="/login">
+            Login
+          </Link>
+        )}
+        {customer && customer.role === "customer" && (
+          <Link className=" hover:text-red-500" to="/my-orders">
+            Orders
+          </Link>
+        )}
+        {customer && customer.role === "customer" && (
+          <Link className=" hover:text-red-500" to="/cart">
+            Cart
+          </Link>
+        )}
+      </div>
+      <div className="flex flex-col sm:flex sm:flex-row ">
+        <div className="hidden">
+          <Sidebar></Sidebar>
         </div>
 
-        <div className="pb-5 mt-5 space-x-10 xxsm:space-y-10 xxsm:mx-auto xxsm:grid-cols-1 xxsm:grid xsm:space-y-5 xsm:mx-3 xsm:w-auto 2xl:grid 2xl:grid-cols-5 xsm:grid xsm:grid-cols-2 sm:mx-3 xl:mx-10 md:grid md:grid-cols-3 sm:w-auto md:w-auto w-60 sm:grid sm:grid-cols-2 lg:grid lg:grid-cols-4">
+        <div className="m-auto mt-10 xxsm:grid-cols-1 xxsm:grid 2xl:grid 2xl:grid-cols-5 xsm:grid xsm:grid-cols-2 xxsm:gap-8 lg:gap-14 md:grid md:grid-cols-3 md:gap-14 xl:mx-auto 2xl:gap-10 lg:mx-auto sm:grid sm:grid-cols-2 lg:grid lg:grid-cols-4">
           {productss &&
             productss.map((product) => (
               <div className="rounded cursor-pointer bg-gray-50 hover:bg-gray-200">
                 <div className="border-black ">
                   <Link to={"/products/" + product._id}>
                     <img
-                      className="w-full rounded-lg "
+                      className="rounded-lg xxxsm:w-48 xxsm:w-40 xsm:w-52 sm:w-44 md:w-52"
                       alt="jvbjdsbj"
                       src={BASE_URL + "/img/products/" + product.imageFront}
                     />
-                    <div className="flex justify-around pb-5">
-                      <div className="text-sm font-semibold sm:text-sm md:text-base">
+                    <div className="flex justify-around pb-5 xxxsm:w-48 xxsm:w-40">
+                      <div className="font-semibold xxxsm:text-xs sm:text-sm md:text-base">
                         {product && product.name}
                       </div>
                       <div className="font-bold text-green-600">
@@ -111,10 +110,17 @@ const ProductsForCategories: FC<Props> = (props) => {
             ))}
         </div>
       </div>
-      {productss && productss.length < 1 && !loading && (
-        <div className="flex items-center justify-center text-center">
-          No products belong to this category yet.
+      {productss && productss.length < 1 && (
+        <div className="text-center">
+          There is no product found for this category yet.
         </div>
+      )}
+      {productss && productss.length < 1 && loading && (
+        <LoadingOverlay
+          className="w-screen h-screen"
+          active
+          spinner
+        ></LoadingOverlay>
       )}
     </LoadingOverlay>
   );
