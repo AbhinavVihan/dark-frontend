@@ -21,7 +21,7 @@ const ChooseProduct: FC<Props> = (props) => {
 
   useEffect(() => {
     fetchProducts({ query }).then((products) => {
-      dispatch(productQueryCompletedAction(query, products));
+      dispatch(productQueryCompletedAction(query, products!));
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

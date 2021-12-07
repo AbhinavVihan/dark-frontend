@@ -88,7 +88,7 @@ const UploadProductImages = () => {
     // window.location.href = "/my-account";
     uploadProductImages(id!, data).then((c) => {
       fetchProducts({ query }).then((products) => {
-        dispatch(productQueryCompletedAction(query, products));
+        dispatch(productQueryCompletedAction(query, products!));
         dispatch(uploadProductCompleted());
         // window.location.href = "/products";
         history.push("/productsRetailor");

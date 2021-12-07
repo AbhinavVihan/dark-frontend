@@ -33,7 +33,7 @@ const Categories: FC<Props> = (props) => {
 
   useEffect(() => {
     fetchCategoriesStart({ query }).then((categories) => {
-      dispatch(categoryQueryCompletedAction(query, categories));
+      dispatch(categoryQueryCompletedAction(query, categories!));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);

@@ -69,17 +69,19 @@ export const addOne = (
 };
 
 export const addMany = (state: EntityState, entities: Entity[]) => {
-  if (entities.length === 0) {
+  if (entities && entities.length === 0) {
     return state;
   }
 
-  const entityMap = entities.reduce((prev, entity) => {
-    // entity.images = imgs;
-    return {
-      ...prev,
-      [entity._id]: entity,
-    };
-  }, {});
+  const entityMap =
+    entities &&
+    entities.reduce((prev, entity) => {
+      // entity.images = imgs;
+      return {
+        ...prev,
+        [entity._id]: entity,
+      };
+    }, {});
 
   return {
     ...state,

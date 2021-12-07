@@ -31,7 +31,7 @@ const ProductsForCategories: FC<Props> = (props) => {
   useEffect(() => {
     fetchProductsForCategory(categoryId).then((p) => {
       dispatch(fetchOneCategory(categoryId));
-      dispatch(fetchProductsForCategories(categoryId, p));
+      dispatch(fetchProductsForCategories(categoryId, p!));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId]);

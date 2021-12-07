@@ -78,7 +78,7 @@ const ProductsDetails: FC<Props> = (props) => {
     dispatch(createCartAction());
     createCart()
       .then((c) => {
-        dispatch(createCartCompleted(c));
+        dispatch(createCartCompleted(c!));
         alert("your cart has been successfully created");
       })
       .catch((e) => {

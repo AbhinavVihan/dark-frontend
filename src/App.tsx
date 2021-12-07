@@ -30,7 +30,7 @@ function App() {
 
     me().then((c) => {
       console.log(c);
-      dispatch(meFetchActionBegin(c));
+      dispatch(meFetchActionBegin(c!));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

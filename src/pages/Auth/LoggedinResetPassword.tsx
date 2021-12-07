@@ -31,7 +31,7 @@ const LoggedinResetPassword: FC<Props> = (props) => {
         // authActions.loggedinPasswordChangeCompleted();
         dispatch(loggedinResetPasswordCompleted());
         // authActions.login(c);
-        dispatch(meLoginAction(c));
+        dispatch(meLoginAction(c!));
         alert("your password has been successfully changed");
         window.location.href = "/my-account";
       })

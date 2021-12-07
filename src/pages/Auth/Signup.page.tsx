@@ -38,7 +38,7 @@ const Signup = () => {
       signup(data)
         .then((c) => {
           // authActions.login(c);
-          dispatch(meLoginAction(c));
+          dispatch(meLoginAction(c!));
           alert("signed up successfully");
           history.push("/products");
         })

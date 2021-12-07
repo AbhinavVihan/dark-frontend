@@ -40,9 +40,9 @@ const Login: FC<Props> = (props) => {
       dispatch(meLoginCompletedAction());
       login(data)
         .then((c) => {
-          dispatch(meLoginAction(c));
+          dispatch(meLoginAction(c!));
           history.goBack();
-          dispatch(loginActionComplete(c));
+          dispatch(loginActionComplete(c!));
           // history.push("/products");
         })
         .catch((e) => {

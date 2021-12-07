@@ -23,7 +23,7 @@ const CrateCategory: FC<Props> = (props) => {
     createCategory({ categoryName: name, description: description })
       .then((c) => {
         alert("category created successfully");
-        dispatch(createCategoryComplete(c));
+        dispatch(createCategoryComplete(c!));
         history.push("/upload-category-photo");
       })
       .catch((e) => {
