@@ -17,12 +17,15 @@ const reducer = combineReducers({
   cart: cartReducer,
 });
 
-const enhancer =
-  process.env.NODE_ENV === "production"
-    ? applyMiddleware(SagaMiddleware)
-    : composeWithDevTools(applyMiddleware(SagaMiddleware));
+// const enhancer =
+//   process.env.NODE_ENV === "production"
+//     ? applyMiddleware(SagaMiddleware)
+//     : composeWithDevTools(applyMiddleware(SagaMiddleware));
 
-export const store = createStore(reducer, enhancer);
+export const store = createStore(
+  reducer,
+  composeWithDevTools(applyMiddleware(SagaMiddleware))
+);
 
 SagaMiddleware.run(watchAll);
 
