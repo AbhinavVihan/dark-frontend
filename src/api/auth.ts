@@ -17,10 +17,13 @@ import {
 export const login = (data: LoginRequest) => {
   const url = BASE_URL + "/customers/login";
 
-  return axios.post<LoginResponse>(url, data).then((response) => {
-    localStorage.setItem(AUTH_TOKEN, "Bearer " + response.data.token);
-    return response.data.doc;
-  });
+  return axios
+    .post<LoginResponse>(url, data)
+    .then((response) => {
+      localStorage.setItem(AUTH_TOKEN, "Bearer " + response.data.token);
+      return response.data.doc;
+    })
+    .catch((e) => console.log(e));
 };
 
 export const loginAsRetailor = (data: LoginRequest) => {
@@ -43,10 +46,13 @@ export const loginAsRetailor = (data: LoginRequest) => {
 export const forgotPassword = (data: forgotPasswordRequest) => {
   const url = BASE_URL + "/customers/forgotPassword";
 
-  return axios.post<ForgotPasswordResponse>(url, data).then((response) => {
-    // console.log(response.data.message);
-    return response.data.message;
-  });
+  return axios
+    .post<ForgotPasswordResponse>(url, data)
+    .then((response) => {
+      // console.log(response.data.message);
+      return response.data.message;
+    })
+    .catch((e) => console.log(e));
 };
 
 export const resetPassword = (data: resetPasswordRequest, token: any) => {
@@ -73,10 +79,13 @@ export const loggedinResetResetPassword = (
 ) => {
   const url = BASE_URL + "/customers/updateMyPassword";
 
-  return axios.patch<LoginResponse>(url, data).then((response) => {
-    localStorage.setItem(AUTH_TOKEN, "Bearer " + response.data.token);
-    return response.data.doc;
-  });
+  return axios
+    .patch<LoginResponse>(url, data)
+    .then((response) => {
+      localStorage.setItem(AUTH_TOKEN, "Bearer " + response.data.token);
+      return response.data.doc;
+    })
+    .catch((e) => console.log(e));
 };
 
 export const changeCustomerPhoto = (data: any) => {
@@ -96,18 +105,23 @@ export const changeCustomerPhoto = (data: any) => {
       "Content-type": "application/json",
       "Content-Type": "multipart/form-data",
     },
-  }).then((response) => {
-    return response.data.doc;
-  });
+  })
+    .then((response) => {
+      return response.data.doc;
+    })
+    .catch((e) => console.log(e));
 };
 
 export const signup = (data: SignupRequest) => {
   const url = BASE_URL + "/customers/signup";
 
-  return axios.post<SignupResponse>(url, data).then((response) => {
-    // console.log(response.data);
-    return response.data.doc;
-  });
+  return axios
+    .post<SignupResponse>(url, data)
+    .then((response) => {
+      // console.log(response.data);
+      return response.data.doc;
+    })
+    .catch((e) => console.log(e));
 };
 
 export const signupAsRetailor = (data: SignupRequest) => {
@@ -151,7 +165,8 @@ export const me = () => {
       console.log(response.data.doc);
       console.log(AUTH_TOKEN);
       return response.data.doc;
-    });
+    })
+    .catch((e) => console.log(e));
 };
 
 export const updateMe = (id: string, data: updateRequest) => {
@@ -160,7 +175,8 @@ export const updateMe = (id: string, data: updateRequest) => {
     .patch(url, data, { headers: { Authorization: AUTH_TOKEN } })
     .then(() => {
       window.location.href = "/my-account";
-    });
+    })
+    .catch((e) => console.log(e));
 };
 
 export const getCustomer = (id: string) => {
@@ -169,5 +185,6 @@ export const getCustomer = (id: string) => {
     .get<CustomerForReview>(url, { headers: { Authorization: AUTH_TOKEN } })
     .then((c) => {
       return c.data.doc;
-    });
+    })
+    .catch((e) => console.log(e));
 };

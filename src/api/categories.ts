@@ -31,10 +31,13 @@ export interface CategoryRequest {
 export const fetchCategories = (data: CategoryRequest) => {
   const url = BASE_URL + "/categories";
 
-  return axios.get<Category[]>(url, { params: data }).then((response) => {
-    // console.log(response.data);
-    return response.data;
-  });
+  return axios
+    .get<Category[]>(url, { params: data })
+    .then((response) => {
+      // console.log(response.data);
+      return response.data;
+    })
+    .catch((e) => console.log(e));
 };
 
 export const fetchOneCategory = (id: string) => {
@@ -55,7 +58,8 @@ export const createCategory = (data: createCategoryRequest) => {
     })
     .then((res) => {
       return res.data;
-    });
+    })
+    .catch((e) => console.log(e));
 };
 
 export const changeCategoryPhoto = (id: string, data: any) => {
@@ -75,7 +79,9 @@ export const changeCategoryPhoto = (id: string, data: any) => {
       "Content-type": "application/json",
       "Content-Type": "multipart/form-data",
     },
-  }).then((response) => {
-    return response.data.doc;
-  });
+  })
+    .then((response) => {
+      return response.data.doc;
+    })
+    .catch((e) => console.log(e));
 };

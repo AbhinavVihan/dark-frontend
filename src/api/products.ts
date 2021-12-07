@@ -14,10 +14,13 @@ export interface ProductRequest {
 export const fetchProducts = (data: ProductRequest) => {
   const url = BASE_URL + "/products";
 
-  return axios.get<Product[]>(url, { params: data }).then((response) => {
-    // console.log(response.data);
-    return response.data;
-  });
+  return axios
+    .get<Product[]>(url, { params: data })
+    .then((response) => {
+      // console.log(response.data);
+      return response.data;
+    })
+    .catch((e) => console.log(e));
 };
 
 export const fetchOneProduct = (id: string) => {
@@ -30,10 +33,13 @@ export const fetchProductsForCategory = (id: string) => {
   const url = BASE_URL + "/categories/" + id + "/products";
   // console.log(id);
 
-  return axios.get<Product[]>(url).then((response) => {
-    // console.log(response.data);
-    return response.data;
-  });
+  return axios
+    .get<Product[]>(url)
+    .then((response) => {
+      // console.log(response.data);
+      return response.data;
+    })
+    .catch((e) => console.log(e));
 };
 
 export const createProduct = (id: string, data: createProductRequest) => {
@@ -64,9 +70,11 @@ export const uploadProductImages = (id: string, data: any) => {
       "Content-type": "application/json",
       "Content-Type": "multipart/form-data",
     },
-  }).then((response) => {
-    return response.data.doc;
-  });
+  })
+    .then((response) => {
+      return response.data.doc;
+    })
+    .catch((e) => console.log(e));
 };
 // {{URL}}products/61860ba6158d3c926ba58aba
 
@@ -85,7 +93,8 @@ export const createCart = () => {
     .post<Cart>(url, { headers: { Authorization: AUTH_TOKEN } })
     .then((response) => {
       return response.data;
-    });
+    })
+    .catch((e) => console.log(e));
 };
 
 export const getCart = () => {
@@ -104,7 +113,8 @@ export const addToCart = (pId: string, cId: string) => {
     .post<Carts>(url, { headers: { Authorization: AUTH_TOKEN } })
     .then((response) => {
       return response.data.doc;
-    });
+    })
+    .catch((e) => console.log(e));
 };
 
 export const deleteFromCart = (pId: string, cId: string) => {
