@@ -46,19 +46,27 @@ const AllOrders: FC<Props> = (props) => {
               <div className="flex flex-col items-center justify-center space-x-4 border-black sm:flex sm:flex-row">
                 <Link
                   className="cursor-pointer "
-                  to={"/products/" + order.product._id + "/retailor"}
+                  to={
+                    "/products/" +
+                    (order.product && order.product._id) +
+                    "/retailor"
+                  }
                 >
                   <img
                     className="items-center justify-center w-48 rounded-xl"
                     alt="jvbjdsbj"
-                    src={BASE_URL + "/img/products/" + order.product.imageFront}
+                    src={
+                      BASE_URL +
+                      "/img/products/" +
+                      (order.product && order.product.imageFront)
+                    }
                   />
                   <div className="flex justify-around">
                     <div className="font-semibold">
-                      {order && order.product.name}
+                      {order.product && order.product.name}
                     </div>
                     <div className="font-bold text-green-600">
-                      ${order.product.price}
+                      ${order.product && order.product.price}
                     </div>
                   </div>
                 </Link>

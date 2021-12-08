@@ -113,8 +113,7 @@ export const addToCart = (pId: string, cId: string) => {
     .post<Carts>(url, { headers: { Authorization: AUTH_TOKEN } })
     .then((response) => {
       return response.data.doc;
-    })
-    .catch((e) => console.log(e));
+    });
 };
 
 export const deleteFromCart = (pId: string, cId: string) => {

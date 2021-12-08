@@ -15,7 +15,6 @@ export const orderProduct = async (productId) => {
     // 1) get checkout session
     const url = BASE_URL + "/orders/checkout-session/" + productId;
     const session = await axios(url);
-    console.log(session);
 
     //2) create checkout form +
 
