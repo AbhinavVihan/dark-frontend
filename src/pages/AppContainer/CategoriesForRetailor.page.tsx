@@ -16,7 +16,6 @@ import {
 import { BASE_URL } from "../../api/base";
 import LoadingOverlay from "react-loading-overlay-ts";
 import { loadingSelector, meSelector } from "../../selectors/auth.selectors";
-import Sidebar from "../../components/Sidebar";
 import { AiFillHome } from "react-icons/ai";
 
 interface Props {}
