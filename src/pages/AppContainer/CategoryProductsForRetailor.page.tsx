@@ -48,7 +48,7 @@ const ProductsForCategories: FC<Props> = (props) => {
   return (
     <LoadingOverlay className="w-screen h-screen" active={loading} spinner>
       <div className="h-20 pt-5 pr-3 space-x-2 text-xs font-semibold text-right text-white bg-black sm:space-x-3 md:text-base justify-items-end sm:text-sm">
-        <Link className=" hover:text-red-500" to="/categories">
+        <Link className=" hover:text-red-500" to="/categoriesRetailor">
           Back to categories
         </Link>
         {!customer && (
@@ -56,24 +56,14 @@ const ProductsForCategories: FC<Props> = (props) => {
             Login
           </Link>
         )}
-        {customer && customer.role === "customer" && (
+        {customer && customer.role === "retailor" && (
           <Link className=" hover:text-red-500" to="/my-account">
             MyAccount
           </Link>
         )}
-        {customer && customer.role === "retailor" && (
+        {customer && customer.role === "customer" && (
           <Link className=" hover:text-red-500" to="/login">
             Login
-          </Link>
-        )}
-        {customer && customer.role === "customer" && (
-          <Link className=" hover:text-red-500" to="/my-orders">
-            Orders
-          </Link>
-        )}
-        {customer && customer.role === "customer" && (
-          <Link className=" hover:text-red-500" to="/cart">
-            Cart
           </Link>
         )}
       </div>
