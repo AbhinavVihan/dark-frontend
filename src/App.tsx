@@ -69,6 +69,7 @@ function App() {
               "/products",
               "/categories/:categoryId",
               "/categories/:categoryId/products",
+              "/categories/:categoryId/productsRetailor",
               "/products/:productId",
               "/my-account",
               "/my-password",
@@ -78,6 +79,7 @@ function App() {
               "/all-orders",
               "/update-myaccount",
               "/productsRetailor",
+              "/categoriesRetailor",
               "/choose-product",
             ]}
             exact

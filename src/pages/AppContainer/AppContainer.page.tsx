@@ -15,6 +15,8 @@ import RetailorAllOrdersPage from "./RetailorAllOrders.page";
 import UpdateMyCredentialsPage from "../Auth/UpdateMyCredentials.page";
 import ProductsForRetailorPage from "./ProductsForRetailor.page";
 import ChooseProductPage from "./ChooseProduct.page";
+import CategoriesForRetailorPage from "./CategoriesForRetailor.page";
+import CategoryProductsForRetailorPage from "./CategoryProductsForRetailor.page";
 
 interface Props {}
 
@@ -28,11 +30,9 @@ const AppContainer: FC<Props> = () => {
         <Route path="/my-account" exact>
           <MyAccount></MyAccount>
         </Route>
-
         <Route path="/my-password" exact>
           <LoggedinResetPasswordPage></LoggedinResetPasswordPage>
         </Route>
-
         <Route path="/categories" exact>
           <CategoriesPage></CategoriesPage>
         </Route>
@@ -48,6 +48,10 @@ const AppContainer: FC<Props> = () => {
         <Route path="/categories/:categoryId/products" exact>
           <CategoryProductsPage></CategoryProductsPage>
         </Route>
+        <Route path="/categories/:categoryId/productsRetailor" exact>
+          <CategoryProductsForRetailorPage></CategoryProductsForRetailorPage>
+        </Route>
+        productsRetailor
         <Route path="/products/:productId" exact>
           <ProductsDetailPage></ProductsDetailPage>
         </Route>
@@ -68,6 +72,10 @@ const AppContainer: FC<Props> = () => {
         </Route>
         <Route path="/choose-product" exact>
           <ChooseProductPage></ChooseProductPage>
+        </Route>
+        categoriesRetailor
+        <Route path="/categoriesRetailor" exact>
+          <CategoriesForRetailorPage></CategoriesForRetailorPage>
         </Route>
       </Switch>
     </div>
