@@ -17,13 +17,10 @@ import {
 export const login = (data: LoginRequest) => {
   const url = BASE_URL + "/customers/login";
 
-  return axios
-    .post<LoginResponse>(url, data)
-    .then((response) => {
-      localStorage.setItem(AUTH_TOKEN, "Bearer " + response.data.token);
-      return response.data.doc;
-    })
-    .catch((e) => console.log(e));
+  return axios.post<LoginResponse>(url, data).then((response) => {
+    localStorage.setItem(AUTH_TOKEN, "Bearer " + response.data.token);
+    return response.data.doc;
+  });
 };
 
 export const loginAsRetailor = (data: LoginRequest) => {

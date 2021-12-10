@@ -67,24 +67,6 @@ const ProductForRetailor: FC<Props> = (props) => {
           </div>
         </div>
 
-        {/* {customer && customer.role === "retailor" && (
-        <Link className="text-blue-500 hover:text-red-500" to="/my-account">
-          <span className="text-black">Hi</span> {customer.name}{" "}
-          <span className="text-black">(retailor)</span>
-        </Link>
-      )} */}
-
-        {/* {customer && customer?.role === "retailor" ? (
-        <Link className="text-blue-500 hover:text-red-500" to="/my-account">
-          <span className="text-black">Hi</span> {customer.name}{" "}
-          <span className="text-black">(retailor)</span>
-        </Link>
-      ) : (
-        <Link className="text-blue-500 hover:text-red-500" to="/retailor-login">
-          Login as retailor
-        </Link>
-      )} */}
-
         <div className="py-6 text-center bg-gray-800 border-black ">
           <input
             // className="h-10 border-2 border-black rounded w-96"
@@ -98,31 +80,34 @@ const ProductForRetailor: FC<Props> = (props) => {
             }}
           ></input>
         </div>
-        <div className="pb-5 mt-5 space-x-10 2xl:grid 2xl:grid-cols-5 xxsm:space-y-10 xxsm:mx-auto xxsm:grid-cols-1 xxsm:grid xsm:space-y-5 xsm:mx-3 xsm:w-auto xsm:grid xsm:grid-cols-2 sm:mx-3 xl:mx-10 md:grid md:grid-cols-3 sm:w-auto md:w-auto w-60 sm:grid sm:grid-cols-2 lg:grid lg:grid-cols-4">
-          {products.map((product) => (
-            <div className="rounded cursor-pointer bg-gray-50 hover:bg-gray-200">
-              <div className="border-black ">
-                <Link to={"/products/" + product._id + "/retailor"}>
-                  <img
-                    className="w-full rounded-lg "
-                    alt="jvbjdsbj"
-                    src={BASE_URL + "/img/products/" + product.imageFront}
-                  />
-                  <div className="flex justify-around pb-5">
-                    <div className="text-sm font-semibold sm:text-sm md:text-base">
-                      {product && product.name}
+        <div className="flex flex-col sm:flex sm:flex-row ">
+          {/* <Sidebar></Sidebar> */}
+          <div className="m-auto mt-10 xxsm:grid-cols-1 xxsm:grid 2xl:grid 2xl:grid-cols-5 xsm:grid xsm:grid-cols-2 xxsm:gap-8 lg:gap-14 md:grid md:grid-cols-3 md:gap-14 xl:mx-auto 2xl:gap-10 lg:mx-auto sm:grid sm:grid-cols-2 lg:grid lg:grid-cols-4">
+            {products.map((product) => (
+              <div className="rounded cursor-pointer bg-gray-50 hover:bg-gray-200">
+                <div className="border-black ">
+                  <Link to={"/products/" + product._id + "/retailor"}>
+                    <img
+                      className="rounded-lg xxxsm:w-48 xxsm:w-40 xsm:w-52 sm:w-44 md:w-52"
+                      alt="jvbjdsbj"
+                      src={BASE_URL + "/img/products/" + product.imageFront}
+                    />
+                    <div className="flex justify-around pb-5 xxxsm:w-48 xxsm:w-40">
+                      <div className="font-semibold xxxsm:text-xs sm:text-sm md:text-base">
+                        {product && product.name}
+                      </div>
+                      <div className="font-bold text-green-600">
+                        ${product.price}
+                      </div>
                     </div>
-                    <div className="font-bold text-green-600">
-                      ${product.price}
+                    <div className="pb-5 text-xl font-bold text-center text-green-600">
+                      Free Delivery
                     </div>
-                  </div>
-                  <div className="pb-5 text-xl font-bold text-center text-green-600">
-                    Free Delivery
-                  </div>
-                </Link>
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </LoadingOverlay>

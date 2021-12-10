@@ -98,7 +98,7 @@ const UploadProductImages = () => {
   };
 
   return (
-    <LoadingOverlay className="w-screen h-screen" active={loader} spinner>
+    <LoadingOverlay className="h-screen " active={loader} spinner>
       <div>
         <div className="font-semibold ">
           <form className="text-center" onSubmit={submit}>

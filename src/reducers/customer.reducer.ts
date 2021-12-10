@@ -53,7 +53,7 @@ export const customerReducer: Reducer<CustomerState> = (
       const customer: Customer = action.payload;
       return {
         ...state,
-        byId: { ...state.byId, [customer._id]: customer },
+        byId: { ...state.byId, [customer && customer._id]: customer },
         loadingOne: false,
       };
     case ME_LOGIN_COMPLETE:

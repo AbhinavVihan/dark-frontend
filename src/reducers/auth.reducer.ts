@@ -38,7 +38,7 @@ export const authReducer: Reducer<AuthState> = (
     // case LOGIN_BEGIN:
     case ME_LOGIN:
     case ME_FETCH:
-      const customerId = action.payload._id as string;
+      const customerId = action.payload && (action.payload._id as string);
       return { ...state, _id: customerId };
     case ME_FETCH_COMPLETE:
     case LOGIN_COMPLETE:

@@ -60,14 +60,16 @@ export const categoryReducer: Reducer<CategoriesState> = (
 
       const newState = addMany(state, categories) as CategoriesState;
 
-      categories.reduce((prev, category) => {
-        const img = category.photo;
+      categories &&
+        categories.reduce((prev, category) => {
+          const img = category.photo;
 
-        return {
-          ...prev,
-          [category._id]: "https://dark-2.herokuapp.com/img/categories/" + img,
-        };
-      }, {});
+          return {
+            ...prev,
+            [category._id]:
+              "https://dark-2.herokuapp.com/img/categories/" + img,
+          };
+        }, {});
 
       //   const imgCover = categories.reduce((prev, product) => {
       //     const img = product.imageCover;
