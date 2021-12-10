@@ -52,7 +52,7 @@ const ProductsForCategories: FC<Props> = (props) => {
           Back to categories
         </Link>
         {!customer && (
-          <Link className=" hover:text-red-500" to="/login">
+          <Link className=" hover:text-red-500" to="/retailor-login">
             Login
           </Link>
         )}
@@ -62,7 +62,7 @@ const ProductsForCategories: FC<Props> = (props) => {
           </Link>
         )}
         {customer && customer.role === "customer" && (
-          <Link className=" hover:text-red-500" to="/login">
+          <Link className=" hover:text-red-500" to="/retailor-login">
             Login
           </Link>
         )}
