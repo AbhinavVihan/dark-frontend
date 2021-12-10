@@ -21,7 +21,6 @@ function App() {
   const customer = useAppSelector(meSelector);
 
   const token = localStorage.getItem(AUTH_TOKEN);
-  console.log(token);
 
   useEffect(() => {
     if (!token) {
@@ -29,7 +28,6 @@ function App() {
     }
 
     me().then((c) => {
-      console.log(c);
       dispatch(meFetchActionBegin(c!));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -81,6 +79,7 @@ function App() {
               "/productsRetailor",
               "/categoriesRetailor",
               "/choose-product",
+              "/products/:productId/review",
             ]}
             exact
           >

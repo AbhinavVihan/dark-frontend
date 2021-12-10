@@ -3,6 +3,7 @@ import { Cart, Carts } from "../models/Cart";
 import { Order } from "../models/Order";
 import { Product } from "../models/Products";
 import { ProductSingle } from "../models/ProductSingle";
+import { Review } from "../models/Reviews";
 import { BASE_URL } from "./base";
 import { AUTH_TOKEN } from "./base";
 import { createProductRequest } from "./interfaces/productInterfaces";
@@ -139,4 +140,25 @@ export const deleteAnOrder = (id: string) => {
 export const deleteProduct = (id: string) => {
   const url = BASE_URL + "/products/" + id;
   return axios.delete(url, { headers: { Authorization: AUTH_TOKEN } });
+};
+
+export interface ReviewRequest {
+  review: string;
+}
+
+export const addAReview = (data: ReviewRequest, id: string) => {
+  const url = BASE_URL + "/products/" + id + "/reviews";
+  return axios
+    .post(url, data, { headers: { Authorization: AUTH_TOKEN } })
+    .then((r) => {
+      return r.data;
+    });
+};
+
+export const getAllReviews = (id: string) => {
+  const url = BASE_URL + "/products/" + id + "/reviews";
+  return axios.get<Review>(url).then((r) => {
+    console.log(r.data.doc);
+    return r.data.doc;
+  });
 };

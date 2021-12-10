@@ -25,6 +25,7 @@ import {
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BASE_URL } from "../../api/base";
 import LoadingOverlay from "react-loading-overlay-ts";
+import ReviewsPage from "./Reviews.page";
 // import ReviewsPage from "./Reviews.page";
 
 <script src="https://js.stripe.com/v3/"></script>;
@@ -193,16 +194,24 @@ const ProductsDetails: FC<Props> = (props) => {
             </div>
           </div>
         )}
-        {}
+        <div className="mt-40 text-right border-t-4">
+          <Link
+            to={`/products/${product && product._id}/review`}
+            className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28"
+          >
+            Add a review
+          </Link>
+        </div>
 
-        {product && product.reviews && (
+        {product && product.reviews && product.reviews.length > 0 && (
           <div>
-            <div className="mt-40 border-t-4 "></div>
+            <div className=""></div>
+
             <div className="mt-20 mb-5 text-3xl font-semibold text-center sm:text-3xl xsm:text-base xxxsm:text-xs">
               Reviews on this product
             </div>
             <div className="flex justify-center ">
-              {/* <ReviewsPage></ReviewsPage> */}
+              <ReviewsPage></ReviewsPage>
             </div>
           </div>
         )}
