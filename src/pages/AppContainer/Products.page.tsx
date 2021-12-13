@@ -41,7 +41,7 @@ const Products: FC<Props> = (props) => {
 
   return (
     <LoadingOverlay
-      className="w-screen h-screen"
+      className="relative w-full h-full"
       active={loading || loadingForLogout}
       spinner
     >
@@ -131,7 +131,7 @@ const Products: FC<Props> = (props) => {
           There is no product found for that query.
         </div>
       )}
-      <div className="grid grid-cols-2 px-10 py-5 mt-10 bg-gray-800 ">
+      <div className="bottom-0 left-0 right-0 grid grid-cols-2 px-10 py-5 mt-10 text-center align-text-bottom bg-gray-800 ">
         <Link
           className="text-white hover:text-gray-300"
           to="/retailor-overview"

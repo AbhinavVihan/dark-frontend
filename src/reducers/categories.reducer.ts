@@ -7,9 +7,12 @@ import {
   CATEGORIES_QUERY_CHANGED,
   CATEGORIES_QUERY_COMPLETED,
   CATEGORY_CHOOSE,
+  CREATE_CATEGORY_BEGIN,
   CREATE_CATEGORY_COMPLETE,
+  CREATE_CATEGORY_ERROR,
   UPLOAD_PHOTO_FOR_CATEGORY_BEGIN,
   UPLOAD_PHOTO_FOR_CATEGORY_COMPLETED,
+  UPLOAD_PHOTO_FOR_CATEGORY_ERROR,
 } from "../actions/action.constants";
 import { Category } from "../models/Categories";
 import {
@@ -71,45 +74,6 @@ export const categoryReducer: Reducer<CategoriesState> = (
           };
         }, {});
 
-      //   const imgCover = categories.reduce((prev, product) => {
-      //     const img = product.imageCover;
-
-      //     return {
-      //       ...prev,
-      //       [product._id]: "https://dark-2.herokuapp.com/img/categories/" + img,
-      //     };
-      //   }, {});
-      //   const imgFront = categories.reduce((prev, product) => {
-      //     const img = product.imageFront;
-      //     return {
-      //       ...prev,
-      //       [product._id]: "https://dark-2.herokuapp.com/img/categories/" + img,
-      //     };
-      //   }, {});
-      //   const img1 = categories.reduce((prev, product) => {
-      //     const img = product.images[0];
-
-      //     return {
-      //       ...prev,
-      //       [product._id]: "https://dark-2.herokuapp.com/img/categories/" + img,
-      //     };
-      //   }, {});
-      //   const img2 = categories.reduce((prev, product) => {
-      //     const img = product.images[1];
-
-      //     return {
-      //       ...prev,
-      //       [product._id]: "https://dark-2.herokuapp.com/img/categories/" + img,
-      //     };
-      //   }, {});
-      //   const img3 = categories.reduce((prev, product) => {
-      //     const img = product.images[2];
-      //     return {
-      //       ...prev,
-      //       [product._id]: "https://dark-2.herokuapp.com/img/categories/" + img,
-      //     };
-      //   }, {});
-
       return {
         ...newState,
         queryMap: {
@@ -117,12 +81,6 @@ export const categoryReducer: Reducer<CategoriesState> = (
           [action.payload.query]: categoriesIds,
         },
         loadingList: false,
-        // photo: { ...state.photo, ...photo },
-        // imageCover: { ...state.imageCover, ...imgCover },
-        // imageFront: { ...state.imageFront, ...imgFront },
-        // image1: { ...state.image1, ...img1 },
-        // image2: { ...state.image2, ...img2 },
-        // image3: { ...state.image3, ...img3 },
       };
     case CATEGORIES_FETCH_SINGLE_COMPLETE:
       return addOne(state, action.payload.doc, false) as CategoriesState;
@@ -132,10 +90,18 @@ export const categoryReducer: Reducer<CategoriesState> = (
     case CATEGORY_CHOOSE:
       return { ...state, idForRetailor: action.payload };
     case CREATE_CATEGORY_COMPLETE:
-      return { ...state, createdCategory: action.payload._id };
+      return {
+        ...state,
+        createdCategory: action.payload._id,
+        loadingOne: false,
+      };
     case UPLOAD_PHOTO_FOR_CATEGORY_BEGIN:
+    case CREATE_CATEGORY_BEGIN:
       return { ...state, loadingOne: true };
+
     case UPLOAD_PHOTO_FOR_CATEGORY_COMPLETED:
+    case UPLOAD_PHOTO_FOR_CATEGORY_ERROR:
+    case CREATE_CATEGORY_ERROR:
       return { ...state, loadingOne: false };
     default:
       return state;

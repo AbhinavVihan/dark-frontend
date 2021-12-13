@@ -11,6 +11,7 @@ import {
   CREATE_CATEGORY_ERROR,
   UPLOAD_PHOTO_FOR_CATEGORY_BEGIN,
   UPLOAD_PHOTO_FOR_CATEGORY_COMPLETED,
+  UPLOAD_PHOTO_FOR_CATEGORY_ERROR,
 } from "./action.constants";
 
 export const categoryQueryChangedAction = (
@@ -73,4 +74,8 @@ export const uploadCategoryPhotoBegin = () => ({
 
 export const uploadCategoryPhotoComplete = () => ({
   type: UPLOAD_PHOTO_FOR_CATEGORY_COMPLETED,
+});
+
+export const uploadCategoryPhotoError = () => ({
+  type: UPLOAD_PHOTO_FOR_CATEGORY_ERROR,
 });

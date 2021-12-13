@@ -125,7 +125,6 @@ function* createproduct(action: AnyAction): Generator<any> {
       price: action.payload.data.price,
       description: action.payload.data.description,
     });
-    console.log(action.payload);
     yield put(createProductComplete(res.data));
     alert("created successfully");
     // console.log(res.data);

@@ -5,11 +5,15 @@ import { useHistory } from "react-router-dom";
 import {
   uploadCategoryPhotoBegin,
   uploadCategoryPhotoComplete,
+  uploadCategoryPhotoError,
 } from "../../actions/categories.actions";
 import { AUTH_TOKEN } from "../../api/base";
 import { changeCategoryPhoto } from "../../api/categories";
 import { meSelector } from "../../selectors/auth.selectors";
-import { createdCategorySelector } from "../../selectors/categories.selectors";
+import {
+  createdCategorySelector,
+  selectedLoadingSelector,
+} from "../../selectors/categories.selectors";
 import { useAppSelector } from "../../store";
 import LoadingOverlay from "react-loading-overlay-ts";
 
@@ -21,6 +25,7 @@ const UploadCategoryPhoto = () => {
   const dispatch = useDispatch();
   const token = localStorage.getItem(AUTH_TOKEN);
   const history = useHistory();
+  const loading = useAppSelector(selectedLoadingSelector);
 
   if (!customer && token) {
     <LoadingOverlay
@@ -39,16 +44,20 @@ const UploadCategoryPhoto = () => {
   // }
 
   const submit = (e: any) => {
+    dispatch(uploadCategoryPhotoBegin());
     e.preventDefault();
     // window.location.href = "/my-account";
     changeCategoryPhoto(id, photo)
       .then((c) => {
         uploadCategoryPhotoComplete();
+
         alert("photo uploaded successfully");
+        dispatch(uploadCategoryPhotoComplete());
         history.push("/retailor-overview");
       })
       .catch((e) => {
         alert("some error occured");
+        dispatch(uploadCategoryPhotoError());
       });
     // changeCustomerPhoto(photo).then((c) => {
     //   authActions.updatemeCompleted(c);
@@ -58,44 +67,56 @@ const UploadCategoryPhoto = () => {
   };
 
   return (
-    <div className="h-screen font-bold bg-gray-100">
-      <form onSubmit={submit}>
-        <div>
-          <label
-            className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
-            onClick={() => setDisabled(!disabled)}
-            htmlFor="photo"
-          >
-            Choose a photo for your category
-          </label>
-          <input
-            className="hidden"
-            onChange={(e) => {
-              handleInputChange(e);
-              dispatch(uploadCategoryPhotoBegin());
-            }}
-            type="file"
-            id="photo"
-            name="photo"
-            accept="image/*"
-            // name="file"
-            defaultValue={photo}
-            // value={photo}
-          />
-          <div>
-            {!disabled && (
-              <button
-                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded cursor-pointer hover:bg-black w-28"
-                type="submit"
-                onClick={() => submit}
-              >
-                Submit
-              </button>
-            )}
-          </div>
+    <LoadingOverlay className="w-full h-full" active={loading} spinner>
+      <div className="h-screen font-bold bg-gray-100">
+        <div className="mb-10 text-xl text-center md:text-4xl sm:text-2xl">
+          Upload an Image for your Category!
         </div>
-      </form>
-    </div>
+        <form onSubmit={submit}>
+          <div className="text-center">
+            <label
+              className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-blue-800 border-2 border-black rounded cursor-pointer hover:bg-blue-900 w-28"
+              onClick={() => setDisabled(!disabled)}
+              htmlFor="photo"
+            >
+              Choose photo
+            </label>
+            <input
+              className="hidden"
+              onChange={(e) => {
+                handleInputChange(e);
+                // dispatch(uploadCategoryPhotoBegin());
+                alert("image uploaded successfully, click on (Submit) button");
+              }}
+              type="file"
+              id="photo"
+              name="photo"
+              accept="image/*"
+              // name="file"
+              defaultValue={photo}
+              // value={photo}
+            />
+            <div className="text-center">
+              {!disabled && (
+                <button
+                  className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded cursor-pointer hover:bg-green-900 w-28"
+                  type="submit"
+                  onClick={() => submit}
+                >
+                  Submit
+                </button>
+              )}
+            </div>
+          </div>
+        </form>
+        <div className="text-center text-red-500">
+          ⚫Kindly do not refresh the page.
+        </div>
+        <div className="text-center text-red-500">
+          ⚫Photo you upload must only be of jpg format.
+        </div>
+      </div>
+    </LoadingOverlay>
   );
 };
 

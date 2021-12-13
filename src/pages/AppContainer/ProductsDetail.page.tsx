@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 
 import { fetchOneProduct } from "../../actions/products.actions";
-import { createCart } from "../../api/products";
+import { createCart, getAllReviews } from "../../api/products";
 import {
   selectedProductSelector,
   selectedErrorSelector,
@@ -26,6 +26,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BASE_URL } from "../../api/base";
 import LoadingOverlay from "react-loading-overlay-ts";
 import ReviewsPage from "./Reviews.page";
+import { Reviewss } from "../../models/Reviews";
 // import ReviewsPage from "./Reviews.page";
 
 <script src="https://js.stripe.com/v3/"></script>;
@@ -51,6 +52,16 @@ const ProductsDetails: FC<Props> = (props) => {
     BASE_URL + "/img/products/" + product.image2,
     BASE_URL + "/img/products/" + product.image3,
   ];
+
+  const [arrr, setArrr] = useState<Reviewss[]>();
+
+  useEffect(() => {
+    getAllReviews(productId).then((r) => {
+      setArrr(r);
+    });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     dispatch(fetchOneProduct(productId));
@@ -102,7 +113,7 @@ const ProductsDetails: FC<Props> = (props) => {
 
   return (
     <LoadingOverlay
-      className="w-screen h-screen"
+      className="w-full h-full"
       active={loading || loadingForCart}
       spinner
     >
@@ -195,18 +206,36 @@ const ProductsDetails: FC<Props> = (props) => {
           </div>
         )}
         <div className="mt-40 text-right border-t-4">
-          <Link
-            to={`/products/${product && product._id}/review`}
-            className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28"
-          >
-            Add a review
-          </Link>
+          {arrr?.map((r) => (
+            <div className=""></div>
+          ))}
+        </div>
+
+        <div className="text-right">
+          {customer?.role === "customer" && (
+            <div>
+              <Link
+                to={"/products/" + productId + "/review"}
+                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28"
+              >
+                Add a review
+              </Link>
+            </div>
+          )}
+          {(!customer || customer.role === "retailor") && (
+            <div>
+              <Link
+                to={"/login"}
+                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28"
+              >
+                Add a review
+              </Link>
+            </div>
+          )}
         </div>
 
         {product && product.reviews && product.reviews.length > 0 && (
           <div>
-            <div className=""></div>
-
             <div className="mt-20 mb-5 text-3xl font-semibold text-center sm:text-3xl xsm:text-base xxxsm:text-xs">
               Reviews on this product
             </div>

@@ -14,3 +14,16 @@ export interface Reviewss extends Entity {
   customer: Customer;
   product: string;
 }
+
+export interface Revi {
+  status: string;
+  doc: Rev;
+}
+
+export interface Rev {
+  review: string;
+  rating: number;
+  createdAt: string;
+  customer: Customer;
+  product: string;
+}

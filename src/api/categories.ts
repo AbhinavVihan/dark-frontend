@@ -59,7 +59,10 @@ export const createCategory = (data: createCategoryRequest) => {
     .then((res) => {
       return res.data;
     })
-    .catch((e) => console.log(e));
+    .catch((e) => {
+      alert("some error occured, please try again");
+      window.location.href = "/retailor-overview";
+    });
 };
 
 export const changeCategoryPhoto = (id: string, data: any) => {
@@ -83,5 +86,11 @@ export const changeCategoryPhoto = (id: string, data: any) => {
     .then((response) => {
       return response.data.doc;
     })
-    .catch((e) => console.log(e));
+    .catch((e) => {
+      alert("some error occured, please create your category again.");
+      axios.delete(url, {
+        headers: { Authorization: AUTH_TOKEN },
+      });
+      window.location.href = "/create-category";
+    });
 };

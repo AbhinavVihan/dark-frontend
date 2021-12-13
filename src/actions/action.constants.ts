@@ -85,6 +85,8 @@ export const UPLOAD_PHOTO_FOR_CATEGORY_BEGIN =
   "upload/photo_for_category_begin";
 export const UPLOAD_PHOTO_FOR_CATEGORY_COMPLETED =
   "upload/photo_for_category_completed";
+export const UPLOAD_PHOTO_FOR_CATEGORY_ERROR =
+  "upload/photo_for_category_error";
 
 //cart
 export const CREATE_CART_REQUEST_BEGIN = "create/cart_request_begin";
@@ -109,3 +111,15 @@ export const MY_ORDERS_ERROR = "my/orders_error";
 export const RETAIOR_ALL_ORDERS_BEGIN = "retailor/all_orders_begin";
 export const RETAIOR_ALL_ORDERS_COMPLETED = "retailor/all_orders_completed";
 export const RETAIOR_ALL_ORDERS_ERROR = "retailor/all_orders_error";
+
+//reviews
+export const RETAILOR_ALL_REVIEWS_BEGIN = "retailor/all_reviews_begin";
+export const RETAILOR_ALL_REVIEWS_COMPLETED = "retailor/all_reviews_completed";
+export const RETAILOR_ALL_REVIEWS_ERROR = "retailor/all_reviews_error";
+export const REVIEW_ID_TO_UPDATE_BEGIN = "review/id_to_update_begin";
+export const REVIEW_ID_TO_UPDATE_BEGIN2 = "review/id_to_update_begin2";
+export const REVIEW_ID_TO_UPDATE_COMPLETE = "review/id_to_update_complete";
+export const REVIEW_ID_TO_UPDATE_ERROR = "review/id_to_update_error";
+export const ADD_REVIEW_BEGIN = "add/review_begin";
+export const ADD_REVIEW_COMPLETE = "add/review_complete";
+export const ADD_REVIEW_ERROR = "add/review_error";

@@ -65,15 +65,6 @@ const ProductsDetailForRetailor: FC<Props> = (props) => {
   return (
     <LoadingOverlay className="w-screen h-screen" active={loading} spinner>
       <div>
-        <div>
-          <Link
-            className="text-blue-600 hover:text-red-500"
-            to="/productsRetailor"
-          >
-            Back to Products
-          </Link>
-        </div>
-
         {product && (
           <div>
             {loading && (

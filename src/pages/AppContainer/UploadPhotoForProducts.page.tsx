@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
@@ -17,6 +17,7 @@ import {
   uploadImage3Completed,
   uploadProductBegin,
   uploadProductCompleted,
+  uploadProductError,
 } from "../../actions/products.actions";
 import { AUTH_TOKEN } from "../../api/base";
 import { fetchProducts, uploadProductImages } from "../../api/products";
@@ -48,13 +49,13 @@ const UploadProductImages = () => {
 
   if (!customer && token) {
     alert("you are logged out somehow, please login again");
-    window.location.href = "/login";
+    window.location.href = "/retailor-login";
   }
-  useEffect(() => {
-    alert(
-      "do not refresh the page, else you'll need to start the whole process again"
-    );
-  }, []);
+  // useEffect(() => {
+  //   alert(
+  //     "do not refresh the page, else you'll need to start the whole process again"
+  //   );
+  // }, []);
 
   const handleInputChange1 = (e: any) => {
     setimageFront(e.target.files[0]);
@@ -87,24 +88,28 @@ const UploadProductImages = () => {
     dispatch(uploadProductBegin());
     // window.location.href = "/my-account";
     uploadProductImages(id!, data).then((c) => {
-      fetchProducts({ query }).then((products) => {
-        dispatch(productQueryCompletedAction(query, products!));
-        dispatch(uploadProductCompleted());
-        // window.location.href = "/products";
-        history.push("/productsRetailor");
-      });
+      fetchProducts({ query })
+        .then((products) => {
+          dispatch(productQueryCompletedAction(query, products!));
+          dispatch(uploadProductCompleted());
+          // window.location.href = "/products";
+          history.push("/productsRetailor");
+        })
+        .catch((e) => {
+          dispatch(uploadProductError());
+        });
       // window.location.href = "/my-account";
     });
   };
 
   return (
-    <LoadingOverlay className="h-screen " active={loader} spinner>
+    <LoadingOverlay className="w-full h-full " active={loader} spinner>
       <div>
-        <div className="font-semibold ">
+        <div className="mt-10 font-semibold">
           <form className="text-center" onSubmit={submit}>
             <div>
               <label
-                className="inline-block px-2 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded cursor-pointer hover:bg-black"
+                className="inline-block px-2 py-1 mx-3 my-2 text-white bg-transparent bg-blue-800 border-2 border-black rounded cursor-pointer hover:bg-blue-900"
                 htmlFor="photo1"
               >
                 Choose a Front photo
@@ -128,7 +133,7 @@ const UploadProductImages = () => {
             </div>
             <div>
               <label
-                className="inline-block px-2 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded cursor-pointer hover:bg-black"
+                className="inline-block px-2 py-1 mx-3 my-2 text-white bg-transparent bg-blue-800 border-2 border-black rounded cursor-pointer hover:bg-blue-900"
                 htmlFor="photo2"
               >
                 Choose a cover photo
@@ -153,7 +158,7 @@ const UploadProductImages = () => {
 
             <div>
               <label
-                className="inline-block px-2 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded cursor-pointer hover:bg-black"
+                className="inline-block px-2 py-1 mx-3 my-2 text-white bg-transparent bg-blue-800 border-2 border-black rounded cursor-pointer hover:bg-blue-900"
                 htmlFor="photo3"
               >
                 Choose image 1
@@ -178,7 +183,7 @@ const UploadProductImages = () => {
 
             <div>
               <label
-                className="inline-block px-2 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded cursor-pointer hover:bg-black"
+                className="inline-block px-2 py-1 mx-3 my-2 text-white bg-transparent bg-blue-800 border-2 border-black rounded cursor-pointer hover:bg-blue-900"
                 htmlFor="photo4"
               >
                 Choose image 2
@@ -203,7 +208,7 @@ const UploadProductImages = () => {
 
             <div>
               <label
-                className="inline-block px-2 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded cursor-pointer hover:bg-black"
+                className="inline-block px-2 py-1 mx-3 my-2 text-white bg-transparent bg-blue-800 border-2 border-black rounded cursor-pointer hover:bg-blue-900"
                 onClick={() => setDisabled(!disabled)}
                 htmlFor="photo5"
               >
@@ -240,6 +245,12 @@ const UploadProductImages = () => {
             </div>
           </form>
         </div>
+      </div>
+      <div className="mt-10 text-center text-red-500">
+        ⚫Kindly do not refresh the page.
+      </div>
+      <div className="text-center text-red-500">
+        ⚫Photo you upload must only be of jpg format.
       </div>
     </LoadingOverlay>
   );

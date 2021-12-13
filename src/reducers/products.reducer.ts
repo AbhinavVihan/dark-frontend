@@ -1,6 +1,10 @@
 import { Reducer } from "redux";
 
 import {
+  ADD_REVIEW_BEGIN,
+  ADD_REVIEW_COMPLETE,
+  ADD_REVIEW_ERROR,
+  CREATE_PRODUCT_BEGIN,
   CREATE_PRODUCT_COMPLETE,
   CREATE_PRODUCT_ERROR,
   FETCH_PRODUCTS_FOR_CATEGORY,
@@ -9,12 +13,18 @@ import {
   PRODUCTS_FETCH_SINGLE_ERROR,
   PRODUCTS_QUERY_CHANGED,
   PRODUCTS_QUERY_COMPLETED,
+  RETAILOR_ALL_REVIEWS_BEGIN,
+  RETAILOR_ALL_REVIEWS_COMPLETED,
+  RETAILOR_ALL_REVIEWS_ERROR,
+  REVIEW_ID_TO_UPDATE_BEGIN,
+  REVIEW_ID_TO_UPDATE_BEGIN2,
+  REVIEW_ID_TO_UPDATE_COMPLETE,
+  REVIEW_ID_TO_UPDATE_ERROR,
   UPLOAD_PRODUCT_BEGIN,
+  UPLOAD_PRODUCT_COMPLETED,
+  UPLOAD_PRODUCT_ERROR,
 } from "../actions/action.constants";
-import {
-  uploadProductCompleted,
-  uploadProductError,
-} from "../actions/products.actions";
+
 import { Product } from "../models/Products";
 import {
   addMany,
@@ -32,6 +42,7 @@ export interface ProductsState extends EntityState<Product> {
   productsByCategoryId: { [id: string]: Product[] };
   createdProduct: { [id: string]: Product };
   loadingForProduct: boolean;
+  revId: string;
 }
 
 const initialState: ProductsState = {
@@ -41,6 +52,7 @@ const initialState: ProductsState = {
   productsByCategoryId: {},
   createdProduct: {},
   loadingForProduct: false,
+  revId: "",
 };
 
 export const productReducer: Reducer<ProductsState> = (
@@ -58,6 +70,8 @@ export const productReducer: Reducer<ProductsState> = (
         query: query,
         loadingList: loadingList,
       };
+    case CREATE_PRODUCT_BEGIN:
+      return { ...state, loadingOne: true };
     case CREATE_PRODUCT_COMPLETE:
       return {
         ...state,
@@ -66,9 +80,10 @@ export const productReducer: Reducer<ProductsState> = (
           [action.payload.id]: action.payload,
         },
         selectedId: action.payload.id,
+        loadingOne: false,
       };
     case CREATE_PRODUCT_ERROR:
-      return { ...state, errorOne: action.payload };
+      return { ...state, errorOne: action.payload, loadingOne: false };
     case PRODUCTS_QUERY_COMPLETED:
       const products = action.payload.products as Product[];
       const productIds = getIds(products);
@@ -97,11 +112,22 @@ export const productReducer: Reducer<ProductsState> = (
         },
       };
     case UPLOAD_PRODUCT_BEGIN:
+    case RETAILOR_ALL_REVIEWS_BEGIN:
+    case ADD_REVIEW_BEGIN:
+    case REVIEW_ID_TO_UPDATE_BEGIN2:
       return { ...state, loadingForProduct: true };
-    case uploadProductCompleted:
+    case UPLOAD_PRODUCT_COMPLETED:
+    case ADD_REVIEW_COMPLETE:
+    case ADD_REVIEW_ERROR:
+    case RETAILOR_ALL_REVIEWS_COMPLETED:
+    case RETAILOR_ALL_REVIEWS_ERROR:
+    case REVIEW_ID_TO_UPDATE_COMPLETE:
+    case REVIEW_ID_TO_UPDATE_ERROR:
       return { ...state, loadingForProduct: false };
-    case uploadProductError:
-      return { ...state, errorOne: action.payload };
+    case UPLOAD_PRODUCT_ERROR:
+      return { ...state, errorOne: action.payload, loadingForProduct: false };
+    case REVIEW_ID_TO_UPDATE_BEGIN:
+      return { ...state, revId: action.payload };
     default:
       return state;
   }

@@ -1,6 +1,9 @@
 import { createProductRequest } from "../api/interfaces/productInterfaces";
 import { Product, Products } from "../models/Products";
 import {
+  ADD_REVIEW_BEGIN,
+  ADD_REVIEW_COMPLETE,
+  ADD_REVIEW_ERROR,
   CREATE_PRODUCT_BEGIN,
   CREATE_PRODUCT_COMPLETE,
   FETCH_PRODUCTS_FOR_CATEGORY,
@@ -10,6 +13,13 @@ import {
   PRODUCTS_QUERY_CHANGED,
   PRODUCTS_QUERY_COMPLETED,
   PRODUCT_CHOOSE,
+  RETAILOR_ALL_REVIEWS_BEGIN,
+  RETAILOR_ALL_REVIEWS_COMPLETED,
+  RETAILOR_ALL_REVIEWS_ERROR,
+  REVIEW_ID_TO_UPDATE_BEGIN,
+  REVIEW_ID_TO_UPDATE_BEGIN2,
+  REVIEW_ID_TO_UPDATE_COMPLETE,
+  REVIEW_ID_TO_UPDATE_ERROR,
   UPLOAD_IMAGE_1_BEGIN,
   UPLOAD_IMAGE_1_COMPLETED,
   UPLOAD_IMAGE_2_BEGIN,
@@ -131,4 +141,45 @@ export const uploadImage3Completed = () => ({
 export const productChoose = (id: string) => ({
   type: PRODUCT_CHOOSE,
   payload: id,
+});
+
+export const retailorAllReviewsBegin = () => ({
+  type: RETAILOR_ALL_REVIEWS_BEGIN,
+});
+
+export const retailorAllReviewsCompleted = () => ({
+  type: RETAILOR_ALL_REVIEWS_COMPLETED,
+});
+
+export const retailorAllReviewsError = () => ({
+  type: RETAILOR_ALL_REVIEWS_ERROR,
+});
+
+export const updateMyReviewBegin = (id: string) => ({
+  type: REVIEW_ID_TO_UPDATE_BEGIN,
+  payload: id,
+});
+
+export const updateMyReviewBegin2 = () => ({
+  type: REVIEW_ID_TO_UPDATE_BEGIN2,
+});
+
+export const updateMyReviewComplete = () => ({
+  type: REVIEW_ID_TO_UPDATE_COMPLETE,
+});
+
+export const updateMyReviewError = () => ({
+  type: REVIEW_ID_TO_UPDATE_ERROR,
+});
+
+export const addReviewBegin = () => ({
+  type: ADD_REVIEW_BEGIN,
+});
+
+export const addReviewComplete = () => ({
+  type: ADD_REVIEW_COMPLETE,
+});
+
+export const addReviewError = () => ({
+  type: ADD_REVIEW_ERROR,
 });

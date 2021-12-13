@@ -3,7 +3,7 @@ import { Cart, Carts } from "../models/Cart";
 import { Order } from "../models/Order";
 import { Product } from "../models/Products";
 import { ProductSingle } from "../models/ProductSingle";
-import { Review } from "../models/Reviews";
+import { Revi, Review } from "../models/Reviews";
 import { BASE_URL } from "./base";
 import { AUTH_TOKEN } from "./base";
 import { createProductRequest } from "./interfaces/productInterfaces";
@@ -75,17 +75,12 @@ export const uploadProductImages = (id: string, data: any) => {
     .then((response) => {
       return response.data.doc;
     })
-    .catch((e) => console.log(e));
+    .catch((e) => {
+      alert("some error occured, please upload your product again.");
+      axios.delete(url, { headers: { Authorization: AUTH_TOKEN } });
+      window.location.href = "/choose-category";
+    });
 };
-// {{URL}}products/61860ba6158d3c926ba58aba
-
-// export const addToCart = (pId: string, cId: string) => {
-//   const url = BASE_URL + "/products/" + pId + "/cart/" + cId;
-
-//   return axios.get<Cart>(url).then((response) => {
-//     return response.data;
-//   });
-// };
 
 export const createCart = () => {
   const url = BASE_URL + "/cart/create";
@@ -94,8 +89,7 @@ export const createCart = () => {
     .post<Cart>(url, { headers: { Authorization: AUTH_TOKEN } })
     .then((response) => {
       return response.data;
-    })
-    .catch((e) => console.log(e));
+    });
 };
 
 export const getCart = () => {
@@ -158,7 +152,24 @@ export const addAReview = (data: ReviewRequest, id: string) => {
 export const getAllReviews = (id: string) => {
   const url = BASE_URL + "/products/" + id + "/reviews";
   return axios.get<Review>(url).then((r) => {
-    console.log(r.data.doc);
+    // console.log(r.data.doc);
     return r.data.doc;
   });
+};
+
+export const getAllReviewsRetailor = () => {
+  const url = BASE_URL + "/reviews";
+  return axios.get<Review>(url).then((r) => {
+    // console.log(r.data.doc);
+    return r.data.doc;
+  });
+};
+
+export const updateReview = (data: ReviewRequest, id: string) => {
+  const url = BASE_URL + "/reviews/" + id;
+  return axios
+    .patch<Revi>(url, data, { headers: { Authorization: AUTH_TOKEN } })
+    .then((r) => {
+      return r.data.doc;
+    });
 };

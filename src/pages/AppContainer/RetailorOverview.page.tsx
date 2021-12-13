@@ -74,6 +74,17 @@ const RetailorOverview: FC<Props> = (props) => {
         </div>
         <div className="ml-20 text-left">
           {customer?.role === "retailor" ? (
+            <Link className=" hover:text-red-500" to="/reviewsRetailor">
+              ⚫ See all reviews
+            </Link>
+          ) : (
+            <Link className=" hover:text-red-500" to="/retailor-login">
+              ⚫ See all reviews
+            </Link>
+          )}
+        </div>
+        <div className="ml-20 text-left">
+          {customer?.role === "retailor" ? (
             <Link className=" hover:text-red-500" to="/choose-product">
               ⚫ Delete a Product
             </Link>

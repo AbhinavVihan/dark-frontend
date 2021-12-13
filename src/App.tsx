@@ -77,9 +77,11 @@ function App() {
               "/all-orders",
               "/update-myaccount",
               "/productsRetailor",
+              "/reviewsRetailor",
               "/categoriesRetailor",
               "/choose-product",
               "/products/:productId/review",
+              "/products/:productId/updateReview/:reviewId",
             ]}
             exact
           >
