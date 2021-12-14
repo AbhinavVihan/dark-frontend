@@ -72,15 +72,6 @@ const CrateCategory: FC<Props> = (props) => {
                   required
                   placeholder="description"
                 ></input>
-                {/* <input
-                className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96 "
-                id="description"
-                onChange={(e) => setDescription(e.target.value)}
-                value={description}
-                autoComplete="off"
-                required
-                placeholder="description"
-              /> */}
               </div>
             </div>
 
@@ -89,7 +80,7 @@ const CrateCategory: FC<Props> = (props) => {
                 onClick={() => {
                   dispatch(createCategoryBegin());
                 }}
-                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-green-800 border-2 border-black rounded bg-transparen hover:bg-green-900 w-28"
+                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-green-800 border-2 border-black rounded bg-transparen hover:bg-green-900 "
               >
                 Create Category
               </button>

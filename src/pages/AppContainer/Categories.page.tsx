@@ -97,7 +97,7 @@ const Categories: FC<Props> = (props) => {
               <div className="border-black ">
                 <Link to={"/categories/" + category._id + "/products"}>
                   <img
-                    className="rounded-lg xxxsm:w-48 xxsm:w-40 xsm:w-52 sm:w-44 md:w-52"
+                    className="rounded-lg xxxsm:w-48 xsm:w-52 sm:w-44 md:w-52"
                     alt="djhsuk"
                     src={BASE_URL + "/img/categories/" + category.photo}
                   />

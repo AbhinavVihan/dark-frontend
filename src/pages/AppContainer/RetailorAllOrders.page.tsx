@@ -40,10 +40,10 @@ const AllOrders: FC<Props> = (props) => {
         {orders.length < 1 && <div>Nothing here</div>}
 
         <div className="text-center "></div>
-        <div className="grid h-auto grid-flow-row gap-4 m-4 space-x-10">
+        <div className="grid h-auto grid-flow-row gap-4 m-4 ">
           {orders.map((order) => (
             <div className="items-center justify-center rounded bg-gray-50 hover:bg-gray-200 hover:border-black">
-              <div className="flex flex-col items-center justify-center space-x-4 border-black sm:flex sm:flex-row">
+              <div className="flex flex-col items-center justify-center space-x-20 text-xs border-black sm:flex sm:flex-row">
                 <Link
                   className="cursor-pointer "
                   to={

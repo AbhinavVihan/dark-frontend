@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { useState } from "react";
@@ -19,6 +19,7 @@ const RetailorSignup = () => {
   const dispatch = useDispatch();
   const loading = useAppSelector(retailorLoginLoadingSelector);
   const [password, setPassword] = useState(false);
+  const history = useHistory();
 
   const togglePassword = () => {
     setPassword(password ? false : true);
@@ -44,6 +45,7 @@ const RetailorSignup = () => {
       signupAsRetailor(data)
         .then((c) => {
           dispatch(RetailorSignupActionComplete());
+          history.push("/retailor-login");
         })
         .catch((e) => {
           dispatch(retailorSignupActionError(e.message));
@@ -52,7 +54,7 @@ const RetailorSignup = () => {
   });
 
   return (
-    <LoadingOverlay className="w-screen h-screen" active={loading} spinner>
+    <LoadingOverlay className="w-full h-full" active={loading} spinner>
       <div className="flex flex-col items-center pt-8 space-y-28">
         <div className="flex flex-col space-y-14">
           <div className="space-y-4 ">
@@ -111,7 +113,7 @@ const RetailorSignup = () => {
               />
             </div>
 
-            <div>
+            <div className="xxsm:text-sm sm:text-base">
               PasswordConfirm:{" "}
               <input
                 className="h-10 border-2 border-black rounded w-44 sm:w-96 md:w-96 lg:w-72 xl:w-96"
@@ -151,7 +153,7 @@ const RetailorSignup = () => {
               </div>
 
               <button
-                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28"
                 type="submit"
               >
                 Get started

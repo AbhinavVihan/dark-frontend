@@ -28,6 +28,9 @@ import {
   RETAILOR_SIGNUP_BEGIN,
   RETAILOR_SIGNUP_COMPLETE,
   RETAILOR_SIGNUP_ERROR,
+  SIGNUP_BEGIN,
+  SIGNUP_COMPLETE,
+  SIGNUP_ERROR,
   UPDATE_MY_CREDENTIALS_BEGIN,
   UPDATE_MY_CREDENTIALS_COMPLETED,
   UPDATE_MY_CREDENTIALS_ERROR,
@@ -51,11 +54,6 @@ export const loginActionComplete = (c: Customer) => ({
   type: LOGIN_COMPLETE,
   payload: c,
 });
-
-// export const RetailorLoginActionComplete = (c: Customer) => ({
-//   type: RETAILOR_LOGIN_COMPLETE,
-//   payload: c,
-// });
 
 export const RetailorLoginActionComplete = () => ({
   type: RETAILOR_LOGIN_COMPLETE,
@@ -112,16 +110,6 @@ export const logoutCompleted = () => ({
   type: LOGOUT_COMPLETE,
 });
 
-// const retailorLoginAction = (c: Customer) => ({
-//   type: RETAILOR_LOGIN,
-//   payload: c,
-// });
-
-// const retailorLoginErrorAction = (msg: string) => ({
-//   type: RETAILOR_LOGIN_ERROR,
-//   payload: msg,
-// });
-
 export const resetPasswordBegin = ({ token }: any) => ({
   type: FORGOT_PASSWORD_BEGIN,
   payload: { token },
@@ -174,6 +162,18 @@ export const getCustomerBegin = (id: string) => ({
 export const getCustomerComplete = (customer: Customer) => ({
   type: GET_CUSTOMER_COMPLETE,
   payload: customer,
+});
+
+export const signupBegin = () => ({
+  type: SIGNUP_BEGIN,
+});
+
+export const signupComplete = () => ({
+  type: SIGNUP_COMPLETE,
+});
+
+export const signupError = () => ({
+  type: SIGNUP_ERROR,
 });
 
 // export const authActions = bindActionCreators(

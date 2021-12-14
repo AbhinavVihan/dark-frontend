@@ -118,7 +118,7 @@ export const signup = (data: SignupRequest) => {
       // console.log(response.data);
       return response.data.doc;
     })
-    .catch((e) => console.log(e));
+    .catch((e) => alert(e));
 };
 
 export const signupAsRetailor = (data: SignupRequest) => {
@@ -129,8 +129,8 @@ export const signupAsRetailor = (data: SignupRequest) => {
     .then((response) => {
       // console.log(response.data);
       alert("retailor signup successfull");
-      window.location.href = "/retailor-login";
-      return response.data;
+      // window.location.href = "/retailor-login";
+      return response.data.doc;
     })
     .catch((e) => {
       alert(e.message);

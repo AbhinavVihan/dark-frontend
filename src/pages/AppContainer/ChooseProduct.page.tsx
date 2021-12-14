@@ -39,7 +39,7 @@ const ChooseProduct: FC<Props> = (props) => {
   });
 
   return (
-    <div className="flex flex-col items-center pt-8 space-y-14 ">
+    <div className="flex flex-col items-center w-screen pt-8 space-y-14 ">
       <div className="flex flex-col space-y-6 text-center">
         <div className="pb-4 text-center">
           <h1 className="text-base font-semibold text-center md:text-4xl sm:text-2xl">

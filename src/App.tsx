@@ -60,6 +60,11 @@ function App() {
           <Route path="/" exact>
             <Redirect to="/products" />
           </Route>
+          {!customer && (
+            <Route path="/my-account" exact>
+              <Redirect to="/login" />
+            </Route>
+          )}
           <Route
             path={[
               "/overview",

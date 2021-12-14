@@ -64,9 +64,9 @@ const Cart: FC<Props> = (props) => {
                     >
                       <div className="flex justify-center">
                         <img
-                          className="w-64 "
+                          className="w-64 rounded-2xl"
                           alt="jvbjdsbj"
-                          src={BASE_URL + "/img/products/" + product.imageFront}
+                          src={BASE_URL + "/img/products/" + product.image1}
                         />
                       </div>
                       <div className="flex flex-col text-center">

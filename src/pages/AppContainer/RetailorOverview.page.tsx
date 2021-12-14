@@ -11,9 +11,7 @@ const RetailorOverview: FC<Props> = (props) => {
 
   return (
     <div className="pt-5 space-y-5 text-center">
-      <h1 className="text-2xl font-semibold lg:pl-10">
-        These are the things that a Retailor can do
-      </h1>
+      <h1 className="text-2xl font-semibold lg:pl-10">Retailor's Menu</h1>
       <div className="pb-12 space-y-5 lg:ml-20 md:ml-48 sm:ml-32">
         <div className="ml-20 text-left">
           {customer?.role === "retailor" ? (
@@ -91,6 +89,17 @@ const RetailorOverview: FC<Props> = (props) => {
           ) : (
             <Link className=" hover:text-red-500" to="/retailor-login">
               ⚫ Delete a Product
+            </Link>
+          )}
+        </div>
+        <div className="ml-20 text-left">
+          {customer?.role === "retailor" ? (
+            <Link className=" hover:text-red-500" to="/my-account">
+              ⚫ My Account
+            </Link>
+          ) : (
+            <Link className=" hover:text-red-500" to="/retailor-login">
+              ⚫ My Account
             </Link>
           )}
         </div>

@@ -89,11 +89,11 @@ const ProductsForCategories: FC<Props> = (props) => {
                 <div className="border-black ">
                   <Link to={"/products/" + product._id}>
                     <img
-                      className="rounded-lg xxxsm:w-48 xxsm:w-40 xsm:w-52 sm:w-44 md:w-52"
+                      className="rounded-lg xxxsm:w-48 xsm:w-52 sm:w-44 md:w-52"
                       alt="jvbjdsbj"
                       src={BASE_URL + "/img/products/" + product.imageFront}
                     />
-                    <div className="flex justify-around pb-5 xxxsm:w-48 xxsm:w-40">
+                    <div className="flex justify-around pb-5 xxxsm:w-48 ">
                       <div className="font-semibold xxxsm:text-xs sm:text-sm md:text-base">
                         {product && product.name}
                       </div>

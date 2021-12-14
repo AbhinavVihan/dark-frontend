@@ -61,11 +61,7 @@ const AddReview: FC<Props> = (props) => {
 
   return (
     <div className="m-auto space-y-10">
-      <LoadingOverlay
-        className="w-full h-full bg-white"
-        active={loading}
-        spinner
-      >
+      <LoadingOverlay className="w-full h-full" active={loading} spinner>
         <div className="w">
           <div className="space-y-10 xxxsm:flex xxxsm:flex-col">
             <div className="pt-10 text-2xl font-semibold text-center">

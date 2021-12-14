@@ -32,6 +32,9 @@ export const RESET_PASSWORD_COMPLETE = "reset/password_complete";
 export const RESET_PASSWORD_ERROR = "reset/password_error";
 export const LOGOUT_BEGIN = "logout/begin";
 export const LOGOUT_COMPLETE = "logout/complete";
+export const SIGNUP_BEGIN = "signup/begin";
+export const SIGNUP_COMPLETE = "signup/complete";
+export const SIGNUP_ERROR = "signup/error";
 
 //products
 export const PRODUCTS_FETCH_SINGLE = "products/fetch_single";
