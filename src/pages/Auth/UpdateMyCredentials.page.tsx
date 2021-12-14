@@ -29,9 +29,13 @@ const UpdateMyAccount = () => {
       .then((c) => {
         dispatch(meLoginAction(c!));
         dispatch(updateMyCredentialsCompleted(c!));
-        window.location.href = "/my-account";
+        // window.location.href = "/my-account";
+        history.push("/my-account");
       })
-      .catch((e) => dispatch(updateMyCredentialsError(e)));
+      .catch((e) => {
+        dispatch(updateMyCredentialsError(e));
+        history.push("/my-account");
+      });
   };
 
   return (
@@ -45,7 +49,7 @@ const UpdateMyAccount = () => {
             <div>
               Name:
               <input
-                className="h-10 border-2 border-black rounded w-96"
+                className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
@@ -53,7 +57,7 @@ const UpdateMyAccount = () => {
             <div>
               Email:
               <input
-                className="h-10 border-2 border-black rounded w-96"
+                className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -61,7 +65,7 @@ const UpdateMyAccount = () => {
             <div>
               Address:
               <input
-                className="h-10 border-2 border-black rounded w-96"
+                className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
               />

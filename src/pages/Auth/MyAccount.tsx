@@ -71,7 +71,7 @@ const MyAccount = () => {
       </div>
       <div className="text-4xl text-center ">My Account</div>
 
-      <div className="flex flex-col justify-start mx-auto space-y-5">
+      <div className="flex flex-col justify-start mx-auto space-y-5 xxsm:text-xs xxsm:w-72 sm:w-96 sm:text-base">
         <div className="">
           NAME : <span className="text-blue-700">{customer?.name}</span>
         </div>
@@ -142,7 +142,7 @@ const MyAccount = () => {
           ROLE: <span className="text-blue-700">{customer?.role}</span>
         </div>
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center sm:text-base xxsm:text-sm">
         <div className="flex items-center justify-end">
           <Link
             className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-red-800 border-2 border-black rounded hover:bg-red-900 "

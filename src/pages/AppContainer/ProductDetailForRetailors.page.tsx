@@ -66,45 +66,36 @@ const ProductsDetailForRetailor: FC<Props> = (props) => {
     <LoadingOverlay className="w-screen h-screen" active={loading} spinner>
       <div>
         {product && (
-          <div>
-            {loading && (
-              <div className="text-green-500">Loading Product...</div>
-            )}
-
-            {product && (
-              <div className="flex">
-                <div className="ml-6 mr-6">
-                  <img
-                    className="w-full h-full"
-                    alt="imhfdb"
-                    src={img![index]}
-                  />
-                  <div className="space-x-5">
-                    <button
-                      className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
-                      onClick={onClickBack}
-                    >
-                      prev.
-                    </button>
-                    <button
-                      className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
-                      onClick={onClickForward}
-                    >
-                      next
-                    </button>
-                  </div>
-                </div>
-
-                <div className="space-y-8 font-bold tracking-wider pl-9">
-                  <div>{product.name}</div>
-                  <div>{product.price}</div>
-                  <div>{product.quantity}</div>
-                  <div>{product.ratingsAverage}</div>
-                  <div>{product.description}</div>
-                  <div></div>
-                </div>
+          <div className="mt-10 xsm:flex xsm:justify-center xsm:flex-row xxsm:flex xxsm:flex-col">
+            <div className="ml-6 mr-6">
+              <img
+                className=" md:w-96 sm:w-64 xsm:w-60 rounded-2xl"
+                alt="imhfdb"
+                src={img![index]}
+              />
+              <div className="text-center mt-7 xsm:space-x-2 xxsm:space-x-3 sm:space-x-5">
+                <button
+                  className="inline-block text-white bg-transparent bg-gray-800 border-2 border-black rounded xxxsm:w-5 xxsm:w-7 hover:bg-black w-28"
+                  onClick={onClickBack}
+                >
+                  {"<"}
+                </button>
+                <button
+                  className="inline-block text-white bg-transparent bg-gray-800 border-2 border-black rounded xxxsm:w-5 xxsm:w-7 hover:bg-black w-28"
+                  onClick={onClickForward}
+                >
+                  {">"}
+                </button>
               </div>
-            )}
+            </div>
+
+            <div className="space-y-8 font-bold tracking-wider text-center xxsm:text-xs xxsm:mt-20 xsm:text-xs pl-9 sm:text-sm sm:w-56 md:w-64 lg:w-96">
+              <div>{product.name}</div>
+              <div>${product.price}</div>
+
+              <div>{product.description}</div>
+              <div></div>
+            </div>
           </div>
         )}
       </div>
