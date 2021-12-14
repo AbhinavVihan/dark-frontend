@@ -118,55 +118,51 @@ const ProductsDetails: FC<Props> = (props) => {
       spinner
     >
       <div>
-        {customer?.role === "customer" && cart ? (
-          <Link to="/cart">
-            <button className="flex px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28">
-              My Cart
-              <AiOutlineShoppingCart className="items-center justify-end text-right "></AiOutlineShoppingCart>
-            </button>
-          </Link>
-        ) : (
-          <Link to="/login">
-            <button className="flex px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28">
-              My Cart
-              <AiOutlineShoppingCart className="items-center justify-end text-right "></AiOutlineShoppingCart>
-            </button>
-          </Link>
-        )}
-        {/* <div>
-          <Link className="text-blue-600 hover:text-red-500" to="/products">
-            Back to Products
-          </Link>
-        </div> */}
+        <div className="flex justify-end">
+          {customer?.role === "customer" && cart ? (
+            <Link to="/cart">
+              <button className="flex px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28">
+                My Cart
+                <AiOutlineShoppingCart className="items-center"></AiOutlineShoppingCart>
+              </button>
+            </Link>
+          ) : (
+            <Link to="/login">
+              <button className="flex px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28">
+                My Cart
+                <AiOutlineShoppingCart className="items-center"></AiOutlineShoppingCart>
+              </button>
+            </Link>
+          )}
+        </div>
+
         {product && (
-          <div className="flex">
+          <div className="xsm:flex xsm:justify-center xsm:flex-row xxsm:flex xxsm:flex-col">
             <div className="ml-6 mr-6">
               <img
-                className="w-full h-full rounded-2xl"
+                className=" md:w-96 sm:w-64 xsm:w-60 rounded-2xl"
                 alt="imhfdb"
                 src={img![index]}
               />
-              <div className="space-x-5">
+              <div className="text-center mt-7 xsm:space-x-2 xxsm:space-x-3 sm:space-x-5">
                 <button
-                  className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                  className="inline-block text-white bg-transparent bg-gray-800 border-2 border-black rounded xxxsm:w-5 xxsm:w-7 hover:bg-black w-28"
                   onClick={onClickBack}
                 >
-                  prev.
+                  {"<"}
                 </button>
                 <button
-                  className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                  className="inline-block text-white bg-transparent bg-gray-800 border-2 border-black rounded xxxsm:w-5 xxsm:w-7 hover:bg-black w-28"
                   onClick={onClickForward}
                 >
-                  next
+                  {">"}
                 </button>
               </div>
             </div>
 
-            <div className="space-y-8 font-bold tracking-wider pl-9">
+            <div className="space-y-8 font-bold tracking-wider xxsm:text-xs xxsm:mt-20 xsm:text-xs pl-9 sm:text-sm sm:w-56 md:w-64 lg:w-96">
               <div>{product.name}</div>
-              <div>{product.price}</div>
-              <div>{product.quantity}</div>
-              <div>{product.ratingsAverage}</div>
+              <div>${product.price}</div>
               <div>{product.description}</div>
               <div>
                 {customer?.role === "retailor" && (
@@ -211,33 +207,32 @@ const ProductsDetails: FC<Props> = (props) => {
           ))}
         </div>
 
-        <div className="text-right">
-          {customer?.role === "customer" && (
-            <div>
-              <Link
-                to={"/products/" + productId + "/review"}
-                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28"
-              >
-                Add a review
-              </Link>
-            </div>
-          )}
-          {(!customer || customer.role === "retailor") && (
-            <div>
-              <Link
-                to={"/login"}
-                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28"
-              >
-                Add a review
-              </Link>
-            </div>
-          )}
-        </div>
-
         {product && product.reviews && product.reviews.length > 0 && (
           <div>
             <div className="mt-20 mb-5 text-3xl font-semibold text-center sm:text-3xl xsm:text-base xxxsm:text-xs">
               Reviews on this product
+            </div>
+            <div className="text-right">
+              {customer?.role === "customer" && (
+                <div>
+                  <Link
+                    to={"/products/" + productId + "/review"}
+                    className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28"
+                  >
+                    Add a review
+                  </Link>
+                </div>
+              )}
+              {(!customer || customer.role === "retailor") && (
+                <div>
+                  <Link
+                    to={"/login"}
+                    className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28"
+                  >
+                    Add a review
+                  </Link>
+                </div>
+              )}
             </div>
             <div className="flex justify-center ">
               <ReviewsPage></ReviewsPage>
