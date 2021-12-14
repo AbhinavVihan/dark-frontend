@@ -1,4 +1,3 @@
-import { updateRequest } from "../api/interfaces/authInterfaces";
 import { Customer } from "../models/Customer";
 import { LoginRequest } from "../api/interfaces/authInterfaces";
 import {
@@ -30,6 +29,8 @@ import {
   RETAILOR_SIGNUP_COMPLETE,
   RETAILOR_SIGNUP_ERROR,
   UPDATE_MY_CREDENTIALS_BEGIN,
+  UPDATE_MY_CREDENTIALS_COMPLETED,
+  UPDATE_MY_CREDENTIALS_ERROR,
 } from "./action.constants";
 
 export const loginActionBegin = (data: LoginRequest) => ({
@@ -150,18 +151,18 @@ export const customerUpdatemeCompleted = (c: Customer) => ({
 export const customerUpdatemeError = (c: Customer) => ({
   type: CUSTOMER_UPDATEME_ERROR,
 });
-export const updateMyCredentialsBegin = (id: string, data: updateRequest) => ({
+export const updateMyCredentialsBegin = (id: string) => ({
   type: UPDATE_MY_CREDENTIALS_BEGIN,
-  payload: { id, data },
+  // payload: { id, data },
 });
 
 export const updateMyCredentialsCompleted = (c: Customer) => ({
-  type: UPDATE_MY_CREDENTIALS_BEGIN,
+  type: UPDATE_MY_CREDENTIALS_COMPLETED,
   payload: c,
 });
 
 export const updateMyCredentialsError = (msg: string) => ({
-  type: UPDATE_MY_CREDENTIALS_BEGIN,
+  type: UPDATE_MY_CREDENTIALS_ERROR,
   payload: msg,
 });
 

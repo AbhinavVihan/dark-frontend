@@ -206,34 +206,35 @@ const ProductsDetails: FC<Props> = (props) => {
             <div className=""></div>
           ))}
         </div>
+        <div className="text-right">
+          {customer?.role === "customer" && (
+            <div>
+              <Link
+                to={"/products/" + productId + "/review"}
+                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28"
+              >
+                Add a review
+              </Link>
+            </div>
+          )}
+          {(!customer || customer.role === "retailor") && (
+            <div>
+              <Link
+                to={"/login"}
+                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28"
+              >
+                Add a review
+              </Link>
+            </div>
+          )}
+        </div>
 
         {product && product.reviews && product.reviews.length > 0 && (
           <div>
             <div className="mt-20 mb-5 text-3xl font-semibold text-center sm:text-3xl xsm:text-base xxxsm:text-xs">
               Reviews on this product
             </div>
-            <div className="text-right">
-              {customer?.role === "customer" && (
-                <div>
-                  <Link
-                    to={"/products/" + productId + "/review"}
-                    className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28"
-                  >
-                    Add a review
-                  </Link>
-                </div>
-              )}
-              {(!customer || customer.role === "retailor") && (
-                <div>
-                  <Link
-                    to={"/login"}
-                    className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28"
-                  >
-                    Add a review
-                  </Link>
-                </div>
-              )}
-            </div>
+
             <div className="flex justify-center ">
               <ReviewsPage></ReviewsPage>
             </div>

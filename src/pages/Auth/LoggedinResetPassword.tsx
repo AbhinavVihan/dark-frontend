@@ -45,7 +45,7 @@ const LoggedinResetPassword: FC<Props> = (props) => {
 
   return (
     <LoadingOverlay className="w-screen h-screen" active={loading} spinner>
-      <div className="flex flex-col items-center w-screen pt-8 lg:w-1/2 space-y-28">
+      <div className="flex flex-col items-center justify-center pt-8 space-y-28">
         <div className="flex flex-col space-y-14">
           <div className="space-y-4 ">
             <h1 className="text-4xl">Change your Password</h1>
@@ -91,10 +91,10 @@ const LoggedinResetPassword: FC<Props> = (props) => {
               />
             </div>
 
-            <div className="flex items-center space-x-28">
+            <div className="flex items-center justify-center space-x-28">
               <button
                 onClick={() => dispatch(loggedinResetPasswordBegin())}
-                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
+                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28"
                 type="submit"
               >
                 {" "}

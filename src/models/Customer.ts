@@ -5,8 +5,8 @@ export interface Customer extends Entity {
   email: string;
   photo: string;
   address: string;
-  passwordResetExpires: Date;
-  passwordResetToken: string;
+  passwordResetExpires?: Date;
+  passwordResetToken?: string;
   role: "customer" | "admin" | "retailor";
 }
 

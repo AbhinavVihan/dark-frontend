@@ -9,7 +9,7 @@ import {
   MY_ORDERS_BEGIN,
   PRODUCTS_FETCH_SINGLE,
   RETAIOR_ALL_ORDERS_BEGIN,
-  UPDATE_MY_CREDENTIALS_BEGIN,
+  // UPDATE_MY_CREDENTIALS_BEGIN,
 } from "../actions/action.constants";
 import {
   fetchOneCategoryComplete,
@@ -45,11 +45,11 @@ import {
   retailorAllOrdersCompleted,
   retailorAllOrdersError,
 } from "../actions/order.actions";
-import { updateMe } from "../api/auth";
-import {
-  updateMyCredentialsCompleted,
-  updateMyCredentialsError,
-} from "../actions/auth.actions";
+// import { updateMe } from "../api/auth";
+// import {
+//   updateMyCredentialsCompleted,
+//   updateMyCredentialsError,
+// } from "../actions/auth.actions";
 
 function* fetchOneProduct(action: AnyAction): Generator<any> {
   try {
@@ -203,24 +203,25 @@ function* FetchAllOrders(action: AnyAction): Generator<any> {
 //   }
 // }
 
-function* updateMyCredentials(action: AnyAction): Generator<any> {
-  try {
-    const res: any = yield call(updateMe, action.payload.id, {
-      name: action.payload.data.name,
-      email: action.payload.data.email,
-      address: action.payload.data.address,
-    });
+// function* updateMyCredentials(action: AnyAction): Generator<any> {
+//   try {
+//     const res: any = yield call(updateMe, action.payload.id, {
+//       name: action.payload.data.name,
+//       email: action.payload.data.email,
+//       address: action.payload.data.address,
+//     });
 
-    console.log(res.data.doc);
-    yield put(updateMyCredentialsCompleted(res.data.doc));
-    // alert("created successfully");
-    // console.log(res.data);
-  } catch (e: any) {
-    const error = e || "some error occured";
-    yield put(updateMyCredentialsError(error));
-    // alert("Some error occured");
-  }
-}
+//     console.log(res.data.doc);
+//     yield put(updateMyCredentialsCompleted(res.data.doc));
+//     // alert("created successfully");
+//     // console.log(res.data);
+//   } catch (e: any) {
+//     console.log(e);
+//     const error = e || "some error occured";
+//     yield put(updateMyCredentialsError(error));
+//     // alert("Some error occured");
+//   }
+// }
 
 // function* getC(action: AnyAction): Generator<any> {
 //   const res: any = yield call(getCustomer, action.payload);
@@ -241,7 +242,7 @@ export function* watchAll() {
     takeEvery(CREATE_PRODUCT_BEGIN, createproduct),
     takeEvery(MY_ORDERS_BEGIN, FetchMyOrders),
     takeEvery(RETAIOR_ALL_ORDERS_BEGIN, FetchAllOrders),
-    takeEvery(UPDATE_MY_CREDENTIALS_BEGIN, updateMyCredentials),
+    // takeEvery(UPDATE_MY_CREDENTIALS_BEGIN, updateMyCredentials),
     // takeEvery(LOGIN_BEGIN, Login),
     // takeEvery(RETAILOR_LOGIN_BEGIN, RetailorLogin),
     // takeEvery(GET_CUSTOMER_BEGIN, getC),

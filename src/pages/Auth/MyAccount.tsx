@@ -52,107 +52,113 @@ const MyAccount = () => {
 
       dispatch(loginActionBegin(c));
       window.location.href = "/my-account";
-      // authActions.login(c);
-      // window.location.href = "/my-account";
     });
   };
 
   return (
-    <div className="flex flex-col justify-around h-screen font-bold bg-gray-100">
-      {customer?.role === "retailor" && (
-        <Link className="cursor-default" to="/retailor-overview">
-          <AiFillHome className="cursor-pointer hover:text-red-500"></AiFillHome>
-        </Link>
-      )}
-      {customer?.role === "customer" && (
-        <Link className="cursor-default" to="/products">
-          <AiFillHome className="cursor-pointer hover:text-red-500"></AiFillHome>
-        </Link>
-      )}
-      <div className="py-10 text-2xl">My Account</div>
-      <div className="">
-        NAME : <span className="text-blue-700">{customer?.name}</span>
+    <div className="flex flex-col justify-around w-screen h-screen font-bold bg-gray-100">
+      <div className="flex justify-end mr-5">
+        {customer?.role === "retailor" && (
+          <Link className="cursor-default" to="/retailor-overview">
+            <AiFillHome className="cursor-pointer hover:text-red-500"></AiFillHome>
+          </Link>
+        )}
+        {customer?.role === "customer" && (
+          <Link className="cursor-default" to="/products">
+            <AiFillHome className="cursor-pointer hover:text-red-500"></AiFillHome>
+          </Link>
+        )}
       </div>
-      <div>
-        EMAIL: <span className="text-blue-700">{customer?.email}</span>
-      </div>
-      <div>
-        ADDRESS: <span className="text-blue-700">{customer?.address}</span>
-      </div>
-      <div>
-        {
-          <img
-            className="rounded"
-            alt="customer"
-            src={`${baseUrl}/img/customers/${imageName}`}
-          />
-        }
-      </div>
-      <form onSubmit={submit}>
-        <div>
-          {customer?.photo.startsWith("default") ? (
-            <label
-              className="text-green-500 cursor-pointer hover:text-red-500"
-              onClick={() => setDisabled(!disabled)}
-              htmlFor="photo"
-            >
-              Upload my photo
-            </label>
-          ) : (
-            <label
-              className="text-green-500 cursor-pointer hover:text-red-500"
-              onClick={() => setDisabled(!disabled)}
-              htmlFor="photo"
-            >
-              Choose new photo
-            </label>
-          )}
+      <div className="text-4xl text-center ">My Account</div>
 
-          <input
-            className="hidden"
-            onChange={(e) => {
-              handleInputChange(e);
-              alert("click on submit button");
-              dispatch(customerUpdatemeBegin());
-            }}
-            type="file"
-            id="photo"
-            name="photo"
-            accept="image/*"
-            // name="file"
-            defaultValue={photo}
-            // value={photo}
-          />
-          <div>
-            {!disabled && (
-              <button
-                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
-                type="submit"
-                onClick={() => submit}
-              >
-                Submit
-              </button>
-            )}
-          </div>
+      <div className="flex flex-col justify-start mx-auto space-y-5">
+        <div className="">
+          NAME : <span className="text-blue-700">{customer?.name}</span>
         </div>
-      </form>
-      <div>
-        ROLE: <span className="text-blue-700">{customer?.role}</span>
-      </div>
-      <div>
-        <Link className="text-green-500 hover:text-red-500" to="/my-password">
-          Change Your Password
-        </Link>
-      </div>
+        <div>
+          EMAIL: <span className="text-blue-700">{customer?.email}</span>
+        </div>
+        <div>
+          ADDRESS: <span className="text-blue-700">{customer?.address}</span>
+        </div>
+        <div className="flex justify-center">
+          {
+            <img
+              className="rounded-full"
+              alt="customer"
+              src={`${baseUrl}/img/customers/${imageName}`}
+            />
+          }
+        </div>
+        <form onSubmit={submit}>
+          <div className="text-center">
+            {customer?.photo.startsWith("default") ? (
+              <label
+                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-red-800 border-2 border-black rounded cursor-pointer hover:bg-red-900 w-28"
+                onClick={() => setDisabled(!disabled)}
+                htmlFor="photo"
+              >
+                Upload my photo
+              </label>
+            ) : (
+              <label
+                className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-red-800 border-2 border-black rounded cursor-pointer hover:bg-red-900 "
+                onClick={() => setDisabled(!disabled)}
+                htmlFor="photo"
+              >
+                Choose new photo
+              </label>
+            )}
 
-      <span className="text-red-500">or</span>
-      <div>
-        <Link
-          className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-red-800 border-2 border-black rounded hover:bg-red-900 w-28"
-          to="update-myaccount"
-        >
-          Update my credentials
-        </Link>
+            <input
+              className="hidden"
+              onChange={(e) => {
+                handleInputChange(e);
+                alert("click on submit button");
+                dispatch(customerUpdatemeBegin());
+              }}
+              type="file"
+              id="photo"
+              name="photo"
+              accept="image/*"
+              // name="file"
+              defaultValue={photo}
+              // value={photo}
+            />
+            <div>
+              {!disabled && (
+                <button
+                  className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28"
+                  type="submit"
+                  onClick={() => submit}
+                >
+                  Submit
+                </button>
+              )}
+            </div>
+          </div>
+        </form>
+        <div>
+          ROLE: <span className="text-blue-700">{customer?.role}</span>
+        </div>
+      </div>
+      <div className="flex justify-center">
+        <div className="flex items-center justify-end">
+          <Link
+            className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-red-800 border-2 border-black rounded hover:bg-red-900 "
+            to="update-myaccount"
+          >
+            Update my credentials
+          </Link>
+        </div>
+        <div className="flex items-center justify-end">
+          <Link
+            className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-red-800 border-2 border-black rounded hover:bg-red-900 "
+            to="/my-password"
+          >
+            Change My Password
+          </Link>
+        </div>
       </div>
     </div>
   );

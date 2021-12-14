@@ -14,6 +14,9 @@ import {
   RESET_PASSWORD_COMPLETE,
   RESET_PASSWORD_COMPLETED,
   RESET_PASSWORD_ERROR,
+  UPDATE_MY_CREDENTIALS_BEGIN,
+  UPDATE_MY_CREDENTIALS_COMPLETED,
+  UPDATE_MY_CREDENTIALS_ERROR,
 } from "../actions/action.constants";
 
 export interface AuthState {
@@ -56,10 +59,13 @@ export const authReducer: Reducer<AuthState> = (
     case LOGGEDIN_PASSWORD_CHANGE_BEGIN:
     case RESET_PASSWORD_BEGIN:
     case LOGOUT_BEGIN:
+    case UPDATE_MY_CREDENTIALS_BEGIN:
       return { ...state, loading: true };
     case LOGIN_ERROR:
       return { ...state, errorOne: action.payload, loading: false };
     case LOGGEDIN_PASSWORD_CHANGE_COMPLETED:
+    case UPDATE_MY_CREDENTIALS_COMPLETED:
+    case UPDATE_MY_CREDENTIALS_ERROR:
       return { ...state, loading: false };
 
     default:

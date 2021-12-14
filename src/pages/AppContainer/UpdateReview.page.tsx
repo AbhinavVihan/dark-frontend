@@ -50,35 +50,37 @@ const AddReview: FC<Props> = (props) => {
   };
 
   return (
-    <LoadingOverlay className="w-screen h-screen" active={loading} spinner>
-      <div className="m-auto space-y-10">
-        <div className="space-y-10 xxxsm:flex xxxsm:flex-col">
-          <div className="pt-10 text-2xl font-semibold text-center">
-            Update your Review for this product.
-          </div>
-          <img
-            alt="sdss"
-            className="rounded-3xl w-60"
-            src={BASE_URL + "/img/products/" + p}
-          />
-        </div>
-        <form onSubmit={(e) => postReview(e)}>
-          <div className="py-6 text-center border-black">
-            <input
-              value={review}
-              onChange={(e) => setReview(e.target.value)}
-              placeholder="write your updated review here..."
-              className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96"
+    <div className="m-auto">
+      <LoadingOverlay className="w-full h-full" active={loading} spinner>
+        <div className="m-auto space-y-10">
+          <div className="space-y-10 xxxsm:flex xxxsm:flex-col">
+            <div className="pt-10 text-2xl font-semibold text-center">
+              Update your Review for this product.
+            </div>
+            <img
+              alt="sdss"
+              className="rounded-3xl w-60"
+              src={BASE_URL + "/img/products/" + p}
             />
           </div>
-          <div className="text-center">
-            <button className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28">
-              Update review
-            </button>
-          </div>
-        </form>
-      </div>
-    </LoadingOverlay>
+          <form onSubmit={(e) => postReview(e)}>
+            <div className="py-6 text-center border-black">
+              <input
+                value={review}
+                onChange={(e) => setReview(e.target.value)}
+                placeholder="write your updated review here..."
+                className="w-56 h-10 border-2 border-black rounded sm:w-96 md:w-96 lg:w-96"
+              />
+            </div>
+            <div className="text-center">
+              <button className="inline-block px-0 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded hover:bg-green-900 w-28">
+                Update review
+              </button>
+            </div>
+          </form>
+        </div>
+      </LoadingOverlay>
+    </div>
   );
 };
 

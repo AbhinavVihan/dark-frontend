@@ -167,11 +167,17 @@ export const me = () => {
 export const updateMe = (id: string, data: updateRequest) => {
   const url = BASE_URL + "/customers/" + id;
   return axios
-    .patch(url, data, { headers: { Authorization: AUTH_TOKEN } })
-    .then(() => {
-      window.location.href = "/my-account";
+    .patch<CustomerForReview>(url, data, {
+      headers: { Authorization: AUTH_TOKEN },
     })
-    .catch((e) => console.log(e));
+    .then((response) => {
+      alert("credentials updated successfully");
+      return response.data.doc;
+    })
+    .catch((e) => {
+      alert(e);
+      window.location.href = "/my-account";
+    });
 };
 
 export const getCustomer = (id: string) => {
