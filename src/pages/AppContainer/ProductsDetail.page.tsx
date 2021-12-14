@@ -160,11 +160,11 @@ const ProductsDetails: FC<Props> = (props) => {
               </div>
             </div>
 
-            <div className="space-y-8 font-bold tracking-wider xxsm:text-xs xxsm:mt-20 xsm:text-xs pl-9 sm:text-sm sm:w-56 md:w-64 lg:w-96">
+            <div className="space-y-8 font-bold tracking-wider text-center xxsm:text-xs xxsm:mt-20 xsm:text-xs pl-9 sm:text-sm sm:w-56 md:w-64 lg:w-96">
               <div>{product.name}</div>
               <div>${product.price}</div>
               <div>{product.description}</div>
-              <div>
+              <div className="text-center">
                 {customer?.role === "retailor" && (
                   <Link
                     className="inline-block px-0 py-1 mx-3 my-2 text-center text-white bg-transparent bg-gray-800 border-2 border-black rounded hover:bg-black w-28"
