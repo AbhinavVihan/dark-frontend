@@ -60,7 +60,7 @@ function App() {
           <Route path="/" exact>
             <Redirect to="/products" />
           </Route>
-          {!customer && (
+          {!customer && !token && (
             <Route path="/my-account" exact>
               <Redirect to="/login" />
             </Route>

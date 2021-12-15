@@ -32,18 +32,19 @@ const AllOrders: FC<Props> = (props) => {
   return (
     <LoadingOverlay className="w-screen h-screen" active={loading} spinner>
       <div>
-        <div className="items-end justify-end space-x-3 space-x-5 text-right">
+        <div className="flex justify-end pr-5">
           <Link className="hover:text-red-500" to="retailor-overview">
             <AiFillHome></AiFillHome>
           </Link>{" "}
         </div>
-        {orders.length < 1 && <div>Nothing here</div>}
+
+        {orders.length < 1 && <div className="text-center">Nothing here</div>}
 
         <div className="text-center "></div>
-        <div className="grid h-auto grid-flow-row gap-4 m-4 ">
+        <div className="grid h-auto grid-flow-row gap-4">
           {orders.map((order) => (
-            <div className="items-center justify-center rounded bg-gray-50 hover:bg-gray-200 hover:border-black">
-              <div className="flex flex-col items-center justify-center space-x-20 text-xs border-black sm:flex sm:flex-row">
+            <div className="flex justify-center rounded bg-gray-50 hover:bg-gray-200 hover:border-black">
+              <div className="flex flex-col space-y-8 text-xs border-black sm:space-x-10 sm:flex sm:flex-row">
                 <Link
                   className="cursor-pointer "
                   to={
@@ -53,7 +54,7 @@ const AllOrders: FC<Props> = (props) => {
                   }
                 >
                   <img
-                    className="items-center justify-center w-48 rounded-xl"
+                    className="items-center justify-center w-40 rounded-xl"
                     alt="jvbjdsbj"
                     src={
                       BASE_URL +
@@ -61,8 +62,8 @@ const AllOrders: FC<Props> = (props) => {
                       (order.product && order.product.imageFront)
                     }
                   />
-                  <div className="flex justify-around">
-                    <div className="font-semibold">
+                  <div className="flex justify-around w-40">
+                    <div className="w-40 font-semibold text-center">
                       {order.product && order.product.name}
                     </div>
                     <div className="font-bold text-green-600">
@@ -71,10 +72,10 @@ const AllOrders: FC<Props> = (props) => {
                   </div>
                 </Link>
 
-                <div className="flex flex-col items-center justify-center">
+                <div className="flex flex-col items-center justify-center mx-auto text-center">
                   Placed by: {order.customer.name}
                   <img
-                    className="w-20 rounded-full"
+                    className="rounded-full w-14"
                     alt="sdhvhsvhs"
                     src={`${BASE_URL}/img/customers/${order.customer.photo}`}
                   />

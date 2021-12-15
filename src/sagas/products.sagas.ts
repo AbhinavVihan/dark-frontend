@@ -107,7 +107,7 @@ function* addToCart(action: AnyAction): Generator<any> {
       action.payload.pId,
       action.payload.cId
     );
-    console.log(action.payload.pId);
+    // console.log(action.payload.pId);
     yield put(addToCartComplete(res.data));
     alert("added successfully");
     // console.log(res.data);
@@ -152,7 +152,7 @@ function* FetchAllOrders(action: AnyAction): Generator<any> {
   try {
     const res: any = yield call(fetchAllOrders);
 
-    console.log(res.data);
+    // console.log(res.data);
     yield put(retailorAllOrdersCompleted(res.data));
     // alert("created successfully");
     // console.log(res.data);

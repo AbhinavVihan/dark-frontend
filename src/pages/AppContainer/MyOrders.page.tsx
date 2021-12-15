@@ -32,7 +32,7 @@ const MyOrders: FC<Props> = (props) => {
     <LoadingOverlay className="w-screen h-screen" active={loading} spinner>
       <div className="flex justify-center">
         <div className="mt-5 gap-7 xxsm:grid-cols-1 xxsm:grid ">
-          <div className="flex flex-col space-y-10">
+          <div className="flex flex-col justify-center space-y-10">
             {orders.length < 1 && (
               <div>You do not have any orders placed yet.</div>
             )}
@@ -45,21 +45,24 @@ const MyOrders: FC<Props> = (props) => {
               </Link>
             )}
           </div>
+          <div className="text-2xl font-bold text-center">My Orders</div>
           {orders.map((order) => (
             <div className="text-center bg-gray-100 rounded-lg cursor-pointer sm:w-full hover:bg-gray-200">
               <div className="border-black ">
                 <Link className="" to={"/products/" + order._id}>
-                  <img
-                    className="w-40 rounded-xl"
-                    alt="jvbjdsbj"
-                    src={BASE_URL + "/img/products/" + order.imageCover}
-                  />
+                  <div className="flex justify-center">
+                    <img
+                      className="w-40 rounded-xl"
+                      alt="jvbjdsbj"
+                      src={BASE_URL + "/img/products/" + order.imageCover}
+                    />
+                  </div>
                   <div className="">
                     <div className="font-semibold">{order && order.name}</div>
                     <div className="font-bold text-green-600">
                       ${order.price}
                     </div>
-                    <div>Paid on {todayDate}</div>
+                    <div>Paid on: {todayDate}</div>
                   </div>
                 </Link>
               </div>
