@@ -26,6 +26,7 @@ const UploadCategoryPhoto = () => {
   const token = localStorage.getItem(AUTH_TOKEN);
   const history = useHistory();
   const loading = useAppSelector(selectedLoadingSelector);
+  const [previewSource, setPreviewSource] = useState();
 
   if (!customer && token) {
     <LoadingOverlay
@@ -35,15 +36,25 @@ const UploadCategoryPhoto = () => {
     ></LoadingOverlay>;
   }
 
-  const handleInputChange = (e: any) => {
-    setPhoto(e.target.files[0]);
+  const handleInputChange = (e) => {
+    const file = e.target.files[0];
+    setPhoto(file);
+    previewFile(file);
+  };
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
   };
 
   // const handleInputChange = (e:  React.ChangeEvent<HTMLInputElement>) => {
   //   setPhoto(e.target.files[0])
   // }
 
-  const submit = (e: any) => {
+  const submit = (e) => {
     dispatch(uploadCategoryPhotoBegin());
     e.preventDefault();
     // window.location.href = "/my-account";
@@ -51,12 +62,10 @@ const UploadCategoryPhoto = () => {
       .then((c) => {
         uploadCategoryPhotoComplete();
 
-        alert("photo uploaded successfully");
         dispatch(uploadCategoryPhotoComplete());
         history.push("/retailor-overview");
       })
       .catch((e) => {
-        alert("some error occured");
         dispatch(uploadCategoryPhotoError());
       });
     // changeCustomerPhoto(photo).then((c) => {
@@ -109,6 +118,18 @@ const UploadCategoryPhoto = () => {
             </div>
           </div>
         </form>
+        {previewSource && (
+          <div className="mt-10 text-2xl font-bold text-center">
+            <div>Preview</div>
+            <div className="flex justify-center ">
+              <img
+                className="w-40 rounded-full"
+                src={previewSource}
+                alt="chosen"
+              />
+            </div>
+          </div>
+        )}
         <div className="text-center text-red-500">
           ⚫Kindly do not refresh the page.
         </div>

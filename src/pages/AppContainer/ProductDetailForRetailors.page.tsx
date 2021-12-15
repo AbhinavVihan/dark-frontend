@@ -10,7 +10,7 @@ import {
 } from "../../selectors/products.selectors";
 import { useAppSelector } from "../../store";
 
-import { BASE_URL } from "../../api/base";
+// import { BASE_URL } from "../../api/base";
 import LoadingOverlay from "react-loading-overlay-ts";
 
 interface Props {}
@@ -25,11 +25,7 @@ const ProductsDetailForRetailor: FC<Props> = (props) => {
   const dispatch = useDispatch();
 
   const [index, setIndex] = useState(0);
-  const img = product && [
-    BASE_URL + "/img/products/" + product.image1,
-    BASE_URL + "/img/products/" + product.image2,
-    BASE_URL + "/img/products/" + product.image3,
-  ];
+  const img = product && [product.image1, product.image2, product.image3];
 
   useEffect(() => {
     dispatch(fetchOneProduct(productId));

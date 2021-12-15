@@ -14,7 +14,7 @@ import {
   productQueryCompletedAction,
 } from "../../actions/products.actions";
 import { meSelector } from "../../selectors/auth.selectors";
-import { BASE_URL } from "../../api/base";
+// import { BASE_URL } from "../../api/base";
 import { AiFillHome } from "react-icons/ai";
 import LoadingOverlay from "react-loading-overlay-ts";
 
@@ -90,7 +90,7 @@ const ProductForRetailor: FC<Props> = (props) => {
                     <img
                       className="rounded-lg xxxsm:w-48 xsm:w-52 sm:w-44 md:w-52"
                       alt="jvbjdsbj"
-                      src={BASE_URL + "/img/products/" + product.imageFront}
+                      src={product.imageFront}
                     />
                     <div className="flex justify-around pb-5 xxxsm:w-48 ">
                       <div className="font-semibold xxxsm:text-xs sm:text-sm md:text-base">

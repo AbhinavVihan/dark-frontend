@@ -13,7 +13,7 @@ import {
   categoryQueryChangedAction,
   categoryQueryCompletedAction,
 } from "../../actions/categories.actions";
-import { BASE_URL } from "../../api/base";
+// import { BASE_URL } from "../../api/base";
 import LoadingOverlay from "react-loading-overlay-ts";
 import { loadingSelector, meSelector } from "../../selectors/auth.selectors";
 import { AiFillHome } from "react-icons/ai";
@@ -86,7 +86,7 @@ const Categories: FC<Props> = (props) => {
                   <img
                     className="rounded-lg xxxsm:w-48 xsm:w-52 sm:w-44 md:w-52"
                     alt="djhsuk"
-                    src={BASE_URL + "/img/categories/" + category.photo}
+                    src={category.photo}
                   />
                   <div className="flex justify-around pb-5">
                     <div className="text-sm font-semibold sm:text-sm md:text-base">

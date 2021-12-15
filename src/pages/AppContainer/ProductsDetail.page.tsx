@@ -23,7 +23,7 @@ import {
   cartSelector,
 } from "../../selectors/cart.selectors";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { BASE_URL } from "../../api/base";
+// import { BASE_URL } from "../../api/base";
 import LoadingOverlay from "react-loading-overlay-ts";
 import ReviewsPage from "./Reviews.page";
 import { Reviewss } from "../../models/Reviews";
@@ -47,11 +47,7 @@ const ProductsDetails: FC<Props> = (props) => {
   const dispatch = useDispatch();
 
   const [index, setIndex] = useState(0);
-  const img = product && [
-    BASE_URL + "/img/products/" + product.image1,
-    BASE_URL + "/img/products/" + product.image2,
-    BASE_URL + "/img/products/" + product.image3,
-  ];
+  const img = product && [product.image1, product.image2, product.image3];
 
   const [arrr, setArrr] = useState<Reviewss[]>();
 

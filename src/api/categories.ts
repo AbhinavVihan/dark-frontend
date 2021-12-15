@@ -84,13 +84,12 @@ export const changeCategoryPhoto = (id: string, data: any) => {
     },
   })
     .then((response) => {
+      alert("photo uploaded successfully");
       return response.data.doc;
     })
     .catch((e) => {
       alert("some error occured, please create your category again.");
-      axios.delete(url, {
-        headers: { Authorization: AUTH_TOKEN },
-      });
+      axios.delete(url, { headers: { Authorization: AUTH_TOKEN } });
       window.location.href = "/create-category";
     });
 };

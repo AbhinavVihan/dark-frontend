@@ -1,6 +1,6 @@
 import { FC, memo, useEffect, useState } from "react";
 
-import { BASE_URL } from "../../api/base";
+// import { BASE_URL } from "../../api/base";
 import { getAllReviews } from "../../api/products";
 import { Link, useParams } from "react-router-dom";
 import { Reviewss } from "../../models/Reviews";
@@ -36,7 +36,7 @@ const Reviews: FC<Props> = (props) => {
               <div className="flex justify-center">
                 <img
                   className="w-20 rounded-full"
-                  src={BASE_URL + "/img/customers/" + r.customer.photo}
+                  src={r.customer.photo}
                   alt="whdgwh"
                 />
               </div>

@@ -8,7 +8,7 @@ import {
   updateMyReviewComplete,
   updateMyReviewError,
 } from "../../actions/products.actions";
-import { BASE_URL } from "../../api/base";
+// import { BASE_URL } from "../../api/base";
 import { updateReview } from "../../api/products";
 import {
   selectedProductSelector,
@@ -57,11 +57,7 @@ const AddReview: FC<Props> = (props) => {
             <div className="pt-10 text-2xl font-semibold text-center">
               Update your Review for this product.
             </div>
-            <img
-              alt="sdss"
-              className="rounded-3xl w-60"
-              src={BASE_URL + "/img/products/" + p}
-            />
+            <img alt="sdss" className="rounded-3xl w-60" src={p} />
           </div>
           <form onSubmit={(e) => postReview(e)}>
             <div className="py-6 text-center border-black">

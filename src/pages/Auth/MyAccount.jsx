@@ -7,7 +7,7 @@ import {
   loginActionBegin,
 } from "../../actions/auth.actions";
 import { changeCustomerPhoto } from "../../api/auth";
-import { AUTH_TOKEN, BASE_URL } from "../../api/base";
+import { AUTH_TOKEN } from "../../api/base";
 import { meSelector } from "../../selectors/auth.selectors";
 import { useAppSelector } from "../../store";
 import LoadingOverlay from "react-loading-overlay-ts";
@@ -22,7 +22,8 @@ const MyAccount = () => {
   const [disabled, setDisabled] = useState(true);
 
   const token = localStorage.getItem(AUTH_TOKEN);
-  const baseUrl = BASE_URL;
+  // const baseUrl = BASE_URL;
+  const [previewSource, setPreviewSource] = useState();
 
   if (!customer && token) {
     return (
@@ -35,15 +36,21 @@ const MyAccount = () => {
   }
   const imageName = customer?.photo;
 
-  const handleInputChange = (e: any) => {
-    setPhoto(e.target.files[0]);
+  const handleInputChange = (e) => {
+    const file = e.target.files[0];
+    setPhoto(file);
+    previewFile(file);
   };
 
-  // const handleInputChange = (e:  React.ChangeEvent<HTMLInputElement>) => {
-  //   setPhoto(e.target.files[0])
-  // }
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
+  };
 
-  const submit = (e: any) => {
+  const submit = (e) => {
     e.preventDefault();
     // window.location.href = "/my-account";
     changeCustomerPhoto(photo).then((c) => {
@@ -82,14 +89,20 @@ const MyAccount = () => {
           ADDRESS: <span className="text-blue-700">{customer?.address}</span>
         </div>
         <div className="flex justify-center">
-          {
-            <img
-              className="rounded-full"
-              alt="customer"
-              src={`${baseUrl}/img/customers/${imageName}`}
-            />
-          }
+          {<img className="rounded-full" alt="customer" src={imageName} />}
         </div>
+        {previewSource && (
+          <div className="mt-10 text-2xl font-bold text-center">
+            <div>Preview</div>
+            <div className="flex justify-center ">
+              <img
+                className="w-40 rounded-full"
+                src={previewSource}
+                alt="chosen"
+              />
+            </div>
+          </div>
+        )}
         <form onSubmit={submit}>
           <div className="text-center">
             {customer?.photo.startsWith("default") ? (

@@ -16,7 +16,7 @@ import {
   cartProductsSelector,
 } from "../../selectors/cart.selectors";
 import { orderProduct } from "../../stripe/public/checkout";
-import { BASE_URL } from "../../api/base";
+// import { BASE_URL } from "../../api/base";
 import LoadingOverlay from "react-loading-overlay-ts";
 import { deleteFromCart } from "../../api/products";
 import sadImoji from "../../../src/sad-emoji.png";
@@ -66,7 +66,7 @@ const Cart: FC<Props> = (props) => {
                         <img
                           className="w-64 rounded-2xl"
                           alt="jvbjdsbj"
-                          src={BASE_URL + "/img/products/" + product.image1}
+                          src={product.image1}
                         />
                       </div>
                       <div className="flex flex-col text-center">

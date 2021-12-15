@@ -1,5 +1,5 @@
 import { FC, memo, useEffect, useState } from "react";
-import { BASE_URL } from "../../api/base";
+// import { BASE_URL } from "../../api/base";
 import { getAllReviewsRetailor } from "../../api/products";
 import { Reviewss } from "../../models/Reviews";
 import {
@@ -61,7 +61,7 @@ const RetailorAllReviews: FC<Props> = (props) => {
                     <img
                       className="w-40 rounded-xl"
                       alt="jvbjdsbj"
-                      src={BASE_URL + "/img/products/" + product.image1}
+                      src={product.image1}
                     />
                   )}
                 </div>
@@ -78,11 +78,7 @@ const RetailorAllReviews: FC<Props> = (props) => {
                       <img
                         className="rounded-full w-14"
                         alt="jvbjdsbj"
-                        src={
-                          BASE_URL +
-                          "/img/customers/" +
-                          (r.customer && r.customer.photo)
-                        }
+                        src={r.customer && r.customer.photo}
                       />
                     </div>
                   </div>

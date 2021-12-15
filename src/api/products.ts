@@ -73,6 +73,7 @@ export const uploadProductImages = (id: string, data: any) => {
     },
   })
     .then((response) => {
+      alert("photos uploaded successfully");
       return response.data.doc;
     })
     .catch((e) => {

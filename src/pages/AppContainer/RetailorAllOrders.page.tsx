@@ -6,7 +6,7 @@ import { deleteAnOrder } from "../../api/products";
 
 import { useDispatch } from "react-redux";
 
-import { BASE_URL } from "../../api/base";
+// import { BASE_URL } from "../../api/base";
 import { retailorAllOrdersBegin } from "../../actions/order.actions";
 import {
   retailorAllOrderRealSelector,
@@ -56,11 +56,7 @@ const AllOrders: FC<Props> = (props) => {
                   <img
                     className="items-center justify-center w-40 rounded-xl"
                     alt="jvbjdsbj"
-                    src={
-                      BASE_URL +
-                      "/img/products/" +
-                      (order.product && order.product.imageFront)
-                    }
+                    src={order.product && order.product.imageFront}
                   />
                   <div className="flex justify-around w-40">
                     <div className="w-40 font-semibold text-center">
@@ -77,7 +73,7 @@ const AllOrders: FC<Props> = (props) => {
                   <img
                     className="rounded-full w-14"
                     alt="sdhvhsvhs"
-                    src={`${BASE_URL}/img/customers/${order.customer.photo}`}
+                    src={order.customer.photo}
                   />
                   <button
                     onClick={() => {

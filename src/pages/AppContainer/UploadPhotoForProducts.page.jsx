@@ -46,6 +46,7 @@ const UploadProductImages = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const token = localStorage.getItem(AUTH_TOKEN);
+  const [previewSource, setPreviewSource] = useState();
 
   if (!customer && token) {
     alert("you are logged out somehow, please login again");
@@ -57,24 +58,47 @@ const UploadProductImages = () => {
   //   );
   // }, []);
 
-  const handleInputChange1 = (e: any) => {
-    setimageFront(e.target.files[0]);
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
+  };
+
+  const handleInputChange1 = (e) => {
+    // setimageFront(e.target.files[0]);
+    const file = e.target.files[0];
+    setimageFront(file);
+    previewFile(file);
     dispatch(uploadFrontImageBegin());
   };
-  const handleInputChange2 = (e: any) => {
-    setimageCover(e.target.files[0]);
+  const handleInputChange2 = (e) => {
+    // setimageCover(e.target.files[0]);
+    const file = e.target.files[0];
+    setimageCover(file);
+    previewFile(file);
     dispatch(uploadCoverImageBegin());
   };
-  const handleInputChange3 = (e: any) => {
-    setimages1(e.target.files[0]);
+  const handleInputChange3 = (e) => {
+    // setimages1(e.target.files[0]);
+    const file = e.target.files[0];
+    setimages1(file);
+    previewFile(file);
     dispatch(uploadImage1Begin());
   };
-  const handleInputChange4 = (e: any) => {
-    setimages2(e.target.files[0]);
+  const handleInputChange4 = (e) => {
+    // setimages2(e.target.files[0]);
+    const file = e.target.files[0];
+    setimages2(file);
+    previewFile(file);
     dispatch(uploadImage2Begin());
   };
-  const handleInputChange5 = (e: any) => {
-    setimages3(e.target.files[0]);
+  const handleInputChange5 = (e) => {
+    // setimages3(e.target.files[0]);
+    const file = e.target.files[0];
+    setimages3(file);
+    previewFile(file);
     dispatch(uploadImage3Begin());
   };
   // const handleInputChange = (e:  React.ChangeEvent<HTMLInputElement>) => {
@@ -83,14 +107,14 @@ const UploadProductImages = () => {
 
   const query = "";
 
-  const submit = (e: any) => {
+  const submit = (e) => {
     e.preventDefault();
     dispatch(uploadProductBegin());
     // window.location.href = "/my-account";
-    uploadProductImages(id!, data).then((c) => {
+    uploadProductImages(id, data).then((c) => {
       fetchProducts({ query })
         .then((products) => {
-          dispatch(productQueryCompletedAction(query, products!));
+          dispatch(productQueryCompletedAction(query, products));
           dispatch(uploadProductCompleted());
           // window.location.href = "/products";
           history.push("/productsRetailor");
@@ -235,7 +259,7 @@ const UploadProductImages = () => {
             <div>
               {!disabled && (
                 <button
-                  className="px-2 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded cursor-pointer hover:bg-black"
+                  className="px-2 py-1 mx-3 my-2 text-white bg-transparent bg-green-800 border-2 border-black rounded cursor-pointer hover:bg-green-900"
                   type="submit"
                   onClick={() => submit}
                 >
@@ -244,6 +268,18 @@ const UploadProductImages = () => {
               )}
             </div>
           </form>
+          {previewSource && (
+            <div className="mt-10 text-2xl font-bold text-center">
+              <div>Preview</div>
+              <div className="flex justify-center ">
+                <img
+                  className="w-40 rounded-full"
+                  src={previewSource}
+                  alt="chosen"
+                />
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <div className="mt-10 text-center text-red-500">

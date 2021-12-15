@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 
-import { BASE_URL } from "../../api/base";
+// import { BASE_URL } from "../../api/base";
 import {
   myOrdersSelectors,
   ordersLoadingSelector,
@@ -54,7 +54,7 @@ const MyOrders: FC<Props> = (props) => {
                     <img
                       className="w-40 rounded-xl"
                       alt="jvbjdsbj"
-                      src={BASE_URL + "/img/products/" + order.imageCover}
+                      src={order.imageCover}
                     />
                   </div>
                   <div className="">
